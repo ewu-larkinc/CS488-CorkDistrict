@@ -13,10 +13,7 @@ class WineriesViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBOutlet weak var tableView: UITableView!
     
     var wineries = [NSManagedObject]()
-    
-    @IBAction func returnToHomePage(AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: {})
-    }
+    let basicCellIdentifier = "BasicCell"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +25,6 @@ class WineriesViewController: UIViewController, UITableViewDataSource, UITableVi
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -46,7 +42,7 @@ class WineriesViewController: UIViewController, UITableViewDataSource, UITableVi
         
     }
     
-    //TABLEVIEW METHODS//////////////
+    //# MARK: - TableView Methods
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return wineries.count
     }
@@ -56,7 +52,6 @@ class WineriesViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func basicCellAtIndexPath(indexPath:NSIndexPath) -> BasicCell {
-        let basicCellIdentifier = "BasicCell"
         let basicCell = tableView.dequeueReusableCellWithIdentifier(basicCellIdentifier) as BasicCell
         setContentForCell(basicCell, indexPath: indexPath)
         return basicCell
@@ -80,7 +75,6 @@ class WineriesViewController: UIViewController, UITableViewDataSource, UITableVi
         let imageData = winery.valueForKey("imageData") as? NSData
         let myImage = UIImage(data: imageData!)
         cell.cellImage.image = myImage
-
         cell.cellImage.contentMode = UIViewContentMode.ScaleAspectFit
     }
     

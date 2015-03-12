@@ -12,26 +12,18 @@ class RestaurantsViewController: UIViewController, UITableViewDataSource, UITabl
     
     @IBOutlet weak var tableView: UITableView!
     
-    
-    
     var restaurants = [NSManagedObject]()
-    
-    @IBAction func returnToHomePage(AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: {});
-    }
-    
+    let basicCellIdentifier = "BasicCell"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let dataManager = DataManager.sharedInstance
-        restaurants = dataManager.getWineries()
-        
+        restaurants = dataManager.getRestaurants()
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        
     }
     
     
@@ -45,7 +37,7 @@ class RestaurantsViewController: UIViewController, UITableViewDataSource, UITabl
     }
     
     func basicCellAtIndexPath(indexPath:NSIndexPath) -> BasicCell {
-        let basicCellIdentifier = "BasicCell"
+        
         let basicCell = tableView.dequeueReusableCellWithIdentifier(basicCellIdentifier) as BasicCell
         setContentForCell(basicCell, indexPath: indexPath)
         return basicCell
