@@ -26,6 +26,16 @@ class RestaurantsViewController: UIViewController, UITableViewDataSource, UITabl
         super.didReceiveMemoryWarning()
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+        
+        let dvc = segue.destinationViewController as DetailViewController
+        
+        if let indexPath = self.tableView.indexPathForSelectedRow() {
+            let restaurant = restaurants[indexPath.row]
+            dvc.currentSelection = restaurant
+        }
+        
+    }
     
     //# MARK: - TableView Methods
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
