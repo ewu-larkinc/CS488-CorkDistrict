@@ -14,6 +14,17 @@
 		2298E0891AB00B7B003CEFFA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2298E0881AB00B7B003CEFFA /* Images.xcassets */; };
 		2298E08C1AB00B7B003CEFFA /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2298E08A1AB00B7B003CEFFA /* LaunchScreen.xib */; };
 		2298E0981AB00B7B003CEFFA /* TheCorkDistrictTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2298E0971AB00B7B003CEFFA /* TheCorkDistrictTests.swift */; };
+		2298E0A21AB010FF003CEFFA /* WineriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2298E0A11AB010FF003CEFFA /* WineriesViewController.swift */; };
+		2298E0A41AB01188003CEFFA /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2298E0A31AB01188003CEFFA /* DataManager.swift */; };
+		2298E0A61AB011B5003CEFFA /* RestaurantsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2298E0A51AB011B5003CEFFA /* RestaurantsViewController.swift */; };
+		2298E0A81AB011CB003CEFFA /* AccommodationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2298E0A71AB011CB003CEFFA /* AccommodationsViewController.swift */; };
+		2298E0AA1AB011EA003CEFFA /* PackagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2298E0A91AB011EA003CEFFA /* PackagesViewController.swift */; };
+		2298E0AC1AB0120C003CEFFA /* BasicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2298E0AB1AB0120C003CEFFA /* BasicCell.swift */; };
+		2298E0AE1AB01902003CEFFA /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2298E0AD1AB01902003CEFFA /* DetailViewController.swift */; };
+		2298E0B01AB01CF2003CEFFA /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2298E0AF1AB01CF2003CEFFA /* CoreLocation.framework */; };
+		2298E0B81AB01D91003CEFFA /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2298E0B71AB01D91003CEFFA /* MapViewController.swift */; };
+		2298E0BA1AB01E53003CEFFA /* WineToursViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2298E0B91AB01E53003CEFFA /* WineToursViewController.swift */; };
+		22A85A081AB1693000B45713 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A85A071AB1693000B45713 /* SwiftyJSON.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +49,17 @@
 		2298E0911AB00B7B003CEFFA /* TheCorkDistrictTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TheCorkDistrictTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2298E0961AB00B7B003CEFFA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2298E0971AB00B7B003CEFFA /* TheCorkDistrictTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheCorkDistrictTests.swift; sourceTree = "<group>"; };
+		2298E0A11AB010FF003CEFFA /* WineriesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WineriesViewController.swift; path = ../WineriesViewController.swift; sourceTree = "<group>"; };
+		2298E0A31AB01188003CEFFA /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataManager.swift; path = ../DataManager.swift; sourceTree = "<group>"; };
+		2298E0A51AB011B5003CEFFA /* RestaurantsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RestaurantsViewController.swift; path = ../RestaurantsViewController.swift; sourceTree = "<group>"; };
+		2298E0A71AB011CB003CEFFA /* AccommodationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccommodationsViewController.swift; path = ../AccommodationsViewController.swift; sourceTree = "<group>"; };
+		2298E0A91AB011EA003CEFFA /* PackagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PackagesViewController.swift; path = ../PackagesViewController.swift; sourceTree = "<group>"; };
+		2298E0AB1AB0120C003CEFFA /* BasicCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BasicCell.swift; path = ../BasicCell.swift; sourceTree = "<group>"; };
+		2298E0AD1AB01902003CEFFA /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DetailViewController.swift; path = ../DetailViewController.swift; sourceTree = "<group>"; };
+		2298E0AF1AB01CF2003CEFFA /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		2298E0B71AB01D91003CEFFA /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapViewController.swift; path = ../MapViewController.swift; sourceTree = "<group>"; };
+		2298E0B91AB01E53003CEFFA /* WineToursViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WineToursViewController.swift; path = ../WineToursViewController.swift; sourceTree = "<group>"; };
+		22A85A071AB1693000B45713 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftyJSON.swift; path = "../../../../Downloads/SwiftyJSON-master-3/Source/SwiftyJSON.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +67,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2298E0B01AB01CF2003CEFFA /* CoreLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,6 +84,8 @@
 		2298E0701AB00B7B003CEFFA = {
 			isa = PBXGroup;
 			children = (
+				22A85A071AB1693000B45713 /* SwiftyJSON.swift */,
+				2298E0AF1AB01CF2003CEFFA /* CoreLocation.framework */,
 				2298E07B1AB00B7B003CEFFA /* TheCorkDistrict */,
 				2298E0941AB00B7B003CEFFA /* TheCorkDistrictTests */,
 				2298E07A1AB00B7B003CEFFA /* Products */,
@@ -81,10 +106,19 @@
 			children = (
 				2298E07E1AB00B7B003CEFFA /* AppDelegate.swift */,
 				2298E0831AB00B7B003CEFFA /* ViewController.swift */,
+				2298E0A31AB01188003CEFFA /* DataManager.swift */,
 				2298E0851AB00B7B003CEFFA /* Main.storyboard */,
 				2298E0881AB00B7B003CEFFA /* Images.xcassets */,
 				2298E08A1AB00B7B003CEFFA /* LaunchScreen.xib */,
 				2298E0801AB00B7B003CEFFA /* TheCorkDistrict.xcdatamodeld */,
+				2298E0B91AB01E53003CEFFA /* WineToursViewController.swift */,
+				2298E0A11AB010FF003CEFFA /* WineriesViewController.swift */,
+				2298E0AD1AB01902003CEFFA /* DetailViewController.swift */,
+				2298E0B71AB01D91003CEFFA /* MapViewController.swift */,
+				2298E0A51AB011B5003CEFFA /* RestaurantsViewController.swift */,
+				2298E0A71AB011CB003CEFFA /* AccommodationsViewController.swift */,
+				2298E0A91AB011EA003CEFFA /* PackagesViewController.swift */,
+				2298E0AB1AB0120C003CEFFA /* BasicCell.swift */,
 				2298E07C1AB00B7B003CEFFA /* Supporting Files */,
 			);
 			path = TheCorkDistrict;
@@ -215,8 +249,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2298E0A21AB010FF003CEFFA /* WineriesViewController.swift in Sources */,
+				2298E0AC1AB0120C003CEFFA /* BasicCell.swift in Sources */,
+				2298E0A81AB011CB003CEFFA /* AccommodationsViewController.swift in Sources */,
+				2298E0BA1AB01E53003CEFFA /* WineToursViewController.swift in Sources */,
+				2298E0A61AB011B5003CEFFA /* RestaurantsViewController.swift in Sources */,
+				2298E0A41AB01188003CEFFA /* DataManager.swift in Sources */,
 				2298E0841AB00B7B003CEFFA /* ViewController.swift in Sources */,
+				2298E0B81AB01D91003CEFFA /* MapViewController.swift in Sources */,
+				2298E0AA1AB011EA003CEFFA /* PackagesViewController.swift in Sources */,
+				2298E0AE1AB01902003CEFFA /* DetailViewController.swift in Sources */,
 				2298E0821AB00B7B003CEFFA /* TheCorkDistrict.xcdatamodeld in Sources */,
+				22A85A081AB1693000B45713 /* SwiftyJSON.swift in Sources */,
 				2298E07F1AB00B7B003CEFFA /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -409,6 +453,7 @@
 				2298E09D1AB00B7B003CEFFA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2298E09E1AB00B7B003CEFFA /* Build configuration list for PBXNativeTarget "TheCorkDistrictTests" */ = {
 			isa = XCConfigurationList;
@@ -417,6 +462,7 @@
 				2298E0A01AB00B7B003CEFFA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
