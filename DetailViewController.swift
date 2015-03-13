@@ -11,7 +11,7 @@ import CoreData
 class DetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     let titleRowHeight : CGFloat = 80.0
-    let imageRowHeight : CGFloat = 240.0
+    let imageRowHeight : CGFloat = 300.0
     let defaultRowHeight : CGFloat = 60.0
     var currentSelection : NSManagedObject!
     let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
@@ -46,6 +46,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
             titleLabel.font = UIFont(name: "STHeitiTC-Light", size: 36.0)
             titleLabel.textAlignment = NSTextAlignment.Left
             titleLabel.text = currentSelection.valueForKey("name") as? String
+            titleLabel.adjustsFontSizeToFitWidth = true
             cell.addSubview(titleLabel)
             break
         case 1:
@@ -62,7 +63,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         case 4:
             let imageData = currentSelection.valueForKey("imageData") as? NSData
             let mainImage = UIImage(data: imageData!)
-            let newImageView = UIImageView(frame: CGRectMake(15.0,10.0,345.0,200.0))
+            let newImageView = UIImageView(frame: CGRectMake(15.0,10.0,345.0,280.0))
             newImageView.image = mainImage
             cell.addSubview(newImageView)
             break
@@ -70,7 +71,6 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
             cell.textLabel?.text = currentSelection.valueForKey("about") as? String
             break
         default:
-            
             break
         }
         
@@ -88,16 +88,16 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     func tableView(tableView: UITableView!, heightForRowAtIndexPath indexPath: NSIndexPath!) -> CGFloat {
         
         switch (indexPath.row) {
-        case 0:
-            return titleRowHeight
-        case 4:
-            return imageRowHeight
-        case 5:
-            var tempStr = currentSelection.valueForKey("about") as String
-            var size = getSizeForText(tempStr)
-            return size
-        default:
-            return defaultRowHeight
+            case 0:
+                return titleRowHeight
+            case 4:
+                return imageRowHeight
+            case 5:
+                var tempStr = currentSelection.valueForKey("about") as String
+                var size = getSizeForText(tempStr)
+                return size
+            default:
+                return defaultRowHeight
         }
     }
     
