@@ -17,7 +17,8 @@ class WineriesViewController: UIViewController, UITableViewDataSource, UITableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "wineBackground")!)
+        //self.view.backgroundColor = UIColor(patternImage: UIImage(named: "wineBackground")!)
+        self.tableView.backgroundView = UIImageView(image:UIImage(named: "wineBackground"))
         
         let dataManager = DataManager.sharedInstance
         wineries = dataManager.getWineries()
@@ -62,6 +63,8 @@ class WineriesViewController: UIViewController, UITableViewDataSource, UITableVi
         let winery = wineries[indexPath.row]
         cell.titleLabel.text = winery.valueForKey("name") as? String
         cell.addressLabel.text = winery.valueForKey("address") as? String
+        
+        cell.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.2)
         
         var city = winery.valueForKey("city") as? String
         city = city?.stringByReplacingOccurrencesOfString(" ", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
