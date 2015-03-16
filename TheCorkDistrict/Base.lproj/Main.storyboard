@@ -239,12 +239,16 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="ftB-06-nU1" firstAttribute="top" secondItem="3t5-yn-v8C" secondAttribute="bottom" id="0OG-9s-Xcc"/>
+                            <constraint firstItem="ftB-06-nU1" firstAttribute="top" secondItem="3t5-yn-v8C" secondAttribute="bottom" id="0OG-9s-Xcc">
+                                <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                            </constraint>
                             <constraint firstItem="vIc-MF-Iqu" firstAttribute="top" secondItem="ftB-06-nU1" secondAttribute="bottom" id="FlQ-EG-jbP"/>
                             <constraint firstAttribute="trailing" secondItem="ftB-06-nU1" secondAttribute="trailing" id="TH4-hN-ssZ"/>
                             <constraint firstAttribute="trailing" secondItem="ftB-06-nU1" secondAttribute="trailing" id="Utn-wL-VGX"/>
                             <constraint firstItem="ftB-06-nU1" firstAttribute="leading" secondItem="yWM-H0-43w" secondAttribute="leading" id="ffr-CH-vah"/>
-                            <constraint firstItem="ftB-06-nU1" firstAttribute="top" secondItem="3t5-yn-v8C" secondAttribute="bottom" id="omb-K0-gjR"/>
+                            <constraint firstItem="ftB-06-nU1" firstAttribute="top" secondItem="3t5-yn-v8C" secondAttribute="bottom" id="omb-K0-gjR">
+                                <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                            </constraint>
                             <constraint firstItem="ftB-06-nU1" firstAttribute="leading" secondItem="yWM-H0-43w" secondAttribute="leading" id="rdi-7u-RDc"/>
                             <constraint firstItem="vIc-MF-Iqu" firstAttribute="top" secondItem="ftB-06-nU1" secondAttribute="bottom" id="vp0-t3-0yk"/>
                         </constraints>
@@ -476,14 +480,10 @@
                                                     <exclude reference="iyf-nc-HBl"/>
                                                 </mask>
                                                 <mask key="constraints">
-                                                    <exclude reference="Mm9-LM-M9H"/>
-                                                    <exclude reference="UQa-xT-RxD"/>
-                                                    <exclude reference="klE-F5-cte"/>
                                                     <exclude reference="L2h-SX-pew"/>
                                                     <exclude reference="dAB-2M-QCM"/>
                                                     <exclude reference="ijv-wS-wRC"/>
                                                     <exclude reference="sSB-em-448"/>
-                                                    <exclude reference="h81-ha-Coi"/>
                                                     <exclude reference="6qf-dD-E5W"/>
                                                     <exclude reference="fES-LE-5fD"/>
                                                     <exclude reference="pwt-8N-dXK"/>
@@ -493,6 +493,10 @@
                                                     <exclude reference="ez6-aO-ysd"/>
                                                     <exclude reference="gVw-0F-pSe"/>
                                                     <exclude reference="s83-mV-hUv"/>
+                                                    <exclude reference="h81-ha-Coi"/>
+                                                    <exclude reference="Mm9-LM-M9H"/>
+                                                    <exclude reference="UQa-xT-RxD"/>
+                                                    <exclude reference="klE-F5-cte"/>
                                                 </mask>
                                             </variation>
                                             <variation key="heightClass=regular-widthClass=compact">
@@ -504,14 +508,10 @@
                                                     <include reference="iyf-nc-HBl"/>
                                                 </mask>
                                                 <mask key="constraints">
-                                                    <include reference="Mm9-LM-M9H"/>
-                                                    <include reference="UQa-xT-RxD"/>
-                                                    <include reference="klE-F5-cte"/>
                                                     <include reference="L2h-SX-pew"/>
                                                     <include reference="dAB-2M-QCM"/>
                                                     <include reference="ijv-wS-wRC"/>
                                                     <include reference="sSB-em-448"/>
-                                                    <include reference="h81-ha-Coi"/>
                                                     <include reference="6qf-dD-E5W"/>
                                                     <include reference="fES-LE-5fD"/>
                                                     <include reference="pwt-8N-dXK"/>
@@ -521,6 +521,10 @@
                                                     <include reference="ez6-aO-ysd"/>
                                                     <include reference="gVw-0F-pSe"/>
                                                     <include reference="s83-mV-hUv"/>
+                                                    <include reference="h81-ha-Coi"/>
+                                                    <include reference="Mm9-LM-M9H"/>
+                                                    <include reference="UQa-xT-RxD"/>
+                                                    <include reference="klE-F5-cte"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
@@ -669,22 +673,9 @@
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4os-2R-sVH">
                                                     <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="274" id="CCv-gs-x4r"/>
-                                                    </constraints>
                                                     <fontDescription key="fontDescription" name="STHeitiTC-Light" family="Heiti TC" pointSize="13"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
-                                                    <variation key="default">
-                                                        <mask key="constraints">
-                                                            <exclude reference="CCv-gs-x4r"/>
-                                                        </mask>
-                                                    </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
-                                                        <mask key="constraints">
-                                                            <include reference="CCv-gs-x4r"/>
-                                                        </mask>
-                                                    </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V1X-gp-e1t">
                                                     <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -710,9 +701,7 @@
                                                 <constraint firstAttribute="trailingMargin" secondItem="3b8-3y-tD1" secondAttribute="trailing" constant="38" id="ZiB-oV-EHB">
                                                     <variation key="heightClass=regular-widthClass=compact" constant="-8"/>
                                                 </constraint>
-                                                <constraint firstItem="kcV-Ly-JPK" firstAttribute="top" secondItem="V1X-gp-e1t" secondAttribute="bottom" constant="6" id="b3d-t2-21y">
-                                                    <variation key="heightClass=regular-widthClass=compact" constant="1"/>
-                                                </constraint>
+                                                <constraint firstItem="V1X-gp-e1t" firstAttribute="top" secondItem="3b8-3y-tD1" secondAttribute="bottom" constant="3" id="b5a-JK-hRl"/>
                                                 <constraint firstItem="a7E-TG-vfo" firstAttribute="top" secondItem="bAd-5L-r3B" secondAttribute="top" constant="7" id="cjn-L4-V57"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="kcV-Ly-JPK" secondAttribute="trailing" constant="38" id="fxu-9x-bam">
                                                     <variation key="heightClass=regular-widthClass=compact" constant="-8"/>
@@ -749,9 +738,9 @@
                                                     <exclude reference="pYF-dF-NGh"/>
                                                     <exclude reference="wVw-NR-HMf"/>
                                                     <exclude reference="1mU-JN-PDv"/>
+                                                    <exclude reference="b5a-JK-hRl"/>
                                                     <exclude reference="mKJ-Rw-UDE"/>
                                                     <exclude reference="A9b-W4-hGT"/>
-                                                    <exclude reference="b3d-t2-21y"/>
                                                     <exclude reference="fxu-9x-bam"/>
                                                     <exclude reference="cjn-L4-V57"/>
                                                     <exclude reference="rtf-0u-9Nn"/>
@@ -775,9 +764,9 @@
                                                     <include reference="pYF-dF-NGh"/>
                                                     <include reference="wVw-NR-HMf"/>
                                                     <include reference="1mU-JN-PDv"/>
+                                                    <include reference="b5a-JK-hRl"/>
                                                     <include reference="mKJ-Rw-UDE"/>
                                                     <include reference="A9b-W4-hGT"/>
-                                                    <include reference="b3d-t2-21y"/>
                                                     <include reference="fxu-9x-bam"/>
                                                     <include reference="cjn-L4-V57"/>
                                                     <include reference="rtf-0u-9Nn"/>
@@ -839,10 +828,10 @@
             </objects>
             <point key="canvasLocation" x="1881" y="1171.5"/>
         </scene>
-        <!--Detail View Controller-->
+        <!--Details-->
         <scene sceneID="xgv-gK-i3l">
             <objects>
-                <viewController id="Sjx-3I-6ZT" customClass="DetailViewController" customModule="TheCorkDistrict" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Details" id="Sjx-3I-6ZT" customClass="DetailViewController" customModule="TheCorkDistrict" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="PVT-WA-HeD"/>
                         <viewControllerLayoutGuide type="bottom" id="ItX-Dz-9JQ"/>
@@ -1307,6 +1296,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="LDX-gq-k6W"/>
+        <segue reference="nDA-69-liF"/>
     </inferredMetricsTieBreakers>
 </document>

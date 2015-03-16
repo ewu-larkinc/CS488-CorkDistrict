@@ -21,6 +21,7 @@ class WineriesViewController: UIViewController, UITableViewDataSource, UITableVi
         
         let dataManager = DataManager.sharedInstance
         wineries = dataManager.getWineries()
+        
     }
     
     override func viewWillAppear(animated: Bool) {

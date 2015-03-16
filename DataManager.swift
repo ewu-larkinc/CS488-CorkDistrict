@@ -9,13 +9,21 @@ import CoreData
 import UIKit
 import CoreLocation
 
+
 private let _SingletonSharedInstance = DataManager()
+
 
 class DataManager {
     
     class var sharedInstance: DataManager {
         return _SingletonSharedInstance
     }
+    
+    
+    var wineries = [NSManagedObject]()
+    var restaurants = [NSManagedObject]()
+    var accommodations = [NSManagedObject]()
+    var packages = [NSManagedObject]()
     
     let ENTITY_URL_WINERY = NSURL(string: "http://www.nathanpilgrim.net/rest/wineries.json")
     let ENTITY_URL_RESTAURANT = NSURL(string: "http://www.nathanpilgrim.net/rest/restaurants.json")
@@ -26,57 +34,50 @@ class DataManager {
     let ENTITY_TYPE_ACCOMMODATION : String = "Accommodation"
     let ENTITY_TYPE_PACKAGE : String = "Package"
     
-    let locationManager = CLLocationManager()
-    let geocoder = CLGeocoder()
-    var wineries = [NSManagedObject]()
-    var restaurants = [NSManagedObject]()
-    var accommodations = [NSManagedObject]()
-    var packages = [NSManagedObject]()
+    
     
     
     func loadData() -> Void {
         
-        
-        
-        if let wineryResults = fetchEntities(ENTITY_TYPE_WINERY) {
-            wineries = wineryResults
-            
-            if (wineries.count == 0) {
-                pullJSONEntities(ENTITY_URL_WINERY!, entityType: ENTITY_TYPE_WINERY)
-            }
-        }
-        
-        if let restaurantResults = fetchEntities(ENTITY_TYPE_RESTAURANT) {
-            restaurants = restaurantResults
-            
-            if (restaurants.count == 0) {
-                pullJSONEntities(ENTITY_URL_RESTAURANT!, entityType: ENTITY_TYPE_RESTAURANT)
-            }
-        }
-        
-        if let accommodationResults = fetchEntities(ENTITY_TYPE_ACCOMMODATION) {
-        accommodations = accommodationResults
-        
-            if (accommodations.count == 0) {
-                pullJSONEntities(ENTITY_URL_ACCOMMODATION!, entityType: ENTITY_TYPE_ACCOMMODATION)
-            }
-        }
+        wineries = retrieveEntities(ENTITY_TYPE_WINERY, entityURL: ENTITY_URL_WINERY!)
+        restaurants = retrieveEntities(ENTITY_TYPE_RESTAURANT, entityURL: ENTITY_URL_RESTAURANT!)
+        accommodations = retrieveEntities(ENTITY_TYPE_ACCOMMODATION, entityURL: ENTITY_URL_ACCOMMODATION!)
         
         //deleteAllEntitiesOfType(ENTITY_TYPE_WINERY)
         //deleteAllEntitiesOfType(ENTITY_TYPE_RESTAURANT)
         //deleteAllEntitiesOfType(ENTITY_TYPE_ACCOMMODATION)
-        
-        
-        /*if let packageResults = fetchEntities(ENTITY_TYPE_PACKAGE) {
-        packages = packageResults
-        
-        if (packages.count == 0) {
-        pullJSONEntities(ENTITY_URL_PACKAGE!, entityType: ENTITY_TYPE_RESTAURANT)
-        }
-        }*/
     }
     
-    func fetchEntities(entityType: String) -> [NSManagedObject]? {
+    func getWineries() -> [NSManagedObject] {
+        return wineries
+    }
+    
+    func getRestaurants() -> [NSManagedObject] {
+        return restaurants
+    }
+    
+    func getAccommodations() -> [NSManagedObject] {
+        return accommodations
+    }
+    
+    
+    //#MARK: - Core Data Methods
+    func retrieveEntities(entityType: String, entityURL: NSURL) -> [NSManagedObject] {
+        
+        var entities = [NSManagedObject]()
+        
+        if let results = fetchEntitiesFromCoreData(entityType) {
+            entities = results
+            
+            if (entities.count == 0) {
+                pullEntitiesFromWeb(entityURL, entityType: entityType)
+            }
+        }
+        
+        return entities
+    }
+    
+    func fetchEntitiesFromCoreData(entityType: String) -> [NSManagedObject]? {
         
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         let managedContext = appDelegate.managedObjectContext!
@@ -89,94 +90,11 @@ class DataManager {
         return fetchedResults
     }
     
-    
-    
-    
-    func pullJSONEntities(entityURL: NSURL, entityType: String) -> Void {
-        
-        var session = NSURLSession.sharedSession()
-        var task = session.dataTaskWithURL(entityURL) {
-            (data, response, error) -> Void in
-            
-            if error != nil {
-                println(error.localizedDescription)
-            } else {
-                self.parseJSONEntity(data, entityType: entityType)
-            }
-        }
-        
-        task.resume()
-    }
-    
-    
-    
-    func parseJSONEntity(data: NSData, entityType: String) -> Void {
-        
-        let json = JSON(data: data)
-        var ctr=0
-        while (ctr < json.count) {
-            
-            var entityCity: String
-            var entityState: String
-            var entityZip: String
-            var entityImageString: String
-            
-            var infoArray = NSMutableArray()
-            
-            let entityCityStateZip = json[ctr]["City State Zip"].stringValue
-            let cityStateZipArray = entityCityStateZip.componentsSeparatedByString(" ")
-            
-            if (cityStateZipArray.count > 3) {
-                entityCity = cityStateZipArray[0] + " " + cityStateZipArray[1]
-                entityState = cityStateZipArray[2]
-                entityZip = cityStateZipArray[3]
-            } else {
-                entityCity = cityStateZipArray[0]
-                entityState = cityStateZipArray[1]
-                entityZip = cityStateZipArray[2]
-            }
-            entityCity = entityCity.stringByReplacingOccurrencesOfString(",", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
-            
-            
-            //let infoArray = NSMutableArray()
-            infoArray.addObject(json[ctr]["node_title"].stringValue)
-            infoArray.addObject(json[ctr]["Street Address"].stringValue)
-            infoArray.addObject(entityZip)
-            infoArray.addObject(entityCity)
-            infoArray.addObject(json[ctr]["Phone"].stringValue)
-            infoArray.addObject(json[ctr]["Description"].stringValue)
-            infoArray.addObject(entityType)
-            
-            entityImageString = stripHtml(json[ctr]["Thumbnail"].stringValue)
-            
-            
-            //entityImageString = stripHtml(entityImageString)
-            
-            let entityImageUrl = NSURL(string: entityImageString)
-            let imgData = NSData(contentsOfURL: entityImageUrl!)
-            let entityImage = UIImage(data: imgData!)
-            addEntity(infoArray, entityImage: entityImage!)
-            
-            ctr++
-        }
-    }
-    
-    func stripHtml(urlObject: String) -> String {
-        
-        let entityImageStringArray = urlObject.componentsSeparatedByString(" ")
-        var entityImageString = entityImageStringArray[2].stringByReplacingOccurrencesOfString("src=\"", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
-        entityImageString = entityImageString.stringByReplacingOccurrencesOfString("\"", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
-        
-        return entityImageString
-    }
-    
     func addEntity(entityInfo: NSMutableArray, entityImage: UIImage) -> Void {
         
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         let managedContext = appDelegate.managedObjectContext!
-        
-        var entityType = entityInfo[6] as NSString
-        println("Current entity type (in addEntity) is: \(entityType)")
+        var entityType = entityInfo[6] as String
         
         let newEntity = NSEntityDescription.insertNewObjectForEntityForName(entityType, inManagedObjectContext: managedContext) as NSManagedObject
         
@@ -188,18 +106,6 @@ class DataManager {
         newEntity.setValue(entityInfo[4], forKey: "phone")
         newEntity.setValue(entityInfo[5], forKey: "about")
         
-        var address = entityInfo[1] as NSString
-        var city = entityInfo[3] as NSString
-        
-        let fullAddress = address + ", " + city + ", USA"
-        
-        
-        geocoder.geocodeAddressString(fullAddress, {(placemarks: [AnyObject]!, error: NSError!) -> Void in
-            if let placemark = placemarks?[0] as? CLPlacemark {
-                newEntity.setValue(placemark, forKey: "placemark")
-            }
-        })
-        
         
         var error: NSError?
         if !managedContext.save(&error) {
@@ -208,25 +114,16 @@ class DataManager {
         
         switch (entityType) {
             
-            case "Winery":
-                println("for testing only. adding entity to wineries array")
-                wineries.append(newEntity)
-                break
-            case "Restaurant":
-                println("for testing only. adding entity to restaurants array")
-                restaurants.append(newEntity)
-                break
-            case "Accommodation":
-                println("for testing only. adding entity to accommodations array")
-                accommodations.append(newEntity)
-                break
-            default:
-                println("Invalid entity type")
+        case "Winery":
+            wineries.append(newEntity)
+        case "Restaurant":
+            restaurants.append(newEntity)
+        case "Accommodation":
+            accommodations.append(newEntity)
+        default:
+            println("Invalid entity type")
             
         }
-        
-        //wineries.append(newEntity)
-        
     }
     
     func deleteAllEntitiesOfType(entityType: String) -> Void {
@@ -266,17 +163,80 @@ class DataManager {
         }
     }
     
-    func getWineries() -> [NSManagedObject] {
-        return wineries
+    //#MARK: - Data Task Methods
+    func pullEntitiesFromWeb(entityURL: NSURL, entityType: String) -> Void {
+        
+        var session = NSURLSession.sharedSession()
+        var task = session.dataTaskWithURL(entityURL) {
+            (data, response, error) -> Void in
+            
+            if error != nil {
+                println(error.localizedDescription)
+            } else {
+                self.parseJSONEntity(data, entityType: entityType)
+            }
+        }
+        
+        task.resume()
     }
     
-    func getRestaurants() -> [NSManagedObject] {
-        return restaurants
+    //#MARK: - SwiftyJSON methods
+    func parseJSONEntity(data: NSData, entityType: String) -> Void {
+        
+        let json = JSON(data: data)
+        var ctr=0
+        while (ctr < json.count) {
+            
+            var entityCity: String
+            var entityState: String
+            var entityZip: String
+            var entityImageString: String
+            var infoArray = NSMutableArray()
+            
+            let entityCityStateZip = json[ctr]["City State Zip"].stringValue
+            let cityStateZipArray = entityCityStateZip.componentsSeparatedByString(" ")
+            
+            if (cityStateZipArray.count > 3) {
+                entityCity = cityStateZipArray[0] + " " + cityStateZipArray[1]
+                entityState = cityStateZipArray[2]
+                entityZip = cityStateZipArray[3]
+            } else {
+                entityCity = cityStateZipArray[0]
+                entityState = cityStateZipArray[1]
+                entityZip = cityStateZipArray[2]
+            }
+            entityCity = entityCity.stringByReplacingOccurrencesOfString(",", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+            
+            
+            infoArray.addObject(json[ctr]["node_title"].stringValue)
+            infoArray.addObject(json[ctr]["Street Address"].stringValue)
+            infoArray.addObject(entityZip)
+            infoArray.addObject(entityCity)
+            infoArray.addObject(json[ctr]["Phone"].stringValue)
+            infoArray.addObject(json[ctr]["Description"].stringValue)
+            infoArray.addObject(entityType)
+            
+            entityImageString = stripHtml(json[ctr]["Thumbnail"].stringValue)
+            
+            let entityImageUrl = NSURL(string: entityImageString)
+            let imgData = NSData(contentsOfURL: entityImageUrl!)
+            let entityImage = UIImage(data: imgData!)
+            addEntity(infoArray, entityImage: entityImage!)
+            
+            ctr++
+        }
     }
     
-    func getAccommodations() -> [NSManagedObject] {
-        return accommodations
+    //#MARK: - Miscellaneous
+    func stripHtml(urlObject: String) -> String {
+        
+        let entityImageStringArray = urlObject.componentsSeparatedByString(" ")
+        var entityImageString = entityImageStringArray[2].stringByReplacingOccurrencesOfString("src=\"", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+        
+        return entityImageString.stringByReplacingOccurrencesOfString("\"", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
     }
+    
+    
     
     
     
