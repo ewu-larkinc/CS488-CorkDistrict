@@ -20,6 +20,8 @@ class RestaurantsViewController: UIViewController, UITableViewDataSource, UITabl
         
         let dataManager = DataManager.sharedInstance
         restaurants = dataManager.getRestaurants()
+        
+        self.tableView.backgroundView = UIImageView(image:UIImage(named: "restBackground"))
     }
     
     override func didReceiveMemoryWarning() {
@@ -58,6 +60,8 @@ class RestaurantsViewController: UIViewController, UITableViewDataSource, UITabl
         cell.titleLabel.text = restaurant.valueForKey("name") as? String
         cell.addressLabel.text = restaurant.valueForKey("address") as? String
         
+        cell.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.2)
+        
         var city = restaurant.valueForKey("city") as? String
         city = city?.stringByReplacingOccurrencesOfString(" ", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
         var state = "WA"
@@ -71,6 +75,14 @@ class RestaurantsViewController: UIViewController, UITableViewDataSource, UITabl
         let imageData = restaurant.valueForKey("imageData") as? NSData
         let myImage = UIImage(data: imageData!)
         cell.cellImage.image = myImage
+
+        cell.cellImage.layer.cornerRadius = 4.0
+        cell.cellImage.clipsToBounds = true
+        cell.titleLabel.textColor = UIColor.whiteColor()
+        cell.addressLabel.textColor = UIColor.whiteColor()
+        cell.cityLabel.textColor = UIColor.whiteColor()
+        cell.phoneLabel.textColor = UIColor.whiteColor()
+
         cell.cellImage.contentMode = UIViewContentMode.ScaleAspectFit
     }
     

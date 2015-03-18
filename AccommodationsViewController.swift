@@ -21,6 +21,8 @@ class AccomodationsViewController: UIViewController, UITableViewDataSource, UITa
         
         let dataManager = DataManager.sharedInstance
         accommodations = dataManager.getAccommodations()
+        
+        self.tableView.backgroundView = UIImageView(image:UIImage(named: "restBackground"))
     }
     
     override func didReceiveMemoryWarning() {
@@ -60,6 +62,8 @@ class AccomodationsViewController: UIViewController, UITableViewDataSource, UITa
         cell.titleLabel.text = accommodation.valueForKey("name") as? String
         cell.addressLabel.text = accommodation.valueForKey("address") as? String
         
+        cell.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.2)
+        
         var city = accommodation.valueForKey("city") as? String
         city = city?.stringByReplacingOccurrencesOfString(" ", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
         var state = "WA"
@@ -73,6 +77,14 @@ class AccomodationsViewController: UIViewController, UITableViewDataSource, UITa
         let imageData = accommodation.valueForKey("imageData") as? NSData
         let myImage = UIImage(data: imageData!)
         cell.cellImage.image = myImage
+
+        cell.cellImage.layer.cornerRadius = 4.0
+        cell.cellImage.clipsToBounds = true
+        cell.titleLabel.textColor = UIColor.whiteColor()
+        cell.addressLabel.textColor = UIColor.whiteColor()
+        cell.cityLabel.textColor = UIColor.whiteColor()
+        cell.phoneLabel.textColor = UIColor.whiteColor()
+
         cell.cellImage.contentMode = UIViewContentMode.ScaleAspectFit
     }
 

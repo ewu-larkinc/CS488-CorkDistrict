@@ -955,7 +955,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="65" id="QB5-xf-lcb">
+                                    <tableViewCell alpha="0.20000000000000001" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="65" id="QB5-xf-lcb">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="QB5-xf-lcb" id="FZg-aw-kmk">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -1009,7 +1009,7 @@
                                             <segue destination="R5a-XM-1fx" kind="show" id="HQI-Fp-KU2"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="65" id="BqN-e1-cS9">
+                                    <tableViewCell alpha="0.20000000000000001" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="65" id="BqN-e1-cS9">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BqN-e1-cS9" id="g9O-P3-czy">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -1063,7 +1063,7 @@
                                             <segue destination="2ZD-wG-sk8" kind="show" id="wLX-D7-LlP"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="65" id="M6n-0V-L1L">
+                                    <tableViewCell alpha="0.20000000000000001" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="65" id="M6n-0V-L1L">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="M6n-0V-L1L" id="I5a-Pe-szK">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -1117,7 +1117,7 @@
                                             <segue destination="SfZ-l6-YqH" kind="show" id="Ode-XK-33n"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="65" id="Nwa-tV-Hjq">
+                                    <tableViewCell alpha="0.20000000000000001" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="65" id="Nwa-tV-Hjq">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Nwa-tV-Hjq" id="O3U-yi-vxh">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -1171,7 +1171,7 @@
                                             <segue destination="4Sy-9S-VPz" kind="show" id="7lc-G7-C10"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="65" id="8nZ-Wj-067">
+                                    <tableViewCell alpha="0.20000000000000001" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="65" id="8nZ-Wj-067">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8nZ-Wj-067" id="5wh-tU-KMa">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -1227,7 +1227,7 @@
                                             <segue destination="56B-xV-tFM" kind="show" id="2t3-ie-CDi"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="65" id="lLK-uY-2xu">
+                                    <tableViewCell alpha="0.20000000000000001" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="65" id="lLK-uY-2xu">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lLK-uY-2xu" id="SVO-KP-9KA">
                                             <autoresizingMask key="autoresizingMask"/>

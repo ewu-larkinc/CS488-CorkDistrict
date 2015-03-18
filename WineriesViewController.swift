@@ -79,7 +79,16 @@ class WineriesViewController: UIViewController, UITableViewDataSource, UITableVi
         let imageData = winery.valueForKey("imageData") as? NSData
         let myImage = UIImage(data: imageData!)
         cell.cellImage.image = myImage
+        
+        cell.cellImage.layer.cornerRadius = 4.0
+        cell.cellImage.clipsToBounds = true
+        cell.titleLabel.textColor = UIColor.whiteColor()
+        cell.addressLabel.textColor = UIColor.whiteColor()
+        cell.cityLabel.textColor = UIColor.whiteColor()
+        cell.phoneLabel.textColor = UIColor.whiteColor()
+        
         cell.cellImage.contentMode = UIViewContentMode.ScaleAspectFit
+        
     }
     
 }
