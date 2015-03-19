@@ -17,7 +17,8 @@ class WineriesViewController: UIViewController, UITableViewDataSource, UITableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "wineBackground")!)
+        //self.view.backgroundColor = UIColor(patternImage: UIImage(named: "wineBackground")!)
+        self.tableView.backgroundView = UIImageView(image:UIImage(named: "wineBackground"))
         
         let dataManager = DataManager.sharedInstance
         wineries = dataManager.getWineries()
@@ -63,6 +64,8 @@ class WineriesViewController: UIViewController, UITableViewDataSource, UITableVi
         cell.titleLabel.text = winery.valueForKey("name") as? String
         cell.addressLabel.text = winery.valueForKey("address") as? String
         
+        cell.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.2)
+        
         var city = winery.valueForKey("city") as? String
         city = city?.stringByReplacingOccurrencesOfString(" ", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
         var state = "WA"
@@ -76,7 +79,16 @@ class WineriesViewController: UIViewController, UITableViewDataSource, UITableVi
         let imageData = winery.valueForKey("imageData") as? NSData
         let myImage = UIImage(data: imageData!)
         cell.cellImage.image = myImage
+        
+        cell.cellImage.layer.cornerRadius = 4.0
+        cell.cellImage.clipsToBounds = true
+        cell.titleLabel.textColor = UIColor.whiteColor()
+        cell.addressLabel.textColor = UIColor.whiteColor()
+        cell.cityLabel.textColor = UIColor.whiteColor()
+        cell.phoneLabel.textColor = UIColor.whiteColor()
+        
         cell.cellImage.contentMode = UIViewContentMode.ScaleAspectFit
+        
     }
     
 }

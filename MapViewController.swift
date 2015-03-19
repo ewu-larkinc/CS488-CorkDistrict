@@ -83,9 +83,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             
             var address:String = temp.valueForKey("address") as String
             var city:String = temp.valueForKey("city") as String
-            //address = address + ", "
-            //address = address + city
-            //println("\(address), \(city), WA, USA")
             
             geocoder.geocodeAddressString( "\(address), \(city), WA, USA", {(placemarks: [AnyObject]!, error: NSError!) -> Void in
                 if let placemark = placemarks?[0]  as? CLPlacemark
@@ -126,7 +123,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         
         return anView
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

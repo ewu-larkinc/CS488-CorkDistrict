@@ -20,6 +20,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     //# MARK: - View Controller Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        //self.tableView.backgroundView = UIImageView(image:UIImage(named: "detailBackground"))
     }
     
     override func didReceiveMemoryWarning() {
@@ -39,6 +40,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         let cell = tableView.dequeueReusableCellWithIdentifier("detailCell") as UITableViewCell
         cell.textLabel?.textAlignment = NSTextAlignment.Left
         cell.textLabel?.text = ""
+        cell.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.2)
         
         switch (indexPath.row) {
         case 0:
