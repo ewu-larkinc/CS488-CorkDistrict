@@ -24,16 +24,26 @@
                                     <outlet property="delegate" destination="2ZD-wG-sk8" id="4qk-PE-Hl5"/>
                                 </connections>
                             </mapView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dbn-aV-euQ">
+                                <rect key="frame" x="56" y="264" width="488" height="66"/>
+                                <color key="backgroundColor" red="0.81785599226804129" green="0.0154632254775505" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="Dbn-aV-euQ" firstAttribute="leading" secondItem="ihZ-MV-rBX" secondAttribute="leadingMargin" constant="40" id="0cO-hZ-fPY"/>
                             <constraint firstItem="v1x-e4-KaP" firstAttribute="top" secondItem="Xgh-rz-LwX" secondAttribute="bottom" id="90r-M1-88R"/>
                             <constraint firstItem="Xgh-rz-LwX" firstAttribute="top" secondItem="X85-gW-TJL" secondAttribute="bottom" id="SKk-G2-7tG"/>
                             <constraint firstItem="Xgh-rz-LwX" firstAttribute="leading" secondItem="ihZ-MV-rBX" secondAttribute="leading" id="Wah-9d-m6V"/>
+                            <constraint firstItem="Dbn-aV-euQ" firstAttribute="top" secondItem="X85-gW-TJL" secondAttribute="bottom" constant="200" id="Xb5-LC-Keh"/>
                             <constraint firstAttribute="trailing" secondItem="Xgh-rz-LwX" secondAttribute="trailing" id="jam-MC-md8"/>
+                            <constraint firstItem="v1x-e4-KaP" firstAttribute="top" secondItem="Dbn-aV-euQ" secondAttribute="bottom" constant="270" id="pcI-Zn-utd"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Dbn-aV-euQ" secondAttribute="trailing" constant="40" id="rka-RV-0p1"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="detailScene" destination="Dbn-aV-euQ" id="G5d-M6-XyX"/>
                         <outlet property="theMapView" destination="Xgh-rz-LwX" id="ikP-dC-8h0"/>
                     </connections>
                 </viewController>

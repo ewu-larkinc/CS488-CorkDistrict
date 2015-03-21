@@ -19,19 +19,24 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     //let geocoder = CLGeocoder()
     
     var wineries = [NSManagedObject]()
+    var restaurants = [NSManagedObject]()
     var showWineries: Bool = false
     var winePins = [MKPointAnnotation]()
     
     @IBOutlet var theMapView: MKMapView!
     
+    @IBOutlet var detailScene: UIView!
     @IBOutlet var wineButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        detailScene.alpha = 0.8
+        detailScene.layer.cornerRadius = 6.0
         //CoreData
         let dataManager = DataManager.sharedInstance
         wineries = dataManager.getWineries()
+        restaurants = dataManager.getRestaurants()
         
         // Do any additional setup after loading the view, typically from a nib.
         var lat: CLLocationDegrees = 47.66
@@ -48,12 +53,13 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         
         self.theMapView.setRegion(theRegion, animated: true)
         
-        placeWineries()
+        placeWineries(wineries, type: "winery")
+        placeWineries(restaurants, type: "rest")
         
     }
     @IBAction func filterWineries(AnyObject) {
         if(showWineries){
-            placeWineries()
+            placeWineries(wineries, type: "winery")
             showWineries = false
             wineButton.alpha = 1.0
         }
@@ -69,33 +75,27 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         }
         //theMapView.removeAnnotations(theMapView.annotations)
     }
-    func placeWineries() {
+    func placeWineries(var array: [NSManagedObject], var type: String) {
         
         
-        
-        for var i = 0; i < wineries.count; i++
+        for var i = 0; i < array.count; i++
         {
             
-            var geocoder = CLGeocoder() // moved this line of code inside the forloop to make a new geocoder every iteration through the loop. DUHHH
-            
-            let temp = wineries[i]
-            let information = MKPointAnnotation()
+            //var temp = wineries[i]
+            var temp = array[i]
+            var information = MKPointAnnotation()
             
             var address:String = temp.valueForKey("address") as String
             var city:String = temp.valueForKey("city") as String
             
-            geocoder.geocodeAddressString( "\(address), \(city), WA, USA", {(placemarks: [AnyObject]!, error: NSError!) -> Void in
-                if let placemark = placemarks?[0]  as? CLPlacemark
-                {
-                    information.coordinate = placemark.location.coordinate
-                    
-                    //information.coordinate = method that returns placemark.location.coordinate
-                }
-                
-            })
+            var mypin: String = temp.valueForKey("placemark") as String
+            var llarray = mypin.componentsSeparatedByString(",")
+            
+            information.coordinate.latitude = NSString(string: llarray[0]).doubleValue
+            information.coordinate.longitude = NSString(string: llarray[1]).doubleValue
             
             information.title = temp.valueForKey("name") as? String
-            information.subtitle = address
+            information.subtitle = type
             
             winePins.append(information)
             
@@ -114,7 +114,12 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         var anView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId)
         if anView == nil {
             anView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
-            anView.image = UIImage(named:"Wine_Icon")
+            if(annotation.subtitle == "winery") {
+                anView.image = UIImage(named:"Wine_Icon")
+            }
+            if(annotation.subtitle == "rest") {
+                anView.image = UIImage(named:"Food_Icon")
+            }
             anView.canShowCallout = true
         }
         else {

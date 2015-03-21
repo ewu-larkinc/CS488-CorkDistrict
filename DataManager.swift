@@ -106,6 +106,17 @@ class DataManager {
         newEntity.setValue(entityInfo[4], forKey: "phone")
         newEntity.setValue(entityInfo[5], forKey: "about")
         
+        var geocoder = CLGeocoder()
+        geocoder.geocodeAddressString( "\(entityInfo[1]), \(entityInfo[3]), WA, USA", {(placemarks: [AnyObject]!, error: NSError!) -> Void in
+            if let placemark = placemarks?[0]  as? CLPlacemark
+            {
+                var latlong: String = "\(placemark.location.coordinate.latitude),"
+                latlong += "\(placemark.location.coordinate.longitude)"
+                
+                newEntity.setValue(latlong, forKey: "placemark")
+            }
+            
+        })
         
         var error: NSError?
         if !managedContext.save(&error) {
