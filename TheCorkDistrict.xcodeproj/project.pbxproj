@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		220A5F5A1ABD452100144E2A /* AltCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220A5F591ABD452100144E2A /* AltCell.swift */; };
 		2298E07F1AB00B7B003CEFFA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2298E07E1AB00B7B003CEFFA /* AppDelegate.swift */; };
 		2298E0821AB00B7B003CEFFA /* TheCorkDistrict.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2298E0801AB00B7B003CEFFA /* TheCorkDistrict.xcdatamodeld */; };
 		2298E0841AB00B7B003CEFFA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2298E0831AB00B7B003CEFFA /* ViewController.swift */; };
@@ -38,6 +39,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		220A5F591ABD452100144E2A /* AltCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AltCell.swift; path = ../AltCell.swift; sourceTree = "<group>"; };
 		2298E0791AB00B7B003CEFFA /* TheCorkDistrict.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheCorkDistrict.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2298E07D1AB00B7B003CEFFA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2298E07E1AB00B7B003CEFFA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 				2298E0A71AB011CB003CEFFA /* AccommodationsViewController.swift */,
 				2298E0A91AB011EA003CEFFA /* PackagesViewController.swift */,
 				2298E0AB1AB0120C003CEFFA /* BasicCell.swift */,
+				220A5F591ABD452100144E2A /* AltCell.swift */,
 				2298E07C1AB00B7B003CEFFA /* Supporting Files */,
 			);
 			path = TheCorkDistrict;
@@ -252,6 +255,7 @@
 				2298E0A21AB010FF003CEFFA /* WineriesViewController.swift in Sources */,
 				2298E0AC1AB0120C003CEFFA /* BasicCell.swift in Sources */,
 				2298E0A81AB011CB003CEFFA /* AccommodationsViewController.swift in Sources */,
+				220A5F5A1ABD452100144E2A /* AltCell.swift in Sources */,
 				2298E0BA1AB01E53003CEFFA /* WineToursViewController.swift in Sources */,
 				2298E0A61AB011B5003CEFFA /* RestaurantsViewController.swift in Sources */,
 				2298E0A41AB01188003CEFFA /* DataManager.swift in Sources */,

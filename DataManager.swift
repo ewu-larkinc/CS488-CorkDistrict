@@ -60,6 +60,10 @@ class DataManager {
         return accommodations
     }
     
+    func getPackages() -> [NSManagedObject] {
+        return packages
+    }
+    
     
     //#MARK: - Core Data Methods
     func retrieveEntities(entityType: String, entityURL: NSURL) -> [NSManagedObject] {
