@@ -40,7 +40,13 @@ class DataManager {
     func loadData() -> Void {
         
         if (!dataReceived) {
-            wineries = retrieveEntities(ENTITY_TYPE_WINERY, entityURL: ENTITY_URL_WINERY!)
+            
+            
+            println("Data hasnt been received. Recieving now...")
+            dispatch_async(dispatch_get_global_queue(Int(QOS_CLASS_USER_INITIATED.value), 0)) {
+                    self.wineries = self.retrieveEntities(self.ENTITY_TYPE_WINERY, entityURL: self.ENTITY_URL_WINERY!)
+                }
+            
             restaurants = retrieveEntities(ENTITY_TYPE_RESTAURANT, entityURL: ENTITY_URL_RESTAURANT!)
             accommodations = retrieveEntities(ENTITY_TYPE_ACCOMMODATION, entityURL: ENTITY_URL_ACCOMMODATION!)
         }
@@ -116,7 +122,7 @@ class DataManager {
         
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         let managedContext = appDelegate.managedObjectContext!
-        var entityType = entityInfo[6] as String
+        var entityType = entityInfo[7] as String
         
         let newEntity = NSEntityDescription.insertNewObjectForEntityForName(entityType, inManagedObjectContext: managedContext) as NSManagedObject
         
@@ -127,6 +133,7 @@ class DataManager {
         newEntity.setValue(entityInfo[3], forKey: "city")
         newEntity.setValue(entityInfo[4], forKey: "phone")
         newEntity.setValue(entityInfo[5], forKey: "about")
+        newEntity.setValue(entityInfo[6], forKey: "website")
         
         var geocoder = CLGeocoder()
         geocoder.geocodeAddressString( "\(entityInfo[1]), \(entityInfo[3]), WA, USA", {(placemarks: [AnyObject]!, error: NSError!) -> Void in
@@ -247,6 +254,7 @@ class DataManager {
             infoArray.addObject(entityCity)
             infoArray.addObject(json[ctr]["Phone"].stringValue)
             infoArray.addObject(json[ctr]["Description"].stringValue)
+            infoArray.addObject(json[ctr]["Website"].stringValue)
             infoArray.addObject(entityType)
             
             entityImageString = stripHtml(json[ctr]["Thumbnail"].stringValue)

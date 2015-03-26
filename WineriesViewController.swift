@@ -79,6 +79,7 @@ class WineriesViewController: UIViewController, UITableViewDataSource, UITableVi
         cell.cityLabel.sizeToFit()
         
         cell.phoneLabel.text = winery.valueForKey("phone") as? String
+        cell.websiteLabel.text = winery.valueForKey("website") as? String
         
         let imageData = winery.valueForKey("imageData") as? NSData
         let myImage = UIImage(data: imageData!)

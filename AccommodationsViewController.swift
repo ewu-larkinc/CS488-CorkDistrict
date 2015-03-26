@@ -73,10 +73,12 @@ class AccomodationsViewController: UIViewController, UITableViewDataSource, UITa
         cell.cityLabel.sizeToFit()
         
         cell.phoneLabel.text = accommodation.valueForKey("phone") as? String
+        cell.websiteLabel.text = accommodation.valueForKey("website") as? String
         
         let imageData = accommodation.valueForKey("imageData") as? NSData
         let myImage = UIImage(data: imageData!)
         cell.cellImage.image = myImage
+        
 
         cell.cellImage.layer.cornerRadius = 4.0
         cell.cellImage.clipsToBounds = true
