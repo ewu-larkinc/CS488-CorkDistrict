@@ -19,7 +19,7 @@ class DataManager {
         return _SingletonSharedInstance
     }
     
-    
+    var dataReceived: Bool = false
     var wineries = [NSManagedObject]()
     var restaurants = [NSManagedObject]()
     var accommodations = [NSManagedObject]()
@@ -39,13 +39,18 @@ class DataManager {
     
     func loadData() -> Void {
         
-        wineries = retrieveEntities(ENTITY_TYPE_WINERY, entityURL: ENTITY_URL_WINERY!)
-        restaurants = retrieveEntities(ENTITY_TYPE_RESTAURANT, entityURL: ENTITY_URL_RESTAURANT!)
-        accommodations = retrieveEntities(ENTITY_TYPE_ACCOMMODATION, entityURL: ENTITY_URL_ACCOMMODATION!)
+        if (!dataReceived) {
+            wineries = retrieveEntities(ENTITY_TYPE_WINERY, entityURL: ENTITY_URL_WINERY!)
+            restaurants = retrieveEntities(ENTITY_TYPE_RESTAURANT, entityURL: ENTITY_URL_RESTAURANT!)
+            accommodations = retrieveEntities(ENTITY_TYPE_ACCOMMODATION, entityURL: ENTITY_URL_ACCOMMODATION!)
+        }
+        
+        dataReceived = true
         
         //deleteAllEntitiesOfType(ENTITY_TYPE_WINERY)
         //deleteAllEntitiesOfType(ENTITY_TYPE_RESTAURANT)
         //deleteAllEntitiesOfType(ENTITY_TYPE_ACCOMMODATION)
+        
     }
     
     func getWineries() -> [NSManagedObject] {
@@ -64,6 +69,19 @@ class DataManager {
         return packages
     }
     
+    
+    func getWineryByTitle(title: String) -> [NSManagedObject]? {
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        let managedContext = appDelegate.managedObjectContext!
+        
+        let fetchRequest = NSFetchRequest(entityName: ENTITY_TYPE_WINERY)
+        fetchRequest.predicate = NSPredicate(format: "name = \(title)")
+        
+        var error: NSError?
+        let fetchedResults = managedContext.executeFetchRequest(fetchRequest, error: &error) as [NSManagedObject]?
+        
+        return fetchedResults
+    }
     
     //#MARK: - Core Data Methods
     func retrieveEntities(entityType: String, entityURL: NSURL) -> [NSManagedObject] {

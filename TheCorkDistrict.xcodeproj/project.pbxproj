@@ -26,6 +26,7 @@
 		2298E0B81AB01D91003CEFFA /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2298E0B71AB01D91003CEFFA /* MapViewController.swift */; };
 		2298E0BA1AB01E53003CEFFA /* WineToursViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2298E0B91AB01E53003CEFFA /* WineToursViewController.swift */; };
 		22A85A0A1AB18B2000B45713 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A85A091AB18B2000B45713 /* SwiftyJSON.swift */; };
+		22D2B2DB1AC3B96B008E0CE1 /* PackageDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D2B2DA1AC3B96B008E0CE1 /* PackageDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,7 @@
 		2298E0B71AB01D91003CEFFA /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapViewController.swift; path = ../MapViewController.swift; sourceTree = "<group>"; };
 		2298E0B91AB01E53003CEFFA /* WineToursViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WineToursViewController.swift; path = ../WineToursViewController.swift; sourceTree = "<group>"; };
 		22A85A091AB18B2000B45713 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
+		22D2B2DA1AC3B96B008E0CE1 /* PackageDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PackageDetailViewController.swift; path = ../PackageDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +118,7 @@
 				2298E0B91AB01E53003CEFFA /* WineToursViewController.swift */,
 				2298E0A11AB010FF003CEFFA /* WineriesViewController.swift */,
 				2298E0AD1AB01902003CEFFA /* DetailViewController.swift */,
+				22D2B2DA1AC3B96B008E0CE1 /* PackageDetailViewController.swift */,
 				2298E0B71AB01D91003CEFFA /* MapViewController.swift */,
 				2298E0A51AB011B5003CEFFA /* RestaurantsViewController.swift */,
 				2298E0A71AB011CB003CEFFA /* AccommodationsViewController.swift */,
@@ -258,6 +261,7 @@
 				220A5F5A1ABD452100144E2A /* AltCell.swift in Sources */,
 				2298E0BA1AB01E53003CEFFA /* WineToursViewController.swift in Sources */,
 				2298E0A61AB011B5003CEFFA /* RestaurantsViewController.swift in Sources */,
+				22D2B2DB1AC3B96B008E0CE1 /* PackageDetailViewController.swift in Sources */,
 				2298E0A41AB01188003CEFFA /* DataManager.swift in Sources */,
 				2298E0841AB00B7B003CEFFA /* ViewController.swift in Sources */,
 				2298E0B81AB01D91003CEFFA /* MapViewController.swift in Sources */,

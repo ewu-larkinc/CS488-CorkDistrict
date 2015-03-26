@@ -22,7 +22,6 @@ class PackagesViewController: UIViewController, UITableViewDataSource, UITableVi
         
         let dataManager = DataManager.sharedInstance
         packages = dataManager.getPackages()
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -49,8 +48,12 @@ class PackagesViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func setContentForCell(cell:AltCell, indexPath:NSIndexPath) {
+        
         let package = packages[indexPath.row]
         cell.titleLabel.text = package.valueForKey("name") as? String
+        cell.entityTitleLabel.text = package.valueForKey("relatedEntity") as? String
+        cell.dateLabel.text = package.valueForKey("validDates") as? String
+        cell.costLabel.text = package.valueForKey("cost") as? String
         
         let imageData = package.valueForKey("imageData") as? NSData
         let myImage = UIImage(data: imageData!)

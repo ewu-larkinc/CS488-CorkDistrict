@@ -21,6 +21,10 @@ class WineriesViewController: UIViewController, UITableViewDataSource, UITableVi
         self.tableView.backgroundView = UIImageView(image:UIImage(named: "wineBackground"))
         
         let dataManager = DataManager.sharedInstance
+        
+        //for testing only.....
+        dataManager.loadData()
+        
         wineries = dataManager.getWineries()
         
     }

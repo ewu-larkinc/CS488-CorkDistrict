@@ -69,10 +69,6 @@ class RestaurantsViewController: UIViewController, UITableViewDataSource, UITabl
         
         cell.cityLabel.text = city! + ", " + state + " " + zip!
         cell.cityLabel.sizeToFit()
-        
-        //TESTING//////////////////////////////////
-        cell.cityLabel.removeConstraints(cell.cityLabel.constraints())
-        
         cell.phoneLabel.text = restaurant.valueForKey("phone") as? String
         
         let imageData = restaurant.valueForKey("imageData") as? NSData
