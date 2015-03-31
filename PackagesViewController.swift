@@ -29,6 +29,10 @@ class PackagesViewController: UIViewController, UITableViewDataSource, UITableVi
         
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.automaticallyAdjustsScrollViewInsets = false
+    }
     
     
     //# MARK: - TableView Methods
@@ -38,6 +42,10 @@ class PackagesViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         return basicCellAtIndexPath(indexPath)
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
     func basicCellAtIndexPath(indexPath:NSIndexPath) -> AltCell {

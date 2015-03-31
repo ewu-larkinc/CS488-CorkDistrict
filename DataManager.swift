@@ -41,8 +41,6 @@ class DataManager {
         
         if (!dataReceived) {
             
-            println("For testing only. Pulling data now...")
-            
             wineries = retrieveEntities(ENTITY_TYPE_WINERY, entityURL: ENTITY_URL_WINERY!)
             restaurants = retrieveEntities(ENTITY_TYPE_RESTAURANT, entityURL: ENTITY_URL_RESTAURANT!)
             accommodations = retrieveEntities(ENTITY_TYPE_ACCOMMODATION, entityURL: ENTITY_URL_ACCOMMODATION!)
@@ -54,6 +52,7 @@ class DataManager {
         //deleteAllEntitiesOfType(ENTITY_TYPE_WINERY)
         //deleteAllEntitiesOfType(ENTITY_TYPE_RESTAURANT)
         //deleteAllEntitiesOfType(ENTITY_TYPE_ACCOMMODATION)
+        //deleteAllEntitiesOfType(ENTITY_TYPE_PACKAGE)
         
     }
     
@@ -133,7 +132,6 @@ class DataManager {
         newEntity.setValue(entityInfo[5], forKey: "about")
         newEntity.setValue(entityInfo[6], forKey: "website")
         
-        //println("Current entity's website is: \(entityInfo[6])")
         
         var geocoder = CLGeocoder()
         geocoder.geocodeAddressString( "\(entityInfo[1]), \(entityInfo[3]), WA, USA", {(placemarks: [AnyObject]!, error: NSError!) -> Void in

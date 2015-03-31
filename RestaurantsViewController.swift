@@ -28,6 +28,11 @@ class RestaurantsViewController: UIViewController, UITableViewDataSource, UITabl
         super.didReceiveMemoryWarning()
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.automaticallyAdjustsScrollViewInsets = false
+    }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         
         let dvc = segue.destinationViewController as DetailViewController
@@ -46,6 +51,10 @@ class RestaurantsViewController: UIViewController, UITableViewDataSource, UITabl
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         return basicCellAtIndexPath(indexPath)
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
     func basicCellAtIndexPath(indexPath:NSIndexPath) -> BasicCell {

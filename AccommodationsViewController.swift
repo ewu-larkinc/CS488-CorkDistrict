@@ -12,8 +12,9 @@ import CoreData
 class AccomodationsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var tableView: UITableView!
-    var accommodations = [NSManagedObject]()
+    
     let basicCellIdentifier = "BasicCell"
+    var accommodations = [NSManagedObject]()
     
     
     override func viewDidLoad() {
@@ -27,6 +28,11 @@ class AccomodationsViewController: UIViewController, UITableViewDataSource, UITa
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.automaticallyAdjustsScrollViewInsets = false
     }
     
     
@@ -48,6 +54,10 @@ class AccomodationsViewController: UIViewController, UITableViewDataSource, UITa
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         return basicCellAtIndexPath(indexPath)
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
     func basicCellAtIndexPath(indexPath:NSIndexPath) -> BasicCell {

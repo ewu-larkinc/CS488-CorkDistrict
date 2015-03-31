@@ -9,6 +9,7 @@ import UIKit
 import CoreData
 
 class DetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    @IBOutlet weak var tableView: UITableView!
     
     let titleRowHeight : CGFloat = 80.0
     let imageRowHeight : CGFloat = 300.0
@@ -74,6 +75,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
             
         case 6:
             cell.textLabel?.text = currentSelection.valueForKey("website") as? String
+            cell.textLabel?.adjustsFontSizeToFitWidth = true
         default:
             break
         }
@@ -87,6 +89,8 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
             var tempNumStr = tempNum.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
             UIApplication.sharedApplication().openURL(NSURL(string: "tel://\(tempNumStr)")!)
         }
+        
+        self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
     func tableView(tableView: UITableView!, heightForRowAtIndexPath indexPath: NSIndexPath!) -> CGFloat {
