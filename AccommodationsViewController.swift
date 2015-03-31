@@ -58,36 +58,39 @@ class AccomodationsViewController: UIViewController, UITableViewDataSource, UITa
     }
     
     func setContentForCell(cell:BasicCell, indexPath:NSIndexPath) {
-        let accommodation = accommodations[indexPath.row]
-        cell.titleLabel.text = accommodation.valueForKey("name") as? String
-        cell.addressLabel.text = accommodation.valueForKey("address") as? String
         
-        cell.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.2)
+        let accommodation = accommodations[indexPath.row]
+        let imageData = accommodation.valueForKey("imageData") as? NSData
+        let cellImage = UIImage(data: imageData!)
         
         var city = accommodation.valueForKey("city") as? String
-        city = city?.stringByReplacingOccurrencesOfString(" ", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
-        var state = "WA"
         var zip = accommodation.valueForKey("zipcode") as? String
+        var name = accommodation.valueForKey("name") as? String
+        var phone = accommodation.valueForKey("phone") as? String
+        var address = accommodation.valueForKey("address") as? String
+        var website = accommodation.valueForKey("website") as? String
+        var state = "WA"
         
+        city = city?.stringByReplacingOccurrencesOfString(" ", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+        
+        cell.cellImage.image = cellImage
+        cell.titleLabel.text = name
+        cell.addressLabel.text = address
+        cell.phoneLabel.text = phone
+        cell.websiteLabel.text = website
         cell.cityLabel.text = city! + ", " + state + " " + zip!
         cell.cityLabel.sizeToFit()
         
-        cell.phoneLabel.text = accommodation.valueForKey("phone") as? String
-        cell.websiteLabel.text = accommodation.valueForKey("website") as? String
-        
-        let imageData = accommodation.valueForKey("imageData") as? NSData
-        let myImage = UIImage(data: imageData!)
-        cell.cellImage.image = myImage
-        
-
         cell.cellImage.layer.cornerRadius = 4.0
         cell.cellImage.clipsToBounds = true
         cell.titleLabel.textColor = UIColor.whiteColor()
         cell.addressLabel.textColor = UIColor.whiteColor()
         cell.cityLabel.textColor = UIColor.whiteColor()
         cell.phoneLabel.textColor = UIColor.whiteColor()
+        cell.websiteLabel.textColor = UIColor.whiteColor()
 
         cell.cellImage.contentMode = UIViewContentMode.ScaleAspectFit
+        cell.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.2)
     }
 
     

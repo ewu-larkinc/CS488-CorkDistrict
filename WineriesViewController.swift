@@ -17,14 +17,9 @@ class WineriesViewController: UIViewController, UITableViewDataSource, UITableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //self.view.backgroundColor = UIColor(patternImage: UIImage(named: "wineBackground")!)
         self.tableView.backgroundView = UIImageView(image:UIImage(named: "wineBackground"))
         
         let dataManager = DataManager.sharedInstance
-        
-        //for testing only.....
-        dataManager.loadData()
-        
         wineries = dataManager.getWineries()
         
     }
@@ -64,36 +59,48 @@ class WineriesViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func setContentForCell(cell:BasicCell, indexPath:NSIndexPath) {
+        
         let winery = wineries[indexPath.row]
-        cell.titleLabel.text = winery.valueForKey("name") as? String
-        cell.addressLabel.text = winery.valueForKey("address") as? String
+        let imageData = winery.valueForKey("imageData") as? NSData
+        let cellImage = UIImage(data: imageData!)
         
-        cell.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.2)
-        
+        var name = winery.valueForKey("name") as? String
+        var address = winery.valueForKey("address") as? String
         var city = winery.valueForKey("city") as? String
-        city = city?.stringByReplacingOccurrencesOfString(" ", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
-        var state = "WA"
+        var website = winery.valueForKey("website") as? String
+        var phone = winery.valueForKey("phone") as? String
         var zip = winery.valueForKey("zipcode") as? String
+        var state = "WA"
         
+        city = city?.stringByReplacingOccurrencesOfString(" ", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+        
+        //for testing only.........................................
+        //let testResults = [NSManagedObject]()
+        /*let dataManager = DataManager.sharedInstance
+        if let testResults = dataManager.getWineryByTitle(name!) {
+            var testWeb = testResults[0].valueForKey("website") as? String
+            println("title: \(name), website found: \(testWeb)")
+        }*/
+        
+        
+        cell.titleLabel.text = name
+        cell.addressLabel.text = address
         cell.cityLabel.text = city! + ", " + state + " " + zip!
         cell.cityLabel.sizeToFit()
+        cell.phoneLabel.text = phone
+        cell.websiteLabel.text = website
+        cell.cellImage.image = cellImage
         
-        cell.phoneLabel.text = winery.valueForKey("phone") as? String
-        cell.websiteLabel.text = winery.valueForKey("website") as? String
-        
-        let imageData = winery.valueForKey("imageData") as? NSData
-        let myImage = UIImage(data: imageData!)
-        cell.cellImage.image = myImage
-        
+        cell.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.2)
         cell.cellImage.layer.cornerRadius = 4.0
         cell.cellImage.clipsToBounds = true
         cell.titleLabel.textColor = UIColor.whiteColor()
         cell.addressLabel.textColor = UIColor.whiteColor()
         cell.cityLabel.textColor = UIColor.whiteColor()
         cell.phoneLabel.textColor = UIColor.whiteColor()
+        cell.websiteLabel.textColor = UIColor.whiteColor()
         
         cell.cellImage.contentMode = UIViewContentMode.ScaleAspectFit
-        
     }
     
 }

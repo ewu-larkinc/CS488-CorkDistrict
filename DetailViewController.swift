@@ -33,7 +33,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 6
+        return 7
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -50,15 +50,15 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
             titleLabel.text = currentSelection.valueForKey("name") as? String
             titleLabel.adjustsFontSizeToFitWidth = true
             cell.addSubview(titleLabel)
-            break
+            
         case 1:
             cell.textLabel?.text = currentSelection.valueForKey("address") as? String
-            break
+            
         case 2:
             let city = currentSelection.valueForKey("city") as? String
             let zipcode = currentSelection.valueForKey("zipcode") as? String
             cell.textLabel?.text = city! + " " + zipcode!
-            break
+            
         case 3:
             cell.textLabel?.text = currentSelection.valueForKey("phone") as? String
             break
@@ -68,10 +68,12 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
             let newImageView = UIImageView(frame: CGRectMake(15.0,10.0,345.0,280.0))
             newImageView.image = mainImage
             cell.addSubview(newImageView)
-            break
+            
         case 5:
             cell.textLabel?.text = currentSelection.valueForKey("about") as? String
-            break
+            
+        case 6:
+            cell.textLabel?.text = currentSelection.valueForKey("website") as? String
         default:
             break
         }

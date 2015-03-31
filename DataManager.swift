@@ -41,14 +41,12 @@ class DataManager {
         
         if (!dataReceived) {
             
+            println("For testing only. Pulling data now...")
             
-            println("Data hasnt been received. Recieving now...")
-            dispatch_async(dispatch_get_global_queue(Int(QOS_CLASS_USER_INITIATED.value), 0)) {
-                    self.wineries = self.retrieveEntities(self.ENTITY_TYPE_WINERY, entityURL: self.ENTITY_URL_WINERY!)
-                }
-            
+            wineries = retrieveEntities(ENTITY_TYPE_WINERY, entityURL: ENTITY_URL_WINERY!)
             restaurants = retrieveEntities(ENTITY_TYPE_RESTAURANT, entityURL: ENTITY_URL_RESTAURANT!)
             accommodations = retrieveEntities(ENTITY_TYPE_ACCOMMODATION, entityURL: ENTITY_URL_ACCOMMODATION!)
+            packages = retrieveEntities(ENTITY_TYPE_PACKAGE, entityURL: ENTITY_URL_PACKAGE!)
         }
         
         dataReceived = true
@@ -135,6 +133,8 @@ class DataManager {
         newEntity.setValue(entityInfo[5], forKey: "about")
         newEntity.setValue(entityInfo[6], forKey: "website")
         
+        //println("Current entity's website is: \(entityInfo[6])")
+        
         var geocoder = CLGeocoder()
         geocoder.geocodeAddressString( "\(entityInfo[1]), \(entityInfo[3]), WA, USA", {(placemarks: [AnyObject]!, error: NSError!) -> Void in
             if let placemark = placemarks?[0]  as? CLPlacemark
@@ -160,6 +160,8 @@ class DataManager {
             restaurants.append(newEntity)
         case "Accommodation":
             accommodations.append(newEntity)
+        case "Package":
+            packages.append(newEntity)
         default:
             println("Invalid entity type")
             

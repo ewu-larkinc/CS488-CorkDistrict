@@ -30,6 +30,7 @@
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="phone" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="placemark" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="website" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="zipcode" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="Winery" syncable="YES">
@@ -40,12 +41,13 @@
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="phone" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="placemark" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="website" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="zipcode" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
         <element name="Accommodation" positionX="-36" positionY="99" width="128" height="180"/>
         <element name="Package" positionX="-45" positionY="99" width="128" height="178"/>
-        <element name="Restaurant" positionX="-54" positionY="54" width="128" height="163"/>
-        <element name="Winery" positionX="-63" positionY="-18" width="128" height="163"/>
+        <element name="Restaurant" positionX="-54" positionY="54" width="128" height="180"/>
+        <element name="Winery" positionX="-63" positionY="-18" width="128" height="180"/>
     </elements>
 </model>
