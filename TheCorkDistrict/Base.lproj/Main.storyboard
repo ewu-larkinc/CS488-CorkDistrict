@@ -323,6 +323,7 @@
                         <viewControllerLayoutGuide type="bottom" id="Jy4-Bq-u9Z"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="bnR-ig-s9D">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="93" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="wNG-LH-IVZ">
@@ -334,10 +335,12 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jgi-v8-WKa" id="Tlx-u2-rUc">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1bc-M7-b4o">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="22" translatesAutoresizingMaskIntoConstraints="NO" id="1bc-M7-b4o">
                                                     <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="24" id="Ulb-WW-qMs"/>
+                                                        <constraint firstAttribute="height" constant="24" id="Ulb-WW-qMs">
+                                                            <variation key="heightClass=regular-widthClass=compact" constant="29"/>
+                                                        </constraint>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="STHeitiTC-Light" family="Heiti TC" pointSize="29"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -353,12 +356,12 @@
                                                         </mask>
                                                     </variation>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vch-bY-kKU">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vch-bY-kKU">
                                                     <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="12" id="TB4-Qy-ukd"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" name="STHeitiTC-Light" family="Heiti TC" pointSize="16"/>
+                                                    <fontDescription key="fontDescription" name="STHeitiTC-Light" family="Heiti TC" pointSize="15"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="default">
@@ -372,12 +375,14 @@
                                                         </mask>
                                                     </variation>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City, State Zip" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5XA-IQ-Dvf">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City, State Zip" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5XA-IQ-Dvf">
                                                     <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="13" id="HRh-Ak-7zT"/>
+                                                        <constraint firstAttribute="height" constant="13" id="HRh-Ak-7zT">
+                                                            <variation key="heightClass=regular-widthClass=compact" constant="14"/>
+                                                        </constraint>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" name="STHeitiTC-Light" family="Heiti TC" pointSize="16"/>
+                                                    <fontDescription key="fontDescription" name="STHeitiTC-Light" family="Heiti TC" pointSize="15"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="default">
@@ -391,12 +396,14 @@
                                                         </mask>
                                                     </variation>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c5S-kA-qVf">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c5S-kA-qVf">
                                                     <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="12" id="5dv-Z3-3MA"/>
+                                                        <constraint firstAttribute="height" constant="12" id="5dv-Z3-3MA">
+                                                            <variation key="heightClass=regular-widthClass=compact" constant="13"/>
+                                                        </constraint>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" name="STHeitiTC-Light" family="Heiti TC" pointSize="16"/>
+                                                    <fontDescription key="fontDescription" name="STHeitiTC-Light" family="Heiti TC" pointSize="15"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="default">
@@ -412,15 +419,21 @@
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="c5S-kA-qVf" firstAttribute="top" secondItem="5XA-IQ-Dvf" secondAttribute="bottom" constant="4" id="4Hp-0x-XqB"/>
+                                                <constraint firstItem="c5S-kA-qVf" firstAttribute="top" secondItem="5XA-IQ-Dvf" secondAttribute="bottom" constant="4" id="4Hp-0x-XqB">
+                                                    <variation key="heightClass=regular-widthClass=compact" constant="4"/>
+                                                </constraint>
                                                 <constraint firstAttribute="trailing" secondItem="c5S-kA-qVf" secondAttribute="trailing" constant="8" id="9kP-35-elK"/>
                                                 <constraint firstAttribute="trailing" secondItem="1bc-M7-b4o" secondAttribute="trailing" constant="8" id="CRC-ln-ZfK"/>
                                                 <constraint firstItem="c5S-kA-qVf" firstAttribute="leading" secondItem="Tlx-u2-rUc" secondAttribute="leading" constant="8" id="J8O-DK-y5w"/>
                                                 <constraint firstItem="5XA-IQ-Dvf" firstAttribute="top" secondItem="vch-bY-kKU" secondAttribute="bottom" constant="4" id="LXU-3P-hu6"/>
-                                                <constraint firstItem="vch-bY-kKU" firstAttribute="top" secondItem="1bc-M7-b4o" secondAttribute="bottom" constant="6" id="Q2p-pg-v2U"/>
+                                                <constraint firstItem="vch-bY-kKU" firstAttribute="top" secondItem="1bc-M7-b4o" secondAttribute="bottom" constant="6" id="Q2p-pg-v2U">
+                                                    <variation key="heightClass=regular-widthClass=compact" constant="5"/>
+                                                </constraint>
                                                 <constraint firstItem="1bc-M7-b4o" firstAttribute="leading" secondItem="Tlx-u2-rUc" secondAttribute="leading" constant="8" id="VRi-Xt-VzG"/>
                                                 <constraint firstAttribute="trailing" secondItem="vch-bY-kKU" secondAttribute="trailing" constant="8" id="cBJ-5j-OjW"/>
-                                                <constraint firstItem="1bc-M7-b4o" firstAttribute="top" secondItem="Tlx-u2-rUc" secondAttribute="top" constant="10" id="h2J-y7-pLE"/>
+                                                <constraint firstItem="1bc-M7-b4o" firstAttribute="top" secondItem="Tlx-u2-rUc" secondAttribute="top" constant="10" id="h2J-y7-pLE">
+                                                    <variation key="heightClass=regular-widthClass=compact" constant="6"/>
+                                                </constraint>
                                                 <constraint firstItem="5XA-IQ-Dvf" firstAttribute="leading" secondItem="Tlx-u2-rUc" secondAttribute="leading" constant="8" id="voW-gn-BKz"/>
                                                 <constraint firstItem="vch-bY-kKU" firstAttribute="leading" secondItem="Tlx-u2-rUc" secondAttribute="leading" constant="8" id="xB2-mS-5Sp"/>
                                                 <constraint firstAttribute="trailing" secondItem="5XA-IQ-Dvf" secondAttribute="trailing" constant="8" id="zGU-R5-D7c"/>
@@ -436,15 +449,15 @@
                                                     <exclude reference="CRC-ln-ZfK"/>
                                                     <exclude reference="VRi-Xt-VzG"/>
                                                     <exclude reference="h2J-y7-pLE"/>
-                                                    <exclude reference="Q2p-pg-v2U"/>
-                                                    <exclude reference="cBJ-5j-OjW"/>
-                                                    <exclude reference="xB2-mS-5Sp"/>
                                                     <exclude reference="LXU-3P-hu6"/>
                                                     <exclude reference="voW-gn-BKz"/>
                                                     <exclude reference="zGU-R5-D7c"/>
                                                     <exclude reference="4Hp-0x-XqB"/>
                                                     <exclude reference="9kP-35-elK"/>
                                                     <exclude reference="J8O-DK-y5w"/>
+                                                    <exclude reference="Q2p-pg-v2U"/>
+                                                    <exclude reference="cBJ-5j-OjW"/>
+                                                    <exclude reference="xB2-mS-5Sp"/>
                                                 </mask>
                                             </variation>
                                             <variation key="heightClass=regular-widthClass=compact">
@@ -458,15 +471,15 @@
                                                     <include reference="CRC-ln-ZfK"/>
                                                     <include reference="VRi-Xt-VzG"/>
                                                     <include reference="h2J-y7-pLE"/>
-                                                    <include reference="Q2p-pg-v2U"/>
-                                                    <include reference="cBJ-5j-OjW"/>
-                                                    <include reference="xB2-mS-5Sp"/>
                                                     <include reference="LXU-3P-hu6"/>
                                                     <include reference="voW-gn-BKz"/>
                                                     <include reference="zGU-R5-D7c"/>
                                                     <include reference="4Hp-0x-XqB"/>
                                                     <include reference="9kP-35-elK"/>
                                                     <include reference="J8O-DK-y5w"/>
+                                                    <include reference="Q2p-pg-v2U"/>
+                                                    <include reference="cBJ-5j-OjW"/>
+                                                    <include reference="xB2-mS-5Sp"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
@@ -496,10 +509,10 @@
                                 <exclude reference="wNG-LH-IVZ"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="3Yh-uZ-dwb"/>
                                 <exclude reference="4jn-VU-dPY"/>
                                 <exclude reference="hWU-Wk-yZe"/>
                                 <exclude reference="tgk-Yj-9Ls"/>
-                                <exclude reference="3Yh-uZ-dwb"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -507,10 +520,10 @@
                                 <include reference="wNG-LH-IVZ"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="3Yh-uZ-dwb"/>
                                 <include reference="4jn-VU-dPY"/>
                                 <include reference="hWU-Wk-yZe"/>
                                 <include reference="tgk-Yj-9Ls"/>
-                                <include reference="3Yh-uZ-dwb"/>
                             </mask>
                         </variation>
                     </view>
@@ -1027,7 +1040,8 @@
                                                             <exclude reference="pcW-iO-dPF"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="93" y="8" width="194" height="21"/>
                                                         <mask key="constraints">
                                                             <include reference="pcW-iO-dPF"/>
                                                         </mask>
@@ -1054,24 +1068,36 @@
                                                     <fontDescription key="fontDescription" name="STHeitiTC-Light" family="Heiti TC" pointSize="13"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="93" y="46" width="194" height="13"/>
+                                                    </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4os-2R-sVH">
                                                     <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" name="STHeitiTC-Light" family="Heiti TC" pointSize="13"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="93" y="60" width="194" height="13"/>
+                                                    </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V1X-gp-e1t">
                                                     <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" name="STHeitiTC-Light" family="Heiti TC" pointSize="13"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="93" y="32" width="194" height="13"/>
+                                                    </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Website" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ieo-Xh-LYH">
                                                     <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" name="STHeitiTC-Light" family="Heiti TC" pointSize="13"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="93" y="74" width="194" height="13"/>
+                                                    </variation>
                                                 </label>
                                             </subviews>
                                             <constraints>

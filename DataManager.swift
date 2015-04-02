@@ -24,15 +24,18 @@ class DataManager {
     var restaurants = [NSManagedObject]()
     var accommodations = [NSManagedObject]()
     var packages = [NSManagedObject]()
+    var parking = [NSManagedObject]()
     
     let ENTITY_URL_WINERY = NSURL(string: "http://www.nathanpilgrim.net/rest/wineries.json")
     let ENTITY_URL_RESTAURANT = NSURL(string: "http://www.nathanpilgrim.net/rest/restaurants.json")
     let ENTITY_URL_ACCOMMODATION = NSURL(string: "http://www.nathanpilgrim.net/rest/lodging.json")
     let ENTITY_URL_PACKAGE = NSURL(string: "http://www.nathanpilgrim.net/rest/packages.json")
+    let ENTITY_URL_PARKING = NSURL(string: "http://www.nathanpilgrim.net/rest/parking.json")
     let ENTITY_TYPE_WINERY : String = "Winery"
     let ENTITY_TYPE_RESTAURANT : String = "Restaurant"
     let ENTITY_TYPE_ACCOMMODATION : String = "Accommodation"
     let ENTITY_TYPE_PACKAGE : String = "Package"
+    let ENTITY_TYPE_PARKING : String = "Parking"
     
     
     
@@ -45,15 +48,10 @@ class DataManager {
             restaurants = retrieveEntities(ENTITY_TYPE_RESTAURANT, entityURL: ENTITY_URL_RESTAURANT!)
             accommodations = retrieveEntities(ENTITY_TYPE_ACCOMMODATION, entityURL: ENTITY_URL_ACCOMMODATION!)
             packages = retrieveEntities(ENTITY_TYPE_PACKAGE, entityURL: ENTITY_URL_PACKAGE!)
+            parking = retrieveParking()
         }
         
         dataReceived = true
-        
-        //deleteAllEntitiesOfType(ENTITY_TYPE_WINERY)
-        //deleteAllEntitiesOfType(ENTITY_TYPE_RESTAURANT)
-        //deleteAllEntitiesOfType(ENTITY_TYPE_ACCOMMODATION)
-        //deleteAllEntitiesOfType(ENTITY_TYPE_PACKAGE)
-        
     }
     
     func getWineries() -> [NSManagedObject] {
@@ -70,6 +68,10 @@ class DataManager {
     
     func getPackages() -> [NSManagedObject] {
         return packages
+    }
+    
+    func getParking() -> [NSManagedObject] {
+        return parking
     }
     
     //#MARK: - Core Data Methods
@@ -152,43 +154,6 @@ class DataManager {
         }
     }
     
-    func deleteAllEntitiesOfType(entityType: String) -> Void {
-        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        let managedContext = appDelegate.managedObjectContext!
-        var ctr = 0
-        
-        if (entityType == "Winery"){
-            while (ctr < wineries.count) {
-                managedContext.deleteObject(wineries[ctr])
-                ctr++
-            }
-            wineries = [NSManagedObject]()
-        } else if (entityType == "Restaurant") {
-            while (ctr < restaurants.count) {
-                managedContext.deleteObject(restaurants[ctr])
-                ctr++
-            }
-            restaurants = [NSManagedObject]()
-        } else if (entityType == "Accommodation") {
-            while (ctr < accommodations.count) {
-                managedContext.deleteObject(accommodations[ctr])
-                ctr++
-            }
-            accommodations = [NSManagedObject]()
-        } else if (entityType == "Package") {
-            while (ctr < packages.count) {
-                managedContext.deleteObject(packages[ctr])
-                ctr++
-            }
-            packages = [NSManagedObject]()
-        }
-        
-        var error: NSError?
-        if !managedContext.save(&error) {
-            println("Could not save \(error), \(error?.userInfo)")
-        }
-    }
-    
     //#MARK: - Data Task Methods
     func pullEntitiesFromWeb(entityURL: NSURL, entityType: String) -> Void {
         
@@ -205,6 +170,8 @@ class DataManager {
         
         task.resume()
     }
+    
+    
     
     //#MARK: - SwiftyJSON methods
     func parseJSONEntity(data: NSData, entityType: String) -> Void {
@@ -255,6 +222,8 @@ class DataManager {
         }
     }
     
+    
+    
     //#MARK: - Miscellaneous
     func stripHtml(urlObject: String) -> String {
         
@@ -266,6 +235,100 @@ class DataManager {
     
     
     
+    //#FIXME: - Need to remove and consolidate these with the main versions above
+    func pullParkingFromWeb(entityURL: NSURL, entityType: String) -> Void {
+        
+        var session = NSURLSession.sharedSession()
+        var task = session.dataTaskWithURL(entityURL) {
+            (data, response, error) -> Void in
+            
+            if error != nil {
+                println(error.localizedDescription)
+            } else {
+                self.parseJSONParking(data, entityType: entityType)
+            }
+        }
+        
+        task.resume()
+    }
     
+    func retrieveParking() -> [NSManagedObject] {
+        
+        var entities = [NSManagedObject]()
+        
+        if let results = fetchEntitiesFromCoreData(ENTITY_TYPE_PARKING) {
+            entities = results
+            
+            if (entities.count == 0) {
+                pullParkingFromWeb(ENTITY_URL_PARKING!, entityType: ENTITY_TYPE_PARKING)
+            }
+        }
+        
+        return entities
+        
+    }
+    
+    func parseJSONParking(data: NSData, entityType: String) -> Void {
+        
+        let json = JSON(data: data)
+        var ctr=0
+        while (ctr < json.count) {
+            
+            var entityCity: String
+            var entityState: String
+            var entityZip: String
+            var infoArray = NSMutableArray()
+            
+            let entityCityStateZip = json[ctr]["City State Zip"].stringValue
+            let cityStateZipArray = entityCityStateZip.componentsSeparatedByString(" ")
+            
+            if (cityStateZipArray.count > 3) {
+                entityCity = cityStateZipArray[0] + " " + cityStateZipArray[1]
+                entityState = cityStateZipArray[2]
+                entityZip = cityStateZipArray[3]
+            } else {
+                entityCity = cityStateZipArray[0]
+                entityState = cityStateZipArray[1]
+                entityZip = cityStateZipArray[2]
+            }
+            entityCity = entityCity.stringByReplacingOccurrencesOfString(",", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+            
+            
+            
+            infoArray.addObject(json[ctr]["node_title"].stringValue)
+            infoArray.addObject(json[ctr]["Street Address"].stringValue)
+            infoArray.addObject(entityZip)
+            infoArray.addObject(entityCity)
+            infoArray.addObject(json[ctr]["Phone"].stringValue)
+            infoArray.addObject(entityType)
+            
+            addParking(infoArray)
+            
+            ctr++
+        }
+    }
+    
+    func addParking(entityInfo: NSMutableArray) -> Void {
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        let managedContext = appDelegate.managedObjectContext!
+        var entityType = entityInfo[5] as String
+        
+        let newEntity = NSEntityDescription.insertNewObjectForEntityForName(entityType, inManagedObjectContext: managedContext) as NSManagedObject
+        
+        newEntity.setValue(entityInfo[0], forKey: "name")
+        newEntity.setValue(entityInfo[1], forKey: "address")
+        newEntity.setValue(entityInfo[2], forKey: "zipcode")
+        newEntity.setValue(entityInfo[3], forKey: "city")
+        newEntity.setValue(entityInfo[4], forKey: "phone")
+        
+        var error: NSError?
+        if !managedContext.save(&error) {
+            println("Could not save \(error), \(error?.userInfo)")
+        }
+        
+        parking.append(newEntity)
+        
+    }
     
 }

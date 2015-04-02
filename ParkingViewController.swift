@@ -14,14 +14,14 @@ class ParkingViewController : UIViewController, UITableViewDataSource, UITableVi
     @IBOutlet var tableView: UITableView!
     
     let simpleCellIdentifier = "SimpleCell"
-    var parkingAreas = [NSManagedObject]()
+    var parking = [NSManagedObject]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "restBackground")!)
         
         let dataManager = DataManager.sharedInstance
-        //parkingAreas = dataManager.getParking()
+        parking = dataManager.getParking()
     }
     
     override func didReceiveMemoryWarning() {
@@ -37,18 +37,18 @@ class ParkingViewController : UIViewController, UITableViewDataSource, UITableVi
     
     //# MARK: - TableView Methods
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return parkingAreas.count
+        return parking.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        return basicCellAtIndexPath(indexPath)
+        return simpleCellAtIndexPath(indexPath)
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
-    func basicCellAtIndexPath(indexPath:NSIndexPath) -> SimpleCell {
+    func simpleCellAtIndexPath(indexPath:NSIndexPath) -> SimpleCell {
         
         let simpleCell = tableView.dequeueReusableCellWithIdentifier(simpleCellIdentifier) as SimpleCell
         setContentForCell(simpleCell, indexPath: indexPath)
@@ -57,10 +57,13 @@ class ParkingViewController : UIViewController, UITableViewDataSource, UITableVi
     
     func setContentForCell(cell:SimpleCell, indexPath:NSIndexPath) {
         
-        let parkingLot = parkingAreas[indexPath.row]
+        let parkingLot = parking[indexPath.row]
         cell.titleLabel.text = parkingLot.valueForKey("name") as? String
         cell.addressLabel.text = parkingLot.valueForKey("address") as? String
-        cell.cityLabel.text = parkingLot.valueForKey("city") as? String
+        
+        var cityText = parkingLot.valueForKey("city") as? String
+        var zipText = parkingLot.valueForKey("zipcode") as? String
+        cell.cityLabel.text = cityText! + ", WA " + zipText!
         cell.phoneLabel.text = parkingLot.valueForKey("phone") as? String
         
     }
