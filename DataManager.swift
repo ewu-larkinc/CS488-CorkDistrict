@@ -72,20 +72,6 @@ class DataManager {
         return packages
     }
     
-    
-    func getWineryByTitle(title: String) -> [NSManagedObject]? {
-        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        let managedContext = appDelegate.managedObjectContext!
-        
-        let fetchRequest = NSFetchRequest(entityName: ENTITY_TYPE_WINERY)
-        fetchRequest.predicate = NSPredicate(format: "name = \(title)")
-        
-        var error: NSError?
-        let fetchedResults = managedContext.executeFetchRequest(fetchRequest, error: &error) as [NSManagedObject]?
-        
-        return fetchedResults
-    }
-    
     //#MARK: - Core Data Methods
     func retrieveEntities(entityType: String, entityURL: NSURL) -> [NSManagedObject] {
         
@@ -133,7 +119,7 @@ class DataManager {
         newEntity.setValue(entityInfo[6], forKey: "website")
         
         
-        var geocoder = CLGeocoder()
+        /*var geocoder = CLGeocoder()
         geocoder.geocodeAddressString( "\(entityInfo[1]), \(entityInfo[3]), WA, USA", {(placemarks: [AnyObject]!, error: NSError!) -> Void in
             if let placemark = placemarks?[0]  as? CLPlacemark
             {
@@ -143,7 +129,7 @@ class DataManager {
                 newEntity.setValue(latlong, forKey: "placemark")
             }
             
-        })
+        })*/
         
         var error: NSError?
         if !managedContext.save(&error) {
@@ -246,6 +232,7 @@ class DataManager {
                 entityZip = cityStateZipArray[2]
             }
             entityCity = entityCity.stringByReplacingOccurrencesOfString(",", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+            
             
             
             infoArray.addObject(json[ctr]["node_title"].stringValue)
