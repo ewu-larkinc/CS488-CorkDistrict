@@ -18,7 +18,6 @@ class ParkingViewController : UIViewController, UITableViewDataSource, UITableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "restBackground")!)
         
         let dataManager = DataManager.sharedInstance
         parking = dataManager.getParking()
@@ -31,6 +30,7 @@ class ParkingViewController : UIViewController, UITableViewDataSource, UITableVi
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.hidden = false
         self.automaticallyAdjustsScrollViewInsets = false
     }
     
@@ -65,6 +65,11 @@ class ParkingViewController : UIViewController, UITableViewDataSource, UITableVi
         var zipText = parkingLot.valueForKey("zipcode") as? String
         cell.cityLabel.text = cityText! + ", WA " + zipText!
         cell.phoneLabel.text = parkingLot.valueForKey("phone") as? String
+        
+        cell.titleLabel.textColor = UIColor.whiteColor()
+        cell.addressLabel.textColor = UIColor.whiteColor()
+        cell.cityLabel.textColor = UIColor.whiteColor()
+        cell.phoneLabel.textColor = UIColor.whiteColor()
         
     }
 

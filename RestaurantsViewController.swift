@@ -30,6 +30,7 @@ class RestaurantsViewController: UIViewController, UITableViewDataSource, UITabl
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.hidden = false
         self.automaticallyAdjustsScrollViewInsets = false
     }
     
