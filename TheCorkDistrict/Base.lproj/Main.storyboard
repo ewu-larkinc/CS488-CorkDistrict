@@ -110,7 +110,7 @@
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="93" y="60.5" width="194" height="13"/>
+                                                        <rect key="frame" x="93" y="60" width="194" height="13"/>
                                                     </variation>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Smh-uG-xX0">
@@ -350,7 +350,8 @@
                                                             <exclude reference="Ulb-WW-qMs"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="8" y="6" width="304" height="29"/>
                                                         <mask key="constraints">
                                                             <include reference="Ulb-WW-qMs"/>
                                                         </mask>
@@ -369,7 +370,8 @@
                                                             <exclude reference="TB4-Qy-ukd"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="8" y="40" width="304" height="12"/>
                                                         <mask key="constraints">
                                                             <include reference="TB4-Qy-ukd"/>
                                                         </mask>
@@ -390,7 +392,8 @@
                                                             <exclude reference="HRh-Ak-7zT"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="8" y="56" width="304" height="14"/>
                                                         <mask key="constraints">
                                                             <include reference="HRh-Ak-7zT"/>
                                                         </mask>
@@ -411,7 +414,8 @@
                                                             <exclude reference="5dv-Z3-3MA"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="8" y="74" width="304" height="13"/>
                                                         <mask key="constraints">
                                                             <include reference="5dv-Z3-3MA"/>
                                                         </mask>
@@ -1389,7 +1393,7 @@
                         <sections>
                             <tableViewSection id="BAf-G1-R6b">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="178" id="1bz-aO-iFg">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="229" id="1bz-aO-iFg">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1bz-aO-iFg" id="Spv-hd-FFC">
                                             <autoresizingMask key="autoresizingMask"/>

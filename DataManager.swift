@@ -126,14 +126,14 @@ class DataManager {
         
         /*var geocoder = CLGeocoder()
         geocoder.geocodeAddressString( "\(entityInfo[1]), \(entityInfo[3]), WA, USA", {(placemarks: [AnyObject]!, error: NSError!) -> Void in
-            if let placemark = placemarks?[0]  as? CLPlacemark
-            {
-                var latlong: String = "\(placemark.location.coordinate.latitude),"
-                latlong += "\(placemark.location.coordinate.longitude)"
-                
-                newEntity.setValue(latlong, forKey: "placemark")
-            }
-            
+        if let placemark = placemarks?[0]  as? CLPlacemark
+        {
+        var latlong: String = "\(placemark.location.coordinate.latitude),"
+        latlong += "\(placemark.location.coordinate.longitude)"
+        
+        newEntity.setValue(latlong, forKey: "placemark")
+        }
+        
         })*/
         
         var error: NSError?
@@ -143,18 +143,16 @@ class DataManager {
         
         switch (entityType) {
             
-            case "Winery":
-                wineries.append(newEntity)
-            case "Restaurant":
-                restaurants.append(newEntity)
-            case "Accommodation":
-                accommodations.append(newEntity)
-            case "Package":
-                packages.append(newEntity)
-            case "Parking":
-                parking.append(newEntity)
-            default:
-                println("Invalid entity type")
+        case "Winery":
+            wineries.append(newEntity)
+        case "Restaurant":
+            restaurants.append(newEntity)
+        case "Accommodation":
+            accommodations.append(newEntity)
+        case "Package":
+            packages.append(newEntity)
+        default:
+            println("Invalid entity type")
             
         }
     }
@@ -217,7 +215,7 @@ class DataManager {
         }
         
         resultArray[0] = resultArray[0].stringByReplacingOccurrencesOfString(",", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
-     
+        
         return resultArray
     }
     

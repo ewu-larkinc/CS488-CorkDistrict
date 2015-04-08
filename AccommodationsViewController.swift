@@ -32,6 +32,7 @@ class AccomodationsViewController: UIViewController, UITableViewDataSource, UITa
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.hidden = false
         self.automaticallyAdjustsScrollViewInsets = false
     }
     
@@ -98,10 +99,10 @@ class AccomodationsViewController: UIViewController, UITableViewDataSource, UITa
         cell.cityLabel.textColor = UIColor.whiteColor()
         cell.phoneLabel.textColor = UIColor.whiteColor()
         cell.websiteLabel.textColor = UIColor.whiteColor()
-
+        
         cell.cellImage.contentMode = UIViewContentMode.ScaleAspectFit
         cell.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.2)
     }
-
+    
     
 }

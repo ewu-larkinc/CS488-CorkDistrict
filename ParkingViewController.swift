@@ -21,6 +21,8 @@ class ParkingViewController : UIViewController, UITableViewDataSource, UITableVi
         
         let dataManager = DataManager.sharedInstance
         parking = dataManager.getParking()
+        
+        println("parking count is \(parking.count)")
     }
     
     override func didReceiveMemoryWarning() {
@@ -66,10 +68,10 @@ class ParkingViewController : UIViewController, UITableViewDataSource, UITableVi
         cell.cityLabel.text = cityText! + ", WA " + zipText!
         cell.phoneLabel.text = parkingLot.valueForKey("phone") as? String
         
-        cell.titleLabel.textColor = UIColor.whiteColor()
+        /*cell.titleLabel.textColor = UIColor.whiteColor()
         cell.addressLabel.textColor = UIColor.whiteColor()
         cell.cityLabel.textColor = UIColor.whiteColor()
-        cell.phoneLabel.textColor = UIColor.whiteColor()
+        cell.phoneLabel.textColor = UIColor.whiteColor()*/
         
     }
 

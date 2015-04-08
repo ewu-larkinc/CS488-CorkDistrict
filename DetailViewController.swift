@@ -87,7 +87,11 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         if (indexPath.row == 3) {
             var tempNum = currentSelection.valueForKey("phone") as NSString
             var tempNumStr = tempNum.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
-            UIApplication.sharedApplication().openURL(NSURL(string: "tel://\(tempNumStr)")!)
+            UIApplication.sharedApplication().openURL(NSURL(string: "#tel://\(tempNumStr)")!)
+        }
+        else if (indexPath.row == 6) {
+            let tempUrlString = currentSelection.valueForKey("website") as? String
+            UIApplication.sharedApplication().openURL(NSURL(string: "\(tempUrlString)")!)
         }
         
         self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
@@ -96,16 +100,16 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     func tableView(tableView: UITableView!, heightForRowAtIndexPath indexPath: NSIndexPath!) -> CGFloat {
         
         switch (indexPath.row) {
-            case 0:
-                return titleRowHeight
-            case 4:
-                return imageRowHeight
-            case 5:
-                var tempStr = currentSelection.valueForKey("about") as String
-                var size = getSizeForText(tempStr)
-                return size
-            default:
-                return defaultRowHeight
+        case 0:
+            return titleRowHeight
+        case 4:
+            return imageRowHeight
+        case 5:
+            var tempStr = currentSelection.valueForKey("about") as String
+            var size = getSizeForText(tempStr)
+            return size
+        default:
+            return defaultRowHeight
         }
     }
     
