@@ -124,7 +124,7 @@ class DataManager {
         }
         
         
-        /*var geocoder = CLGeocoder()
+        var geocoder = CLGeocoder()
         geocoder.geocodeAddressString( "\(entityInfo[1]), \(entityInfo[3]), WA, USA", {(placemarks: [AnyObject]!, error: NSError!) -> Void in
         if let placemark = placemarks?[0]  as? CLPlacemark
         {
@@ -134,7 +134,7 @@ class DataManager {
         newEntity.setValue(latlong, forKey: "placemark")
         }
         
-        })*/
+        })
         
         var error: NSError?
         if !managedContext.save(&error) {

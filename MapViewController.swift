@@ -25,14 +25,12 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     @IBOutlet var theMapView: MKMapView!
     
-    @IBOutlet var detailScene: UIView!
     @IBOutlet var wineButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        detailScene.alpha = 0.8
-        detailScene.layer.cornerRadius = 6.0
+        
         //CoreData
         let dataManager = DataManager.sharedInstance
         wineries = dataManager.getWineries()
@@ -57,6 +55,13 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         placeWineries(restaurants, type: "rest")
         
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.hidden = false
+        self.automaticallyAdjustsScrollViewInsets = false
+    }
+    
     @IBAction func filterWineries(AnyObject) {
         if(showWineries){
             placeWineries(wineries, type: "winery")
