@@ -46,7 +46,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         switch (indexPath.row) {
         case 0:
             let titleLabel = UILabel(frame: CGRectMake(15.0,0.0,350.0,82.0))
-            titleLabel.font = UIFont(name: "STHeitiTC-Light", size: 36.0)
+            titleLabel.font = UIFont(name: "STHeitiTC-Light", size: 30.0)
             titleLabel.textAlignment = NSTextAlignment.Left
             titleLabel.text = currentSelection.valueForKey("name") as? String
             titleLabel.adjustsFontSizeToFitWidth = true

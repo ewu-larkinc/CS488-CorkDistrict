@@ -89,6 +89,7 @@ class WineriesViewController: UIViewController, UITableViewDataSource, UITableVi
         
         
         cell.titleLabel.text = name
+        cell.titleLabel.adjustsFontSizeToFitWidth = true
         cell.addressLabel.text = address
         cell.cityLabel.text = city! + ", " + state + " " + zip!
         cell.cityLabel.sizeToFit()

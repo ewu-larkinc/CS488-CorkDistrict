@@ -12,6 +12,10 @@ class ViewController: UITableViewController {
         super.viewDidLoad()
         
         self.tableView.backgroundView = UIImageView(image:UIImage(named: "menuBackground"))
+        let background = UIImage(named: "menuBackground")
+        
+        //THIS ALLOWS THE BACKGROUND IMAGE TO SCROLL WITH THE TABLE CELLS - NEED A TALLER VERSION OF THE IMAGE
+        //self.tableView.backgroundColor = UIColor(patternImage: background!)
         
         let dataManager = DataManager.sharedInstance
         dataManager.loadData()
