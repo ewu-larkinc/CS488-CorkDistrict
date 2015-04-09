@@ -90,15 +90,19 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             var temp = array[i]
             var information = MKPointAnnotation()
             
-            var address:String = temp.valueForKey("address") as String
-            var city:String = temp.valueForKey("city") as String
+            var address:String = temp.valueForKey("address") as! String
+            var city:String = temp.valueForKey("city") as! String
+            if(temp.valueForKey("placemark") != nil) {
+                
+                var mypin: String = temp.valueForKey("placemark") as! String
+                var llarray = mypin.componentsSeparatedByString(",")
             
-            var mypin: String = temp.valueForKey("placemark") as String
-            var llarray = mypin.componentsSeparatedByString(",")
-            
-            information.coordinate.latitude = NSString(string: llarray[0]).doubleValue
-            information.coordinate.longitude = NSString(string: llarray[1]).doubleValue
-            
+                information.coordinate.latitude = NSString(string: llarray[0]).doubleValue
+                information.coordinate.longitude = NSString(string: llarray[1]).doubleValue
+            }
+            else {
+                
+            }
             information.title = temp.valueForKey("name") as? String
             information.subtitle = type
             
@@ -125,15 +129,23 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             if(annotation.subtitle == "rest") {
                 anView.image = UIImage(named:"Food_Icon")
             }
-            anView.canShowCallout = true
+            anView.canShowCallout = false
+            
         }
         else {
             anView.annotation = annotation
+            
         }
         
         return anView
     }
-
+    func mapView(mapView: MKMapView!, didSelectAnnotationView view: MKAnnotationView!) {
+        var alertView = UIAlertView();
+        alertView.addButtonWithTitle("Ok");
+        alertView.title = view.annotation.title!;
+        alertView.message = "message";
+        alertView.show();
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

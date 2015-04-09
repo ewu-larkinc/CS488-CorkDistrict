@@ -92,24 +92,24 @@ class DataManager {
     
     func fetchEntitiesFromCoreData(entityType: String) -> [NSManagedObject]? {
         
-        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext!
         
         let fetchRequest = NSFetchRequest(entityName: entityType)
         
         var error: NSError?
-        let fetchedResults = managedContext.executeFetchRequest(fetchRequest, error: &error) as [NSManagedObject]?
+        let fetchedResults = managedContext.executeFetchRequest(fetchRequest, error: &error) as! [NSManagedObject]?
         
         return fetchedResults
     }
     
     func addEntity(entityInfo: NSMutableArray, entityImage: UIImage) -> Void {
         
-        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext!
-        var entityType = entityInfo[5] as String
+        var entityType = entityInfo[5] as! String
         
-        let newEntity = NSEntityDescription.insertNewObjectForEntityForName(entityType, inManagedObjectContext: managedContext) as NSManagedObject
+        let newEntity = NSEntityDescription.insertNewObjectForEntityForName(entityType, inManagedObjectContext: managedContext) as! NSManagedObject
         
         newEntity.setValue(UIImageJPEGRepresentation(entityImage, 1), forKey: "imageData")
         newEntity.setValue(entityInfo[0], forKey: "name")
@@ -125,7 +125,7 @@ class DataManager {
         
         
         var geocoder = CLGeocoder()
-        geocoder.geocodeAddressString( "\(entityInfo[1]), \(entityInfo[3]), WA, USA", {(placemarks: [AnyObject]!, error: NSError!) -> Void in
+        geocoder.geocodeAddressString( "\(entityInfo[1]), \(entityInfo[3]), WA, USA", completionHandler: {(placemarks: [AnyObject]!, error: NSError!) -> Void in
         if let placemark = placemarks?[0]  as? CLPlacemark
         {
         var latlong: String = "\(placemark.location.coordinate.latitude),"
@@ -159,11 +159,11 @@ class DataManager {
     
     func addParking(entityInfo: NSMutableArray) -> Void {
         
-        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext!
-        var entityType = entityInfo[5] as String
+        var entityType = entityInfo[5] as! String
         
-        let newEntity = NSEntityDescription.insertNewObjectForEntityForName(entityType, inManagedObjectContext: managedContext) as NSManagedObject
+        let newEntity = NSEntityDescription.insertNewObjectForEntityForName(entityType, inManagedObjectContext: managedContext) as! NSManagedObject
         
         newEntity.setValue(entityInfo[0], forKey: "name")
         newEntity.setValue(entityInfo[1], forKey: "address")

@@ -18,7 +18,7 @@ class PackageDetailViewController : UIViewController, UITableViewDataSource, UIT
     let imageRowHeight : CGFloat = 300.0
     let defaultRowHeight : CGFloat = 60.0
     var currentSelection : NSManagedObject!
-    let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     
     
     //# MARK: - TableView Methods
@@ -32,7 +32,7 @@ class PackageDetailViewController : UIViewController, UITableViewDataSource, UIT
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("detailCell") as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("detailCell") as! UITableViewCell
         cell.textLabel?.textAlignment = NSTextAlignment.Left
         cell.textLabel?.text = ""
         
@@ -81,7 +81,7 @@ class PackageDetailViewController : UIViewController, UITableViewDataSource, UIT
     
     func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if (indexPath.row == 3) {
-            var tempNum = currentSelection.valueForKey("phone") as NSString
+            var tempNum = currentSelection.valueForKey("phone") as! NSString
             var tempNumStr = tempNum.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
             UIApplication.sharedApplication().openURL(NSURL(string: "tel://\(tempNumStr)")!)
         }
@@ -95,7 +95,7 @@ class PackageDetailViewController : UIViewController, UITableViewDataSource, UIT
         case 4:
             return imageRowHeight
         case 5:
-            var tempStr = currentSelection.valueForKey("about") as String
+            var tempStr = currentSelection.valueForKey("about") as! String
             var size = getSizeForText(tempStr)
             return size
         default:
@@ -104,7 +104,7 @@ class PackageDetailViewController : UIViewController, UITableViewDataSource, UIT
     }
     
     func getSizeForText(cellText: String) -> CGFloat {
-        var length = CGFloat(cellText.utf16Count)
+        var length = CGFloat(count(cellText.utf16))
         var rowSize : CGFloat = (length/13.0)*12.0
         return rowSize
     }

@@ -39,7 +39,7 @@ class AccomodationsViewController: UIViewController, UITableViewDataSource, UITa
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         
-        let dvc = segue.destinationViewController as DetailViewController
+        let dvc = segue.destinationViewController as! DetailViewController
         
         if let indexPath = self.tableView.indexPathForSelectedRow() {
             let accommodation = accommodations[indexPath.row]
@@ -63,7 +63,7 @@ class AccomodationsViewController: UIViewController, UITableViewDataSource, UITa
     
     func basicCellAtIndexPath(indexPath:NSIndexPath) -> BasicCell {
         
-        let basicCell = tableView.dequeueReusableCellWithIdentifier(basicCellIdentifier) as BasicCell
+        let basicCell = tableView.dequeueReusableCellWithIdentifier(basicCellIdentifier) as! BasicCell
         setContentForCell(basicCell, indexPath: indexPath)
         return basicCell
     }
