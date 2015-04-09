@@ -51,8 +51,8 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         
         self.theMapView.setRegion(theRegion, animated: true)
         
-        placeWineries(wineries, type: "winery")
-        placeWineries(restaurants, type: "rest")
+        placePinsOnMap(wineries, type: "winery")
+        placePinsOnMap(restaurants, type: "rest")
         
     }
     
@@ -64,7 +64,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     @IBAction func filterWineries(AnyObject) {
         if(showWineries){
-            placeWineries(wineries, type: "winery")
+            placePinsOnMap(wineries, type: "winery")
             showWineries = false
             wineButton.alpha = 1.0
         }
@@ -80,13 +80,12 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         }
         //theMapView.removeAnnotations(theMapView.annotations)
     }
-    func placeWineries(var array: [NSManagedObject], var type: String) {
+    func placePinsOnMap(var array: [NSManagedObject], var type: String) {
         
         
         for var i = 0; i < array.count; i++
         {
             
-            //var temp = wineries[i]
             var temp = array[i]
             var information = MKPointAnnotation()
             
@@ -101,9 +100,22 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                 information.coordinate.longitude = NSString(string: llarray[1]).doubleValue
             }
             else {
-                
+                var geocoder = CLGeocoder()
+                geocoder.geocodeAddressString( "\(address), \(city), WA, USA", completionHandler: {(placemarks: [AnyObject]!, error: NSError!) -> Void in
+                    if let placemark = placemarks?[0]  as? CLPlacemark
+                    {
+                        var lat: String = "\(placemark.location.coordinate.latitude),"
+                        var long: String  = "\(placemark.location.coordinate.longitude)"
+                        
+                        information.coordinate.latitude = NSString(string: lat).doubleValue
+                        information.coordinate.longitude = NSString(string: long).doubleValue
+                        //newEntity.setValue(latlong, forKey: "placemark")
+                    }
+                    
+                })
             }
-            information.title = temp.valueForKey("name") as? String
+            
+            information.title = "\(i)"
             information.subtitle = type
             
             winePins.append(information)
@@ -136,15 +148,32 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             anView.annotation = annotation
             
         }
-        
+    
         return anView
     }
     func mapView(mapView: MKMapView!, didSelectAnnotationView view: MKAnnotationView!) {
-        var alertView = UIAlertView();
-        alertView.addButtonWithTitle("Ok");
-        alertView.title = view.annotation.title!;
-        alertView.message = "message";
-        alertView.show();
+        
+        var temp = wineries[view.annotation.title!.toInt()!]
+        
+        if(view.annotation.subtitle == "winery") {
+            temp = wineries[view.annotation.title!.toInt()!]
+        }
+        else if(view.annotation.subtitle == "rest") {
+            temp = restaurants[view.annotation.title!.toInt()!]
+        }
+        var alertView = UIAlertController(title: temp.valueForKey("name") as? String, message: temp.valueForKey("address") as? String, preferredStyle: .Alert)
+        
+        var imageView = UIImageView(frame: CGRectMake(10, 15, 50, 50))
+
+        let imageData = temp.valueForKey("imageData") as? NSData
+        
+        imageView.image = UIImage(data: imageData!)
+        
+        alertView.view.addSubview(imageView)
+        
+        alertView.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
+        
+        presentViewController(alertView, animated: true, completion: nil)
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
