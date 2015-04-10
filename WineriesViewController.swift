@@ -35,7 +35,7 @@ class WineriesViewController: UIViewController, UITableViewDataSource, UITableVi
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         
-        let dvc = segue.destinationViewController as DetailViewController
+        let dvc = segue.destinationViewController as! DetailViewController
         
         if let indexPath = self.tableView.indexPathForSelectedRow() {
             let winery = wineries[indexPath.row]
@@ -58,7 +58,7 @@ class WineriesViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func basicCellAtIndexPath(indexPath:NSIndexPath) -> BasicCell {
-        let basicCell = tableView.dequeueReusableCellWithIdentifier(basicCellIdentifier) as BasicCell
+        let basicCell = tableView.dequeueReusableCellWithIdentifier(basicCellIdentifier) as! BasicCell
         setContentForCell(basicCell, indexPath: indexPath)
         return basicCell
     }

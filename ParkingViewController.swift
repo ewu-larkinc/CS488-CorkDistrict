@@ -52,7 +52,7 @@ class ParkingViewController : UIViewController, UITableViewDataSource, UITableVi
     
     func simpleCellAtIndexPath(indexPath:NSIndexPath) -> SimpleCell {
         
-        let simpleCell = tableView.dequeueReusableCellWithIdentifier(simpleCellIdentifier) as SimpleCell
+        let simpleCell = tableView.dequeueReusableCellWithIdentifier(simpleCellIdentifier) as! SimpleCell
         setContentForCell(simpleCell, indexPath: indexPath)
         return simpleCell
     }

@@ -19,23 +19,23 @@ class DataManager {
         return _SingletonSharedInstance
     }
     
-    var dataReceived: Bool = false
-    var wineries = [NSManagedObject]()
-    var restaurants = [NSManagedObject]()
-    var accommodations = [NSManagedObject]()
-    var packages = [NSManagedObject]()
-    var parking = [NSManagedObject]()
+    private var dataReceived: Bool = false
+    private var wineries = [NSManagedObject]()
+    private var restaurants = [NSManagedObject]()
+    private var accommodations = [NSManagedObject]()
+    private var packages = [NSManagedObject]()
+    private var parking = [NSManagedObject]()
     
-    let ENTITY_URL_WINERY = NSURL(string: "http://www.nathanpilgrim.net/rest/wineries.json")
-    let ENTITY_URL_RESTAURANT = NSURL(string: "http://www.nathanpilgrim.net/rest/restaurants.json")
-    let ENTITY_URL_ACCOMMODATION = NSURL(string: "http://www.nathanpilgrim.net/rest/lodging.json")
-    let ENTITY_URL_PACKAGE = NSURL(string: "http://www.nathanpilgrim.net/rest/packages.json")
-    let ENTITY_URL_PARKING = NSURL(string: "http://www.nathanpilgrim.net/rest/parking.json")
-    let ENTITY_TYPE_WINERY : String = "Winery"
-    let ENTITY_TYPE_RESTAURANT : String = "Restaurant"
-    let ENTITY_TYPE_ACCOMMODATION : String = "Accommodation"
-    let ENTITY_TYPE_PACKAGE : String = "Package"
-    let ENTITY_TYPE_PARKING : String = "Parking"
+    private let ENTITY_URL_WINERY = NSURL(string: "http://www.nathanpilgrim.net/rest/wineries.json")
+    private let ENTITY_URL_RESTAURANT = NSURL(string: "http://www.nathanpilgrim.net/rest/restaurants.json")
+    private let ENTITY_URL_ACCOMMODATION = NSURL(string: "http://www.nathanpilgrim.net/rest/lodging.json")
+    private let ENTITY_URL_PACKAGE = NSURL(string: "http://www.nathanpilgrim.net/rest/packages.json")
+    private let ENTITY_URL_PARKING = NSURL(string: "http://www.nathanpilgrim.net/rest/parking.json")
+    private let ENTITY_TYPE_WINERY : String = "Winery"
+    private let ENTITY_TYPE_RESTAURANT : String = "Restaurant"
+    private let ENTITY_TYPE_ACCOMMODATION : String = "Accommodation"
+    private let ENTITY_TYPE_PACKAGE : String = "Package"
+    private let ENTITY_TYPE_PARKING : String = "Parking"
     
     
     
@@ -92,24 +92,24 @@ class DataManager {
     
     func fetchEntitiesFromCoreData(entityType: String) -> [NSManagedObject]? {
         
-        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext!
         
         let fetchRequest = NSFetchRequest(entityName: entityType)
         
         var error: NSError?
-        let fetchedResults = managedContext.executeFetchRequest(fetchRequest, error: &error) as [NSManagedObject]?
+        let fetchedResults = managedContext.executeFetchRequest(fetchRequest, error: &error) as! [NSManagedObject]?
         
         return fetchedResults
     }
     
     func addEntity(entityInfo: NSMutableArray, entityImage: UIImage) -> Void {
         
-        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext!
-        var entityType = entityInfo[5] as String
+        var entityType = entityInfo[5] as! String
         
-        let newEntity = NSEntityDescription.insertNewObjectForEntityForName(entityType, inManagedObjectContext: managedContext) as NSManagedObject
+        let newEntity = NSEntityDescription.insertNewObjectForEntityForName(entityType, inManagedObjectContext: managedContext) as! NSManagedObject
         
         newEntity.setValue(UIImageJPEGRepresentation(entityImage, 1), forKey: "imageData")
         newEntity.setValue(entityInfo[0], forKey: "name")
@@ -121,11 +121,15 @@ class DataManager {
         if (entityType != ENTITY_TYPE_PARKING) {
             newEntity.setValue(entityInfo[6], forKey: "about")
             newEntity.setValue(entityInfo[7], forKey: "website")
+            
+            if (entityType == ENTITY_TYPE_WINERY) {
+                newEntity.setValue(entityInfo[8], forKey: "cluster")
+            }
         }
         
         
         var geocoder = CLGeocoder()
-        geocoder.geocodeAddressString( "\(entityInfo[1]), \(entityInfo[3]), WA, USA", {(placemarks: [AnyObject]!, error: NSError!) -> Void in
+        geocoder.geocodeAddressString( "\(entityInfo[1]), \(entityInfo[3]), WA, USA", completionHandler: {(placemarks: [AnyObject]!, error: NSError!) -> Void in
         if let placemark = placemarks?[0]  as? CLPlacemark
         {
         var latlong: String = "\(placemark.location.coordinate.latitude),"
@@ -159,11 +163,11 @@ class DataManager {
     
     func addParking(entityInfo: NSMutableArray) -> Void {
         
-        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext!
-        var entityType = entityInfo[5] as String
+        var entityType = entityInfo[5] as! String
         
-        let newEntity = NSEntityDescription.insertNewObjectForEntityForName(entityType, inManagedObjectContext: managedContext) as NSManagedObject
+        let newEntity = NSEntityDescription.insertNewObjectForEntityForName(entityType, inManagedObjectContext: managedContext) as! NSManagedObject
         
         newEntity.setValue(entityInfo[0], forKey: "name")
         newEntity.setValue(entityInfo[1], forKey: "address")
@@ -242,6 +246,8 @@ class DataManager {
             infoArray.addObject(json[ctr]["Phone"].stringValue)
             infoArray.addObject(entityType)
             
+            
+            
             if (entityType != ENTITY_TYPE_PARKING) {
                 
                 let entityImageString = stripHtml(json[ctr]["Thumbnail"].stringValue)
@@ -251,6 +257,12 @@ class DataManager {
                 
                 infoArray.addObject(json[ctr]["Description"].stringValue)
                 infoArray.addObject(json[ctr]["Website"].stringValue)
+                
+                if (entityType == ENTITY_TYPE_WINERY) {
+                    infoArray.addObject(json[ctr]["Cluster"].stringValue)
+                    println("testing... current cluster is \(infoArray[8])")
+                }
+                
                 addEntity(infoArray, entityImage: entityImage!)
             } else {
                 addParking(infoArray)

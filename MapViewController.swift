@@ -90,10 +90,10 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             var temp = array[i]
             var information = MKPointAnnotation()
             
-            var address:String = temp.valueForKey("address") as String
-            var city:String = temp.valueForKey("city") as String
+            var address:String = temp.valueForKey("address") as! String
+            var city:String = temp.valueForKey("city") as! String
             
-            var mypin: String = temp.valueForKey("placemark") as String
+            var mypin: String = temp.valueForKey("placemark") as! String
             var llarray = mypin.componentsSeparatedByString(",")
             
             information.coordinate.latitude = NSString(string: llarray[0]).doubleValue

@@ -51,7 +51,7 @@ class PackagesViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func basicCellAtIndexPath(indexPath:NSIndexPath) -> AltCell {
         
-        let altCell = tableView.dequeueReusableCellWithIdentifier(altCellIdentifier) as AltCell
+        let altCell = tableView.dequeueReusableCellWithIdentifier(altCellIdentifier) as! AltCell
         setContentForCell(altCell, indexPath: indexPath)
         return altCell
     }
