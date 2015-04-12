@@ -22,7 +22,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     //# MARK: - View Controller Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tableView.backgroundView = UIImageView(image:UIImage(named: "parchmentBackground"))
+        self.tableView.backgroundView = UIImageView(image:UIImage(named: "detailBackground"))
     }
     
     override func didReceiveMemoryWarning() {
@@ -49,6 +49,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         case 0:
             let titleLabel = UILabel(frame: CGRectMake(15.0,0.0,350.0,82.0))
             titleLabel.font = UIFont(name: "STHeitiTC-Light", size: 30.0)
+            titleLabel.textColor = UIColor.whiteColor()
             titleLabel.textAlignment = NSTextAlignment.Left
             titleLabel.text = currentSelection.valueForKey("name") as? String
             titleLabel.adjustsFontSizeToFitWidth = true
@@ -65,7 +66,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
             let imageData = currentSelection.valueForKey("imageData") as? NSData
             let mainImage = UIImage(data: imageData!)
             let newImageView = UIImageView(frame: CGRectMake(15.0,10.0,345.0,280.0))
-            newImageView.layer.borderColor = UIColor.blackColor().CGColor
+            newImageView.layer.borderColor = UIColor.whiteColor().CGColor
             newImageView.layer.borderWidth = 2.0
             newImageView.image = mainImage
             cell.addSubview(newImageView)

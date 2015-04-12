@@ -19,7 +19,8 @@ class DataManager {
         return _SingletonSharedInstance
     }
     
-    private var dataReceived: Bool = false
+    var dataReceived: Bool = false
+    var dlFlag: Bool = false
     private var wineries = [NSManagedObject]()
     private var restaurants = [NSManagedObject]()
     private var accommodations = [NSManagedObject]()
@@ -260,7 +261,6 @@ class DataManager {
                 
                 if (entityType == ENTITY_TYPE_WINERY) {
                     infoArray.addObject(json[ctr]["Cluster"].stringValue)
-                    println("testing... current cluster is \(infoArray[8])")
                 }
                 
                 addEntity(infoArray, entityImage: entityImage!)

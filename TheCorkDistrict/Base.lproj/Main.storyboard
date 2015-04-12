@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="5UI-gu-Dnq">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="YQC-8F-0mO">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
@@ -39,7 +39,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EjK-Ls-rK8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2884" y="172"/>
+            <point key="canvasLocation" x="3801" y="171.75"/>
         </scene>
         <!--Wineries-->
         <scene sceneID="DXy-ef-RSP">
@@ -78,8 +78,7 @@
                                                             <exclude reference="g4q-pA-hxs"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="93" y="8" width="194" height="21"/>
+                                                    <variation key="heightClass=regular-widthClass=compact">
                                                         <mask key="constraints">
                                                             <include reference="g4q-pA-hxs"/>
                                                         </mask>
@@ -99,9 +98,6 @@
                                                     <fontDescription key="fontDescription" name="STHeitiTC-Light" family="Heiti TC" pointSize="13"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="93" y="61" width="194" height="13"/>
-                                                    </variation>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Smh-uG-xX0">
                                                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
@@ -340,8 +336,7 @@
                                                             <exclude reference="Ulb-WW-qMs"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="8" y="6" width="304" height="29"/>
+                                                    <variation key="heightClass=regular-widthClass=compact">
                                                         <mask key="constraints">
                                                             <include reference="Ulb-WW-qMs"/>
                                                         </mask>
@@ -1035,8 +1030,7 @@
                                                             <exclude reference="pcW-iO-dPF"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="93" y="8" width="194" height="21"/>
+                                                    <variation key="heightClass=regular-widthClass=compact">
                                                         <mask key="constraints">
                                                             <include reference="pcW-iO-dPF"/>
                                                         </mask>
@@ -1072,9 +1066,6 @@
                                                     <fontDescription key="fontDescription" name="STHeitiTC-Light" family="Heiti TC" pointSize="13"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="93" y="60" width="194" height="13"/>
-                                                    </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V1X-gp-e1t">
                                                     <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -1319,7 +1310,7 @@
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="16" id="5gt-dB-oqg">
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="STHeitiTC-Light" family="Heiti TC" pointSize="20"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="heightClass=regular-widthClass=compact">
                                                         <fontDescription key="fontDescription" name="STHeitiTC-Light" family="Heiti TC" pointSize="24"/>
@@ -1383,12 +1374,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IEb-to-ePp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2926.5" y="-729.75"/>
+            <point key="canvasLocation" x="3844.5" y="-729.75"/>
         </scene>
         <!--The Cork District-->
         <scene sceneID="8Vu-vb-LYn">
             <objects>
-                <tableViewController title="The Cork District" id="zPQ-7U-YTK" customClass="ViewController" customModule="TheCorkDistrict" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="The Cork District" modalTransitionStyle="crossDissolve" id="zPQ-7U-YTK" customClass="ViewController" customModule="TheCorkDistrict" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="ICq-Vr-7PW">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1800,25 +1791,143 @@
             </objects>
             <point key="canvasLocation" x="1939.5" y="306.75"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="aE1-1j-6h3">
+        <!--Loading View Controller-->
+        <scene sceneID="Eso-pq-gmz">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="5UI-gu-Dnq" sceneMemberID="viewController">
+                <viewController modalTransitionStyle="crossDissolve" id="Agf-MZ-jVI" customClass="LoadingViewController" customModule="TheCorkDistrict" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="cno-bT-LaB"/>
+                        <viewControllerLayoutGuide type="bottom" id="977-tt-Xmj"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="FZZ-Qz-GJm">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LOADING" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KID-L4-484">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <fontDescription key="fontDescription" name="STHeitiSC-Light" family="Heiti SC" pointSize="35"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qqV-V7-rnu">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="1Z6-Fh-34A"/>
+                                    <constraint firstAttribute="height" constant="200" id="4mK-Yu-CXq"/>
+                                </constraints>
+                                <state key="normal" image="barrelTop">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="1Z6-Fh-34A"/>
+                                        <exclude reference="4mK-Yu-CXq"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="1Z6-Fh-34A"/>
+                                        <include reference="4mK-Yu-CXq"/>
+                                    </mask>
+                                </variation>
+                            </button>
+                            <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CORKDISTRICT_LOGO" translatesAutoresizingMaskIntoConstraints="NO" id="Wei-cG-sbl">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="98" id="NC7-I4-ydk"/>
+                                    <constraint firstAttribute="width" constant="162" id="esc-Qp-hMD"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="NC7-I4-ydk"/>
+                                        <exclude reference="esc-Qp-hMD"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="NC7-I4-ydk"/>
+                                        <include reference="esc-Qp-hMD"/>
+                                    </mask>
+                                </variation>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="KID-L4-484" secondAttribute="trailing" constant="50" id="EUE-v6-XP0"/>
+                            <constraint firstItem="KID-L4-484" firstAttribute="leading" secondItem="FZZ-Qz-GJm" secondAttribute="leading" constant="50" id="L0p-W1-0gu"/>
+                            <constraint firstAttribute="centerY" secondItem="Wei-cG-sbl" secondAttribute="centerY" id="OAe-u1-Wsk"/>
+                            <constraint firstAttribute="centerY" secondItem="qqV-V7-rnu" secondAttribute="centerY" id="Pk9-D5-8Ka"/>
+                            <constraint firstAttribute="centerX" secondItem="Wei-cG-sbl" secondAttribute="centerX" id="ftf-3C-T41"/>
+                            <constraint firstItem="977-tt-Xmj" firstAttribute="top" secondItem="KID-L4-484" secondAttribute="bottom" constant="48" id="gno-2w-r49"/>
+                            <constraint firstAttribute="centerX" secondItem="qqV-V7-rnu" secondAttribute="centerX" id="yGZ-eX-6d2"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="KID-L4-484"/>
+                                <exclude reference="qqV-V7-rnu"/>
+                                <exclude reference="Wei-cG-sbl"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="Pk9-D5-8Ka"/>
+                                <exclude reference="yGZ-eX-6d2"/>
+                                <exclude reference="OAe-u1-Wsk"/>
+                                <exclude reference="ftf-3C-T41"/>
+                                <exclude reference="EUE-v6-XP0"/>
+                                <exclude reference="L0p-W1-0gu"/>
+                                <exclude reference="gno-2w-r49"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="KID-L4-484"/>
+                                <include reference="qqV-V7-rnu"/>
+                                <include reference="Wei-cG-sbl"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="Pk9-D5-8Ka"/>
+                                <include reference="yGZ-eX-6d2"/>
+                                <include reference="OAe-u1-Wsk"/>
+                                <include reference="ftf-3C-T41"/>
+                                <include reference="EUE-v6-XP0"/>
+                                <include reference="L0p-W1-0gu"/>
+                                <include reference="gno-2w-r49"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <navigationItem key="navigationItem" id="HOU-WI-Aqq"/>
+                    <connections>
+                        <outlet property="loadingImage" destination="qqV-V7-rnu" id="Xec-AA-cZv"/>
+                        <outlet property="loadingLabel" destination="KID-L4-484" id="Hdc-dF-MbH"/>
+                        <outlet property="loadingLogo" destination="Wei-cG-sbl" id="zh6-bm-u5W"/>
+                        <segue destination="zPQ-7U-YTK" kind="show" identifier="introSegue" id="DRR-pB-Ihn"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kbK-1R-8HH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1816.5" y="-432.75"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="uK1-Gf-EUj">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="YQC-8F-0mO" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="oo8-Kp-nJF">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="CSQ-pK-7f6">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="zPQ-7U-YTK" kind="relationship" relationship="rootViewController" id="7HR-z6-r0R"/>
+                        <segue destination="Agf-MZ-jVI" kind="relationship" relationship="rootViewController" id="zHz-my-q2e"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="lKy-eo-JWd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bR4-ch-qKY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="898.5" y="306.75"/>
+            <point key="canvasLocation" x="898.5" y="-432.75"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="CORKDISTRICT_LOGO" width="1050" height="618"/>
+        <image name="barrelTop" width="602" height="605"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="LDX-gq-k6W"/>
     </inferredMetricsTieBreakers>

@@ -2,8 +2,6 @@
 //  ParkingViewController.swift
 //  TheCorkDistrict
 //
-//  Created by Chris Larkin on 3/31/15.
-//  Copyright (c) 2015 Chris Larkin. All rights reserved.
 //
 
 import Foundation
@@ -21,8 +19,6 @@ class ParkingViewController : UIViewController, UITableViewDataSource, UITableVi
         
         let dataManager = DataManager.sharedInstance
         parking = dataManager.getParking()
-        
-        println("parking count is \(parking.count)")
     }
     
     override func didReceiveMemoryWarning() {
@@ -67,11 +63,6 @@ class ParkingViewController : UIViewController, UITableViewDataSource, UITableVi
         var zipText = parkingLot.valueForKey("zipcode") as? String
         cell.cityLabel.text = cityText! + ", WA " + zipText!
         cell.phoneLabel.text = parkingLot.valueForKey("phone") as? String
-        
-        /*cell.titleLabel.textColor = UIColor.whiteColor()
-        cell.addressLabel.textColor = UIColor.whiteColor()
-        cell.cityLabel.textColor = UIColor.whiteColor()
-        cell.phoneLabel.textColor = UIColor.whiteColor()*/
         
     }
 

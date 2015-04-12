@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		220A5F5A1ABD452100144E2A /* AltCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220A5F591ABD452100144E2A /* AltCell.swift */; };
+		221346EB1AD92A3F009633DB /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221346EA1AD92A3F009633DB /* UIViewExtensions.swift */; };
+		221346ED1AD92ADE009633DB /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221346EC1AD92ADE009633DB /* LoadingViewController.swift */; };
+		221346EF1AD92B31009633DB /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221346EE1AD92B31009633DB /* Timer.swift */; };
 		221D72851ACA8F39005C26EB /* SimpleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221D72841ACA8F39005C26EB /* SimpleCell.swift */; };
 		221D72871ACA8F87005C26EB /* ParkingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221D72861ACA8F87005C26EB /* ParkingViewController.swift */; };
 		2298E07F1AB00B7B003CEFFA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2298E07E1AB00B7B003CEFFA /* AppDelegate.swift */; };
@@ -43,6 +46,9 @@
 
 /* Begin PBXFileReference section */
 		220A5F591ABD452100144E2A /* AltCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AltCell.swift; path = ../AltCell.swift; sourceTree = "<group>"; };
+		221346EA1AD92A3F009633DB /* UIViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
+		221346EC1AD92ADE009633DB /* LoadingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
+		221346EE1AD92B31009633DB /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
 		221D72841ACA8F39005C26EB /* SimpleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SimpleCell.swift; path = ../SimpleCell.swift; sourceTree = "<group>"; };
 		221D72861ACA8F87005C26EB /* ParkingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ParkingViewController.swift; path = ../ParkingViewController.swift; sourceTree = "<group>"; };
 		2298E0791AB00B7B003CEFFA /* TheCorkDistrict.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheCorkDistrict.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -92,6 +98,9 @@
 		2298E0701AB00B7B003CEFFA = {
 			isa = PBXGroup;
 			children = (
+				221346EE1AD92B31009633DB /* Timer.swift */,
+				221346EC1AD92ADE009633DB /* LoadingViewController.swift */,
+				221346EA1AD92A3F009633DB /* UIViewExtensions.swift */,
 				22A85A091AB18B2000B45713 /* SwiftyJSON.swift */,
 				2298E0AF1AB01CF2003CEFFA /* CoreLocation.framework */,
 				2298E07B1AB00B7B003CEFFA /* TheCorkDistrict */,
@@ -265,6 +274,7 @@
 				2298E0A21AB010FF003CEFFA /* WineriesViewController.swift in Sources */,
 				2298E0AC1AB0120C003CEFFA /* BasicCell.swift in Sources */,
 				2298E0A81AB011CB003CEFFA /* AccommodationsViewController.swift in Sources */,
+				221346EF1AD92B31009633DB /* Timer.swift in Sources */,
 				220A5F5A1ABD452100144E2A /* AltCell.swift in Sources */,
 				2298E0BA1AB01E53003CEFFA /* WineToursViewController.swift in Sources */,
 				221D72851ACA8F39005C26EB /* SimpleCell.swift in Sources */,
@@ -273,11 +283,13 @@
 				2298E0A41AB01188003CEFFA /* DataManager.swift in Sources */,
 				2298E0841AB00B7B003CEFFA /* ViewController.swift in Sources */,
 				2298E0B81AB01D91003CEFFA /* MapViewController.swift in Sources */,
+				221346ED1AD92ADE009633DB /* LoadingViewController.swift in Sources */,
 				2298E0AA1AB011EA003CEFFA /* PackagesViewController.swift in Sources */,
 				2298E0AE1AB01902003CEFFA /* DetailViewController.swift in Sources */,
 				2298E0821AB00B7B003CEFFA /* TheCorkDistrict.xcdatamodeld in Sources */,
 				22A85A0A1AB18B2000B45713 /* SwiftyJSON.swift in Sources */,
 				221D72871ACA8F87005C26EB /* ParkingViewController.swift in Sources */,
+				221346EB1AD92A3F009633DB /* UIViewExtensions.swift in Sources */,
 				2298E07F1AB00B7B003CEFFA /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
