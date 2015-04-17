@@ -19,6 +19,10 @@ class WineToursViewController: UIViewController {
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "restBackground")!)
     }
     
+    override func viewWillAppear(animated: Bool) {
+        self.navigationController?.navigationBar.hidden = false
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
