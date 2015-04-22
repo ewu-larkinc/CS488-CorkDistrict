@@ -22,8 +22,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     var wineries = [NSManagedObject]()
     var restaurants = [NSManagedObject]()
+    var hotels = [NSManagedObject]()
+    var parking = [NSManagedObject]()
     var showWineries: Bool = false
-    var winePins = [MKPointAnnotation]()
+    var pins = [MKPointAnnotation]()
     
     @IBOutlet var theMapView: MKMapView!
     
@@ -31,12 +33,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        //CoreData
-        let dataManager = DataManager.sharedInstance
-        wineries = dataManager.getWineries()
-        restaurants = dataManager.getRestaurants()
         
         // Do any additional setup after loading the view, typically from a nib.
         var lat: CLLocationDegrees = 47.66
@@ -54,6 +50,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         var theRegion: MKCoordinateRegion = MKCoordinateRegionMake(centerLocation, theSpan)
         
         self.theMapView.setRegion(theRegion, animated: true)
+
+        //CoreData
+        let dataManager = DataManager.sharedInstance
+        wineries = dataManager.getWineries()
+        restaurants = dataManager.getRestaurants()
         
         
         
@@ -65,6 +66,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         placePinsOnMap(wineries, type: "winery")
         placePinsOnMap(restaurants, type: "rest")
         
+        //util.getDirections(wineries, start: wineries[1])
+        //util.sortByDistance()
+        
+        util.placePinsOnMap(wineries, type: "winery")
+        util.placePinsOnMap(restaurants, type: "rest")
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -131,7 +137,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             
             theMapView.addAnnotation(information)
         }
-        
     }
     
     func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
@@ -157,7 +162,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             anView.annotation = annotation
             
         }
-        
+    
         return anView
     }
     func mapView(mapView: MKMapView!, didSelectAnnotationView view: MKAnnotationView!) {
