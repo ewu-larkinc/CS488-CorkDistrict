@@ -61,14 +61,17 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         util.mapView = theMapView
         //util.distanceRequired = true
         
-        //util.getDirections(wineries, start: wineries[1])
+        
         //util.sortByDistance()
         
         //request user location
         locationManager.requestWhenInUseAuthorization()
         //  if locationManager.
         self.theMapView.showsUserLocation = true
+        var wineriesTemp = [NSManagedObject]()
+        wineriesTemp.append(wineries[1]);
         
+       // util.getDirections(wineriesTemp, start: wineries[2]);
         
         util.placePinsOnMap(wineries, type: "winery")
         util.placePinsOnMap(restaurants, type: "rest")

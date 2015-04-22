@@ -18,22 +18,23 @@ class MapUtilities {
     var distanceRequired: Bool = false
     @IBOutlet var mapView: MKMapView!
     
-    func getDirections(var theArray: [NSManagedObject], let start: NSManagedObject) {
+    func getDirections(var theArray: [NSManagedObject], let start: CLLocationCoordinate2D) {
         
-        //let start = theArray[i]
         for location in theArray {
+      
+            
+     //   var mypin: String = start.valueForKey("placemark") as! String
+     //   var llarray = mypin.componentsSeparatedByString(",")
+        //var coord = CLLocationCoordinate2DMake(NSString(string: llarray[0]).doubleValue,NSString(string: llarray[1]).doubleValue)
         
-        var mypin: String = start.valueForKey("placemark") as! String
-        var llarray = mypin.componentsSeparatedByString(",")
-        var coord = CLLocationCoordinate2DMake(NSString(string: llarray[0]).doubleValue,NSString(string: llarray[1]).doubleValue)
-        
-        var sourcePlacemark:MKPlacemark = MKPlacemark(coordinate: coord, addressDictionary: nil)
+        var sourcePlacemark:MKPlacemark = MKPlacemark(coordinate: start, addressDictionary: nil)
+         
             
         println(location.valueForKey("placemark") as! String)
         
-        mypin = location.valueForKey("placemark") as! String
-        llarray = mypin.componentsSeparatedByString(",")
-        coord = CLLocationCoordinate2DMake(NSString(string: llarray[0]).doubleValue,NSString(string: llarray[1]).doubleValue)
+        var mypin = location.valueForKey("placemark") as! String
+        var llarray = mypin.componentsSeparatedByString(",")
+        var coord = CLLocationCoordinate2DMake(NSString(string: llarray[0]).doubleValue,NSString(string: llarray[1]).doubleValue)
         
         var destinationPlacemark:MKPlacemark = MKPlacemark(coordinate: coord, addressDictionary: nil)
         
@@ -55,13 +56,9 @@ class MapUtilities {
             }
             else {
                 let myroute = response?.routes[0] as! MKRoute
+                self.mapView.addOverlay(myroute.polyline, level: MKOverlayLevel.AboveRoads)
+                print("Suck my dick Apple")
                 
-                if self.distanceRequired {
-                    self.myRoutes.append(myroute)
-                }
-                else {
-                    self.mapView.addOverlay(myroute.polyline, level: MKOverlayLevel.AboveRoads)
-                }
             }
             
         })
