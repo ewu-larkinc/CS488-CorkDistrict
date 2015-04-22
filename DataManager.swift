@@ -159,6 +159,10 @@ class DataManager : NSObject, NSURLConnectionDataDelegate {
         
         var geocoder = CLGeocoder() 
         geocoder.geocodeAddressString( "\(entityInfo[1]), \(entityInfo[3]), WA, USA", completionHandler: {(placemarks: [AnyObject]!, error: NSError!) -> Void in
+            if let placemark = placemarks?[0]  as? CLPlacemark
+            {
+                var latlong: String = "\(placemark.location.coordinate.latitude),"
+                latlong += "\(placemark.location.coordinate.longitude)"
         
                 if let placemark = placemarks?[0]  as? CLPlacemark {
                     var latlong: String = "\(placemark.location.coordinate.latitude)," 

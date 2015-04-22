@@ -26,6 +26,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     var parking = [NSManagedObject]()
     var showWineries: Bool = false
     var pins = [MKPointAnnotation]()
+    var winePins = [MKPointAnnotation]()
     
     @IBOutlet var theMapView: MKMapView!
     
@@ -56,18 +57,18 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         wineries = dataManager.getWineries()
         restaurants = dataManager.getRestaurants()
         
+        let util = MapUtilities()
+        util.mapView = theMapView
+        //util.distanceRequired = true
         
+        //util.getDirections(wineries, start: wineries[1])
+        //util.sortByDistance()
         
         //request user location
         locationManager.requestWhenInUseAuthorization()
         //  if locationManager.
         self.theMapView.showsUserLocation = true
         
-        placePinsOnMap(wineries, type: "winery")
-        placePinsOnMap(restaurants, type: "rest")
-        
-        //util.getDirections(wineries, start: wineries[1])
-        //util.sortByDistance()
         
         util.placePinsOnMap(wineries, type: "winery")
         util.placePinsOnMap(restaurants, type: "rest")
@@ -81,7 +82,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     @IBAction func filterWineries(AnyObject) {
         if(showWineries){
-            placePinsOnMap(wineries, type: "winery")
+            //MapUtilities.placePinsOnMap(wineries, type: "winery")
             showWineries = false
             wineButton.alpha = 1.0
         }
@@ -93,49 +94,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     func removeWineries() {
         for var i = 0; i < wineries.count; i++ {
-            theMapView.removeAnnotation(winePins[i])
-        }
-    }
-    func placePinsOnMap(var array: [NSManagedObject], var type: String) {
-        
-        
-        for var i = 0; i < array.count; i++
-        {
-            
-            var temp = array[i]
-            var information = MKPointAnnotation()
-            
-            var address:String = temp.valueForKey("address") as! String
-            var city:String = temp.valueForKey("city") as! String
-            if(temp.valueForKey("placemark") != nil) {
-                
-                var mypin: String = temp.valueForKey("placemark") as! String
-                var llarray = mypin.componentsSeparatedByString(",")
-                
-                information.coordinate.latitude = NSString(string: llarray[0]).doubleValue
-                information.coordinate.longitude = NSString(string: llarray[1]).doubleValue
-            }
-            else {
-                var geocoder = CLGeocoder()
-                geocoder.geocodeAddressString( "\(address), \(city), WA, USA", completionHandler: {(placemarks: [AnyObject]!, error: NSError!) -> Void in
-                    if let placemark = placemarks?[0]  as? CLPlacemark
-                    {
-                        var lat: String = "\(placemark.location.coordinate.latitude),"
-                        var long: String  = "\(placemark.location.coordinate.longitude)"
-                        
-                        information.coordinate.latitude = NSString(string: lat).doubleValue
-                        information.coordinate.longitude = NSString(string: long).doubleValue
-                    }
-                    
-                })
-            }
-            
-            information.title = "\(i)"
-            information.subtitle = type
-            
-            winePins.append(information)
-            
-            theMapView.addAnnotation(information)
+            theMapView.removeAnnotation(pins[i])
         }
     }
     
@@ -155,6 +114,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             if(annotation.subtitle == "rest") {
                 anView.image = UIImage(named:"Food_Icon")
             }
+            if(annotation.subtitle == "hotel") {
+                anView.image = UIImage(named:"Hotel_Icon")
+            }
+            if(annotation.subtitle == "park") {
+                anView.image = UIImage(named:"Park_Icon")
+            }
             anView.canShowCallout = false
             
         }
@@ -165,18 +130,37 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
         return anView
     }
+    func mapView(mapView: MKMapView!, rendererForOverlay overlay: MKOverlay!) -> MKOverlayRenderer! {
+        println("rendererForOverlay");
+        
+        if (overlay is MKPolyline) {
+            var pr = MKPolylineRenderer(overlay: overlay);
+            pr.strokeColor = UIColor.blueColor().colorWithAlphaComponent(0.5);
+            pr.lineWidth = 5;
+            return pr;
+        }
+        
+        
+        return nil
+    }
     func mapView(mapView: MKMapView!, didSelectAnnotationView view: MKAnnotationView!) {
-        
-        var index = view.annotation.title!.toInt()!
-        
-        var temp = wineries[index]
+//......Determines what kind of pin was touched...........................................................//
+        var temp = wineries[view.annotation.title!.toInt()!]
         
         if(view.annotation.subtitle == "winery") {
-            temp = wineries[index]
+            temp = wineries[view.annotation.title!.toInt()!]
         }
         else if(view.annotation.subtitle == "rest") {
-            temp = restaurants[index]
+            temp = restaurants[view.annotation.title!.toInt()!]
         }
+        else if(view.annotation.subtitle == "hotel") {
+            temp = hotels[view.annotation.title!.toInt()!]
+        }
+        else if(view.annotation.subtitle == "park") {
+            temp = parking[view.annotation.title!.toInt()!]
+        }
+        
+//......Create a alertView when pin is clicked...........................................................//
         var alertView = UIAlertController(title: temp.valueForKey("name") as? String, message: temp.valueForKey("address") as? String, preferredStyle: .Alert)
         
         var imageView = UIImageView(frame: CGRectMake(10, 15, 50, 50))
