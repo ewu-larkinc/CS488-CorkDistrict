@@ -9,10 +9,11 @@
 /* Begin PBXBuildFile section */
 		220A5F5A1ABD452100144E2A /* AltCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220A5F591ABD452100144E2A /* AltCell.swift */; };
 		221346EB1AD92A3F009633DB /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221346EA1AD92A3F009633DB /* UIViewExtensions.swift */; };
-		221346ED1AD92ADE009633DB /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221346EC1AD92ADE009633DB /* LoadingViewController.swift */; };
 		221346EF1AD92B31009633DB /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221346EE1AD92B31009633DB /* Timer.swift */; };
 		221D72851ACA8F39005C26EB /* SimpleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221D72841ACA8F39005C26EB /* SimpleCell.swift */; };
 		221D72871ACA8F87005C26EB /* ParkingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221D72861ACA8F87005C26EB /* ParkingViewController.swift */; };
+		2281672C1AE20CFE00CCC9DF /* LoadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2281672A1AE20CFE00CCC9DF /* LoadViewController.swift */; };
+		2281672D1AE20CFE00CCC9DF /* LoadViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2281672B1AE20CFE00CCC9DF /* LoadViewController.xib */; };
 		2298E07F1AB00B7B003CEFFA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2298E07E1AB00B7B003CEFFA /* AppDelegate.swift */; };
 		2298E0821AB00B7B003CEFFA /* TheCorkDistrict.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2298E0801AB00B7B003CEFFA /* TheCorkDistrict.xcdatamodeld */; };
 		2298E0841AB00B7B003CEFFA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2298E0831AB00B7B003CEFFA /* ViewController.swift */; };
@@ -47,10 +48,11 @@
 /* Begin PBXFileReference section */
 		220A5F591ABD452100144E2A /* AltCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AltCell.swift; path = ../AltCell.swift; sourceTree = "<group>"; };
 		221346EA1AD92A3F009633DB /* UIViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
-		221346EC1AD92ADE009633DB /* LoadingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		221346EE1AD92B31009633DB /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
 		221D72841ACA8F39005C26EB /* SimpleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SimpleCell.swift; path = ../SimpleCell.swift; sourceTree = "<group>"; };
 		221D72861ACA8F87005C26EB /* ParkingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ParkingViewController.swift; path = ../ParkingViewController.swift; sourceTree = "<group>"; };
+		2281672A1AE20CFE00CCC9DF /* LoadViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadViewController.swift; sourceTree = "<group>"; };
+		2281672B1AE20CFE00CCC9DF /* LoadViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadViewController.xib; sourceTree = "<group>"; };
 		2298E0791AB00B7B003CEFFA /* TheCorkDistrict.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheCorkDistrict.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2298E07D1AB00B7B003CEFFA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2298E07E1AB00B7B003CEFFA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -98,8 +100,9 @@
 		2298E0701AB00B7B003CEFFA = {
 			isa = PBXGroup;
 			children = (
+				2281672A1AE20CFE00CCC9DF /* LoadViewController.swift */,
+				2281672B1AE20CFE00CCC9DF /* LoadViewController.xib */,
 				221346EE1AD92B31009633DB /* Timer.swift */,
-				221346EC1AD92ADE009633DB /* LoadingViewController.swift */,
 				221346EA1AD92A3F009633DB /* UIViewExtensions.swift */,
 				22A85A091AB18B2000B45713 /* SwiftyJSON.swift */,
 				2298E0AF1AB01CF2003CEFFA /* CoreLocation.framework */,
@@ -253,6 +256,7 @@
 			files = (
 				2298E0871AB00B7B003CEFFA /* Main.storyboard in Resources */,
 				2298E08C1AB00B7B003CEFFA /* LaunchScreen.xib in Resources */,
+				2281672D1AE20CFE00CCC9DF /* LoadViewController.xib in Resources */,
 				2298E0891AB00B7B003CEFFA /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -280,10 +284,10 @@
 				221D72851ACA8F39005C26EB /* SimpleCell.swift in Sources */,
 				2298E0A61AB011B5003CEFFA /* RestaurantsViewController.swift in Sources */,
 				22D2B2DB1AC3B96B008E0CE1 /* PackageDetailViewController.swift in Sources */,
+				2281672C1AE20CFE00CCC9DF /* LoadViewController.swift in Sources */,
 				2298E0A41AB01188003CEFFA /* DataManager.swift in Sources */,
 				2298E0841AB00B7B003CEFFA /* ViewController.swift in Sources */,
 				2298E0B81AB01D91003CEFFA /* MapViewController.swift in Sources */,
-				221346ED1AD92ADE009633DB /* LoadingViewController.swift in Sources */,
 				2298E0AA1AB011EA003CEFFA /* PackagesViewController.swift in Sources */,
 				2298E0AE1AB01902003CEFFA /* DetailViewController.swift in Sources */,
 				2298E0821AB00B7B003CEFFA /* TheCorkDistrict.xcdatamodeld in Sources */,

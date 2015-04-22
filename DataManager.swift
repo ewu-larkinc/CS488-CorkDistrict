@@ -13,7 +13,7 @@ import CoreLocation
 private let _SingletonSharedInstance = DataManager()
 
 
-class DataManager {
+class DataManager : NSObject, NSURLConnectionDataDelegate {
     
     class var sharedInstance: DataManager {
         return _SingletonSharedInstance
@@ -39,7 +39,14 @@ class DataManager {
     private let ENTITY_TYPE_PARKING : String = "Parking"
     
     
+    //FOR TESTING ONLY
     
+    
+    
+    
+    
+    
+    //END TESTING
     
     func loadData() -> Void {
         
@@ -48,7 +55,7 @@ class DataManager {
             wineries = retrieveEntities(ENTITY_TYPE_WINERY, entityURL: ENTITY_URL_WINERY!)
             restaurants = retrieveEntities(ENTITY_TYPE_RESTAURANT, entityURL: ENTITY_URL_RESTAURANT!)
             accommodations = retrieveEntities(ENTITY_TYPE_ACCOMMODATION, entityURL: ENTITY_URL_ACCOMMODATION!)
-            packages = retrieveEntities(ENTITY_TYPE_PACKAGE, entityURL: ENTITY_URL_PACKAGE!)
+            //packages = retrieveEntities(ENTITY_TYPE_PACKAGE, entityURL: ENTITY_URL_PACKAGE!)
             parking = retrieveEntities(ENTITY_TYPE_PARKING, entityURL: ENTITY_URL_PARKING!)
         }
         
@@ -56,88 +63,109 @@ class DataManager {
     }
     
     func getWineries() -> [NSManagedObject] {
-        return wineries
+        return wineries 
+    }
+    
+    func getWineryIndex(title: String) -> Int {
+        
+        var i : Int
+        
+        for (i=0; i < wineries.count; i++) {
+            var tempTitle = wineries[i].valueForKey("name") as! String
+            println("current winery title is \(tempTitle)")
+            
+            if (title == tempTitle) {
+                return i
+            }
+        }
+        
+        return -1
     }
     
     func getRestaurants() -> [NSManagedObject] {
-        return restaurants
+        return restaurants 
     }
     
     func getAccommodations() -> [NSManagedObject] {
-        return accommodations
+        return accommodations 
     }
     
     func getPackages() -> [NSManagedObject] {
-        return packages
+        return packages 
     }
     
     func getParking() -> [NSManagedObject] {
-        return parking
+        return parking 
     }
+    
+    func hasDownloadFinished() -> Bool {
+        return parking.count != 0 
+    }
+    
     
     //#MARK: - Core Data Methods
     func retrieveEntities(entityType: String, entityURL: NSURL) -> [NSManagedObject] {
         
-        var entities = [NSManagedObject]()
+        var entities = [NSManagedObject]() 
         
         if let results = fetchEntitiesFromCoreData(entityType) {
-            entities = results
+            entities = results 
             
             if (entities.count == 0) {
-                fetchEntitiesFromWeb(entityURL, entityType: entityType)
+                fetchEntitiesFromWeb(entityURL, entityType: entityType) 
             }
         }
         
-        return entities
+        return entities 
     }
     
     func fetchEntitiesFromCoreData(entityType: String) -> [NSManagedObject]? {
         
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let managedContext = appDelegate.managedObjectContext!
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate 
+        let managedContext = appDelegate.managedObjectContext! 
         
-        let fetchRequest = NSFetchRequest(entityName: entityType)
+        let fetchRequest = NSFetchRequest(entityName: entityType) 
         
-        var error: NSError?
-        let fetchedResults = managedContext.executeFetchRequest(fetchRequest, error: &error) as! [NSManagedObject]?
+        var error: NSError? 
+        let fetchedResults = managedContext.executeFetchRequest(fetchRequest, error: &error) as! [NSManagedObject]? 
         
-        return fetchedResults
+        return fetchedResults 
     }
     
     func addEntity(entityInfo: NSMutableArray, entityImage: UIImage) -> Void {
         
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let managedContext = appDelegate.managedObjectContext!
-        var entityType = entityInfo[5] as! String
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate 
+        let managedContext = appDelegate.managedObjectContext! 
+        var entityType = entityInfo[5] as! String 
         
-        let newEntity = NSEntityDescription.insertNewObjectForEntityForName(entityType, inManagedObjectContext: managedContext) as! NSManagedObject
+        let newEntity = NSEntityDescription.insertNewObjectForEntityForName(entityType, inManagedObjectContext: managedContext) as! NSManagedObject 
         
-        newEntity.setValue(UIImageJPEGRepresentation(entityImage, 1), forKey: "imageData")
-        newEntity.setValue(entityInfo[0], forKey: "name")
-        newEntity.setValue(entityInfo[1], forKey: "address")
-        newEntity.setValue(entityInfo[2], forKey: "zipcode")
-        newEntity.setValue(entityInfo[3], forKey: "city")
-        newEntity.setValue(entityInfo[4], forKey: "phone")
+        newEntity.setValue(UIImageJPEGRepresentation(entityImage, 1), forKey: "imageData") 
+        newEntity.setValue(entityInfo[0], forKey: "name") 
+        newEntity.setValue(entityInfo[1], forKey: "address") 
+        newEntity.setValue(entityInfo[2], forKey: "zipcode") 
+        newEntity.setValue(entityInfo[3], forKey: "city") 
+        newEntity.setValue(entityInfo[4], forKey: "phone") 
         
         if (entityType != ENTITY_TYPE_PARKING) {
-            newEntity.setValue(entityInfo[6], forKey: "about")
-            newEntity.setValue(entityInfo[7], forKey: "website")
+            newEntity.setValue(entityInfo[6], forKey: "about") 
+            newEntity.setValue(entityInfo[7], forKey: "website") 
             
             if (entityType == ENTITY_TYPE_WINERY) {
-                newEntity.setValue(entityInfo[8], forKey: "cluster")
+                newEntity.setValue(entityInfo[8], forKey: "cluster") 
             }
         }
         
         
-        var geocoder = CLGeocoder()
+        var geocoder = CLGeocoder() 
         geocoder.geocodeAddressString( "\(entityInfo[1]), \(entityInfo[3]), WA, USA", completionHandler: {(placemarks: [AnyObject]!, error: NSError!) -> Void in
-        if let placemark = placemarks?[0]  as? CLPlacemark
-        {
-        var latlong: String = "\(placemark.location.coordinate.latitude),"
-        latlong += "\(placemark.location.coordinate.longitude)"
         
-        newEntity.setValue(latlong, forKey: "placemark")
-        }
+                if let placemark = placemarks?[0]  as? CLPlacemark {
+                    var latlong: String = "\(placemark.location.coordinate.latitude)," 
+                    latlong += "\(placemark.location.coordinate.longitude)" 
+        
+                    newEntity.setValue(latlong, forKey: "placemark") 
+                }
         
         })
         
@@ -185,6 +213,51 @@ class DataManager {
         
     }
     
+    func addPackage(entityInfo: NSMutableArray, entityImage: UIImage) -> Void {
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let managedContext = appDelegate.managedObjectContext!
+        let entityType = entityInfo[9] as! String
+        
+        let newEntity = NSEntityDescription.insertNewObjectForEntityForName(entityType, inManagedObjectContext:
+            managedContext) as! NSManagedObject
+        
+        newEntity.setValue(entityInfo[0], forKey: "name")
+        newEntity.setValue(entityInfo[1], forKey: "about")
+        newEntity.setValue(entityInfo[2], forKey: "website")
+        newEntity.setValue(entityInfo[3], forKey: "cost")
+        newEntity.setValue(entityInfo[4], forKey: "startDay")
+        newEntity.setValue(entityInfo[5], forKey: "startMonth")
+        newEntity.setValue(entityInfo[6], forKey: "endDay")
+        newEntity.setValue(entityInfo[7], forKey: "endMonth")
+        newEntity.setValue(entityInfo[8], forKey: "relatedEntityName")
+        
+        let relatedTitle = entityInfo[8] as! String
+        println("searching for relatedEntityTitle: \(relatedTitle)")
+        var index : Int = 0
+        index = getWineryIndex(relatedTitle)
+        let wineries = getWineries()
+        
+        println("index is \(index)")
+        
+        let relatedEntity = wineries[index]
+        
+        
+        if (index >= 0) {
+            newEntity.setValue(relatedEntity.valueForKey("address"), forKey: "relatedEntityAddress")
+            newEntity.setValue(relatedEntity.valueForKey("city"), forKey: "relatedEntityCity")
+            newEntity.setValue(relatedEntity.valueForKey("zipcode"), forKey: "relatedEntityZipcode")
+            newEntity.setValue(relatedEntity.valueForKey("address"), forKey: "relatedEntityPhone")
+        }
+        
+        var error: NSError?
+        if !managedContext.save(&error) {
+            println("Could not save \(error), \(error?.userInfo)")
+        }
+        
+        packages.append(newEntity)
+    }
+    
     //#MARK: - Data Task Methods
     func fetchEntitiesFromWeb(entityURL: NSURL, entityType: String) -> Void {
         
@@ -228,48 +301,99 @@ class DataManager {
     //#MARK: - SwiftyJSON methods
     func parseJSONEntity(data: NSData, entityType: String) -> Void {
         
-        let json = JSON(data: data)
-        var ctr=0
-        while (ctr < json.count) {
+        if (entityType == ENTITY_TYPE_PACKAGE) {
+            parseJSONPackage(data, entityType: entityType)
             
-            let entityCityStateZip = json[ctr]["City State Zip"].stringValue
-            let cityStateZipArray = separateCityStateZip(entityCityStateZip)
+        } else {
             
-            let entityCity = cityStateZipArray[0]
-            let entityState = cityStateZipArray[1]
-            let entityZip = cityStateZipArray[2]
-            
-            var infoArray = NSMutableArray()
-            infoArray.addObject(json[ctr]["node_title"].stringValue)
-            infoArray.addObject(json[ctr]["Street Address"].stringValue)
-            infoArray.addObject(entityZip)
-            infoArray.addObject(entityCity)
-            infoArray.addObject(json[ctr]["Phone"].stringValue)
-            infoArray.addObject(entityType)
-            
-            
-            
-            if (entityType != ENTITY_TYPE_PARKING) {
+            let json = JSON(data: data)
+            var ctr=0
+            while (ctr < json.count) {
                 
-                let entityImageString = stripHtml(json[ctr]["Thumbnail"].stringValue)
-                let entityImageUrl = NSURL(string: entityImageString)
-                let imgData = NSData(contentsOfURL: entityImageUrl!)
-                let entityImage = UIImage(data: imgData!)
+                let entityCityStateZip = json[ctr]["City State Zip"].stringValue
+                let cityStateZipArray = separateCityStateZip(entityCityStateZip)
                 
-                infoArray.addObject(json[ctr]["Description"].stringValue)
-                infoArray.addObject(json[ctr]["Website"].stringValue)
+                let entityCity = cityStateZipArray[0]
+                let entityState = cityStateZipArray[1]
+                let entityZip = cityStateZipArray[2]
                 
-                if (entityType == ENTITY_TYPE_WINERY) {
-                    infoArray.addObject(json[ctr]["Cluster"].stringValue)
+                var infoArray = NSMutableArray()
+                infoArray.addObject(json[ctr]["node_title"].stringValue)
+                infoArray.addObject(json[ctr]["Street Address"].stringValue)
+                infoArray.addObject(entityZip)
+                infoArray.addObject(entityCity)
+                infoArray.addObject(json[ctr]["Phone"].stringValue)
+                infoArray.addObject(entityType)
+                
+                println("testing")
+                println(json[ctr]["node_title"].stringValue)
+                
+                
+                if (entityType != ENTITY_TYPE_PARKING) {
+                    
+                    let entityImageString = stripHtml(json[ctr]["Thumbnail"].stringValue)
+                    let entityImageUrl = NSURL(string: entityImageString)
+                    let imgData = NSData(contentsOfURL: entityImageUrl!)
+                    let entityImage = UIImage(data: imgData!)
+                    
+                    infoArray.addObject(json[ctr]["Description"].stringValue)
+                    infoArray.addObject(json[ctr]["Website"].stringValue)
+                    
+                    if (entityType == ENTITY_TYPE_WINERY) {
+                        infoArray.addObject(json[ctr]["Cluster"].stringValue)
+                    }
+                    
+                    addEntity(infoArray, entityImage: entityImage!)
+                } else {
+                    addParking(infoArray)
                 }
                 
-                addEntity(infoArray, entityImage: entityImage!)
-            } else {
-                addParking(infoArray)
+                ctr++
             }
             
+        }
+        
+    }
+    
+    func parseJSONPackage(data: NSData, entityType: String) -> Void {
+        
+        let json = JSON(data: data)
+        var ctr=0
+        var infoArray = NSMutableArray()
+        
+        while (ctr < json.count) {
+            
+            infoArray.addObject(json[ctr]["node_title"].stringValue)
+            infoArray.addObject(json[ctr]["Description"].stringValue)
+            infoArray.addObject(json[ctr]["Website"].stringValue)
+            infoArray.addObject(json[ctr]["Cost"].stringValue)
+            infoArray.addObject(json[ctr]["StartDay"].stringValue)
+            infoArray.addObject(json[ctr]["StartMonth"].stringValue)
+            infoArray.addObject(json[ctr]["EndDay"].stringValue)
+            infoArray.addObject(json[ctr]["EndMonth"].stringValue)
+            infoArray.addObject(json[ctr]["RelatedEntityTitle"].stringValue)
+            infoArray.addObject(entityType)
+            
+            println("testing in parseJSONPackages...")
+            println("incoming title is \(infoArray[0])")
+            println("incoming cost is \(infoArray[3])")
+            
+            var temp2 = json[ctr]["RelatedEntityTitle"].stringValue
+            
+            println("incoming related entity title is \(temp2)")
+            var temp = json[ctr]["Thumbnail"].stringValue
+            println("thumbnail string value is \(temp)")
+            
+            let entityImageString = stripHtml(json[ctr]["Thumbnail"].stringValue)
+            let entityImageUrl = NSURL(string: entityImageString)
+            let imgData = NSData(contentsOfURL: entityImageUrl!)
+            let entityImage = UIImage(data: imgData!)
+            
+            addPackage(infoArray, entityImage: entityImage!)
             ctr++
         }
+        
+        
     }
     
     
