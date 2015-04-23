@@ -159,14 +159,19 @@ class DataManager : NSObject, NSURLConnectionDataDelegate {
         
         var geocoder = CLGeocoder() 
         geocoder.geocodeAddressString( "\(entityInfo[1]), \(entityInfo[3]), WA, USA", completionHandler: {(placemarks: [AnyObject]!, error: NSError!) -> Void in
+            if let placemark = placemarks?[0]  as? CLPlacemark
+            {
         
                 if let placemark = placemarks?[0]  as? CLPlacemark {
                     var latlong: String = "\(placemark.location.coordinate.latitude)," 
                     latlong += "\(placemark.location.coordinate.longitude)" 
         
+                    
+                    var coord : CLLocationCoordinate2D
                     newEntity.setValue(latlong, forKey: "placemark") 
                 }
         
+        }
         })
         
         var error: NSError?
@@ -177,13 +182,13 @@ class DataManager : NSObject, NSURLConnectionDataDelegate {
         switch (entityType) {
             
         case "Winery":
-            wineries.append(newEntity)
+            self.wineries.append(newEntity)
         case "Restaurant":
-            restaurants.append(newEntity)
+            self.restaurants.append(newEntity)
         case "Accommodation":
-            accommodations.append(newEntity)
+            self.accommodations.append(newEntity)
         case "Package":
-            packages.append(newEntity)
+            self.packages.append(newEntity)
         default:
             println("Invalid entity type")
             

@@ -9,7 +9,7 @@ import UIKit
 import MapKit
 import CoreData
 
-class MapViewController: UIViewController, MKMapViewDelegate {
+class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     
     
     @IBAction func returnToHomePage(AnyObject) {
@@ -18,9 +18,14 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     //let geocoder = CLGeocoder()
     
+    let locationManager = CLLocationManager()
+    
     var wineries = [NSManagedObject]()
     var restaurants = [NSManagedObject]()
+    var hotels = [NSManagedObject]()
+    var parking = [NSManagedObject]()
     var showWineries: Bool = false
+    var pins = [MKPointAnnotation]()
     var winePins = [MKPointAnnotation]()
     
     @IBOutlet var theMapView: MKMapView!
@@ -30,18 +35,14 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        //CoreData
-        let dataManager = DataManager.sharedInstance
-        wineries = dataManager.getWineries()
-        restaurants = dataManager.getRestaurants()
-        
         // Do any additional setup after loading the view, typically from a nib.
         var lat: CLLocationDegrees = 47.66
         var long: CLLocationDegrees = -117.2999
         
         var latDelta: CLLocationDegrees = 0.5
         var longDelta: CLLocationDegrees = 0.5
+        
+        
         
         var theSpan: MKCoordinateSpan = MKCoordinateSpanMake(latDelta, longDelta)
         
@@ -50,10 +51,30 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         var theRegion: MKCoordinateRegion = MKCoordinateRegionMake(centerLocation, theSpan)
         
         self.theMapView.setRegion(theRegion, animated: true)
+
+        //CoreData
+        let dataManager = DataManager.sharedInstance
+        wineries = dataManager.getWineries()
+        restaurants = dataManager.getRestaurants()
         
-        placeWineries(wineries, type: "winery")
-        placeWineries(restaurants, type: "rest")
+        let util = MapUtilities()
+        util.mapView = theMapView
+        //util.distanceRequired = true
         
+        
+        //util.sortByDistance()
+        
+        //request user location
+        locationManager.requestWhenInUseAuthorization()
+        //  if locationManager.
+        self.theMapView.showsUserLocation = true
+        var wineriesTemp = [NSManagedObject]()
+        wineriesTemp.append(wineries[1]);
+        
+       // util.getDirections(wineriesTemp, start: wineries[2]);
+        
+        util.placePinsOnMap(wineries, type: "winery")
+        util.placePinsOnMap(restaurants, type: "rest")
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -64,7 +85,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     @IBAction func filterWineries(AnyObject) {
         if(showWineries){
-            placeWineries(wineries, type: "winery")
+            //MapUtilities.placePinsOnMap(wineries, type: "winery")
             showWineries = false
             wineButton.alpha = 1.0
         }
@@ -76,37 +97,8 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
     func removeWineries() {
         for var i = 0; i < wineries.count; i++ {
-            theMapView.removeAnnotation(winePins[i])
+            theMapView.removeAnnotation(pins[i])
         }
-        //theMapView.removeAnnotations(theMapView.annotations)
-    }
-    func placeWineries(var array: [NSManagedObject], var type: String) {
-        
-        
-        for var i = 0; i < array.count; i++
-        {
-            
-            //var temp = wineries[i]
-            var temp = array[i]
-            var information = MKPointAnnotation()
-            
-            var address:String = temp.valueForKey("address") as! String
-            var city:String = temp.valueForKey("city") as! String
-            
-            var mypin: String = temp.valueForKey("placemark") as! String
-            var llarray = mypin.componentsSeparatedByString(",")
-            
-            information.coordinate.latitude = NSString(string: llarray[0]).doubleValue
-            information.coordinate.longitude = NSString(string: llarray[1]).doubleValue
-            
-            information.title = temp.valueForKey("name") as? String
-            information.subtitle = type
-            
-            winePins.append(information)
-            
-            theMapView.addAnnotation(information)
-        }
-        
     }
     
     func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
@@ -125,15 +117,99 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             if(annotation.subtitle == "rest") {
                 anView.image = UIImage(named:"Food_Icon")
             }
-            anView.canShowCallout = true
+            if(annotation.subtitle == "hotel") {
+                anView.image = UIImage(named:"Hotel_Icon")
+            }
+            if(annotation.subtitle == "park") {
+                anView.image = UIImage(named:"Park_Icon")
+            }
+            anView.canShowCallout = false
+            
         }
         else {
             anView.annotation = annotation
+            
         }
-        
+    
         return anView
     }
-
+    func mapView(mapView: MKMapView!, rendererForOverlay overlay: MKOverlay!) -> MKOverlayRenderer! {
+        println("rendererForOverlay");
+        
+        if (overlay is MKPolyline) {
+            var pr = MKPolylineRenderer(overlay: overlay);
+            pr.strokeColor = UIColor.blueColor().colorWithAlphaComponent(0.5);
+            pr.lineWidth = 5;
+            return pr;
+        }
+        
+        
+        return nil
+    }
+    func mapView(mapView: MKMapView!, didSelectAnnotationView view: MKAnnotationView!) {
+//......Determines what kind of pin was touched...........................................................//
+        var temp = wineries[view.annotation.title!.toInt()!]
+        
+        if(view.annotation.subtitle == "winery") {
+            temp = wineries[view.annotation.title!.toInt()!]
+        }
+        else if(view.annotation.subtitle == "rest") {
+            temp = restaurants[view.annotation.title!.toInt()!]
+        }
+        else if(view.annotation.subtitle == "hotel") {
+            temp = hotels[view.annotation.title!.toInt()!]
+        }
+        else if(view.annotation.subtitle == "park") {
+            temp = parking[view.annotation.title!.toInt()!]
+        }
+        
+//......Create a alertView when pin is clicked...........................................................//
+        var alertView = UIAlertController(title: temp.valueForKey("name") as? String, message: temp.valueForKey("address") as? String, preferredStyle: .Alert)
+        
+        var imageView = UIImageView(frame: CGRectMake(10, 15, 50, 50))
+        
+        let imageData = temp.valueForKey("imageData") as? NSData
+        
+        imageView.image = UIImage(data: imageData!)
+        
+        alertView.view.addSubview(imageView)
+        
+        let callAction = UIAlertAction(title: "Call", style: .Default, handler: {
+            action in
+            let alertMessage = UIAlertController(title: "Are you sure?", message: "Are you sure you want to call this winery?", preferredStyle: .Alert)
+            let callFinalAction = UIAlertAction(title: "Call", style: .Default, handler: {
+                action in
+                var pNumber = "tel://"
+                pNumber += (temp.valueForKey("phone")as? String)!
+                var url:NSURL? = NSURL(string: pNumber)
+                UIApplication.sharedApplication().openURL(url!)
+            })
+            alertMessage.addAction(callFinalAction)
+            alertMessage.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+            self.presentViewController(alertMessage, animated: true, completion: nil)
+            
+            
+            println(temp.valueForKey("phone") as? String)
+        })
+        
+        let detailAction = UIAlertAction(title: "Details", style: .Default, handler: {
+            action in
+            
+            
+        })
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: {
+            action in
+            
+        })
+        
+        alertView.addAction(callAction)
+        alertView.addAction(detailAction)
+        alertView.addAction(cancelAction)
+        
+        
+        
+        presentViewController(alertView, animated: true, completion: nil)
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
