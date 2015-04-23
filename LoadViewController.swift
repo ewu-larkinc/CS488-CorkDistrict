@@ -22,9 +22,6 @@ class LoadViewController : UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let dataManager = DataManager.sharedInstance
-        //dataManager.
-        
         
         progressView.setProgress(0, animated: true)
         startCount()

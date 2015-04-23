@@ -10,11 +10,8 @@ class ViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        UIApplication.sharedApplication().registerForRemoteNotifications()
         self.tableView.backgroundView = UIImageView(image:UIImage(named: "menuBackground"))
-        
-        let background = UIImage(named: "menuBackground")
-        
         
         self.navigationController?.providesPresentationContextTransitionStyle = true
         self.navigationController?.definesPresentationContext = true
