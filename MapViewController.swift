@@ -36,7 +36,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        //hi
         // Do any additional setup after loading the view, typically from a nib.
         var lat: CLLocationDegrees = 47.66
         var long: CLLocationDegrees = -117.2999
