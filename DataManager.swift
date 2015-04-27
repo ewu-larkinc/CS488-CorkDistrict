@@ -27,12 +27,12 @@ class DataManager : NSObject, NSURLSessionDelegate, NSURLSessionDownloadDelegate
     private var packages = [NSManagedObject]()
     private var parking = [NSManagedObject]()
     
-    private let URL_WINERIES = NSURL(string: "http://www.nathanpilgrim.net/rest/wineries.json")
-    private let URL_RESTAURANTS = NSURL(string: "http://www.nathanpilgrim.net/rest/restaurants.json")
-    private let URL_ACCOMMODATIONS = NSURL(string: "http://www.nathanpilgrim.net/rest/lodging.json")
-    private let URL_PACKAGES = NSURL(string: "http://www.nathanpilgrim.net/rest/packages.json")
-    private let URL_PARKING = NSURL(string: "http://www.nathanpilgrim.net/rest/parking.json")
-    private let URL_NOTIFICATIONS = NSURL(string: "http://www.nathanpilgrim.net/apns/push_notifications")
+    private let URL_WINERIES = NSURL(string: "http://www.corkdistrictapp.com/rest/wineries.json")
+    private let URL_RESTAURANTS = NSURL(string: "http://www.corkdistrictapp.com/rest/restaurants.json")
+    private let URL_ACCOMMODATIONS = NSURL(string: "http://www.corkdistrictapp.com/rest/lodging.json")
+    private let URL_PACKAGES = NSURL(string: "http://www.corkdistrictapp.com/rest/packages.json")
+    private let URL_PARKING = NSURL(string: "http://www.corkdistrictapp.comt/rest/parking.json")
+    private let URL_NOTIFICATIONS = NSURL(string: "http://www.corkdistrictapp.com/rest/push_notifications")
     
     private let ENTITY_TYPE_WINERY : String = "Winery"
     private let ENTITY_TYPE_RESTAURANT : String = "Restaurant"
