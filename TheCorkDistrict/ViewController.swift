@@ -10,6 +10,9 @@ class ViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let dataManager = DataManager.sharedInstance
+        dataManager.loadData()
+        
         UIApplication.sharedApplication().registerForRemoteNotifications()
         self.tableView.backgroundView = UIImageView(image:UIImage(named: "menuBackground"))
         
@@ -22,15 +25,13 @@ class ViewController: UITableViewController {
         //THIS ALLOWS THE BACKGROUND IMAGE TO SCROLL WITH THE TABLE CELLS - NEED A TALLER VERSION OF THE IMAGE
         //self.tableView.backgroundColor = UIColor(patternImage: background!)
         
-        let dataManager = DataManager.sharedInstance
-        dataManager.loadData()
-        let testData = dataManager.getParking()
+        
+        let testData = dataManager.getPackages()
         
         if (testData.count == 0) {
             
             let loadingVC = LoadViewController(nibName: "LoadViewController", bundle: nil)
-            //loadingVC.modalTransitionStyle = UIModalTransitionStyle.CrossDissolve
-            
+            loadingVC.modalTransitionStyle = UIModalTransitionStyle.CrossDissolve
             
             //error logged if I don't wait at least 1 second before calling the presentViewController method
             var timer = Timer(duration: 1.0, completionHandler: {

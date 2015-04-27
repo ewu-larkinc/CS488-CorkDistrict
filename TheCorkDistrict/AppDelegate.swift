@@ -11,13 +11,49 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
-
+    private let URL_NOTIFICATIONS = NSURL(string: "http://www.nathanpilgrim.net/apns/push_notifications")
+    
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         UIApplication.sharedApplication().registerForRemoteNotifications()
         let settings = UIUserNotificationSettings(forTypes: (.Alert | .Sound | .Badge), categories: nil)
         UIApplication.sharedApplication().registerUserNotificationSettings(settings)
+        
+        
+        var request = NSMutableURLRequest(URL: URL_NOTIFICATIONS!)
+        var session = NSURLSession.sharedSession()
+        var err: NSError?
+        var params = ["token":"989", "type":"ios"]
+        
+        request.HTTPMethod = "POST"
+        request.HTTPBody = NSJSONSerialization.dataWithJSONObject(params, options: nil, error: &err)
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        
+        var task = session.dataTaskWithRequest(request, completionHandler: {data, response, error -> Void in
+            
+            var strData = NSString(data: data, encoding: NSUTF8StringEncoding)
+            var err: NSError?
+            var json = NSJSONSerialization.JSONObjectWithData(data, options: .MutableLeaves, error: &err) as? NSDictionary
+            
+            if (err != nil) {
+                println(err!.localizedDescription)
+                let jsonStr = NSString(data: data, encoding: NSUTF8StringEncoding)
+                println("Error. Could not parse JSON: \(jsonStr)")
+            }
+            else {
+                if let parseJSON = json {
+                    var success = parseJSON["success"] as? Int
+                    println("Success: \(success)")
+                }
+                else {
+                    println("JSON object was nil!!!")
+                }
+            }
+        })
+        
+        task.resume()
         return true
     }
     

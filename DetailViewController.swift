@@ -88,12 +88,6 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
             var tempNumStr = tempNum.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
             UIApplication.sharedApplication().openURL(NSURL(string: "tel://#\(tempNumStr)")!)
         }
-        else if (indexPath.row == 6) {
-            let tempUrl = currentSelection.valueForKey("website") as? String
-            let tempUrlString: String = "http://" + tempUrl!
-            UIApplication.sharedApplication().openURL(NSURL(string: "\(tempUrlString)")!)
-        }
-        
         self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoadViewController" customModule="TheCorkDistrict" customModuleProvider="target">
@@ -34,12 +34,6 @@
                 </button>
                 <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" progress="2.7755575615628914e-17" translatesAutoresizingMaskIntoConstraints="NO" id="T8Y-Jb-Hj1">
                     <rect key="frame" x="50" y="507" width="500" height="2"/>
-                    <constraints>
-                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="500" id="EZG-xr-L16"/>
-                        <constraint firstAttribute="width" constant="500" id="KKu-sP-LOd"/>
-                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="2" id="nu7-9T-Lyt"/>
-                        <constraint firstAttribute="height" constant="2" id="pIz-Vj-3sB"/>
-                    </constraints>
                     <color key="progressTintColor" red="0.92549026012420654" green="0.88627457618713379" blue="0.22352942824363708" alpha="1" colorSpace="deviceRGB"/>
                     <color key="trackTintColor" red="0.50196081399917603" green="0.37254902720451355" blue="0.13725490868091583" alpha="1" colorSpace="deviceRGB"/>
                 </progressView>
@@ -80,20 +74,22 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="ZOL-pO-UmM" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="393" id="8cb-TZ-Y39"/>
+                <constraint firstItem="ZOL-pO-UmM" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="393" id="8cb-TZ-Y39">
+                    <variation key="heightClass=regular-widthClass=compact" constant="345"/>
+                </constraint>
                 <constraint firstAttribute="centerX" secondItem="ZOL-pO-UmM" secondAttribute="centerX" id="E1e-Ty-34k"/>
                 <constraint firstItem="X9X-gl-iIq" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="245" id="NZN-Zw-wMf">
-                    <variation key="heightClass=regular-widthClass=compact" constant="244"/>
+                    <variation key="heightClass=regular-widthClass=compact" constant="190"/>
                 </constraint>
                 <constraint firstAttribute="centerX" secondItem="E9q-aQ-Qil" secondAttribute="centerX" id="UVh-xy-t4c"/>
                 <constraint firstItem="T8Y-Jb-Hj1" firstAttribute="top" secondItem="X9X-gl-iIq" secondAttribute="bottom" constant="73" id="gqO-cA-M5X">
-                    <variation key="heightClass=regular-widthClass=compact" constant="105"/>
+                    <variation key="heightClass=regular-widthClass=compact" constant="54"/>
                 </constraint>
                 <constraint firstAttribute="centerX" secondItem="X9X-gl-iIq" secondAttribute="centerX" id="omg-0x-sWj"/>
                 <constraint firstAttribute="centerX" secondItem="T8Y-Jb-Hj1" secondAttribute="centerX" id="vsS-cX-DhT"/>
                 <constraint firstAttribute="trailing" secondItem="T8Y-Jb-Hj1" secondAttribute="trailing" constant="50" id="x5E-BE-jaw"/>
                 <constraint firstItem="E9q-aQ-Qil" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="296" id="xWx-a4-dx4">
-                    <variation key="heightClass=regular-widthClass=compact" constant="285"/>
+                    <variation key="heightClass=regular-widthClass=compact" constant="233"/>
                 </constraint>
                 <constraint firstItem="T8Y-Jb-Hj1" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="50" id="ya3-EL-HYz"/>
             </constraints>

@@ -13,50 +13,98 @@ import CoreLocation
 private let _SingletonSharedInstance = DataManager()
 
 
-class DataManager : NSObject, NSURLConnectionDataDelegate {
+class DataManager : NSObject, NSURLSessionDelegate, NSURLSessionDownloadDelegate {
     
     class var sharedInstance: DataManager {
         return _SingletonSharedInstance
     }
     
     var dataReceived: Bool = false
-    var dlFlag: Bool = false
+    
     private var wineries = [NSManagedObject]()
     private var restaurants = [NSManagedObject]()
     private var accommodations = [NSManagedObject]()
     private var packages = [NSManagedObject]()
     private var parking = [NSManagedObject]()
     
-    private let ENTITY_URL_WINERY = NSURL(string: "http://www.nathanpilgrim.net/rest/wineries.json")
-    private let ENTITY_URL_RESTAURANT = NSURL(string: "http://www.nathanpilgrim.net/rest/restaurants.json")
-    private let ENTITY_URL_ACCOMMODATION = NSURL(string: "http://www.nathanpilgrim.net/rest/lodging.json")
-    private let ENTITY_URL_PACKAGE = NSURL(string: "http://www.nathanpilgrim.net/rest/packages.json")
-    private let ENTITY_URL_PARKING = NSURL(string: "http://www.nathanpilgrim.net/rest/parking.json")
+    private let URL_WINERIES = NSURL(string: "http://www.nathanpilgrim.net/rest/wineries.json")
+    private let URL_RESTAURANTS = NSURL(string: "http://www.nathanpilgrim.net/rest/restaurants.json")
+    private let URL_ACCOMMODATIONS = NSURL(string: "http://www.nathanpilgrim.net/rest/lodging.json")
+    private let URL_PACKAGES = NSURL(string: "http://www.nathanpilgrim.net/rest/packages.json")
+    private let URL_PARKING = NSURL(string: "http://www.nathanpilgrim.net/rest/parking.json")
+    private let URL_NOTIFICATIONS = NSURL(string: "http://www.nathanpilgrim.net/apns/push_notifications")
+    
     private let ENTITY_TYPE_WINERY : String = "Winery"
     private let ENTITY_TYPE_RESTAURANT : String = "Restaurant"
     private let ENTITY_TYPE_ACCOMMODATION : String = "Accommodation"
     private let ENTITY_TYPE_PACKAGE : String = "Package"
     private let ENTITY_TYPE_PARKING : String = "Parking"
     
-    
-    //FOR TESTING ONLY
-    
-    
-    
-    
-    
-    
+    //TESTING. FOR USE WITH NSURLSESSION DOWNLOADTASK
+    private var sessionConfiguration = NSURLSessionConfiguration()
+    private var session = NSURLSession()
+    private var progress = Float()
+    private var taskNumber = Int(0)
     //END TESTING
+    
+    
+    
+    func URLSession(session: NSURLSession, downloadTask: NSURLSessionDownloadTask, didFinishDownloadingToURL location: NSURL) {
+        
+        var entityType: String
+        var data = NSData(contentsOfURL: location)
+        
+        switch (downloadTask.taskDescription) {
+            
+        case ENTITY_TYPE_WINERY:
+            let wData = data
+            parseJSONEntity(wData!, entityType: ENTITY_TYPE_WINERY)
+        case ENTITY_TYPE_RESTAURANT:
+            let rData = data
+            parseJSONEntity(rData!, entityType: ENTITY_TYPE_RESTAURANT)
+        case ENTITY_TYPE_ACCOMMODATION:
+            let aData = data
+            parseJSONEntity(aData!, entityType: ENTITY_TYPE_ACCOMMODATION)
+        case ENTITY_TYPE_PARKING:
+            let parkData = data
+            parseJSONEntity(parkData!, entityType: ENTITY_TYPE_PARKING)
+        case ENTITY_TYPE_PACKAGE:
+            let packData = data
+            parseJSONEntity(packData!, entityType: ENTITY_TYPE_PACKAGE)
+        default:
+            break
+        }
+        
+        taskNumber++
+    }
+    
+    func URLSession(session: NSURLSession, downloadTask: NSURLSessionDownloadTask, didResumeAtOffset fileOffset: Int64, expectedTotalBytes: Int64) {
+            
+    }
+    
+    func URLSession(session: NSURLSession, downloadTask: NSURLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
+        
+        progress = (Float(taskNumber)/5) * 100
+        
+        println("testing in didWriteData method - current progress is \(progress)")
+    }
+    
+    func getProgress() -> Float {
+        return progress
+    }
     
     func loadData() -> Void {
         
+        sessionConfiguration = NSURLSessionConfiguration.defaultSessionConfiguration()
+        session = NSURLSession(configuration: sessionConfiguration, delegate: self, delegateQueue: nil)
+        
         if (!dataReceived) {
             
-            wineries = retrieveEntities(ENTITY_TYPE_WINERY, entityURL: ENTITY_URL_WINERY!)
-            restaurants = retrieveEntities(ENTITY_TYPE_RESTAURANT, entityURL: ENTITY_URL_RESTAURANT!)
-            accommodations = retrieveEntities(ENTITY_TYPE_ACCOMMODATION, entityURL: ENTITY_URL_ACCOMMODATION!)
-            //packages = retrieveEntities(ENTITY_TYPE_PACKAGE, entityURL: ENTITY_URL_PACKAGE!)
-            parking = retrieveEntities(ENTITY_TYPE_PARKING, entityURL: ENTITY_URL_PARKING!)
+            wineries = retrieveEntities(ENTITY_TYPE_WINERY, entityURL: URL_WINERIES!)
+            restaurants = retrieveEntities(ENTITY_TYPE_RESTAURANT, entityURL: URL_RESTAURANTS!)
+            accommodations = retrieveEntities(ENTITY_TYPE_ACCOMMODATION, entityURL: URL_ACCOMMODATIONS!)
+            parking = retrieveEntities(ENTITY_TYPE_PARKING, entityURL: URL_PARKING!)
+            //packages = retrieveEntities(ENTITY_TYPE_PACKAGE, entityURL: URL_PACKAGES!)
         }
         
         dataReceived = true
@@ -99,7 +147,7 @@ class DataManager : NSObject, NSURLConnectionDataDelegate {
     }
     
     func hasDownloadFinished() -> Bool {
-        return parking.count != 0 
+        return packages.count != 0
     }
     
     
@@ -112,7 +160,8 @@ class DataManager : NSObject, NSURLConnectionDataDelegate {
             entities = results 
             
             if (entities.count == 0) {
-                fetchEntitiesFromWeb(entityURL, entityType: entityType) 
+                //fetchEntitiesFromWeb(entityURL, entityType: entityType)
+                fetchEntitiesFromWeb2(entityURL, entityType: entityType)
             }
         }
         
@@ -263,7 +312,7 @@ class DataManager : NSObject, NSURLConnectionDataDelegate {
         packages.append(newEntity)
     }
     
-    //#MARK: - Data Task Methods
+    //#MARK: - NSURLSession Methods
     func fetchEntitiesFromWeb(entityURL: NSURL, entityType: String) -> Void {
         
         var session = NSURLSession.sharedSession()
@@ -280,31 +329,17 @@ class DataManager : NSObject, NSURLConnectionDataDelegate {
         task.resume()
     }
     
-    
-    func separateCityStateZip(cityStateZip: String) -> [String] {
+    func fetchEntitiesFromWeb2(entityUrl: NSURL, entityType: String) -> Void {
         
-        let cityStateZipArray = cityStateZip.componentsSeparatedByString(" ")
-        var resultArray = [String]()
+        var downloadTask = session.downloadTaskWithURL(entityUrl)
+        downloadTask.taskDescription = entityType
         
-        //0-city, 1-state, 2-zip
-        if (cityStateZipArray.count > 3) {
-            resultArray.append(cityStateZipArray[0] + " " + cityStateZipArray[1])
-            resultArray.append(cityStateZipArray[2])
-            resultArray.append(cityStateZipArray[3])
-        } else {//0,1-city, 2-state, 3-zip
-            resultArray.append(cityStateZipArray[0])
-            resultArray.append(cityStateZipArray[1])
-            resultArray.append(cityStateZipArray[2])
-        }
-        
-        resultArray[0] = resultArray[0].stringByReplacingOccurrencesOfString(",", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
-        
-        return resultArray
+        downloadTask.resume()
     }
     
-    
-    //#MARK: - SwiftyJSON methods
+    //#MARK: - JSON methods
     func parseJSONEntity(data: NSData, entityType: String) -> Void {
+        
         
         if (entityType == ENTITY_TYPE_PACKAGE) {
             parseJSONPackage(data, entityType: entityType)
@@ -405,10 +440,33 @@ class DataManager : NSObject, NSURLConnectionDataDelegate {
     //#MARK: - Miscellaneous
     func stripHtml(urlObject: String) -> String {
         
+        //println("testing... entitiyImageString is \(urlObject)")
         let entityImageStringArray = urlObject.componentsSeparatedByString(" ")
         var entityImageString = entityImageStringArray[2].stringByReplacingOccurrencesOfString("src=\"", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
         
         return entityImageString.stringByReplacingOccurrencesOfString("\"", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+    }
+    
+    func separateCityStateZip(cityStateZip: String) -> [String] {
+        
+        //println("Testing... cityStateZip is \(cityStateZip)")
+        let cityStateZipArray = cityStateZip.componentsSeparatedByString(" ")
+        var resultArray = [String]()
+        
+        //0-city, 1-state, 2-zip
+        if (cityStateZipArray.count > 3) {
+            resultArray.append(cityStateZipArray[0] + " " + cityStateZipArray[1])
+            resultArray.append(cityStateZipArray[2])
+            resultArray.append(cityStateZipArray[3])
+        } else {//0,1-city, 2-state, 3-zip
+            resultArray.append(cityStateZipArray[0])
+            resultArray.append(cityStateZipArray[1])
+            resultArray.append(cityStateZipArray[2])
+        }
+        
+        resultArray[0] = resultArray[0].stringByReplacingOccurrencesOfString(",", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+        
+        return resultArray
     }
     
     

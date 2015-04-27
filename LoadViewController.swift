@@ -2,9 +2,8 @@
 //  LoadViewController.swift
 //  TheCorkDistrict
 //
-//  Created by Chris Larkin on 4/17/15.
-//  Copyright (c) 2015 Chris Larkin. All rights reserved.
 //
+
 
 import UIKit
 
@@ -18,10 +17,13 @@ class LoadViewController : UIViewController {
     var isRotating = false
     var shouldStopRotating = false
     var timer: Timer!
+    var progress = Float()
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        let dataManager = DataManager.sharedInstance
+        progress = 0
         
         progressView.setProgress(0, animated: true)
         startCount()
@@ -32,7 +34,7 @@ class LoadViewController : UIViewController {
             self.animateLoadingLogo()
             self.loadingImage.rotate360Degrees(completionDelegate: self)
             
-            self.timer = Timer(duration: 10.0, completionHandler: {
+            self.timer = Timer(duration: 12.0, completionHandler: {
                 self.shouldStopRotating = true
             })
             self.timer.start()
@@ -57,7 +59,19 @@ class LoadViewController : UIViewController {
                         self.loadingLabel.fadeIn(completion: {
                             
                             (finished: Bool) -> Void in
-                            self.loadingLabel.fadeOut()
+                            self.loadingLabel.fadeOut(completion: {
+                                
+                                (finished: Bool) -> Void in
+                                self.loadingLabel.fadeIn(completion: {
+                                    
+                                    (finished: Bool) -> Void in
+                                    self.loadingLabel.fadeOut(completion: {
+                                      
+                                        (finished: Bool) -> Void in
+                                        self.loadingLabel.fadeIn()
+                                    })
+                                })
+                            })
                         })
                     })
                 })
@@ -83,7 +97,19 @@ class LoadViewController : UIViewController {
                         self.loadingLogo.fadeIn(completion: {
                             
                             (finished: Bool) -> Void in
-                            self.loadingLogo.fadeOut()
+                            self.loadingLogo.fadeOut(completion: {
+                                
+                                (finished: Bool) -> Void in
+                                self.loadingLogo.fadeIn(completion: {
+                                    
+                                    (finished: Bool) -> Void in
+                                    self.loadingLogo.fadeOut(completion: {
+                                        
+                                        (finished: Bool) -> Void in
+                                        self.loadingLogo.fadeIn()
+                                    })
+                                })
+                            })
                         })
                     })
                 })
@@ -93,26 +119,37 @@ class LoadViewController : UIViewController {
     }
     
     func startCount() {
-        self.ctr = 0
+        
+        let dataManager = DataManager.sharedInstance
+        progress = 0
+        var ctr2 = 0
+        var ctr = 0
         for i in 0..<250 {
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), {
                 sleep(2)
+                if (self.progress < dataManager.getProgress()) {
+                    self.progress = dataManager.getProgress()
+                    println("Progress is \(self.progress)")
+                    self.progressView.setProgress(self.progress, animated: true)
+                }
+                
                 dispatch_async(dispatch_get_main_queue(), {
-                    self.ctr++
+                    self.progress += 0.004
+                    self.progressView.setProgress(self.progress, animated: true)
                     return
                 })
             })
         }
     }
     
-    var ctr: Int = 0 {
+    /*var ctr: Int = 0 {
         didSet {
             let fractionalProgress = Float(ctr)/250.0
             let animated = ctr != 0
             
             progressView.setProgress(fractionalProgress, animated: animated)
         }
-    }
+    }*/
     
     override func animationDidStop(anim: CAAnimation!, finished flag: Bool) {
         if self.shouldStopRotating == false {
