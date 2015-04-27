@@ -38,6 +38,14 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         return 8
     }
     
+    
+    func loadDetailView(id: Int)
+    {
+        
+    }
+    
+    
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("detailCell") as! UITableViewCell
         cell.textLabel?.textAlignment = NSTextAlignment.Left
@@ -113,5 +121,12 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         return rowSize
     }
     
+    
+    override func viewWillAppear(animated: Bool)
+    {
+        super.viewWillAppear(animated)
+        
+        //counterLabel.text = "The counter was tapped \(numberToDisplay) times."
+    }
     
 }

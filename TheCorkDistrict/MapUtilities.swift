@@ -57,7 +57,6 @@ class MapUtilities {
             else {
                 let myroute = response?.routes[0] as! MKRoute
                 self.mapView.addOverlay(myroute.polyline, level: MKOverlayLevel.AboveRoads)
-                print("Suck my dick Apple")
                 
             }
             
@@ -66,6 +65,7 @@ class MapUtilities {
     }
     
     func sortByDistance() {
+
         
         for route in myRoutes {
             println(route.distance)
