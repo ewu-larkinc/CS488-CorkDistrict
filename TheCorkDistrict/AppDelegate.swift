@@ -11,17 +11,20 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    private let URL_NOTIFICATIONS = NSURL(string: "http://www.corkdistrictapp.com/rest/push_notifications")
+    let dataManager = DataManager.sharedInstance
+    var URL_NOTIFICATIONS = NSURL()
     
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        URL_NOTIFICATIONS = dataManager.getNotificationURL()
+        
         UIApplication.sharedApplication().registerForRemoteNotifications()
         let settings = UIUserNotificationSettings(forTypes: (.Alert | .Sound | .Badge), categories: nil)
         UIApplication.sharedApplication().registerUserNotificationSettings(settings)
         
         
-        var request = NSMutableURLRequest(URL: URL_NOTIFICATIONS!)
+        var request = NSMutableURLRequest(URL: URL_NOTIFICATIONS)
         var session = NSURLSession.sharedSession()
         var err: NSError?
         var params = ["token":"989", "type":"ios"]

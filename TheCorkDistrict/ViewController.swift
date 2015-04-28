@@ -26,7 +26,7 @@ class ViewController: UITableViewController {
         //self.tableView.backgroundColor = UIColor(patternImage: background!)
         
         
-        let testData = dataManager.getPackages()
+        let testData = dataManager.getParking()
         
         if (testData.count == 0) {
             
