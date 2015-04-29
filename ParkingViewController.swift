@@ -19,6 +19,8 @@ class ParkingViewController : UIViewController, UITableViewDataSource, UITableVi
         
         let dataManager = DataManager.sharedInstance
         parking = dataManager.getParking()
+        
+        self.tableView.backgroundView = UIImageView(image: UIImage(named: "parkingBackground"))
     }
     
     override func didReceiveMemoryWarning() {
