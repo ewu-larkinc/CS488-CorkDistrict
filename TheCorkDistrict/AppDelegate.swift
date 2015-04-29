@@ -15,13 +15,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
-        UIApplication.sharedApplication().registerForRemoteNotifications()
-        let settings = UIUserNotificationSettings(forTypes: (.Alert | .Sound | .Badge), categories: nil)
+        
+        URL_NOTIFICATIONS = dataManager.getNotificationURL()
+        
+        var types: UIUserNotificationType = UIUserNotificationType.Badge |
+            UIUserNotificationType.Alert |
+            UIUserNotificationType.Sound
+
+        
+        let settings = UIUserNotificationSettings(forTypes: types, categories: nil)
         UIApplication.sharedApplication().registerUserNotificationSettings(settings)
+        UIApplication.sharedApplication().registerForRemoteNotifications()
         
         
-        var request = NSMutableURLRequest(URL: URL_NOTIFICATIONS!)
+        var request = NSMutableURLRequest(URL: URL_NOTIFICATIONS)
         var session = NSURLSession.sharedSession()
         var err: NSError?
         var params = ["token":"weienrs", "type":"ios"]
@@ -58,12 +65,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
-        println("Got token data: \(deviceToken)")
+        var characterSet: NSCharacterSet = NSCharacterSet( charactersInString: "<>" )
+        
+        var deviceTokenString: String = ( deviceToken.description as NSString )
+            .stringByTrimmingCharactersInSet( characterSet )
+            .stringByReplacingOccurrencesOfString( " ", withString: "" ) as String
+        
+        currentDeviceToken = deviceTokenString
+        println( deviceTokenString )
     }
     
     func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
         println("Couldn’t register: \(error)")
     }
+    
 
     func applicationWillResignActive(application: UIApplication) {
         
