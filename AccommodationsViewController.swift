@@ -99,6 +99,7 @@ class AccomodationsViewController: UIViewController, UITableViewDataSource, UITa
         cell.cityLabel.textColor = UIColor.whiteColor()
         cell.phoneLabel.textColor = UIColor.whiteColor()
         cell.websiteLabel.textColor = UIColor.whiteColor()
+        cell.websiteLabel.sizeToFit()
         
         cell.cellImage.contentMode = UIViewContentMode.ScaleAspectFit
         cell.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.2)

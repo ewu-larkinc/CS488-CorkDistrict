@@ -65,16 +65,22 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         case 4:
             let imageData = currentSelection.valueForKey("imageData") as? NSData
             let mainImage = UIImage(data: imageData!)
-            let newImageView = UIImageView(frame: CGRectMake(15.0,10.0,345.0,280.0))
+            let newImageView = UIImageView(frame: CGRectMake(20.0,10.0,280.0,280.0))
             newImageView.layer.borderColor = UIColor.whiteColor().CGColor
             newImageView.layer.borderWidth = 2.0
             newImageView.image = mainImage
             cell.addSubview(newImageView)
         case 5:
             cell.textLabel?.text = currentSelection.valueForKey("about") as? String
+            cell.textLabel?.textAlignment = NSTextAlignment.Justified
         case 6:
-            cell.textLabel?.text = currentSelection.valueForKey("website") as? String
-            cell.textLabel?.adjustsFontSizeToFitWidth = true
+            let websiteLabel = UILabel(frame: CGRectMake(15.0,0.0,300.0, 82.0))
+            websiteLabel.font = UIFont(name: "STHeitiTC-Light", size: 20.0)
+            websiteLabel.textColor = UIColor.whiteColor()
+            websiteLabel.textAlignment = NSTextAlignment.Left
+            websiteLabel.text = currentSelection.valueForKey("website") as? String
+            websiteLabel.adjustsFontSizeToFitWidth = true
+            cell.addSubview(websiteLabel)
         default:
             break
         }
