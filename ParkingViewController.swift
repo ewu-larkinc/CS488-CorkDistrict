@@ -16,6 +16,7 @@ class ParkingViewController : UIViewController, UITableViewDataSource, UITableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tableView.backgroundView = UIImageView(image:UIImage(named: "parkBackground"))
         
         let dataManager = DataManager.sharedInstance
         parking = dataManager.getParking()
@@ -59,10 +60,16 @@ class ParkingViewController : UIViewController, UITableViewDataSource, UITableVi
         cell.titleLabel.text = parkingLot.valueForKey("name") as? String
         cell.addressLabel.text = parkingLot.valueForKey("address") as? String
         
+        cell.titleLabel.textColor = UIColor.whiteColor()
+        cell.addressLabel.textColor = UIColor.whiteColor()
+        cell.cityLabel.textColor = UIColor.whiteColor()
+        cell.phoneLabel.textColor = UIColor.whiteColor()
+        
         var cityText = parkingLot.valueForKey("city") as? String
         var zipText = parkingLot.valueForKey("zipcode") as? String
         cell.cityLabel.text = cityText! + ", WA " + zipText!
         cell.phoneLabel.text = parkingLot.valueForKey("phone") as? String
+        cell.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.5)
         
     }
 

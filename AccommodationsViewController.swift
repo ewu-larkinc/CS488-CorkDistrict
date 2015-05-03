@@ -19,11 +19,10 @@ class AccomodationsViewController: UIViewController, UITableViewDataSource, UITa
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tableView.backgroundView = UIImageView(image:UIImage(named: "packagesBackground"))
         
         let dataManager = DataManager.sharedInstance
         accommodations = dataManager.getAccommodations()
-        
-        self.tableView.backgroundView = UIImageView(image:UIImage(named: "restBackground"))
     }
     
     override func didReceiveMemoryWarning() {

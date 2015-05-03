@@ -18,7 +18,7 @@ class PackagesViewController: UIViewController, UITableViewDataSource, UITableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "restBackground")!)
+        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "packagesBackground")!)
         
         let dataManager = DataManager.sharedInstance
         packages = dataManager.getPackages()
@@ -72,6 +72,7 @@ class PackagesViewController: UIViewController, UITableViewDataSource, UITableVi
         cell.cellImage.clipsToBounds = true
         
         cell.cellImage.contentMode = UIViewContentMode.ScaleAspectFit
+        cell.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.2)
     }
 
     

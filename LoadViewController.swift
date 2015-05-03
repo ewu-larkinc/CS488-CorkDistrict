@@ -25,7 +25,7 @@ class LoadViewController : UIViewController {
         let dataManager = DataManager.sharedInstance
         //dataManager.
         
-        
+
         progressView.setProgress(0, animated: true)
         startCount()
         
