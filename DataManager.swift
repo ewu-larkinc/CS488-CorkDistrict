@@ -22,17 +22,12 @@ class DataManager {
     var dataReceived: Bool = false
     private let URL_NOTIFICATIONS = NSURL(string: "http://www.nathanpilgrim.net/apns/push_notifications")
     private let URL_CHANGELOG = NSURL(string: "http://www.nathanpilgrim.net/rest/all")
-    
-    //TESTING
-    private var thewineries = CorkDistrictEntity()
-    private var therestaurants = CorkDistrictEntity()
-    private var theaccommodations = CorkDistrictEntity()
-    private var thepackages = CorkDistrictEntity()
-    private var theparking = CorkDistrictEntity()
+    private var wineries = CorkDistrictEntity()
+    private var restaurants = CorkDistrictEntity()
+    private var accommodations = CorkDistrictEntity()
+    private var packages = CorkDistrictEntity()
+    private var parking = CorkDistrictEntity()
     private var progress = Float()
-    private var taskNumber = Int(0)
-    //END TESTING
-    
     
     
     
@@ -42,7 +37,7 @@ class DataManager {
     }
     
     func getWineries() -> [NSManagedObject] {
-        return thewineries.entities 
+        return wineries.entities 
     }
     
     func getNotificationURL() -> NSURL {
@@ -53,8 +48,8 @@ class DataManager {
         
         var i : Int
         
-        for (i=0; i < thewineries.entities.count; i++) {
-            var tempTitle = thewineries.entities[i].valueForKey("name") as! String
+        for (i=0; i < wineries.entities.count; i++) {
+            var tempTitle = wineries.entities[i].valueForKey("name") as! String
             println("current winery title is \(tempTitle)")
             
             if (title == tempTitle) {
@@ -66,23 +61,23 @@ class DataManager {
     }
     
     func getRestaurants() -> [NSManagedObject] {
-        return therestaurants.entities 
+        return restaurants.entities 
     }
     
     func getAccommodations() -> [NSManagedObject] {
-        return theaccommodations.entities 
+        return accommodations.entities 
     }
     
     func getPackages() -> [NSManagedObject] {
-        return thepackages.entities 
+        return packages.entities 
     }
     
     func getParking() -> [NSManagedObject] {
-        return theparking.entities 
+        return parking.entities 
     }
     
     func hasDownloadFinished() -> Bool {
-        return thepackages.entities.count != 0
+        return packages.entities.count != 0
     }
     
     //#MARK: - Data Management Methods
@@ -106,70 +101,70 @@ class DataManager {
     
     func compareEntityCounts() {
         
-        println("thewineries webCount: \(thewineries.webCount)")
-        println("thewineries cdCount: \(thewineries.cdCount)")
-        println("therestaurants webCount: \(therestaurants.webCount)")
-        println("therestaurants cdCount: \(therestaurants.cdCount)")
-        println("theaccommodations webCount: \(theaccommodations.webCount)")
-        println("theaccommodations cdCount: \(theaccommodations.cdCount)")
-        println("thepackages webCount: \(thepackages.webCount)")
-        println("thepackages cdCount: \(thepackages.cdCount)")
-        println("theparking webCount: \(theparking.webCount)")
-        println("theparking cdCount: \(theparking.cdCount)")
+        println("wineries webCount: \(wineries.webCount)")
+        println("wineries cdCount: \(wineries.cdCount)")
+        println("restaurants webCount: \(restaurants.webCount)")
+        println("restaurants cdCount: \(restaurants.cdCount)")
+        println("accommodations webCount: \(accommodations.webCount)")
+        println("accommodations cdCount: \(accommodations.cdCount)")
+        println("packages webCount: \(packages.webCount)")
+        println("packages cdCount: \(packages.cdCount)")
+        println("parking webCount: \(parking.webCount)")
+        println("parking cdCount: \(parking.cdCount)")
         
-        if (theaccommodations.webCount != theaccommodations.cdCount) {
+        if (accommodations.webCount != accommodations.cdCount) {
             println("deleting accommodations and redownloading")
-            deleteFromCoreData(theaccommodations.type)
-            fetchEntitiesFromWeb(theaccommodations.URL, entityType: theaccommodations.type)
+            deleteFromCoreData(accommodations.type)
+            fetchEntitiesFromWeb(accommodations.URL, entityType: accommodations.type)
         } else {
             println("fetching accommodations from core data")
-            theaccommodations.entities = fetchEntitiesFromCoreData(theaccommodations.type)!
+            accommodations.entities = fetchEntitiesFromCoreData(accommodations.type)!
         }
-        if (thepackages.webCount != thepackages.cdCount) {
+        if (packages.webCount != packages.cdCount) {
             println("deleting packages and redownloading")
-            deleteFromCoreData(thepackages.type)
-            fetchEntitiesFromWeb(thepackages.URL, entityType: thepackages.type)
+            deleteFromCoreData(packages.type)
+            fetchEntitiesFromWeb(packages.URL, entityType: packages.type)
         } else {
             println("fetching packages from core data")
-            thepackages.entities = fetchEntitiesFromCoreData(thepackages.type)!
+            packages.entities = fetchEntitiesFromCoreData(packages.type)!
         }
-        if (theparking.webCount != theparking.cdCount) {
+        if (parking.webCount != parking.cdCount) {
             println("deleting parking and redownloading")
-            deleteFromCoreData(theparking.type)
-            fetchEntitiesFromWeb(theparking.URL, entityType: theparking.type)
+            deleteFromCoreData(parking.type)
+            fetchEntitiesFromWeb(parking.URL, entityType: parking.type)
         } else {
             println("fetching parking from core data")
-            theparking.entities = fetchEntitiesFromCoreData(theparking.type)!
+            parking.entities = fetchEntitiesFromCoreData(parking.type)!
         }
-        if (therestaurants.webCount != therestaurants.cdCount) {
+        if (restaurants.webCount != restaurants.cdCount) {
             println("deleting restaurants and redownloading")
-            deleteFromCoreData(therestaurants.type)
-            fetchEntitiesFromWeb(therestaurants.URL, entityType: therestaurants.type)
+            deleteFromCoreData(restaurants.type)
+            fetchEntitiesFromWeb(restaurants.URL, entityType: restaurants.type)
         } else {
             println("fetching restaurants from core data")
-            therestaurants.entities = fetchEntitiesFromCoreData(therestaurants.type)!
+            restaurants.entities = fetchEntitiesFromCoreData(restaurants.type)!
         }
-        if (thewineries.webCount != thewineries.cdCount) {
+        if (wineries.webCount != wineries.cdCount) {
             println("deleting wineries and redownloading")
-            deleteFromCoreData(thewineries.type)
-            fetchEntitiesFromWeb(thewineries.URL, entityType: thewineries.type)
+            deleteFromCoreData(wineries.type)
+            fetchEntitiesFromWeb(wineries.URL, entityType: wineries.type)
         } else {
             println("fetching wineries from core data")
-            thewineries.entities = fetchEntitiesFromCoreData(thewineries.type)!
+            wineries.entities = fetchEntitiesFromCoreData(wineries.type)!
         }
     }
     
     func initializeEntityObjects() {
-        thewineries.URL = NSURL(string: "http://www.nathanpilgrim.net/rest/wineries.json")!
-        thewineries.type = "Winery"
-        therestaurants.URL = NSURL(string: "http://www.nathanpilgrim.net/rest/restaurants.json")!
-        therestaurants.type = "Restaurant"
-        thepackages.URL = NSURL(string: "http://www.nathanpilgrim.net/rest/packages.json")!
-        thepackages.type = "Package"
-        theparking.URL = NSURL(string: "http://www.nathanpilgrim.net/rest/parking.json")!
-        theparking.type = "Parking"
-        theaccommodations.URL = NSURL(string: "http://www.nathanpilgrim.net/rest/accommodations.json")!
-        theaccommodations.type = "Accommodation"
+        wineries.URL = NSURL(string: "http://www.nathanpilgrim.net/rest/wineries.json")!
+        wineries.type = "Winery"
+        restaurants.URL = NSURL(string: "http://www.nathanpilgrim.net/rest/restaurants.json")!
+        restaurants.type = "Restaurant"
+        packages.URL = NSURL(string: "http://www.nathanpilgrim.net/rest/packages.json")!
+        packages.type = "Package"
+        parking.URL = NSURL(string: "http://www.nathanpilgrim.net/rest/parking.json")!
+        parking.type = "Parking"
+        accommodations.URL = NSURL(string: "http://www.nathanpilgrim.net/rest/accommodations.json")!
+        accommodations.type = "Accommodation"
     }
     
     //#MARK: - Core Data Methods
@@ -211,11 +206,11 @@ class DataManager {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext!
         
-        let wineryFetchRequest = NSFetchRequest(entityName: thewineries.type)
-        let restaurantFetchRequest = NSFetchRequest(entityName: therestaurants.type)
-        let packageFetchRequest = NSFetchRequest(entityName: thepackages.type)
-        let parkingFetchRequest = NSFetchRequest(entityName: theparking.type)
-        let accommodationFetchRequest = NSFetchRequest(entityName: theaccommodations.type)
+        let wineryFetchRequest = NSFetchRequest(entityName: wineries.type)
+        let restaurantFetchRequest = NSFetchRequest(entityName: restaurants.type)
+        let packageFetchRequest = NSFetchRequest(entityName: packages.type)
+        let parkingFetchRequest = NSFetchRequest(entityName: parking.type)
+        let accommodationFetchRequest = NSFetchRequest(entityName: accommodations.type)
         
         var error: NSError?
         
@@ -229,16 +224,16 @@ class DataManager {
         
         let fetchedWineries = managedContext.executeFetchRequest(wineryFetchRequest, error: &error) as! [NSManagedObject]
         
-        theaccommodations.cdCount = fetchedAccommodations.count
-        println("Accommodations cdCount: \(theaccommodations.cdCount)")
-        thepackages.cdCount = fetchedPackages.count
-        println("Packages cdCount: \(thepackages.cdCount)")
-        theparking.cdCount = fetchedParking.count
-        println("Parking cdCount: \(theparking.cdCount)")
-        therestaurants.cdCount = fetchedRestaurants.count
-        println("Restaurants cdCount: \(therestaurants.cdCount)")
-        thewineries.cdCount = fetchedWineries.count
-        println("Wineries cdCount: \(thewineries.cdCount)")
+        accommodations.cdCount = fetchedAccommodations.count
+        println("Accommodations cdCount: \(accommodations.cdCount)")
+        packages.cdCount = fetchedPackages.count
+        println("Packages cdCount: \(packages.cdCount)")
+        parking.cdCount = fetchedParking.count
+        println("Parking cdCount: \(parking.cdCount)")
+        restaurants.cdCount = fetchedRestaurants.count
+        println("Restaurants cdCount: \(restaurants.cdCount)")
+        wineries.cdCount = fetchedWineries.count
+        println("Wineries cdCount: \(wineries.cdCount)")
     }
     
     func addEntityToCoreData(entityInfo: NSMutableArray, entityImage: UIImage) -> Void {
@@ -256,11 +251,11 @@ class DataManager {
         newEntity.setValue(entityInfo[3], forKey: "city") 
         newEntity.setValue(entityInfo[4], forKey: "phone") 
         
-        if (entityType != theparking.type) {
+        if (entityType != parking.type) {
             newEntity.setValue(entityInfo[6], forKey: "about") 
             newEntity.setValue(entityInfo[7], forKey: "website") 
             
-            if (entityType == thewineries.type) {
+            if (entityType == wineries.type) {
                 newEntity.setValue(entityInfo[8], forKey: "cluster") 
             }
         }
@@ -290,13 +285,13 @@ class DataManager {
         switch (entityType) {
             
         case "Winery":
-            self.thewineries.entities.append(newEntity)
+            self.wineries.entities.append(newEntity)
         case "Restaurant":
-            self.therestaurants.entities.append(newEntity)
+            self.restaurants.entities.append(newEntity)
         case "Accommodation":
-            self.theaccommodations.entities.append(newEntity)
+            self.accommodations.entities.append(newEntity)
         case "Package":
-            self.thepackages.entities.append(newEntity)
+            self.packages.entities.append(newEntity)
         default:
             println("Invalid entity type")
             
@@ -322,7 +317,7 @@ class DataManager {
             println("Could not save \(error), \(error?.userInfo)")
         }
         
-        theparking.entities.append(newEntity)
+        parking.entities.append(newEntity)
         
     }
     
@@ -350,11 +345,11 @@ class DataManager {
         println("searching for relatedEntityTitle: \(relatedTitle)")
         /*var index : Int = 0
         index = getWineryIndex(relatedTitle)
-        let thewineries.entities = getWineries()
+        let wineries.entities = getWineries()
         
         println("index is \(index)")
         
-        let relatedEntity = thewineries.entities[index]
+        let relatedEntity = wineries.entities[index]
         
         
         if (index >= 0) {
@@ -369,7 +364,7 @@ class DataManager {
             println("Could not save \(error), \(error?.userInfo)")
         }
         
-        thepackages.entities.append(newEntity)
+        packages.entities.append(newEntity)
     }
     
     
@@ -394,18 +389,18 @@ class DataManager {
     
     func getWebCounts() {
         
-        countEntitiesFromURL(thewineries.URL, entityType: thewineries.type)
-        countEntitiesFromURL(theaccommodations.URL, entityType: theaccommodations.type)
-        countEntitiesFromURL(therestaurants.URL, entityType: therestaurants.type)
-        countEntitiesFromURL(thepackages.URL, entityType: thepackages.type)
-        countEntitiesFromURL(theparking.URL, entityType: theparking.type)
+        countEntitiesFromURL(wineries.URL, entityType: wineries.type)
+        countEntitiesFromURL(accommodations.URL, entityType: accommodations.type)
+        countEntitiesFromURL(restaurants.URL, entityType: restaurants.type)
+        countEntitiesFromURL(packages.URL, entityType: packages.type)
+        countEntitiesFromURL(parking.URL, entityType: parking.type)
         
         
-        /*fetchEntitiesFromWeb(theaccommodations.URL!, entityType: theaccommodations.type)
-        fetchEntitiesFromWeb(therestaurants.URL!, entityType: therestaurants.type)
-        fetchEntitiesFromWeb(thepackages.URL!, entityType: thepackages.type)
-        fetchEntitiesFromWeb(theparking.URL!, entityType: theparking.type)
-        fetchEntitiesFromWeb(thewineries.URL!, entityType: thewineries.type)*/
+        /*fetchEntitiesFromWeb(accommodations.URL!, entityType: accommodations.type)
+        fetchEntitiesFromWeb(restaurants.URL!, entityType: restaurants.type)
+        fetchEntitiesFromWeb(packages.URL!, entityType: packages.type)
+        fetchEntitiesFromWeb(parking.URL!, entityType: parking.type)
+        fetchEntitiesFromWeb(wineries.URL!, entityType: wineries.type)*/
     }
     
     func fetchEntitiesFromWeb(entityURL: NSURL, entityType: String) -> Void {
@@ -433,16 +428,16 @@ class DataManager {
         println("\(entityType) web count is \(json.count)")
         
         switch (entityType) {
-        case self.theaccommodations.type:
-            theaccommodations.webCount = json.count
-        case self.thepackages.type:
-            thepackages.webCount = json.count
-        case self.theparking.type:
-            theparking.webCount = json.count
-        case self.therestaurants.type:
-            therestaurants.webCount = json.count
-        case self.thewineries.type:
-            thewineries.webCount = json.count
+        case self.accommodations.type:
+            accommodations.webCount = json.count
+        case self.packages.type:
+            packages.webCount = json.count
+        case self.parking.type:
+            parking.webCount = json.count
+        case self.restaurants.type:
+            restaurants.webCount = json.count
+        case self.wineries.type:
+            wineries.webCount = json.count
         default:
             println("Invalid EntityType")
         }
@@ -451,7 +446,7 @@ class DataManager {
     func parseJSONEntity(data: NSData, entityType: String) -> Void {
         
         
-        if (entityType == thepackages.type) {
+        if (entityType == packages.type) {
             parseJSONPackage(data, entityType: entityType)
             
         } else {
@@ -480,7 +475,7 @@ class DataManager {
                 println(json[ctr]["node_title"].stringValue)
                 
                 
-                if (entityType != theparking.type) {
+                if (entityType != parking.type) {
                     
                     let entityImageString = stripHtml(json[ctr]["Thumbnail"].stringValue)
                     let entityImageUrl = NSURL(string: entityImageString)
@@ -490,7 +485,7 @@ class DataManager {
                     infoArray.addObject(json[ctr]["Description"].stringValue)
                     infoArray.addObject(json[ctr]["Website"].stringValue)
                     
-                    if (entityType == thewineries.type) {
+                    if (entityType == wineries.type) {
                         infoArray.addObject(json[ctr]["Cluster"].stringValue)
                     }
                     
