@@ -13,27 +13,41 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     let dataManager = DataManager.sharedInstance
     var URL_NOTIFICATIONS = NSURL()
-    var currentDeviceToken = String()
+    var currentDeviceToken = NSData()
     
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         URL_NOTIFICATIONS = dataManager.getNotificationURL()
         
-        var types: UIUserNotificationType = UIUserNotificationType.Badge |
-            UIUserNotificationType.Alert |
+        var types: UIUserNotificationType = UIUserNotificationType.Badge | UIUserNotificationType.Alert |
             UIUserNotificationType.Sound
 
         
         let settings = UIUserNotificationSettings(forTypes: types, categories: nil)
-        UIApplication.sharedApplication().registerUserNotificationSettings(settings)
-        UIApplication.sharedApplication().registerForRemoteNotifications()
+        //UIApplication.sharedApplication().registerUserNotificationSettings(settings)
+        //UIApplication.sharedApplication().registerForRemoteNotifications()
+        application.registerUserNotificationSettings(settings)
+        application.registerForRemoteNotifications()
         
+        
+        return true
+    }
+    
+    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+        var characterSet: NSCharacterSet = NSCharacterSet( charactersInString: "<>" )
+        
+        var deviceTokenString: String = ( deviceToken.description as NSString )
+            .stringByTrimmingCharactersInSet( characterSet )
+            .stringByReplacingOccurrencesOfString( " ", withString: "" ) as String
+        
+        currentDeviceToken = deviceToken
+        println(deviceTokenString)
         
         var request = NSMutableURLRequest(URL: URL_NOTIFICATIONS)
         var session = NSURLSession.sharedSession()
         var err: NSError?
-        var params = ["token":currentDeviceToken, "type":"ios"]
+        var params = ["token":deviceTokenString, "type":"ios"]
         
         request.HTTPMethod = "POST"
         request.HTTPBody = NSJSONSerialization.dataWithJSONObject(params, options: nil, error: &err)
@@ -63,23 +77,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         })
         
         task.resume()
-        return true
-    }
-    
-    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
-        var characterSet: NSCharacterSet = NSCharacterSet( charactersInString: "<>" )
         
-        var deviceTokenString: String = ( deviceToken.description as NSString )
-            .stringByTrimmingCharactersInSet( characterSet )
-            .stringByReplacingOccurrencesOfString( " ", withString: "" ) as String
         
-        currentDeviceToken = deviceTokenString
-        println( deviceTokenString )
     }
     
     func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
         println("Couldn’t register: \(error)")
     }
+    
+    /*func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+        <#code#>
+    }*/
     
 
     func applicationWillResignActive(application: UIApplication) {

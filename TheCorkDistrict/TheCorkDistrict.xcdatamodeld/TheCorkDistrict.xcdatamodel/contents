@@ -11,6 +11,13 @@
         <attribute name="website" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="zipcode" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
+    <entity name="EntityTotals" syncable="YES">
+        <attribute name="accommodations" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="packages" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="parking" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="restaurants" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="wineries" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+    </entity>
     <entity name="Package" syncable="YES">
         <attribute name="about" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="cost" optional="YES" attributeType="String" syncable="YES"/>
@@ -64,5 +71,6 @@
         <element name="Parking" positionX="-45" positionY="108" width="128" height="135"/>
         <element name="Restaurant" positionX="-54" positionY="54" width="128" height="180"/>
         <element name="Winery" positionX="-63" positionY="-18" width="128" height="195"/>
+        <element name="EntityTotals" positionX="-45" positionY="135" width="128" height="120"/>
     </elements>
 </model>

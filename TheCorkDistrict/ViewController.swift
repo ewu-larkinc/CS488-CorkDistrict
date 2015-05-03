@@ -13,7 +13,6 @@ class ViewController: UITableViewController {
         let dataManager = DataManager.sharedInstance
         dataManager.loadData()
         
-        UIApplication.sharedApplication().registerForRemoteNotifications()
         self.tableView.backgroundView = UIImageView(image:UIImage(named: "menuBackground"))
         
         self.navigationController?.providesPresentationContextTransitionStyle = true
@@ -26,7 +25,7 @@ class ViewController: UITableViewController {
         //self.tableView.backgroundColor = UIColor(patternImage: background!)
         
         
-        let testData = dataManager.getParking()
+        /*let testData = dataManager.getParking()
         
         if (testData.count == 0) {
             
@@ -39,7 +38,7 @@ class ViewController: UITableViewController {
             })
             
             timer.start()
-        }
+        }*/
         
     }
     

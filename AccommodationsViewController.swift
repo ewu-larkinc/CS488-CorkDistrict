@@ -13,7 +13,7 @@ class AccomodationsViewController: UIViewController, UITableViewDataSource, UITa
     
     @IBOutlet weak var tableView: UITableView!
     
-    let basicCellIdentifier = "BasicCell"
+    let entityCellIdentifier = "EntityCell"
     var accommodations = [NSManagedObject]()
     
     
@@ -54,21 +54,21 @@ class AccomodationsViewController: UIViewController, UITableViewDataSource, UITa
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        return basicCellAtIndexPath(indexPath)
+        return entityCellAtIndexPath(indexPath)
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
-    func basicCellAtIndexPath(indexPath:NSIndexPath) -> BasicCell {
+    func entityCellAtIndexPath(indexPath:NSIndexPath) -> EntityCell {
         
-        let basicCell = tableView.dequeueReusableCellWithIdentifier(basicCellIdentifier) as! BasicCell
-        setContentForCell(basicCell, indexPath: indexPath)
-        return basicCell
+        let entityCell = tableView.dequeueReusableCellWithIdentifier(entityCellIdentifier) as! EntityCell
+        setContentForCell(entityCell, indexPath: indexPath)
+        return entityCell
     }
     
-    func setContentForCell(cell:BasicCell, indexPath:NSIndexPath) {
+    func setContentForCell(cell:EntityCell, indexPath:NSIndexPath) {
         
         let accommodation = accommodations[indexPath.row]
         let imageData = accommodation.valueForKey("imageData") as? NSData

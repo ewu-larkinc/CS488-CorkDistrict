@@ -13,7 +13,7 @@ class WineriesViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBOutlet weak var tableView: UITableView!
     
     var wineries = [NSManagedObject]()
-    let basicCellIdentifier = "BasicCell"
+    let entityCellIdentifier = "EntityCell"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,20 +50,20 @@ class WineriesViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        return basicCellAtIndexPath(indexPath)
+        return entityCellAtIndexPath(indexPath)
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
-    func basicCellAtIndexPath(indexPath:NSIndexPath) -> BasicCell {
-        let basicCell = tableView.dequeueReusableCellWithIdentifier(basicCellIdentifier) as! BasicCell
-        setContentForCell(basicCell, indexPath: indexPath)
-        return basicCell
+    func entityCellAtIndexPath(indexPath:NSIndexPath) -> EntityCell {
+        let entityCell = tableView.dequeueReusableCellWithIdentifier(entityCellIdentifier) as! EntityCell
+        setContentForCell(entityCell, indexPath: indexPath)
+        return entityCell
     }
     
-    func setContentForCell(cell:BasicCell, indexPath:NSIndexPath) {
+    func setContentForCell(cell:EntityCell, indexPath:NSIndexPath) {
         
         let winery = wineries[indexPath.row]
         let imageData = winery.valueForKey("imageData") as? NSData
