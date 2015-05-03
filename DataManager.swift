@@ -20,13 +20,6 @@ class DataManager {
     }
     
     var dataReceived: Bool = false
-    
-    /*private var wineries = [NSManagedObject]()
-    private var restaurants = [NSManagedObject]()
-    private var accommodations = [NSManagedObject]()
-    private var packages = [NSManagedObject]()
-    private var parking = [NSManagedObject]()*/
-    
     private let URL_NOTIFICATIONS = NSURL(string: "http://www.nathanpilgrim.net/apns/push_notifications")
     private let URL_CHANGELOG = NSURL(string: "http://www.nathanpilgrim.net/rest/all")
     
@@ -41,20 +34,9 @@ class DataManager {
     //END TESTING
     
     
-    func initializeEntityObjects() {
-        thewineries.URL = NSURL(string: "http://www.nathanpilgrim.net/rest/wineries.json")!
-        thewineries.type = "Winery"
-        therestaurants.URL = NSURL(string: "http://www.nathanpilgrim.net/rest/restaurants.json")!
-        therestaurants.type = "Restaurant"
-        thepackages.URL = NSURL(string: "http://www.nathanpilgrim.net/rest/packages.json")!
-        thepackages.type = "Package"
-        theparking.URL = NSURL(string: "http://www.nathanpilgrim.net/rest/parking.json")!
-        theparking.type = "Parking"
-        theaccommodations.URL = NSURL(string: "http://www.nathanpilgrim.net/rest/accommodations.json")!
-        theaccommodations.type = "Accommodation"
-    }
     
-    //#MARK: - Data Access
+    
+    //#MARK: - Access Methods
     func getProgress() -> Float {
         return progress
     }
@@ -103,6 +85,7 @@ class DataManager {
         return thepackages.entities.count != 0
     }
     
+    //#MARK: - Data Management Methods
     func loadData() -> Void {
         
         initializeEntityObjects()
@@ -176,6 +159,18 @@ class DataManager {
         }
     }
     
+    func initializeEntityObjects() {
+        thewineries.URL = NSURL(string: "http://www.nathanpilgrim.net/rest/wineries.json")!
+        thewineries.type = "Winery"
+        therestaurants.URL = NSURL(string: "http://www.nathanpilgrim.net/rest/restaurants.json")!
+        therestaurants.type = "Restaurant"
+        thepackages.URL = NSURL(string: "http://www.nathanpilgrim.net/rest/packages.json")!
+        thepackages.type = "Package"
+        theparking.URL = NSURL(string: "http://www.nathanpilgrim.net/rest/parking.json")!
+        theparking.type = "Parking"
+        theaccommodations.URL = NSURL(string: "http://www.nathanpilgrim.net/rest/accommodations.json")!
+        theaccommodations.type = "Accommodation"
+    }
     
     //#MARK: - Core Data Methods
     func deleteFromCoreData(entityType: String) -> Void {
@@ -331,8 +326,6 @@ class DataManager {
         
     }
     
-    
-    
     func addPackageToCoreData(entityInfo: NSMutableArray, entityImage: UIImage) -> Void {
         
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
@@ -381,7 +374,7 @@ class DataManager {
     
     
     
-    //#MARK: - NSURLSession
+    //#MARK: - NSURLSession Methods
     func countEntitiesFromURL(entityURL: NSURL, entityType: String) -> Void {
         
         var count: Int
@@ -431,7 +424,7 @@ class DataManager {
         task.resume()
     }
     
-    //#MARK: - JSON
+    //#MARK: - JSON Methods
     func extractCountFromJSON(data: NSData, entityType: String) -> Void {
         
         //println("testing... extractCount method is firing!")
@@ -555,7 +548,7 @@ class DataManager {
     }
     
     
-    //#MARK: - Miscellaneous
+    //#MARK: - Misc. Methods
     func stripHtml(urlObject: String) -> String {
         
         //println("testing... entitiyImageString is \(urlObject)")
