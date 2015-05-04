@@ -11,7 +11,9 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    private let URL_NOTIFICATIONS = NSURL(string: "http://www.nathanpilgrim.net/apns/push_notifications")
+    let dataManager = DataManager.sharedInstance
+    var URL_NOTIFICATIONS = NSURL()
+    var currentDeviceToken = String()
     
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
@@ -24,14 +26,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         
         let settings = UIUserNotificationSettings(forTypes: types, categories: nil)
-        UIApplication.sharedApplication().registerUserNotificationSettings(settings)
         UIApplication.sharedApplication().registerForRemoteNotifications()
+        UIApplication.sharedApplication().registerUserNotificationSettings(settings)
+
         
+        var tempTest = currentDeviceToken.toInt()
         
         var request = NSMutableURLRequest(URL: URL_NOTIFICATIONS)
         var session = NSURLSession.sharedSession()
         var err: NSError?
-        var params = ["token":"weienrs", "type":"ios"]
+        var params = ["token":currentDeviceToken, "type":"ios"]
+        
+        print("Token: "+currentDeviceToken)
+        currentDeviceToken.toInt()
         
         request.HTTPMethod = "POST"
         request.HTTPBody = NSJSONSerialization.dataWithJSONObject(params, options: nil, error: &err)
