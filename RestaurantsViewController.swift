@@ -15,6 +15,7 @@ class RestaurantsViewController: UIViewController, UITableViewDataSource, UITabl
     var restaurants = [NSManagedObject]()
     let entityCellIdentifier = "EntityCell"
     
+    //# MARK: - ViewController Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -34,6 +35,7 @@ class RestaurantsViewController: UIViewController, UITableViewDataSource, UITabl
         self.automaticallyAdjustsScrollViewInsets = false
     }
     
+    //# MARK: - Segue Methods
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         
         let dvc = segue.destinationViewController as! DetailViewController

@@ -14,6 +14,7 @@ class ParkingViewController : UIViewController, UITableViewDataSource, UITableVi
     let parkingCellIdentifier = "ParkingCell"
     var parking = [NSManagedObject]()
     
+    //# MARK: - ViewController Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         

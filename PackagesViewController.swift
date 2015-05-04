@@ -15,7 +15,7 @@ class PackagesViewController: UIViewController, UITableViewDataSource, UITableVi
     let packageCellIdentifier = "PackageCell"
     var packages = [NSManagedObject]()
     
-    
+    //# MARK: - ViewController Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "restBackground")!)

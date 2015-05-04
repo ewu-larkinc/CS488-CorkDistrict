@@ -16,7 +16,7 @@ class AccomodationsViewController: UIViewController, UITableViewDataSource, UITa
     let entityCellIdentifier = "EntityCell"
     var accommodations = [NSManagedObject]()
     
-    
+    //# MARK: - ViewController Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -36,7 +36,7 @@ class AccomodationsViewController: UIViewController, UITableViewDataSource, UITa
         self.automaticallyAdjustsScrollViewInsets = false
     }
     
-    
+    //# MARK: - Segue Methods
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         
         let dvc = segue.destinationViewController as! DetailViewController

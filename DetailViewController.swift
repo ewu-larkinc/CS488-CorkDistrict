@@ -19,7 +19,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     
     
-    //# MARK: - View Controller Methods
+    //# MARK: - ViewController Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.backgroundView = UIImageView(image:UIImage(named: "detailBackground"))

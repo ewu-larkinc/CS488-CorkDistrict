@@ -15,6 +15,7 @@ class WineriesViewController: UIViewController, UITableViewDataSource, UITableVi
     var wineries = [NSManagedObject]()
     let entityCellIdentifier = "EntityCell"
     
+    //# MARK: - ViewController Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.backgroundView = UIImageView(image:UIImage(named: "wineBackground"))
@@ -33,6 +34,7 @@ class WineriesViewController: UIViewController, UITableViewDataSource, UITableVi
         super.didReceiveMemoryWarning()
     }
     
+    //#MARK: - Segue Methods
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         
         let dvc = segue.destinationViewController as! DetailViewController
@@ -78,14 +80,6 @@ class WineriesViewController: UIViewController, UITableViewDataSource, UITableVi
         var state = "WA"
         
         city = city?.stringByReplacingOccurrencesOfString(" ", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
-        
-        //for testing only.........................................
-        //let testResults = [NSManagedObject]()
-        /*let dataManager = DataManager.sharedInstance
-        if let testResults = dataManager.getWineryByTitle(name!) {
-            var testWeb = testResults[0].valueForKey("website") as? String
-            println("title: \(name), website found: \(testWeb)")
-        }*/
         
         
         cell.titleLabel.text = name
