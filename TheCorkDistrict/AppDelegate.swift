@@ -77,8 +77,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         })
         
         task.resume()
-        
-        
     }
     
     func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {

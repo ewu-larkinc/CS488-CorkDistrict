@@ -90,7 +90,7 @@ class DataManager {
             getWebCounts()
             getCoreDataCounts()
             
-            var timer = Timer(duration: 5.0, completionHandler: {
+            var timer = Timer(duration: 8.0, completionHandler: {
                 self.compareEntityCounts()
             })
             timer.start()
@@ -125,11 +125,52 @@ class DataManager {
         println("parking webCount: \(parking.webCount)")
         println("parking cdCount: \(parking.cdCount)")
         
-        retrieveEntities(accommodations)
+        /*retrieveEntities(accommodations)
         retrieveEntities(packages)
         retrieveEntities(parking)
         retrieveEntities(restaurants)
-        retrieveEntities(wineries)
+        retrieveEntities(wineries)*/
+        
+        if (accommodations.webCount != accommodations.cdCount) {
+        println("deleting accommodations and redownloading")
+        deleteFromCoreData(accommodations.type)
+        fetchEntitiesFromWeb(accommodations.URL, entityType: accommodations.type)
+        } else {
+        println("fetching accommodations from core data")
+        accommodations.entities = fetchEntitiesFromCoreData(accommodations.type)!
+        }
+        if (packages.webCount != packages.cdCount) {
+        println("deleting packages and redownloading")
+        deleteFromCoreData(packages.type)
+        fetchEntitiesFromWeb(packages.URL, entityType: packages.type)
+        } else {
+        println("fetching packages from core data")
+        packages.entities = fetchEntitiesFromCoreData(packages.type)!
+        }
+        if (parking.webCount != parking.cdCount) {
+        println("deleting parking and redownloading")
+        deleteFromCoreData(parking.type)
+        fetchEntitiesFromWeb(parking.URL, entityType: parking.type)
+        } else {
+        println("fetching parking from core data")
+        parking.entities = fetchEntitiesFromCoreData(parking.type)!
+        }
+        if (restaurants.webCount != restaurants.cdCount) {
+        println("deleting restaurants and redownloading")
+        deleteFromCoreData(restaurants.type)
+        fetchEntitiesFromWeb(restaurants.URL, entityType: restaurants.type)
+        } else {
+        println("fetching restaurants from core data")
+        restaurants.entities = fetchEntitiesFromCoreData(restaurants.type)!
+        }
+        if (wineries.webCount != wineries.cdCount) {
+        println("deleting wineries and redownloading")
+        deleteFromCoreData(wineries.type)
+        fetchEntitiesFromWeb(wineries.URL, entityType: wineries.type)
+        } else {
+        println("fetching wineries from core data")
+        wineries.entities = fetchEntitiesFromCoreData(wineries.type)!
+        }
     }
     
     func initializeEntityObjects() {

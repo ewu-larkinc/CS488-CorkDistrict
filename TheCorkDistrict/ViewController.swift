@@ -25,6 +25,7 @@ class ViewController: UITableViewController {
         //self.tableView.backgroundColor = UIColor(patternImage: background!)
         
         
+        //loadview commented out for now while testing other
         /*let testData = dataManager.getParking()
         
         if (testData.count == 0) {
