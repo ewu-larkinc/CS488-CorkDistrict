@@ -13,8 +13,9 @@ class WineriesViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBOutlet weak var tableView: UITableView!
     
     var wineries = [NSManagedObject]()
-    let basicCellIdentifier = "BasicCell"
+    let entityCellIdentifier = "EntityCell"
     
+    //# MARK: - ViewController Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.backgroundView = UIImageView(image:UIImage(named: "wineBackground"))
@@ -33,6 +34,7 @@ class WineriesViewController: UIViewController, UITableViewDataSource, UITableVi
         super.didReceiveMemoryWarning()
     }
     
+    //#MARK: - Segue Methods
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         
         let dvc = segue.destinationViewController as! DetailViewController
@@ -50,20 +52,20 @@ class WineriesViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        return basicCellAtIndexPath(indexPath)
+        return entityCellAtIndexPath(indexPath)
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
-    func basicCellAtIndexPath(indexPath:NSIndexPath) -> BasicCell {
-        let basicCell = tableView.dequeueReusableCellWithIdentifier(basicCellIdentifier) as! BasicCell
-        setContentForCell(basicCell, indexPath: indexPath)
-        return basicCell
+    func entityCellAtIndexPath(indexPath:NSIndexPath) -> EntityCell {
+        let entityCell = tableView.dequeueReusableCellWithIdentifier(entityCellIdentifier) as! EntityCell
+        setContentForCell(entityCell, indexPath: indexPath)
+        return entityCell
     }
     
-    func setContentForCell(cell:BasicCell, indexPath:NSIndexPath) {
+    func setContentForCell(cell:EntityCell, indexPath:NSIndexPath) {
         
         let winery = wineries[indexPath.row]
         let imageData = winery.valueForKey("imageData") as? NSData
@@ -78,14 +80,6 @@ class WineriesViewController: UIViewController, UITableViewDataSource, UITableVi
         var state = "WA"
         
         city = city?.stringByReplacingOccurrencesOfString(" ", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
-        
-        //for testing only.........................................
-        //let testResults = [NSManagedObject]()
-        /*let dataManager = DataManager.sharedInstance
-        if let testResults = dataManager.getWineryByTitle(name!) {
-            var testWeb = testResults[0].valueForKey("website") as? String
-            println("title: \(name), website found: \(testWeb)")
-        }*/
         
         
         cell.titleLabel.text = name

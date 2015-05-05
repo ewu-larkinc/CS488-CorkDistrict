@@ -12,10 +12,10 @@ class PackagesViewController: UIViewController, UITableViewDataSource, UITableVi
     
     @IBOutlet weak var tableView: UITableView!
     
-    let altCellIdentifier = "AltCell"
+    let packageCellIdentifier = "PackageCell"
     var packages = [NSManagedObject]()
     
-    
+    //# MARK: - ViewController Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "restBackground")!)
@@ -49,28 +49,33 @@ class PackagesViewController: UIViewController, UITableViewDataSource, UITableVi
         self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
-    func basicCellAtIndexPath(indexPath:NSIndexPath) -> AltCell {
+    func basicCellAtIndexPath(indexPath:NSIndexPath) -> PackageCell {
         
-        let altCell = tableView.dequeueReusableCellWithIdentifier(altCellIdentifier) as! AltCell
-        setContentForCell(altCell, indexPath: indexPath)
-        return altCell
+        let packageCell = tableView.dequeueReusableCellWithIdentifier(packageCellIdentifier) as! PackageCell
+        setContentForCell(packageCell, indexPath: indexPath)
+        return packageCell
     }
     
-    func setContentForCell(cell:AltCell, indexPath:NSIndexPath) {
+    func setContentForCell(cell:PackageCell, indexPath:NSIndexPath) {
         
         let package = packages[indexPath.row]
-        cell.titleLabel.text = package.valueForKey("name") as? String
-        cell.entityTitleLabel.text = package.valueForKey("relatedEntity") as? String
-        cell.dateLabel.text = package.valueForKey("validDates") as? String
-        cell.costLabel.text = package.valueForKey("cost") as? String
-        
         let imageData = package.valueForKey("imageData") as? NSData
         let myImage = UIImage(data: imageData!)
+        var startDay = package.valueForKey("startDay") as? String
+        var startMonth = package.valueForKey("startMonth") as? String
+        var endDay = package.valueForKey("endDay") as? String
+        var endMonth = package.valueForKey("endMonth") as? String
+        var startDate = startMonth! + " " + startDay!
+        var endDate = endMonth! + " " + endDay!
+        
+        cell.titleLabel.text = package.valueForKey("name") as? String
+        cell.entityTitleLabel.text = package.valueForKey("relatedEntityName") as? String
+        cell.dateLabel.text = startDate + " - " + endDate
+        cell.costLabel.text = package.valueForKey("cost") as? String
         cell.cellImage.image = myImage
         
         cell.cellImage.layer.cornerRadius = 4.0
         cell.cellImage.clipsToBounds = true
-        
         cell.cellImage.contentMode = UIViewContentMode.ScaleAspectFit
     }
 

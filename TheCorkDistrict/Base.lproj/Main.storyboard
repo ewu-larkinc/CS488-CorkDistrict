@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Yvq-3g-fua">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Yvq-3g-fua">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -58,7 +58,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="BasicCell" rowHeight="93" id="yqq-U9-meb" customClass="BasicCell" customModule="TheCorkDistrict" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="EntityCell" rowHeight="93" id="yqq-U9-meb" customClass="EntityCell" customModule="TheCorkDistrict" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yqq-U9-meb" id="X0i-AK-I0s">
@@ -79,8 +79,7 @@
                                                             <exclude reference="g4q-pA-hxs"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="93" y="8" width="194" height="21"/>
+                                                    <variation key="heightClass=regular-widthClass=compact">
                                                         <mask key="constraints">
                                                             <include reference="g4q-pA-hxs"/>
                                                         </mask>
@@ -91,18 +90,12 @@
                                                     <fontDescription key="fontDescription" name="STHeitiTC-Light" family="Heiti TC" pointSize="13"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="93" y="32" width="194" height="13"/>
-                                                    </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Ir-Ec-haw">
                                                     <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" name="STHeitiTC-Light" family="Heiti TC" pointSize="13"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="93" y="61" width="194" height="13"/>
-                                                    </variation>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Smh-uG-xX0">
                                                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
@@ -151,9 +144,6 @@
                                                     <fontDescription key="fontDescription" name="STHeitiTC-Light" family="Heiti TC" pointSize="13"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="93" y="74" width="194" height="13"/>
-                                                    </variation>
                                                 </label>
                                             </subviews>
                                             <constraints>
@@ -251,12 +241,12 @@
                                             </variation>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="addressLabel" destination="lhF-QB-8If" id="OHa-Gb-dk7"/>
-                                            <outlet property="cellImage" destination="Smh-uG-xX0" id="OUm-Sm-e4Z"/>
-                                            <outlet property="cityLabel" destination="Unk-Rg-dAf" id="0mW-ar-utw"/>
-                                            <outlet property="phoneLabel" destination="5Ir-Ec-haw" id="Ynj-KR-AoF"/>
-                                            <outlet property="titleLabel" destination="3ZL-nu-rIp" id="nve-yl-Esm"/>
-                                            <outlet property="websiteLabel" destination="ONu-5l-LPA" id="NrK-3a-aXj"/>
+                                            <outlet property="addressLabel" destination="lhF-QB-8If" id="NQX-Ax-hoL"/>
+                                            <outlet property="cellImage" destination="Smh-uG-xX0" id="VQc-d4-lCf"/>
+                                            <outlet property="cityLabel" destination="Unk-Rg-dAf" id="r7s-xA-dfB"/>
+                                            <outlet property="phoneLabel" destination="5Ir-Ec-haw" id="oPl-kD-DWA"/>
+                                            <outlet property="titleLabel" destination="3ZL-nu-rIp" id="fj8-fs-epq"/>
+                                            <outlet property="websiteLabel" destination="ONu-5l-LPA" id="IgO-tA-EOn"/>
                                             <segue destination="Sjx-3I-6ZT" kind="show" identifier="detailSegue" id="Ysb-z2-Hox"/>
                                         </connections>
                                     </tableViewCell>
@@ -321,7 +311,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SimpleCell" rowHeight="93" id="jgi-v8-WKa" customClass="SimpleCell" customModule="TheCorkDistrict" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ParkingCell" rowHeight="93" id="jgi-v8-WKa" customClass="ParkingCell" customModule="TheCorkDistrict" customModuleProvider="target">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jgi-v8-WKa" id="Tlx-u2-rUc">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -477,10 +467,10 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
-                                            <outlet property="addressLabel" destination="vch-bY-kKU" id="JEA-z5-Q76"/>
-                                            <outlet property="cityLabel" destination="5XA-IQ-Dvf" id="vVg-i9-Neh"/>
-                                            <outlet property="phoneLabel" destination="c5S-kA-qVf" id="Sva-qf-fFE"/>
-                                            <outlet property="titleLabel" destination="1bc-M7-b4o" id="sTi-Xw-spk"/>
+                                            <outlet property="addressLabel" destination="vch-bY-kKU" id="3IM-UA-rA1"/>
+                                            <outlet property="cityLabel" destination="5XA-IQ-Dvf" id="VoQ-vU-Cpx"/>
+                                            <outlet property="phoneLabel" destination="c5S-kA-qVf" id="DzQ-5c-f3R"/>
+                                            <outlet property="titleLabel" destination="1bc-M7-b4o" id="wHH-nf-6ng"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -544,7 +534,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AltCell" rowHeight="93" id="oAF-QB-NEz" customClass="AltCell" customModule="TheCorkDistrict" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PackageCell" rowHeight="93" id="oAF-QB-NEz" customClass="PackageCell" customModule="TheCorkDistrict" customModuleProvider="target">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="oAF-QB-NEz" id="YSq-EZ-7s1">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -722,11 +712,11 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
-                                            <outlet property="cellImage" destination="mcP-1u-Zty" id="Mx8-54-gL3"/>
-                                            <outlet property="costLabel" destination="hOP-FV-nLZ" id="A9a-e5-VgH"/>
-                                            <outlet property="dateLabel" destination="CLn-ED-wIo" id="WxL-jm-Hw4"/>
-                                            <outlet property="entityTitleLabel" destination="pwA-N2-U1o" id="6rl-iM-Z4b"/>
-                                            <outlet property="titleLabel" destination="and-he-k8B" id="8oO-7b-Mcm"/>
+                                            <outlet property="cellImage" destination="mcP-1u-Zty" id="0ru-lT-Yxr"/>
+                                            <outlet property="costLabel" destination="hOP-FV-nLZ" id="16c-Vv-1og"/>
+                                            <outlet property="dateLabel" destination="CLn-ED-wIo" id="QwS-uU-c2X"/>
+                                            <outlet property="entityTitleLabel" destination="pwA-N2-U1o" id="VZk-pQ-EtD"/>
+                                            <outlet property="titleLabel" destination="and-he-k8B" id="rrZ-1R-Cbo"/>
                                             <segue destination="rV9-zB-CPx" kind="show" id="sbs-KG-E8g"/>
                                         </connections>
                                     </tableViewCell>
@@ -776,7 +766,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="BasicCell" rowHeight="93" id="wiX-9T-eff" customClass="BasicCell" customModule="TheCorkDistrict" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="EntityCell" rowHeight="93" id="wiX-9T-eff" customClass="EntityCell" customModule="TheCorkDistrict" customModuleProvider="target">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wiX-9T-eff" id="LIw-Qe-VZi">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -815,8 +805,7 @@
                                                             <exclude reference="7Y0-xp-blC"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="93" y="8" width="194" height="21"/>
+                                                    <variation key="heightClass=regular-widthClass=compact">
                                                         <mask key="constraints">
                                                             <include reference="7Y0-xp-blC"/>
                                                         </mask>
@@ -827,36 +816,24 @@
                                                     <fontDescription key="fontDescription" name="STHeitiTC-Light" family="Heiti TC" pointSize="13"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="93" y="32" width="194" height="13"/>
-                                                    </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="a27-N5-g1k">
                                                     <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" name="STHeitiTC-Light" family="Heiti TC" pointSize="13"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="93" y="46" width="194" height="13"/>
-                                                    </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iyf-nc-HBl">
                                                     <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" name="STHeitiTC-Light" family="Heiti TC" pointSize="13"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="93" y="60" width="194" height="13"/>
-                                                    </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Website" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="UG6-fM-jBf">
                                                     <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" name="STHeitiTC-Light" family="Heiti TC" pointSize="13"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="93" y="74" width="194" height="13"/>
-                                                    </variation>
                                                 </label>
                                             </subviews>
                                             <constraints>
@@ -1013,7 +990,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationWidth="10" reuseIdentifier="BasicCell" rowHeight="93" id="sXc-YS-XqJ" customClass="BasicCell" customModule="TheCorkDistrict" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationWidth="10" reuseIdentifier="EntityCell" rowHeight="93" id="sXc-YS-XqJ" customClass="EntityCell" customModule="TheCorkDistrict" customModuleProvider="target">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sXc-YS-XqJ" id="bAd-5L-r3B">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -1033,8 +1010,7 @@
                                                             <exclude reference="pcW-iO-dPF"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="93" y="8" width="194" height="21"/>
+                                                    <variation key="heightClass=regular-widthClass=compact">
                                                         <mask key="constraints">
                                                             <include reference="pcW-iO-dPF"/>
                                                         </mask>
@@ -1061,36 +1037,24 @@
                                                     <fontDescription key="fontDescription" name="STHeitiTC-Light" family="Heiti TC" pointSize="13"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="93" y="46" width="194" height="13"/>
-                                                    </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4os-2R-sVH">
                                                     <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" name="STHeitiTC-Light" family="Heiti TC" pointSize="13"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="93" y="60" width="194" height="13"/>
-                                                    </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V1X-gp-e1t">
                                                     <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" name="STHeitiTC-Light" family="Heiti TC" pointSize="13"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="93" y="32" width="194" height="13"/>
-                                                    </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Website" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="ieo-Xh-LYH">
                                                     <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" name="STHeitiTC-Light" family="Heiti TC" pointSize="13"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="93" y="74" width="194" height="13"/>
-                                                    </variation>
                                                 </label>
                                             </subviews>
                                             <constraints>

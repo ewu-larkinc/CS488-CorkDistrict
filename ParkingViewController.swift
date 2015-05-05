@@ -11,9 +11,10 @@ import CoreData
 class ParkingViewController : UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet var tableView: UITableView!
     
-    let simpleCellIdentifier = "SimpleCell"
+    let parkingCellIdentifier = "ParkingCell"
     var parking = [NSManagedObject]()
     
+    //# MARK: - ViewController Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -41,21 +42,21 @@ class ParkingViewController : UIViewController, UITableViewDataSource, UITableVi
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        return simpleCellAtIndexPath(indexPath)
+        return parkingCellAtIndexPath(indexPath)
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
-    func simpleCellAtIndexPath(indexPath:NSIndexPath) -> SimpleCell {
+    func parkingCellAtIndexPath(indexPath:NSIndexPath) -> ParkingCell {
         
-        let simpleCell = tableView.dequeueReusableCellWithIdentifier(simpleCellIdentifier) as! SimpleCell
-        setContentForCell(simpleCell, indexPath: indexPath)
-        return simpleCell
+        let parkingCell = tableView.dequeueReusableCellWithIdentifier(parkingCellIdentifier) as! ParkingCell
+        setContentForCell(parkingCell, indexPath: indexPath)
+        return parkingCell
     }
     
-    func setContentForCell(cell:SimpleCell, indexPath:NSIndexPath) {
+    func setContentForCell(cell:ParkingCell, indexPath:NSIndexPath) {
         
         let parkingLot = parking[indexPath.row]
         cell.titleLabel.text = parkingLot.valueForKey("name") as? String

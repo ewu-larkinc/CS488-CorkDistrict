@@ -13,8 +13,9 @@ class RestaurantsViewController: UIViewController, UITableViewDataSource, UITabl
     @IBOutlet weak var tableView: UITableView!
     
     var restaurants = [NSManagedObject]()
-    let basicCellIdentifier = "BasicCell"
+    let entityCellIdentifier = "EntityCell"
     
+    //# MARK: - ViewController Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -34,6 +35,7 @@ class RestaurantsViewController: UIViewController, UITableViewDataSource, UITabl
         self.automaticallyAdjustsScrollViewInsets = false
     }
     
+    //# MARK: - Segue Methods
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         
         let dvc = segue.destinationViewController as! DetailViewController
@@ -51,21 +53,21 @@ class RestaurantsViewController: UIViewController, UITableViewDataSource, UITabl
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        return basicCellAtIndexPath(indexPath)
+        return entityCellAtIndexPath(indexPath)
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
-    func basicCellAtIndexPath(indexPath:NSIndexPath) -> BasicCell {
+    func entityCellAtIndexPath(indexPath:NSIndexPath) -> EntityCell {
         
-        let basicCell = tableView.dequeueReusableCellWithIdentifier(basicCellIdentifier) as! BasicCell
-        setContentForCell(basicCell, indexPath: indexPath)
-        return basicCell
+        let entityCell = tableView.dequeueReusableCellWithIdentifier(entityCellIdentifier) as! EntityCell
+        setContentForCell(entityCell, indexPath: indexPath)
+        return entityCell
     }
     
-    func setContentForCell(cell:BasicCell, indexPath:NSIndexPath) {
+    func setContentForCell(cell:EntityCell, indexPath:NSIndexPath) {
         let restaurant = restaurants[indexPath.row]
         let imageData = restaurant.valueForKey("imageData") as? NSData
         let cellImage = UIImage(data: imageData!)
