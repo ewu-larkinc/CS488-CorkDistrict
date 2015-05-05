@@ -27,36 +27,32 @@ class DataManager {
     }
     
     var dataReceived: Bool = false
-    
+   /*
     private var wineries = [NSManagedObject]()
     private var restaurants = [NSManagedObject]()
     private var accommodations = [NSManagedObject]()
     private var packages = [NSManagedObject]()
     private var parking = [NSManagedObject]()
-    
+
     private let URL_WINERIES = NSURL(string: "http://www.corkdistrictapp.com/rest/wineries.json")
     private let URL_RESTAURANTS = NSURL(string: "http://www.corkdistrictapp.com/rest/restaurants.json")
     private let URL_ACCOMMODATIONS = NSURL(string: "http://www.corkdistrictapp.com/rest/lodging.json")
     private let URL_PACKAGES = NSURL(string: "http://www.corkdistrictapp.com/rest/packages.json")
     private let URL_PARKING = NSURL(string: "http://www.corkdistrictapp.com/rest/parking.json")
     private let URL_NOTIFICATIONS = NSURL(string: "http://www.corkdistrictapp.com/rest/push_notifications")
-    /*
+    */
     private let URL_WINERIES = NSURL(string: "http://www.nathanpilgrim.net/rest/wineries.json")
     private let URL_RESTAURANTS = NSURL(string: "http://www.nathanpilgrim.net/rest/restaurants.json")
     private let URL_ACCOMMODATIONS = NSURL(string: "http://www.nathanpilgrim.net/rest/lodging.json")
     private let URL_PACKAGES = NSURL(string: "http://www.nathanpilgrim.net/rest/packages.json")
     private let URL_PARKING = NSURL(string: "http://www.nathanpilgrim.net/rest/parking.json")
     private let URL_NOTIFICATIONS = NSURL(string: "http://www.nathanpilgrim.net/apns/push_notifications")
-    */
-    private let ENTITY_TYPE_WINERY : String = "Winery"
-    private let ENTITY_TYPE_RESTAURANT : String = "Restaurant"
-    private let ENTITY_TYPE_ACCOMMODATION : String = "Accommodation"
-    private let ENTITY_TYPE_PACKAGE : String = "Package"
-    private let ENTITY_TYPE_PARKING : String = "Parking"
-    
-    //TESTING. FOR USE WITH NSURLSESSION DOWNLOADTASK
-    private var sessionConfiguration = NSURLSessionConfiguration()
-    private var session = NSURLSession()
+    private let URL_CHANGELOG = NSURL(string: "http://www.nathanpilgrim.net/rest/all")
+    private var wineries = CorkDistrictEntity()
+    private var restaurants = CorkDistrictEntity()
+    private var accommodations = CorkDistrictEntity()
+    private var packages = CorkDistrictEntity()
+    private var parking = CorkDistrictEntity()
     private var progress = Float()
     
     

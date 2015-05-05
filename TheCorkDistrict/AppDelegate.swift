@@ -29,7 +29,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.sharedApplication().registerUserNotificationSettings(settings)
 
         
-        var tempTest = currentDeviceToken.toInt()
         
         return true
     }
@@ -49,8 +48,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var err: NSError?
         var params = ["token":deviceTokenString, "type":"ios"]
         
-        print("Token: "+currentDeviceToken)
-        currentDeviceToken.toInt()
         
         request.HTTPMethod = "POST"
         request.HTTPBody = NSJSONSerialization.dataWithJSONObject(params, options: nil, error: &err)
