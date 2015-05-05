@@ -16,5 +16,8 @@ class CorkDistrictEntity {
     var URL = NSURL()
     var entities = [NSManagedObject]()
 
+    func clearEntities() {
+        entities = [NSManagedObject]()
+    }
     
 }

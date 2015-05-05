@@ -70,6 +70,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
             newImageView.layer.borderWidth = 2.0
             newImageView.image = mainImage
             cell.addSubview(newImageView)
+            newImageView.sizeToFit()
         case 5:
             cell.textLabel?.text = currentSelection.valueForKey("about") as? String
             cell.textLabel?.textAlignment = NSTextAlignment.Justified

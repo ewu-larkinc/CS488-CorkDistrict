@@ -94,96 +94,18 @@ class DataManager {
         getCoreDataCounts()
         
         if (!dataReceived) {
-            
-            //getWebCounts()
-            
-            fetchEntitiesFromWeb(wineries)
-            fetchEntitiesFromWeb(restaurants)
-            fetchEntitiesFromWeb(packages)
-            fetchEntitiesFromWeb(parking)
-            fetchEntitiesFromWeb(accommodations)
-            
-            var timer = Timer(duration: 8.0, completionHandler: {
-                //self.compareEntityCounts()
-            })
-            //timer.start()
+            fetchAllEntities()
         }
         
         dataReceived = true
     }
     
-    func retrieveEntities(entity: CorkDistrictEntity) {
-        
-        if (entity.webCount != entity.cdCount) {
-            println("Deleting \(entity.type) and downloading again due to recent changes")
-            deleteFromCoreData(entity.type)
-            fetchEntitiesFromWeb(entity)
-        } else {
-            println("fetching \(entity.type) from core data rather than downloading")
-            fetchEntitiesFromCoreData(entity)
-        }
-        
-    }
-    
-    func compareEntityCounts() {
-        
-        println("wineries webCount: \(wineries.webCount)")
-        println("wineries cdCount: \(wineries.cdCount)")
-        println("restaurants webCount: \(restaurants.webCount)")
-        println("restaurants cdCount: \(restaurants.cdCount)")
-        println("accommodations webCount: \(accommodations.webCount)")
-        println("accommodations cdCount: \(accommodations.cdCount)")
-        println("packages webCount: \(packages.webCount)")
-        println("packages cdCount: \(packages.cdCount)")
-        println("parking webCount: \(parking.webCount)")
-        println("parking cdCount: \(parking.cdCount)")
-        
-        /*retrieveEntities(accommodations)
-        retrieveEntities(packages)
-        retrieveEntities(parking)
-        retrieveEntities(restaurants)
-        retrieveEntities(wineries)*/
-        
-        if (accommodations.webCount != accommodations.cdCount) {
-            println("deleting accommodations and redownloading")
-            deleteFromCoreData(accommodations.type)
-            fetchEntitiesFromWeb(accommodations)
-        } else {
-            println("fetching accommodations from core data")
-            fetchEntitiesFromCoreData(accommodations)
-        }
-        if (packages.webCount != packages.cdCount) {
-            println("deleting packages and redownloading")
-            deleteFromCoreData(packages.type)
-            fetchEntitiesFromWeb(packages)
-        } else {
-            println("fetching packages from core data")
-            fetchEntitiesFromCoreData(packages)
-        }
-        if (parking.webCount != parking.cdCount) {
-            println("deleting parking and redownloading")
-            deleteFromCoreData(parking.type)
-            fetchEntitiesFromWeb(parking)
-        } else {
-            println("fetching parking from core data")
-            fetchEntitiesFromCoreData(parking)
-        }
-        if (restaurants.webCount != restaurants.cdCount) {
-            println("deleting restaurants and redownloading")
-            deleteFromCoreData(restaurants.type)
-            fetchEntitiesFromWeb(restaurants)
-        } else {
-            println("fetching restaurants from core data")
-            fetchEntitiesFromCoreData(restaurants)
-        }
-        if (wineries.webCount != wineries.cdCount) {
-            println("deleting wineries and redownloading")
-            deleteFromCoreData(wineries.type)
-            fetchEntitiesFromWeb(wineries)
-        } else {
-            println("fetching wineries from core data")
-            fetchEntitiesFromCoreData(wineries)
-        }
+    func fetchAllEntities() {
+        fetchEntitiesFromWeb(wineries)
+        fetchEntitiesFromWeb(restaurants)
+        fetchEntitiesFromWeb(packages)
+        fetchEntitiesFromWeb(parking)
+        fetchEntitiesFromWeb(accommodations)
     }
     
     func initializeEntityObjects() {
@@ -237,21 +159,7 @@ class DataManager {
         
         entity.entities = fetchedResults!
     }
-    
-/*func fetchEntitiesFromCoreData(entityType: String) -> [NSManagedObject]? {
 
-println("fetching \(entityType) from coreData")
-
-let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-let managedContext = appDelegate.managedObjectContext!
-
-let fetchRequest = NSFetchRequest(entityName: entityType)
-
-var error: NSError?
-let fetchedResults = managedContext.executeFetchRequest(fetchRequest, error: &error) as! [NSManagedObject]?
-
-return fetchedResults
-}*/
 
     func getCoreDataCounts() {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
@@ -437,21 +345,7 @@ return fetchedResults
         task.resume()
     }
     
-    func getWebCounts() {
-        
-        countEntitiesFromURL(wineries.URL, entityType: wineries.type)
-        countEntitiesFromURL(accommodations.URL, entityType: accommodations.type)
-        countEntitiesFromURL(restaurants.URL, entityType: restaurants.type)
-        countEntitiesFromURL(packages.URL, entityType: packages.type)
-        countEntitiesFromURL(parking.URL, entityType: parking.type)
-        
-        
-        /*fetchEntitiesFromWeb(accommodations.URL!, entityType: accommodations.type)
-        fetchEntitiesFromWeb(restaurants.URL!, entityType: restaurants.type)
-        fetchEntitiesFromWeb(packages.URL!, entityType: packages.type)
-        fetchEntitiesFromWeb(parking.URL!, entityType: parking.type)
-        fetchEntitiesFromWeb(wineries.URL!, entityType: wineries.type)*/
-    }
+    
     
     func fetchEntitiesFromWeb(entity: CorkDistrictEntity) -> Void {
         
