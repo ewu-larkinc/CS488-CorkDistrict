@@ -405,9 +405,9 @@ class DataManager {
         } else {
             
             let json = JSON(data: data)
-            println("webCount: \(json.count) cdCount: \(entity.entities.count) \(entity.type)")
+            println("\(entity.type) webCount: \(json.count) cdCount: \(entity.entities.count)")
             if (json.count != entity.entities.count) {
-                
+                println("Downloading \(entity.type)...")
                 deleteFromCoreData(entity)
                 var ctr=0
             
@@ -462,9 +462,10 @@ class DataManager {
     func parseJSONPackage(data: NSData, entity: CorkDistrictEntity) -> Void {
         
         let json = JSON(data: data)
+        println("\(entity.type) webCount: \(json.count) cdCount: \(entity.entities.count)")
         
         if (json.count != entity.entities.count) {
-            
+            println("Downloading \(entity.type)...")
             deleteFromCoreData(entity)
             var ctr=0
             var infoArray = NSMutableArray()
