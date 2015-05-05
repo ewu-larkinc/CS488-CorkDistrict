@@ -91,21 +91,30 @@ class DataManager {
     func loadData() -> Void {
         
         initializeEntityObjects()
-        getCoreDataCounts()
+        fetchAllEntitiesFromCoreData()
+        //getCoreDataCounts()
         
         if (!dataReceived) {
-            fetchAllEntities()
+            fetchAllEntitiesFromWeb()
         }
         
         dataReceived = true
     }
     
-    func fetchAllEntities() {
+    func fetchAllEntitiesFromWeb() {
         fetchEntitiesFromWeb(wineries)
         fetchEntitiesFromWeb(restaurants)
         fetchEntitiesFromWeb(packages)
         fetchEntitiesFromWeb(parking)
         fetchEntitiesFromWeb(accommodations)
+    }
+    
+    func fetchAllEntitiesFromCoreData() {
+        fetchEntitiesFromCoreData(wineries)
+        fetchEntitiesFromCoreData(restaurants)
+        fetchEntitiesFromCoreData(packages)
+        fetchEntitiesFromCoreData(accommodations)
+        fetchEntitiesFromCoreData(parking)
     }
     
     func initializeEntityObjects() {
@@ -122,13 +131,14 @@ class DataManager {
     }
     
     //#MARK: - Core Data Methods
-    func deleteFromCoreData(entityType: String) -> Void {
+    func deleteFromCoreData(entity: CorkDistrictEntity) -> Void {
         
-        println("Deleting \(entityType) from coreData")
+        entity.clearEntities()
+        println("Deleting \(entity.type) from coreData")
         
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext!
-        let deletionFetchRequest = NSFetchRequest(entityName: entityType)
+        let deletionFetchRequest = NSFetchRequest(entityName: entity.type)
         
         var error: NSError?
         let fetchedResults = managedContext.executeFetchRequest(deletionFetchRequest, error: &error) as! [NSManagedObject]
@@ -395,9 +405,10 @@ class DataManager {
         } else {
             
             let json = JSON(data: data)
-            if (json.count != entity.cdCount) {
-                println("webCount not = to cdCount - downloading \(entity.type)")
-                deleteFromCoreData(entity.type)
+            println("webCount: \(json.count) cdCount: \(entity.entities.count) \(entity.type)")
+            if (json.count != entity.entities.count) {
+                
+                deleteFromCoreData(entity)
                 var ctr=0
             
                 while (ctr < json.count) {
@@ -442,8 +453,6 @@ class DataManager {
                 
                     ctr++
                 }
-            } else {
-                fetchEntitiesFromCoreData(entity)
             }
             
         }
@@ -453,9 +462,10 @@ class DataManager {
     func parseJSONPackage(data: NSData, entity: CorkDistrictEntity) -> Void {
         
         let json = JSON(data: data)
-        if (json.count != entity.cdCount) {
-            println("webCount not = to cdCount - downloading \(entity.type)")
-            deleteFromCoreData(entity.type)
+        
+        if (json.count != entity.entities.count) {
+            
+            deleteFromCoreData(entity)
             var ctr=0
             var infoArray = NSMutableArray()
         
@@ -490,8 +500,6 @@ class DataManager {
                 addPackageToCoreData(infoArray, entityImage: entityImage!)
                 ctr++
             }
-        } else {
-            fetchEntitiesFromCoreData(entity)
         }
         
     }
