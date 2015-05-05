@@ -210,12 +210,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         let detailAction = UIAlertAction(title: "Details", style: .Default, handler: {
             action in
-            //print("Hi")
             let detailVC = DetailViewController()
-            
             self.performSegueWithIdentifier("mapDetail", sender: self)
-           // DetailViewController.tableView(UITableView.new(), 5)
-
             
         })
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: {
