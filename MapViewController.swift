@@ -20,11 +20,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     let locationManager = CLLocationManager()
     
-    var wineries = [NSManagedObject]()
-    var restaurants = [NSManagedObject]()
-    var hotels = [NSManagedObject]()
-    var parking = [NSManagedObject]()
-    
     var showWineries: Bool = false
     var showHotels: Bool = false
     var showParking: Bool = false
@@ -48,39 +43,31 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        //CoreData
-        let dataManager = DataManager.sharedInstance
-        wineries = dataManager.getWineries()
-        restaurants = dataManager.getRestaurants()
-        hotels = dataManager.getAccommodations()
-        parking = dataManager.getParking()
-        
+                
         util.mapView = theMapView
+        util.multiPinsMap()
         
         //request user location
         locationManager.requestWhenInUseAuthorization()
+        
         self.theMapView.showsUserLocation = true
         
-        var coord = CLLocationCoordinate2D()
-        coord.latitude = 47.655262
-        coord.longitude = -117.414129
+        //fill pin arrays
+        winePins = util.pinTypeOnMap("winery")
         
-        var wineriesTemp = [NSManagedObject]()
-        wineriesTemp.append(wineries[2]);
+        restPins = util.pinTypeOnMap("rest")
         
-        //self.mapRoutes = self.util.getDirections(wineriesTemp, start: coord)
-
-        //self.util.sortByDistance(self.mapRoutes)
-
-        winePins = util.placePinsOnMap(wineries, type: "winery")
-        restPins = util.placePinsOnMap(restaurants, type: "rest")
-        hotelPins = util.placePinsOnMap(hotels, type: "hotel")
-        parkPins = util.placePinsOnMap(parking, type: "park")
+        hotelPins = util.pinTypeOnMap("hotel")
+        
+        parkPins = util.pinTypeOnMap("park")
     }
     
     override func viewWillAppear(animated: Bool) {
+        
         super.viewWillAppear(animated)
+        
         self.navigationController?.navigationBar.hidden = false
+        
         self.automaticallyAdjustsScrollViewInsets = false
 
         var theSpan: MKCoordinateSpan = MKCoordinateSpanMake(0.05, 0.05)
@@ -155,62 +142,22 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         if !(annotation is MKPointAnnotation) {
             return nil
         }
-
-            var anView = MKAnnotationView(annotation: annotation, reuseIdentifier: nil)
-            if(annotation.subtitle == "winery") {
-                anView.image = UIImage(named:"Wine_Icon")
-            }
-            else if(annotation.subtitle == "rest") {
-                anView.image = UIImage(named:"Food_Icon")
-            }
-            else if(annotation.subtitle == "hotel") {
-                anView.image = UIImage(named:"Hotel_Icon")
-            }
-            else if(annotation.subtitle == "park") {
-                anView.image = UIImage(named:"Car_Icon")
-            }
-            anView.canShowCallout = false
-
     
-        return anView
+        return util.viewForAnnotation(mapView, viewForAnnotation: annotation)
     }
     func mapView(mapView: MKMapView!, rendererForOverlay overlay: MKOverlay!) -> MKOverlayRenderer! {
         
         if (overlay is MKPolyline) {
-            var pr = MKPolylineRenderer(overlay: overlay);
-            pr.strokeColor = UIColor.blueColor().colorWithAlphaComponent(0.7);
-            pr.lineWidth = 4;
-            return pr;
+            
+            return util.renderForOverlay(mapView, rendererForOverlay: overlay)
         }
-        
         
         return nil
     }
     func mapView(mapView: MKMapView!, didSelectAnnotationView view: MKAnnotationView!) {
 //......Determines what kind of pin was touched...........................................................//
-        var temp = wineries[view.annotation.title!.toInt()!]
-        
-        if(view.annotation.subtitle == "winery") {
-            temp = wineries[view.annotation.title!.toInt()!]
-        }
-        else if(view.annotation.subtitle == "rest") {
-            temp = restaurants[view.annotation.title!.toInt()!]
-        }
-        else if(view.annotation.subtitle == "hotel") {
-            temp = hotels[view.annotation.title!.toInt()!]
-        }
-        else if(view.annotation.subtitle == "park") {
-            temp = parking[view.annotation.title!.toInt()!]
-        }
-        
-        
-        
-        print("PIN SUBTITLE: "+view.annotation.subtitle!+"\n")
-        
-        
-        
-        
-//......Create a alertView when pin is clicked...........................................................//
+        var temp = util.didSelectAnnotationView(view)
+        //......Create a alertView when pin is clicked...........................................................//
         var alertView = UIAlertController(title: temp.valueForKey("name") as? String, message: temp.valueForKey("address") as? String, preferredStyle: .Alert)
         
         var imageView = UIImageView(frame: CGRectMake(10, 15, 50, 50))

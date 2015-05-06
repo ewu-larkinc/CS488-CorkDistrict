@@ -14,8 +14,44 @@ import CoreData
 class MapUtilities {
     
     var distanceRequired: Bool = false
+    var wineries = [NSManagedObject]()
+    var restaurants = [NSManagedObject]()
+    var hotels = [NSManagedObject]()
+    var parking = [NSManagedObject]()
     
     @IBOutlet var mapView: MKMapView!
+    
+    func multiPinsMap() {
+        //CoreData
+        let dataManager = DataManager.sharedInstance
+        
+        wineries = dataManager.getWineries()
+        
+        restaurants = dataManager.getRestaurants()
+        
+        hotels = dataManager.getAccommodations()
+        
+        parking = dataManager.getParking()
+
+    }
+    
+    func pinTypeOnMap(type: String) -> [MKPointAnnotation]{
+        
+        switch(type) {
+        case "winery":
+            return placePinsOnMap(wineries, type: "winery")
+        case "rest":
+            return placePinsOnMap(restaurants, type: "rest")
+        case "hotel":
+            return placePinsOnMap(hotels, type: "hotel")
+        case "park":
+            return placePinsOnMap(parking, type: "park")
+        default:
+            println("error")
+            
+        }
+        return placePinsOnMap(wineries, type: "winery")
+    }
     
     func getDirections(var theArray: [NSManagedObject], let start: CLLocationCoordinate2D) -> [MKRoute]{
         
@@ -84,6 +120,57 @@ class MapUtilities {
         }
         
     }
+    
+    func viewForAnnotation(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
+        
+        var anView = MKAnnotationView(annotation: annotation, reuseIdentifier: nil)
+        if(annotation.subtitle == "winery") {
+            anView.image = UIImage(named:"Wine_Icon")
+        }
+        else if(annotation.subtitle == "rest") {
+            anView.image = UIImage(named:"Food_Icon")
+        }
+        else if(annotation.subtitle == "hotel") {
+            anView.image = UIImage(named:"Hotel_Icon")
+        }
+        else if(annotation.subtitle == "park") {
+            anView.image = UIImage(named:"Car_Icon")
+        }
+        anView.canShowCallout = false
+        
+        return anView
+    }
+    
+    func renderForOverlay(mapView: MKMapView!, rendererForOverlay overlay: MKOverlay!) -> MKOverlayRenderer! {
+        
+        var pr = MKPolylineRenderer(overlay: overlay);
+        
+        pr.strokeColor = UIColor.blueColor().colorWithAlphaComponent(0.7);
+        
+        pr.lineWidth = 4;
+        
+        return pr
+    }
+    
+    func didSelectAnnotationView(view: MKAnnotationView!) -> NSManagedObject {
+        var temp = wineries[view.annotation.title!.toInt()!]
+        
+        if(view.annotation.subtitle == "winery") {
+            temp = wineries[view.annotation.title!.toInt()!]
+        }
+        else if(view.annotation.subtitle == "rest") {
+            temp = restaurants[view.annotation.title!.toInt()!]
+        }
+        else if(view.annotation.subtitle == "hotel") {
+            temp = hotels[view.annotation.title!.toInt()!]
+        }
+        else if(view.annotation.subtitle == "park") {
+            temp = parking[view.annotation.title!.toInt()!]
+        }
+        
+        return temp
+    }
+    
     
     func placePinsOnMap(var array: [NSManagedObject], var type: String) -> [MKPointAnnotation]{
         
