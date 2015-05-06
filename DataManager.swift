@@ -12,12 +12,12 @@ import CoreLocation
 
 private let _SingletonSharedInstance = DataManager()
 
-enum arrayIndex: Int {
-    case name = 0
-    case address = 1
-    case zipcode = 2
-    case city = 3
-    case phone = 4
+enum Index: Int {
+    case Name = 0
+    case Address = 1
+    case Zipcode = 2
+    case City = 3
+    case Phone = 4
 }
 
 class DataManager {
@@ -92,29 +92,12 @@ class DataManager {
         
         initializeEntityObjects()
         fetchAllEntitiesFromCoreData()
-        //getCoreDataCounts()
         
         if (!dataReceived) {
             fetchAllEntitiesFromWeb()
         }
         
         dataReceived = true
-    }
-    
-    func fetchAllEntitiesFromWeb() {
-        fetchEntitiesFromWeb(wineries)
-        fetchEntitiesFromWeb(restaurants)
-        fetchEntitiesFromWeb(packages)
-        fetchEntitiesFromWeb(parking)
-        fetchEntitiesFromWeb(accommodations)
-    }
-    
-    func fetchAllEntitiesFromCoreData() {
-        fetchEntitiesFromCoreData(wineries)
-        fetchEntitiesFromCoreData(restaurants)
-        fetchEntitiesFromCoreData(packages)
-        fetchEntitiesFromCoreData(accommodations)
-        fetchEntitiesFromCoreData(parking)
     }
     
     func initializeEntityObjects() {
@@ -169,40 +152,13 @@ class DataManager {
         
         entity.entities = fetchedResults!
     }
-
-
-    func getCoreDataCounts() {
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let managedContext = appDelegate.managedObjectContext!
-        
-        let wineryFetchRequest = NSFetchRequest(entityName: wineries.type)
-        let restaurantFetchRequest = NSFetchRequest(entityName: restaurants.type)
-        let packageFetchRequest = NSFetchRequest(entityName: packages.type)
-        let parkingFetchRequest = NSFetchRequest(entityName: parking.type)
-        let accommodationFetchRequest = NSFetchRequest(entityName: accommodations.type)
-        
-        var error: NSError?
-        
-        let fetchedAccommodations = managedContext.executeFetchRequest(accommodationFetchRequest, error: &error) as! [NSManagedObject]
-        
-        let fetchedPackages = managedContext.executeFetchRequest(packageFetchRequest, error: &error) as! [NSManagedObject]
-        
-        let fetchedParking = managedContext.executeFetchRequest(parkingFetchRequest, error: &error) as! [NSManagedObject]
-        
-        let fetchedRestaurants = managedContext.executeFetchRequest(restaurantFetchRequest, error: &error) as! [NSManagedObject]
-        
-        let fetchedWineries = managedContext.executeFetchRequest(wineryFetchRequest, error: &error) as! [NSManagedObject]
-        
-        accommodations.cdCount = fetchedAccommodations.count
-        println("Accommodations cdCount: \(accommodations.cdCount)")
-        packages.cdCount = fetchedPackages.count
-        println("Packages cdCount: \(packages.cdCount)")
-        parking.cdCount = fetchedParking.count
-        println("Parking cdCount: \(parking.cdCount)")
-        restaurants.cdCount = fetchedRestaurants.count
-        println("Restaurants cdCount: \(restaurants.cdCount)")
-        wineries.cdCount = fetchedWineries.count
-        println("Wineries cdCount: \(wineries.cdCount)")
+    
+    func fetchAllEntitiesFromCoreData() {
+        fetchEntitiesFromCoreData(wineries)
+        fetchEntitiesFromCoreData(restaurants)
+        fetchEntitiesFromCoreData(packages)
+        fetchEntitiesFromCoreData(accommodations)
+        fetchEntitiesFromCoreData(parking)
     }
     
     func addEntityToCoreData(entityInfo: NSMutableArray, entityImage: UIImage) -> Void {
@@ -214,11 +170,11 @@ class DataManager {
         let newEntity = NSEntityDescription.insertNewObjectForEntityForName(entityType, inManagedObjectContext: managedContext) as! NSManagedObject 
         
         newEntity.setValue(UIImageJPEGRepresentation(entityImage, 1), forKey: "imageData") 
-        newEntity.setValue(entityInfo[arrayIndex.name.rawValue], forKey: "name")
-        newEntity.setValue(entityInfo[arrayIndex.address.rawValue], forKey: "address")
-        newEntity.setValue(entityInfo[arrayIndex.zipcode.rawValue], forKey: "zipcode")
-        newEntity.setValue(entityInfo[arrayIndex.city.rawValue], forKey: "city")
-        newEntity.setValue(entityInfo[arrayIndex.phone.rawValue], forKey: "phone")
+        newEntity.setValue(entityInfo[Index.Name.rawValue], forKey: "name")
+        newEntity.setValue(entityInfo[Index.Address.rawValue], forKey: "address")
+        newEntity.setValue(entityInfo[Index.Zipcode.rawValue], forKey: "zipcode")
+        newEntity.setValue(entityInfo[Index.City.rawValue], forKey: "city")
+        newEntity.setValue(entityInfo[Index.Phone.rawValue], forKey: "phone")
         
         if (entityType != parking.type) {
             newEntity.setValue(entityInfo[6], forKey: "about") 
@@ -275,11 +231,11 @@ class DataManager {
         
         let newEntity = NSEntityDescription.insertNewObjectForEntityForName(entityType, inManagedObjectContext: managedContext) as! NSManagedObject
         
-        newEntity.setValue(entityInfo[arrayIndex.name.rawValue], forKey: "name")
-        newEntity.setValue(entityInfo[arrayIndex.address.rawValue], forKey: "address")
-        newEntity.setValue(entityInfo[arrayIndex.zipcode.rawValue], forKey: "zipcode")
-        newEntity.setValue(entityInfo[arrayIndex.city.rawValue], forKey: "city")
-        newEntity.setValue(entityInfo[arrayIndex.phone.rawValue], forKey: "phone")
+        newEntity.setValue(entityInfo[Index.Name.rawValue], forKey: "name")
+        newEntity.setValue(entityInfo[Index.Address.rawValue], forKey: "address")
+        newEntity.setValue(entityInfo[Index.Zipcode.rawValue], forKey: "zipcode")
+        newEntity.setValue(entityInfo[Index.City.rawValue], forKey: "city")
+        newEntity.setValue(entityInfo[Index.Phone.rawValue], forKey: "phone")
         
         var error: NSError?
         if !managedContext.save(&error) {
@@ -336,26 +292,14 @@ class DataManager {
         packages.entities.append(newEntity)
     }
     
-    
-    
     //#MARK: - NSURLSession Methods
-    func countEntitiesFromURL(entityURL: NSURL, entityType: String) -> Void {
-        
-        var count: Int
-        var session = NSURLSession.sharedSession()
-        var task = session.dataTaskWithURL(entityURL) {
-            (data, response, error) -> Void in
-            
-            if error != nil {
-                println(error.localizedDescription)
-            } else {
-                self.extractCountFromJSON(data, entityType: entityType)
-            }
-        }
-        task.resume()
+    func fetchAllEntitiesFromWeb() {
+        fetchEntitiesFromWeb(wineries)
+        fetchEntitiesFromWeb(restaurants)
+        fetchEntitiesFromWeb(packages)
+        fetchEntitiesFromWeb(parking)
+        fetchEntitiesFromWeb(accommodations)
     }
-    
-    
     
     func fetchEntitiesFromWeb(entity: CorkDistrictEntity) -> Void {
         
@@ -374,29 +318,6 @@ class DataManager {
     }
     
     //#MARK: - JSON Methods
-    func extractCountFromJSON(data: NSData, entityType: String) -> Void {
-        
-        //println("testing... extractCount method is firing!")
-        
-        let json = JSON(data: data)
-        println("\(entityType) web count is \(json.count)")
-        
-        switch (entityType) {
-        case self.accommodations.type:
-            accommodations.webCount = json.count
-        case self.packages.type:
-            packages.webCount = json.count
-        case self.parking.type:
-            parking.webCount = json.count
-        case self.restaurants.type:
-            restaurants.webCount = json.count
-        case self.wineries.type:
-            wineries.webCount = json.count
-        default:
-            println("Invalid EntityType")
-        }
-    }
-    
     func parseJSONEntity(data: NSData, entity: CorkDistrictEntity) -> Void {
         
         if (entity.type == packages.type) {

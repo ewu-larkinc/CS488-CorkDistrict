@@ -15,6 +15,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     let titleRowHeight : CGFloat = 80.0
     let imageRowHeight : CGFloat = 300.0
     let defaultRowHeight : CGFloat = 60.0
+    let imageViewMargin = 17.0 as CGFloat
     var currentSelection : NSManagedObject!
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     
@@ -65,12 +66,12 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         case 4:
             let imageData = currentSelection.valueForKey("imageData") as? NSData
             let mainImage = UIImage(data: imageData!)
-            let newImageView = UIImageView(frame: CGRectMake(20.0,10.0,350.0,280.0))
+            let newImageView = UIImageView(frame: CGRectMake((imageViewMargin),cell.frame.origin.y,(tableView.frame.width-(imageViewMargin*2)), imageRowHeight))
+            
             newImageView.layer.borderColor = UIColor.whiteColor().CGColor
             newImageView.layer.borderWidth = 2.0
             newImageView.image = mainImage
             cell.addSubview(newImageView)
-            newImageView.sizeToFit()
         case 5:
             cell.textLabel?.text = currentSelection.valueForKey("about") as? String
             cell.textLabel?.textAlignment = NSTextAlignment.Justified
@@ -80,6 +81,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         
         return cell
     }
+    
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if (indexPath.row == 3) {
