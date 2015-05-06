@@ -25,10 +25,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         
         let settings = UIUserNotificationSettings(forTypes: types, categories: nil)
-        //UIApplication.sharedApplication().registerUserNotificationSettings(settings)
-        //UIApplication.sharedApplication().registerForRemoteNotifications()
-        application.registerUserNotificationSettings(settings)
-        application.registerForRemoteNotifications()
+        UIApplication.sharedApplication().registerForRemoteNotifications()
+        UIApplication.sharedApplication().registerUserNotificationSettings(settings)
+
         
         
         return true
@@ -48,6 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var session = NSURLSession.sharedSession()
         var err: NSError?
         var params = ["token":deviceTokenString, "type":"ios"]
+        
         
         request.HTTPMethod = "POST"
         request.HTTPBody = NSJSONSerialization.dataWithJSONObject(params, options: nil, error: &err)
