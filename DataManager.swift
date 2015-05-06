@@ -46,7 +46,7 @@ class DataManager {
     private let URL_ACCOMMODATIONS = NSURL(string: "http://www.nathanpilgrim.net/rest/lodging.json")
     private let URL_PACKAGES = NSURL(string: "http://www.nathanpilgrim.net/rest/packages.json")
     private let URL_PARKING = NSURL(string: "http://www.nathanpilgrim.net/rest/parking.json")
-    private let URL_NOTIFICATIONS = NSURL(string: "http://www.nathanpilgrim.net/apns/push_notifications")
+    private let URL_NOTIFICATIONS = NSURL(string: "http://www.corkdistrictapp.com/rest/push_notifications")
     private let URL_CHANGELOG = NSURL(string: "http://www.nathanpilgrim.net/rest/all")
     private var wineries = CorkDistrictEntity()
     private var restaurants = CorkDistrictEntity()
