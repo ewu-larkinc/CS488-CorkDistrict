@@ -16,7 +16,7 @@ class ParkingViewController : UIViewController, UITableViewDataSource, UITableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tableView.backgroundView = UIImageView(image:UIImage(named: "parkBackground"))
+        self.tableView.backgroundView = UIImageView(image:UIImage(named: "asphaltBackground"))
         
         let dataManager = DataManager.sharedInstance
         parking = dataManager.getParking()

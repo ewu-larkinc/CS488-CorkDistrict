@@ -58,7 +58,7 @@ class MapUtilities {
                     
                     myRoutes.append(myroute)
                     
-                    println(myroute.distance/1609.344)
+                    println(myroute.distance/1609.344)//meters convert to miles
                     
                     self.mapView.addOverlay(myroute.polyline, level: MKOverlayLevel.AboveRoads)
                 }

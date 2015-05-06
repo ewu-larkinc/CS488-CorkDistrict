@@ -24,26 +24,79 @@
                                     <outlet property="delegate" destination="2ZD-wG-sk8" id="4qk-PE-Hl5"/>
                                 </connections>
                             </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mRt-cK-sOP">
-                                <rect key="frame" x="16" y="505" width="75" height="75"/>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" restorationIdentifier="wineButton" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mRt-cK-sOP">
+                                <rect key="frame" x="36" y="525" width="75" height="75"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <state key="normal">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="75" id="IO5-nv-nEx"/>
+                                    <constraint firstAttribute="height" constant="75" id="VZ3-A9-oI8"/>
+                                </constraints>
+                                <state key="normal" image="Wine_Button">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="filterWineries:" destination="2ZD-wG-sk8" eventType="touchUpInside" id="CFr-RE-c2Y"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" restorationIdentifier="hotelButton" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xHW-WL-vwx">
+                                <rect key="frame" x="111" y="525" width="75" height="75"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="75" id="WsF-qj-bc3"/>
+                                    <constraint firstAttribute="width" constant="75" id="fEy-cy-LYe"/>
+                                </constraints>
+                                <state key="normal" image="Hotel_Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="filterHotels:" destination="2ZD-wG-sk8" eventType="touchUpInside" id="lDr-la-JAC"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oWT-P3-kBr">
+                                <rect key="frame" x="185" y="525" width="75" height="75"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="75" id="3jp-6t-SFd"/>
+                                    <constraint firstAttribute="width" constant="75" id="dGo-9Y-dNk"/>
+                                </constraints>
+                                <state key="normal" image="Car_Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="filterParking:" destination="2ZD-wG-sk8" eventType="touchUpInside" id="VBE-DL-KQK"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uXb-V7-vLU">
+                                <rect key="frame" x="260" y="525" width="75" height="75"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="75" id="H06-qS-VUl"/>
+                                    <constraint firstAttribute="height" constant="75" id="s1t-NH-CdK"/>
+                                </constraints>
+                                <state key="normal" image="Rest_Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="filterRest:" destination="2ZD-wG-sk8" eventType="touchUpInside" id="o7r-Sx-6Pn"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="v1x-e4-KaP" firstAttribute="top" secondItem="xHW-WL-vwx" secondAttribute="bottom" id="5ta-Jq-cSR"/>
                             <constraint firstItem="v1x-e4-KaP" firstAttribute="top" secondItem="Xgh-rz-LwX" secondAttribute="bottom" id="90r-M1-88R"/>
+                            <constraint firstItem="v1x-e4-KaP" firstAttribute="top" secondItem="mRt-cK-sOP" secondAttribute="bottom" id="LmS-qB-VCb"/>
                             <constraint firstItem="Xgh-rz-LwX" firstAttribute="top" secondItem="X85-gW-TJL" secondAttribute="bottom" id="SKk-G2-7tG"/>
                             <constraint firstItem="Xgh-rz-LwX" firstAttribute="leading" secondItem="ihZ-MV-rBX" secondAttribute="leading" id="Wah-9d-m6V"/>
+                            <constraint firstItem="v1x-e4-KaP" firstAttribute="top" secondItem="uXb-V7-vLU" secondAttribute="bottom" id="hxh-y5-jk3"/>
                             <constraint firstAttribute="trailing" secondItem="Xgh-rz-LwX" secondAttribute="trailing" id="jam-MC-md8"/>
+                            <constraint firstItem="v1x-e4-KaP" firstAttribute="top" secondItem="oWT-P3-kBr" secondAttribute="bottom" id="yl5-r7-dEA"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="hotelButton" destination="xHW-WL-vwx" id="RqY-tG-Ij6"/>
+                        <outlet property="parkButton" destination="oWT-P3-kBr" id="tja-d1-roi"/>
+                        <outlet property="restButton" destination="uXb-V7-vLU" id="sBF-mf-UVb"/>
                         <outlet property="theMapView" destination="Xgh-rz-LwX" id="ikP-dC-8h0"/>
                         <outlet property="wineButton" destination="mRt-cK-sOP" id="OWG-cV-d2V"/>
                     </connections>
@@ -1833,6 +1886,12 @@
             <point key="canvasLocation" x="1206" y="201.75"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Car_Button" width="600" height="600"/>
+        <image name="Hotel_Button" width="600" height="600"/>
+        <image name="Rest_Button" width="600" height="600"/>
+        <image name="Wine_Button" width="600" height="600"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="LDX-gq-k6W"/>
     </inferredMetricsTieBreakers>

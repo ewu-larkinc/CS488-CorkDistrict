@@ -24,14 +24,26 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     var restaurants = [NSManagedObject]()
     var hotels = [NSManagedObject]()
     var parking = [NSManagedObject]()
+    
     var showWineries: Bool = false
-    let util = MapUtilities()
+    var showHotels: Bool = false
+    var showParking: Bool = false
+    var showRest: Bool = false
+    
     var winePins = [MKPointAnnotation]()
+    var hotelPins = [MKPointAnnotation]()
+    var parkPins = [MKPointAnnotation]()
+    var restPins = [MKPointAnnotation]()
+    
+    let util = MapUtilities()
     var mapRoutes = [MKRoute]()
     
     @IBOutlet var theMapView: MKMapView!
     
+    @IBOutlet var parkButton: UIButton!
+    @IBOutlet var restButton: UIButton!
     @IBOutlet var wineButton: UIButton!
+    @IBOutlet var hotelButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,18 +67,15 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         var wineriesTemp = [NSManagedObject]()
         wineriesTemp.append(wineries[2]);
-/*
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), {
-            self.mapRoutes = self.util.getDirections(wineriesTemp, start: coord)
-            dispatch_async(dispatch_get_main_queue(), {
-                self.util.sortByDistance(self.mapRoutes)
-            })
-        })
-*/
+        
+        //self.mapRoutes = self.util.getDirections(wineriesTemp, start: coord)
+
+        //self.util.sortByDistance(self.mapRoutes)
+
         winePins = util.placePinsOnMap(wineries, type: "winery")
-        util.placePinsOnMap(restaurants, type: "rest")
-        util.placePinsOnMap(hotels, type: "hotel")
-        util.placePinsOnMap(parking, type: "park")
+        restPins = util.placePinsOnMap(restaurants, type: "rest")
+        hotelPins = util.placePinsOnMap(hotels, type: "hotel")
+        parkPins = util.placePinsOnMap(parking, type: "park")
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -74,7 +83,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         self.navigationController?.navigationBar.hidden = false
         self.automaticallyAdjustsScrollViewInsets = false
 
-        var theSpan: MKCoordinateSpan = MKCoordinateSpanMake(0.5, 0.05)
+        var theSpan: MKCoordinateSpan = MKCoordinateSpanMake(0.05, 0.05)
         
         var centerLocation: CLLocationCoordinate2D = CLLocationCoordinate2DMake(47.655262, -117.414129)
         
@@ -85,51 +94,83 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     @IBAction func filterWineries(AnyObject) {
         if(showWineries){
-            winePins = util.placePinsOnMap(wineries, type: "winery")
+            addPins(winePins)
             showWineries = false
             wineButton.alpha = 1.0
         }
         else {
-            removeWineries(winePins)
+            removePins(winePins)
             showWineries = true
             wineButton.alpha = 0.5
         }
     }
-    func removeWineries(arraytype: [MKPointAnnotation]) {
+    @IBAction func filterHotels(AnyObject) {
+        if(showHotels){
+            addPins(hotelPins)
+            showHotels = false
+            hotelButton.alpha = 1.0
+        }
+        else {
+            removePins(hotelPins)
+            showHotels = true
+            hotelButton.alpha = 0.5
+        }
+    }
+    @IBAction func filterRest(AnyObject) {
+        if(showRest){
+            addPins(restPins)
+            showRest = false
+            restButton.alpha = 1.0
+        }
+        else {
+            removePins(restPins)
+            showRest = true
+            restButton.alpha = 0.5
+        }
+    }
+    @IBAction func filterParking(AnyObject) {
+        if(showParking){
+            addPins(parkPins)
+            showParking = false
+            parkButton.alpha = 1.0
+        }
+        else {
+            removePins(parkPins)
+            showParking = true
+            parkButton.alpha = 0.5
+        }
+    }
+    func removePins(arraytype: [MKPointAnnotation]) {
         for var i = 0; i < arraytype.count; i++ {
             theMapView.removeAnnotation(arraytype[i])
         }
     }
     
+    func addPins(arraytype: [MKPointAnnotation]) {
+        for var i = 0; i < arraytype.count; i++ {
+            theMapView.addAnnotation(arraytype[i])
+        }
+    }
     func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
         if !(annotation is MKPointAnnotation) {
             return nil
         }
-        
-        let reuseId = "test"
-        
-        var anView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId)
-        if anView == nil {
-            anView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+
+            var anView = MKAnnotationView(annotation: annotation, reuseIdentifier: nil)
             if(annotation.subtitle == "winery") {
                 anView.image = UIImage(named:"Wine_Icon")
             }
-            if(annotation.subtitle == "rest") {
+            else if(annotation.subtitle == "rest") {
                 anView.image = UIImage(named:"Food_Icon")
             }
-            if(annotation.subtitle == "hotel") {
+            else if(annotation.subtitle == "hotel") {
                 anView.image = UIImage(named:"Hotel_Icon")
             }
-            if(annotation.subtitle == "park") {
+            else if(annotation.subtitle == "park") {
                 anView.image = UIImage(named:"Car_Icon")
             }
             anView.canShowCallout = false
-            
-        }
-        else {
-            anView.annotation = annotation
-            
-        }
+
     
         return anView
     }
@@ -137,8 +178,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         if (overlay is MKPolyline) {
             var pr = MKPolylineRenderer(overlay: overlay);
-            pr.strokeColor = UIColor.blueColor().colorWithAlphaComponent(1.0);
-            pr.lineWidth = 5;
+            pr.strokeColor = UIColor.blueColor().colorWithAlphaComponent(0.7);
+            pr.lineWidth = 4;
             return pr;
         }
         
@@ -161,6 +202,13 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         else if(view.annotation.subtitle == "park") {
             temp = parking[view.annotation.title!.toInt()!]
         }
+        
+        
+        
+        print("PIN SUBTITLE: "+view.annotation.subtitle!+"\n")
+        
+        
+        
         
 //......Create a alertView when pin is clicked...........................................................//
         var alertView = UIAlertController(title: temp.valueForKey("name") as? String, message: temp.valueForKey("address") as? String, preferredStyle: .Alert)
