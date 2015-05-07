@@ -62,11 +62,15 @@ class PackagesViewController: UIViewController, UITableViewDataSource, UITableVi
         let imageData = package.valueForKey("imageData") as? NSData
         let myImage = UIImage(data: imageData!)
         var startDay = package.valueForKey("startDay") as? String
-        var startMonth = package.valueForKey("startMonth") as? String
+        var startMonth = package.valueForKey("StartMonth") as? String
+        var startYear = package.valueForKey("startYear") as? String
         var endDay = package.valueForKey("endDay") as? String
         var endMonth = package.valueForKey("endMonth") as? String
-        var startDate = startMonth! + " " + startDay!
-        var endDate = endMonth! + " " + endDay!
+        var endYear = package.valueForKey("endYear") as? String
+        var startDate = startMonth! + " " + startDay! + " " + startYear!
+        var endDate = endMonth! + " " + endDay! + " " + endYear!
+        var nodeId = package.valueForKey("relatedNodeID") as? String
+        println("Testing in packages - Node_ID: \(nodeId)")
         
         cell.titleLabel.text = package.valueForKey("name") as? String
         cell.entityTitleLabel.text = package.valueForKey("relatedEntityName") as? String
@@ -76,7 +80,7 @@ class PackagesViewController: UIViewController, UITableViewDataSource, UITableVi
         
         cell.cellImage.layer.cornerRadius = 4.0
         cell.cellImage.clipsToBounds = true
-        cell.cellImage.contentMode = UIViewContentMode.ScaleAspectFit
+        cell.cellImage.contentMode = UIViewContentMode.ScaleToFill
     }
 
     

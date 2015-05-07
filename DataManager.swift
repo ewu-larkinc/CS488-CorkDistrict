@@ -14,10 +14,11 @@ private let _SingletonSharedInstance = DataManager()
 
 enum Index: Int {
     case Name = 0
-    case Address = 1
-    case Zipcode = 2
-    case City = 3
-    case Phone = 4
+    case NodeID = 1
+    case Address = 2
+    case Zipcode = 3
+    case City = 4
+    case Phone = 5
 }
 
 class DataManager {
@@ -27,27 +28,11 @@ class DataManager {
     }
     
     var dataReceived: Bool = false
-   /*
-    private var wineries = [NSManagedObject]()
-    private var restaurants = [NSManagedObject]()
-    private var accommodations = [NSManagedObject]()
-    private var packages = [NSManagedObject]()
-    private var parking = [NSManagedObject]()
-
-    private let URL_WINERIES = NSURL(string: "http://www.corkdistrictapp.com/rest/wineries.json")
-    private let URL_RESTAURANTS = NSURL(string: "http://www.corkdistrictapp.com/rest/restaurants.json")
-    private let URL_ACCOMMODATIONS = NSURL(string: "http://www.corkdistrictapp.com/rest/lodging.json")
-    private let URL_PACKAGES = NSURL(string: "http://www.corkdistrictapp.com/rest/packages.json")
-    private let URL_PARKING = NSURL(string: "http://www.corkdistrictapp.com/rest/parking.json")
-    private let URL_NOTIFICATIONS = NSURL(string: "http://www.corkdistrictapp.com/rest/push_notifications")
-    */
-    private let URL_WINERIES = NSURL(string: "http://www.nathanpilgrim.net/rest/wineries.json")
-    private let URL_RESTAURANTS = NSURL(string: "http://www.nathanpilgrim.net/rest/restaurants.json")
-    private let URL_ACCOMMODATIONS = NSURL(string: "http://www.nathanpilgrim.net/rest/lodging.json")
-    private let URL_PACKAGES = NSURL(string: "http://www.nathanpilgrim.net/rest/packages.json")
-    private let URL_PARKING = NSURL(string: "http://www.nathanpilgrim.net/rest/parking.json")
+    
+    
     private let URL_NOTIFICATIONS = NSURL(string: "http://www.nathanpilgrim.net/apns/push_notifications")
     private let URL_CHANGELOG = NSURL(string: "http://www.nathanpilgrim.net/rest/all")
+    
     private var wineries = CorkDistrictEntity()
     private var restaurants = CorkDistrictEntity()
     private var accommodations = CorkDistrictEntity()
@@ -120,7 +105,8 @@ class DataManager {
     }
     
     func initializeEntityObjects() {
-        wineries.URL = NSURL(string: "http://www.nathanpilgrim.net/rest/wineries.json")!
+        
+        /*wineries.URL = NSURL(string: "http://www.nathanpilgrim.net/rest/wineries.json")!
         wineries.type = "Winery"
         restaurants.URL = NSURL(string: "http://www.nathanpilgrim.net/rest/restaurants.json")!
         restaurants.type = "Restaurant"
@@ -129,6 +115,17 @@ class DataManager {
         parking.URL = NSURL(string: "http://www.nathanpilgrim.net/rest/parking.json")!
         parking.type = "Parking"
         accommodations.URL = NSURL(string: "http://www.nathanpilgrim.net/rest/accommodations.json")!
+        accommodations.type = "Accommodation"*/
+        
+        wineries.URL = NSURL(string: "http://www.corkdistrictapp.com/rest/wineries.json")!
+        wineries.type = "Winery"
+        restaurants.URL = NSURL(string: "http://www.corkdistrictapp.com/rest/restaurants.json")!
+        restaurants.type = "Restaurant"
+        packages.URL = NSURL(string: "http://www.corkdistrictapp.com/rest/packages.json")!
+        packages.type = "Package"
+        parking.URL = NSURL(string: "http://www.corkdistrictapp.com/rest/parking.json")!
+        parking.type = "Parking"
+        accommodations.URL = NSURL(string: "http://www.corkdistrictapp.com/rest/lodging.json")!
         accommodations.type = "Accommodation"
     }
     
@@ -184,23 +181,24 @@ class DataManager {
         
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate 
         let managedContext = appDelegate.managedObjectContext! 
-        var entityType = entityInfo[5] as! String 
+        var entityType = entityInfo[6] as! String
         
         let newEntity = NSEntityDescription.insertNewObjectForEntityForName(entityType, inManagedObjectContext: managedContext) as! NSManagedObject 
         
         newEntity.setValue(UIImageJPEGRepresentation(entityImage, 1), forKey: "imageData") 
         newEntity.setValue(entityInfo[Index.Name.rawValue], forKey: "name")
+        newEntity.setValue(entityInfo[Index.NodeID.rawValue], forKey: "nodeID")
         newEntity.setValue(entityInfo[Index.Address.rawValue], forKey: "address")
         newEntity.setValue(entityInfo[Index.Zipcode.rawValue], forKey: "zipcode")
         newEntity.setValue(entityInfo[Index.City.rawValue], forKey: "city")
         newEntity.setValue(entityInfo[Index.Phone.rawValue], forKey: "phone")
         
         if (entityType != parking.type) {
-            newEntity.setValue(entityInfo[6], forKey: "about") 
-            newEntity.setValue(entityInfo[7], forKey: "website") 
+            newEntity.setValue(entityInfo[7], forKey: "about")
+            newEntity.setValue(entityInfo[8], forKey: "website")
             
             if (entityType == wineries.type) {
-                newEntity.setValue(entityInfo[8], forKey: "cluster") 
+                newEntity.setValue(entityInfo[9], forKey: "cluster")
             }
         }
         
@@ -246,11 +244,12 @@ class DataManager {
         
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext!
-        var entityType = entityInfo[5] as! String
+        var entityType = entityInfo[6] as! String
         
         let newEntity = NSEntityDescription.insertNewObjectForEntityForName(entityType, inManagedObjectContext: managedContext) as! NSManagedObject
         
         newEntity.setValue(entityInfo[Index.Name.rawValue], forKey: "name")
+        newEntity.setValue(entityInfo[Index.NodeID.rawValue], forKey: "nodeID")
         newEntity.setValue(entityInfo[Index.Address.rawValue], forKey: "address")
         newEntity.setValue(entityInfo[Index.Zipcode.rawValue], forKey: "zipcode")
         newEntity.setValue(entityInfo[Index.City.rawValue], forKey: "city")
@@ -269,7 +268,7 @@ class DataManager {
         
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext!
-        let entityType = entityInfo[9] as! String
+        let entityType = entityInfo[11] as! String
         
         let newEntity = NSEntityDescription.insertNewObjectForEntityForName(entityType, inManagedObjectContext:
             managedContext) as! NSManagedObject
@@ -283,10 +282,12 @@ class DataManager {
         newEntity.setValue(entityInfo[5], forKey: "startMonth")
         newEntity.setValue(entityInfo[6], forKey: "endDay")
         newEntity.setValue(entityInfo[7], forKey: "endMonth")
-        newEntity.setValue(entityInfo[8], forKey: "relatedEntityName")
+        newEntity.setValue(entityInfo[8], forKey: "startYear")
+        newEntity.setValue(entityInfo[9], forKey: "endYear")
+        newEntity.setValue(entityInfo[10], forKey: "relatedNodeID")
         
-        let relatedTitle = entityInfo[8] as! String
-        println("searching for relatedEntityTitle: \(relatedTitle)")
+        let relatedNodeID = entityInfo[10] as! String
+        //println("searching for relatedEntityTitle: \(relatedNodeID)")
         /*var index : Int = 0
         index = getWineryIndex(relatedTitle)
         let wineries.entities = getWineries()
@@ -362,6 +363,7 @@ class DataManager {
                 
                     var infoArray = NSMutableArray()
                     infoArray.addObject(json[ctr]["node_title"].stringValue)
+                    infoArray.addObject(json[ctr]["nid"].stringValue)
                     infoArray.addObject(json[ctr]["Street Address"].stringValue)
                     infoArray.addObject(entityZip)
                     infoArray.addObject(entityCity)
@@ -420,16 +422,18 @@ class DataManager {
                 infoArray.addObject(json[ctr]["StartMonth"].stringValue)
                 infoArray.addObject(json[ctr]["EndDay"].stringValue)
                 infoArray.addObject(json[ctr]["EndMonth"].stringValue)
-                infoArray.addObject(json[ctr]["RelatedEntityTitle"].stringValue)
+                infoArray.addObject(json[ctr]["StartYear"].stringValue)
+                infoArray.addObject(json[ctr]["EndYear"].stringValue)
+                infoArray.addObject(json[ctr]["nid"].stringValue)
                 infoArray.addObject(entity.type)
             
                 println("testing in parseJSONPackages...")
                 println("incoming title is \(infoArray[0])")
                 println("incoming cost is \(infoArray[3])")
             
-                var temp2 = json[ctr]["RelatedEntityTitle"].stringValue
+                var temp2 = json[ctr]["RelatedEntityTitle"]["item"]["target_id"].stringValue
             
-                println("incoming related entity title is \(temp2)")
+                println("incoming related entity nid is \(temp2)")
                 var temp = json[ctr]["Thumbnail"].stringValue
                 println("thumbnail string value is \(temp)")
             

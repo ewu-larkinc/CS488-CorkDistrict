@@ -98,7 +98,7 @@ class RestaurantsViewController: UIViewController, UITableViewDataSource, UITabl
         cell.phoneLabel.textColor = UIColor.whiteColor()
         cell.websiteLabel.textColor = UIColor.whiteColor()
 
-        cell.cellImage.contentMode = UIViewContentMode.ScaleAspectFit
+        cell.cellImage.contentMode = UIViewContentMode.ScaleToFill
         cell.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.2)
     }
     

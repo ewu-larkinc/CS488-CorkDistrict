@@ -36,7 +36,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 8
+        return 6
     }
     
     
@@ -120,14 +120,6 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         var length = CGFloat(count(cellText.utf16))
         var rowSize : CGFloat = (length/13.0)*12.0
         return rowSize
-    }
-    
-    
-    override func viewWillAppear(animated: Bool)
-    {
-        super.viewWillAppear(animated)
-        
-        //counterLabel.text = "The counter was tapped \(numberToDisplay) times."
     }
     
 }

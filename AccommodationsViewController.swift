@@ -101,7 +101,7 @@ class AccomodationsViewController: UIViewController, UITableViewDataSource, UITa
         cell.websiteLabel.textColor = UIColor.whiteColor()
         cell.websiteLabel.sizeToFit()
         
-        cell.cellImage.contentMode = UIViewContentMode.ScaleAspectFit
+        cell.cellImage.contentMode = UIViewContentMode.ScaleToFill
         cell.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.2)
     }
     

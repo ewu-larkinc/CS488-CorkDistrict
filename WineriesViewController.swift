@@ -100,7 +100,7 @@ class WineriesViewController: UIViewController, UITableViewDataSource, UITableVi
         cell.phoneLabel.textColor = UIColor.whiteColor()
         cell.websiteLabel.textColor = UIColor.whiteColor()
         
-        cell.cellImage.contentMode = UIViewContentMode.ScaleAspectFit
+        cell.cellImage.contentMode = UIViewContentMode.ScaleToFill
     }
     
 }
