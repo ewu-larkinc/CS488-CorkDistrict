@@ -31,7 +31,8 @@ class ViewController: UITableViewController {
         if (testData.count == 0) {
             
             let loadingVC = LoadViewController(nibName: "LoadViewController", bundle: nil)
-            loadingVC.modalTransitionStyle = UIModalTransitionStyle.CrossDissolve
+            loadingVC.modalTransitionStyle = UIModalTransitionStyle.CoverVertical
+            //loadingVC.modalPresentationStyle = UIModalPresentationStyle.OverCurrentContext
             
             //error logged if I don't wait at least 1 second before calling the presentViewController method
             var timer = Timer(duration: 1.0, completionHandler: {

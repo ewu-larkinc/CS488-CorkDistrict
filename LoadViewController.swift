@@ -26,96 +26,37 @@ class LoadViewController : UIViewController {
         progress = 0
         
         progressView.setProgress(0, animated: true)
-        startCount()
+        //startCount()
         
         if (self.isRotating == false) {
             
-            self.animateLoadingLabel()
-            self.animateLoadingLogo()
+            self.loadingLabel.fadeIn()
+            self.loadingLogo.fadeIn()
             self.loadingImage.rotate360Degrees(completionDelegate: self)
             
-            self.timer = Timer(duration: 12.0, completionHandler: {
+            /*self.timer = Timer(duration: 12.0, completionHandler: {
                 self.shouldStopRotating = true
             })
-            self.timer.start()
+            self.timer.start()*/
             self.isRotating = true
         }
+        
+        self.timer = Timer(duration: 5.0, completionHandler: {
+            self.getProgress()
+        })
+        timer.start()
     }
     
-    func animateLoadingLabel() -> Void {
+    func getProgress() {
         
-        self.loadingLabel.fadeIn(completion: {
-            
-            (finished: Bool) -> Void in
-            self.loadingLabel.fadeOut(completion: {
-                
-                (finished: Bool) -> Void in
-                self.loadingLabel.fadeIn(completion: {
-                    
-                    (finished: Bool) -> Void in
-                    self.loadingLabel.fadeOut(completion: {
-                        
-                        (finished: Bool) -> Void in
-                        self.loadingLabel.fadeIn(completion: {
-                            
-                            (finished: Bool) -> Void in
-                            self.loadingLabel.fadeOut(completion: {
-                                
-                                (finished: Bool) -> Void in
-                                self.loadingLabel.fadeIn(completion: {
-                                    
-                                    (finished: Bool) -> Void in
-                                    self.loadingLabel.fadeOut(completion: {
-                                      
-                                        (finished: Bool) -> Void in
-                                        self.loadingLabel.fadeIn()
-                                    })
-                                })
-                            })
-                        })
-                    })
-                })
-            })
-        })
+        let dataManager = DataManager.sharedInstance
         
-    }
-    
-    func animateLoadingLogo() -> Void {
+        while (progress < 1.0) {
+            progress = dataManager.getProgress()
+            progressView.setProgress(progress, animated: true)
+        }
         
-        self.loadingLogo.fadeIn(completion: {
-            
-            (finished: Bool) -> Void in
-            self.loadingLogo.fadeOut(completion: {
-                
-                (finished: Bool) -> Void in
-                self.loadingLogo.fadeIn(completion: {
-                    
-                    (finished: Bool) -> Void in
-                    self.loadingLogo.fadeOut(completion: {
-                        
-                        (finished: Bool) -> Void in
-                        self.loadingLogo.fadeIn(completion: {
-                            
-                            (finished: Bool) -> Void in
-                            self.loadingLogo.fadeOut(completion: {
-                                
-                                (finished: Bool) -> Void in
-                                self.loadingLogo.fadeIn(completion: {
-                                    
-                                    (finished: Bool) -> Void in
-                                    self.loadingLogo.fadeOut(completion: {
-                                        
-                                        (finished: Bool) -> Void in
-                                        self.loadingLogo.fadeIn()
-                                    })
-                                })
-                            })
-                        })
-                    })
-                })
-            })
-        })
-        
+        self.view.window?.rootViewController?.dismissViewControllerAnimated(false, completion: nil)
     }
     
     func startCount() {

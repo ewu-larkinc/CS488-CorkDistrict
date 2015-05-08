@@ -13,6 +13,7 @@ extension UIView {
         rotateAnimation.fromValue = 0.0
         rotateAnimation.toValue = CGFloat(M_PI * 2.0)
         rotateAnimation.duration = duration
+        //rotateAnimation.repeatCount = 50
         
         if let delegate: AnyObject = completionDelegate {
             rotateAnimation.delegate = delegate
@@ -20,17 +21,19 @@ extension UIView {
         self.layer.addAnimation(rotateAnimation, forKey: nil)
     }
     
-    func fadeIn(duration: NSTimeInterval = 2.0, delay: NSTimeInterval = 0.0, completion:
-        ((Bool) -> Void) = {(finished: Bool) -> Void in}) {
-        UIView.animateWithDuration(duration, delay: delay, options: UIViewAnimationOptions.CurveEaseIn, animations: {
-            self.alpha = 1.0
-        }, completion: completion)
+    func fadeIn(duration: NSTimeInterval = 2.0, delay: NSTimeInterval = 0.0) {
+            UIView.animateWithDuration(duration, delay: delay, options: UIViewAnimationOptions.CurveEaseIn, animations: {
+                self.alpha = 1.0
+                }, completion: {(finished: Bool) -> Void in
+                    self.fadeOut()
+            })
     }
     
-    func fadeOut(duration: NSTimeInterval = 2.0, delay: NSTimeInterval = 0.0, completion:
-        ((Bool) -> Void) = {(finished: Bool) -> Void in}) {
+    func fadeOut(duration: NSTimeInterval = 2.0, delay: NSTimeInterval = 0.0) {
         UIView.animateWithDuration(duration, delay: delay, options: UIViewAnimationOptions.CurveEaseIn, animations: {
             self.alpha = 0.0
-        }, completion: completion)
+            }, completion: {(finished: Bool) -> Void in
+                self.fadeIn()
+        })
     }
 }

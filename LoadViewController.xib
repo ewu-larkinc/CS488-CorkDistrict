@@ -72,7 +72,7 @@
                     </variation>
                 </label>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="ZOL-pO-UmM" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="393" id="8cb-TZ-Y39">
                     <variation key="heightClass=regular-widthClass=compact" constant="345"/>

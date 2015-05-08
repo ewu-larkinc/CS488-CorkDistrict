@@ -315,9 +315,13 @@ class DataManager {
     //#MARK: - NSURLSession Methods
     func fetchAllEntitiesFromWeb() {
         fetchEntitiesFromWeb(wineries)
+        progress = 0.2
         fetchEntitiesFromWeb(restaurants)
+        progress = 0.4
         fetchEntitiesFromWeb(packages)
+        progress = 0.6
         fetchEntitiesFromWeb(parking)
+        progress = 0.8
         fetchEntitiesFromWeb(accommodations)
     }
     
@@ -399,6 +403,10 @@ class DataManager {
             
         }
         
+        if (entity.type == accommodations.type) {
+            progress = 1.0
+        }
+        
     }
     
     func parseJSONPackage(data: NSData, entity: CorkDistrictEntity) -> Void {
@@ -441,7 +449,7 @@ class DataManager {
                     println("t3 incoming related entity nid is \(temp3)")
                 }*/
                 
-                var temp3 = json[ctr]["RelatedEntityTitle"]["item"]["target_id"].stringValue
+                var temp3 = json[ctr]["RelatedEntityTitle"].stringValue
                 println("t3 incoming related entity nid is \(temp3)")
                 
             

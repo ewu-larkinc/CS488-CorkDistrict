@@ -12,6 +12,7 @@ import QuartzCore
 class DetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var tableView: UITableView!
+    let titleRowHeight : CGFloat = 75.0
     let imageRowHeight : CGFloat = 300.0
     let defaultRowHeight : CGFloat = 60.0
     let imageViewMargin = 17.0 as CGFloat
@@ -60,7 +61,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
                 let city = currentSelection.valueForKey("city") as? String
                 let zipcode = currentSelection.valueForKey("zipcode") as? String
                 var addressLine = currentSelection.valueForKey("address") as? String
-                var cityLine = "\n" + city! + " ,WA " + zipcode!
+                var cityLine = "\n" + city! + ", WA " + zipcode!
                 cell.textLabel?.text = addressLine! + cityLine
             case 2:
                 cell.textLabel?.text = currentSelection.valueForKey("phone") as? String
@@ -96,6 +97,8 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
         switch (indexPath.row) {
+            case 1:
+                return titleRowHeight
             case 3:
                 return imageRowHeight
             case 4:
