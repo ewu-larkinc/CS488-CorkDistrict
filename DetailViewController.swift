@@ -54,31 +54,30 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         
         switch (indexPath.row) {
-        case 0:
-            cell.textLabel?.text = currentSelection.valueForKey("name") as? String
-        case 1:
-            let city = currentSelection.valueForKey("city") as? String
-            let zipcode = currentSelection.valueForKey("zipcode") as? String
-            var addressLine = currentSelection.valueForKey("address") as? String
-            var cityLine = "\n" + city! + " ,WA " + zipcode!
-            //cell.textLabel?.text = currentSelection.valueForKey("address") as? String
-            cell.textLabel?.text = addressLine! + cityLine
-        case 2:
-            cell.textLabel?.text = currentSelection.valueForKey("phone") as? String
-        case 3:
-            let imageData = currentSelection.valueForKey("imageData") as? NSData
-            let mainImage = UIImage(data: imageData!)
-            let newImageView = UIImageView(frame: CGRectMake((imageViewMargin),cell.frame.origin.y,(tableView.frame.width-(imageViewMargin*2)), imageRowHeight))
+            case 0:
+                cell.textLabel?.text = currentSelection.valueForKey("name") as? String
+            case 1:
+                let city = currentSelection.valueForKey("city") as? String
+                let zipcode = currentSelection.valueForKey("zipcode") as? String
+                var addressLine = currentSelection.valueForKey("address") as? String
+                var cityLine = "\n" + city! + " ,WA " + zipcode!
+                cell.textLabel?.text = addressLine! + cityLine
+            case 2:
+                cell.textLabel?.text = currentSelection.valueForKey("phone") as? String
+            case 3:
+                let imageData = currentSelection.valueForKey("imageData") as? NSData
+                let mainImage = UIImage(data: imageData!)
+                let newImageView = UIImageView(frame: CGRectMake((imageViewMargin),cell.frame.origin.y,(tableView.frame.width-(imageViewMargin*2)), imageRowHeight))
             
-            newImageView.layer.borderColor = UIColor.whiteColor().CGColor
-            newImageView.layer.borderWidth = 2.0
-            newImageView.image = mainImage
-            cell.addSubview(newImageView)
-        case 4:
-            cell.textLabel?.text = currentSelection.valueForKey("about") as? String
-            cell.textLabel?.textAlignment = NSTextAlignment.Justified
-        default:
-            break
+                newImageView.layer.borderColor = UIColor.whiteColor().CGColor
+                newImageView.layer.borderWidth = 2.0
+                newImageView.image = mainImage
+                cell.addSubview(newImageView)
+            case 4:
+                cell.textLabel?.text = currentSelection.valueForKey("about") as? String
+                cell.textLabel?.textAlignment = NSTextAlignment.Justified
+            default:
+                break
         }
 
         return cell
