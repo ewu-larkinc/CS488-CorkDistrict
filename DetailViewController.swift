@@ -10,9 +10,8 @@ import CoreData
 import QuartzCore
 
 class DetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    @IBOutlet weak var tableView: UITableView!
     
-    let titleRowHeight : CGFloat = 80.0
+    @IBOutlet weak var tableView: UITableView!
     let imageRowHeight : CGFloat = 300.0
     let defaultRowHeight : CGFloat = 60.0
     let imageViewMargin = 17.0 as CGFloat
@@ -36,7 +35,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 6
+        return 5
     }
     
     
@@ -56,22 +55,17 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         
         switch (indexPath.row) {
         case 0:
-            let titleLabel = UILabel(frame: CGRectMake(15.0,0.0,350.0,82.0))
-            titleLabel.font = UIFont(name: "STHeitiTC-Light", size: 30.0)
-            titleLabel.textColor = UIColor.whiteColor()
-            titleLabel.textAlignment = NSTextAlignment.Left
-            titleLabel.text = currentSelection.valueForKey("name") as? String
-            titleLabel.adjustsFontSizeToFitWidth = true
-            cell.addSubview(titleLabel)
+            cell.textLabel?.text = currentSelection.valueForKey("name") as? String
         case 1:
-            cell.textLabel?.text = currentSelection.valueForKey("address") as? String
-        case 2:
             let city = currentSelection.valueForKey("city") as? String
             let zipcode = currentSelection.valueForKey("zipcode") as? String
-            cell.textLabel?.text = city! + " , WA " + zipcode!
-        case 3:
+            var addressLine = currentSelection.valueForKey("address") as? String
+            var cityLine = "\n" + city! + " ,WA " + zipcode!
+            //cell.textLabel?.text = currentSelection.valueForKey("address") as? String
+            cell.textLabel?.text = addressLine! + cityLine
+        case 2:
             cell.textLabel?.text = currentSelection.valueForKey("phone") as? String
-        case 4:
+        case 3:
             let imageData = currentSelection.valueForKey("imageData") as? NSData
             let mainImage = UIImage(data: imageData!)
             let newImageView = UIImageView(frame: CGRectMake((imageViewMargin),cell.frame.origin.y,(tableView.frame.width-(imageViewMargin*2)), imageRowHeight))
@@ -80,19 +74,19 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
             newImageView.layer.borderWidth = 2.0
             newImageView.image = mainImage
             cell.addSubview(newImageView)
-        case 5:
+        case 4:
             cell.textLabel?.text = currentSelection.valueForKey("about") as? String
             cell.textLabel?.textAlignment = NSTextAlignment.Justified
         default:
             break
         }
-        
+
         return cell
     }
-    
-    
+
+
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if (indexPath.row == 3) {
+        if (indexPath.row == 2) {
             var tempNum = currentSelection.valueForKey("phone") as! NSString
             var tempNumStr = tempNum.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
             UIApplication.sharedApplication().openURL(NSURL(string: "tel://#\(tempNumStr)")!)
@@ -103,16 +97,14 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
         switch (indexPath.row) {
-        case 0:
-            return titleRowHeight
-        case 4:
-            return imageRowHeight
-        case 5:
-            var tempStr = currentSelection.valueForKey("about") as! String
-            var size = getSizeForText(tempStr)
-            return size
-        default:
-            return defaultRowHeight
+            case 3:
+                return imageRowHeight
+            case 4:
+                var tempStr = currentSelection.valueForKey("about") as! String
+                var size = getSizeForText(tempStr)
+                return size
+            default:
+                return defaultRowHeight
         }
     }
     

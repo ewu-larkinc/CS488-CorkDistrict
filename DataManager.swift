@@ -431,11 +431,19 @@ class DataManager {
                 println("incoming title is \(infoArray[0])")
                 println("incoming cost is \(infoArray[3])")
             
-                var temp2 = json[ctr]["RelatedEntityTitle"]["item"]["target_id"].stringValue
-            
-                println("incoming related entity nid is \(temp2)")
-                var temp = json[ctr]["Thumbnail"].stringValue
-                println("thumbnail string value is \(temp)")
+                
+                /*if (json[ctr]["RelatedEntityTitle"].count > 1) {
+                    var temp2 = json[ctr]["RelatedEntityTitle"].arrayValue
+                    println("incoming related entity nid is \(temp2)")
+                }
+                else {
+                    var temp3 = json[ctr]["RelatedEntityTitle"].stringValue
+                    println("t3 incoming related entity nid is \(temp3)")
+                }*/
+                
+                var temp3 = json[ctr]["RelatedEntityTitle"]["item"]["target_id"].stringValue
+                println("t3 incoming related entity nid is \(temp3)")
+                
             
                 let entityImageString = stripHtml(json[ctr]["Thumbnail"].stringValue)
                 let entityImageUrl = NSURL(string: entityImageString)
