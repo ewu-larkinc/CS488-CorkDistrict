@@ -26,7 +26,7 @@ class LoadViewController : UIViewController {
         progress = 0
         
         progressView.setProgress(0, animated: true)
-        //startCount()
+        startCount()
         
         if (self.isRotating == false) {
             

@@ -22,16 +22,17 @@ class ViewController: UITableViewController {
 
         
         //THIS ALLOWS THE BACKGROUND IMAGE TO SCROLL WITH THE TABLE CELLS - NEED A TALLER VERSION OF THE IMAGE
+        //let background = UIImage(named: "menuBackground2")
         //self.tableView.backgroundColor = UIColor(patternImage: background!)
         
         
         //loadview commented out for now while testing other
-        /*let testData = dataManager.getParking()
+        let testData = dataManager.getParking()
         
         if (testData.count == 0) {
             
             let loadingVC = LoadViewController(nibName: "LoadViewController", bundle: nil)
-            loadingVC.modalTransitionStyle = UIModalTransitionStyle.CoverVertical
+            loadingVC.modalTransitionStyle = UIModalTransitionStyle.CrossDissolve
             //loadingVC.modalPresentationStyle = UIModalPresentationStyle.OverCurrentContext
             
             //error logged if I don't wait at least 1 second before calling the presentViewController method
@@ -40,7 +41,7 @@ class ViewController: UITableViewController {
             })
             
             timer.start()
-        }*/
+        }
         
     }
     

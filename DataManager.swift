@@ -55,20 +55,58 @@ class DataManager {
         return URL_NOTIFICATIONS!
     }
     
-    func getWineryIndex(title: String) -> Int {
+    func getEntityIndex(nid: Int) -> NSManagedObject {
         
         var i : Int
         
         for (i=0; i < wineries.entities.count; i++) {
-            var tempTitle = wineries.entities[i].valueForKey("name") as! String
-            println("current winery title is \(tempTitle)")
             
-            if (title == tempTitle) {
-                return i
+            var tempTitle = wineries.entities[i].valueForKey("name") as! String
+            var tempID = wineries.entities[i].valueForKey("nodeID") as! String
+            var test = tempID.toInt()
+            println("current nodeID is \(test)")
+            println("comparing against nid \(nid)")
+            
+            if (test == nid) {
+                return wineries.entities[i]
             }
         }
         
-        return -1
+        for (i=0; i < restaurants.entities.count; i++) {
+            
+            var tempTitle = restaurants.entities[i].valueForKey("name") as! String
+            var tempID = restaurants.entities[i].valueForKey("nodeID") as! String
+            var test = tempID.toInt()
+            println("current nodeID is \(test)")
+            println("comparing against nid \(nid)")
+            
+            if (test == nid) {
+                return restaurants.entities[i]
+            }
+        }
+        
+        for (i=0; i < accommodations.entities.count; i++) {
+            
+            var tempTitle = accommodations.entities[i].valueForKey("name") as! String
+            var tempID = accommodations.entities[i].valueForKey("nodeID") as! String
+            var test = tempID.toInt()
+            println("current nodeID is \(test)")
+            println("comparing against nid \(nid)")
+            
+            if (test == nid) {
+                return accommodations.entities[i]
+            }
+        }
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let managedContext = appDelegate.managedObjectContext!
+        let entityType = "Winery"
+        
+        let newEntity = NSEntityDescription.insertNewObjectForEntityForName(entityType, inManagedObjectContext:
+            managedContext) as! NSManagedObject
+        newEntity.setValue("blank", forKey: "name")
+        
+        return newEntity
     }
     
     func getRestaurants() -> [NSManagedObject] {
@@ -172,9 +210,9 @@ class DataManager {
     func fetchAllEntitiesFromCoreData() {
         fetchEntitiesFromCoreData(wineries)
         fetchEntitiesFromCoreData(restaurants)
-        fetchEntitiesFromCoreData(packages)
         fetchEntitiesFromCoreData(accommodations)
         fetchEntitiesFromCoreData(parking)
+        fetchEntitiesFromCoreData(packages)
     }
     
     func addEntityToCoreData(entityInfo: NSMutableArray, entityImage: UIImage) -> Void {
@@ -284,20 +322,30 @@ class DataManager {
         newEntity.setValue(entityInfo[7], forKey: "endMonth")
         newEntity.setValue(entityInfo[8], forKey: "startYear")
         newEntity.setValue(entityInfo[9], forKey: "endYear")
-        newEntity.setValue(entityInfo[10], forKey: "relatedNodeID")
+        newEntity.setValue(entityInfo[10], forKey: "nodeID")
+        newEntity.setValue(entityInfo[12], forKey: "relatedNodeID")
         
-        let relatedNodeID = entityInfo[10] as! String
-        //println("searching for relatedEntityTitle: \(relatedNodeID)")
-        /*var index : Int = 0
-        index = getWineryIndex(relatedTitle)
-        let wineries.entities = getWineries()
+        var relatedNodeIDString = entityInfo[12] as! String
+        /*if let relatedNodeID = relatedNodeIDString.toInt() {
         
-        println("index is \(index)")
+            println("searching for relatedEntityNID: \(relatedNodeID)")
+            var index : Int
+            index = getEntityIndex(relatedNodeID)
         
-        let relatedEntity = wineries.entities[index]
+            println("index is \(index)")
+        
+            if (index >= 0) {
+                let relatedEntity = wineries.entities[index]
+                if let title = relatedEntity.valueForKey("name") as? String {
+                    var entityTitle = title
+                    println("Located entity title \(entityTitle)")
+                }
+                
+            }
+        }*/
         
         
-        if (index >= 0) {
+        /*if (index >= 0) {
             newEntity.setValue(relatedEntity.valueForKey("address"), forKey: "relatedEntityAddress")
             newEntity.setValue(relatedEntity.valueForKey("city"), forKey: "relatedEntityCity")
             newEntity.setValue(relatedEntity.valueForKey("zipcode"), forKey: "relatedEntityZipcode")
@@ -318,11 +366,11 @@ class DataManager {
         progress = 0.2
         fetchEntitiesFromWeb(restaurants)
         progress = 0.4
-        fetchEntitiesFromWeb(packages)
+        fetchEntitiesFromWeb(accommodations)
         progress = 0.6
         fetchEntitiesFromWeb(parking)
         progress = 0.8
-        fetchEntitiesFromWeb(accommodations)
+        fetchEntitiesFromWeb(packages)
     }
     
     func fetchEntitiesFromWeb(entity: CorkDistrictEntity) -> Void {
@@ -418,10 +466,11 @@ class DataManager {
             println("Downloading \(entity.type)...")
             deleteFromCoreData(entity)
             var ctr=0
-            var infoArray = NSMutableArray()
+            
         
             while (ctr < json.count) {
-            
+                var infoArray = NSMutableArray()
+                
                 infoArray.addObject(json[ctr]["node_title"].stringValue)
                 infoArray.addObject(json[ctr]["Description"].stringValue)
                 infoArray.addObject(json[ctr]["Website"].stringValue)
@@ -434,25 +483,33 @@ class DataManager {
                 infoArray.addObject(json[ctr]["EndYear"].stringValue)
                 infoArray.addObject(json[ctr]["nid"].stringValue)
                 infoArray.addObject(entity.type)
-            
-                println("testing in parseJSONPackages...")
-                println("incoming title is \(infoArray[0])")
-                println("incoming cost is \(infoArray[3])")
-            
                 
-                /*if (json[ctr]["RelatedEntityTitle"].count > 1) {
-                    var temp2 = json[ctr]["RelatedEntityTitle"].arrayValue
-                    println("incoming related entity nid is \(temp2)")
+                if let node = json[ctr]["nid"].string {
+                    var nodeId = node
+                    println("current nodeID is \(nodeId)")
                 }
-                else {
-                    var temp3 = json[ctr]["RelatedEntityTitle"].stringValue
-                    println("t3 incoming related entity nid is \(temp3)")
-                }*/
+                var title = json[ctr]["node_title"]
                 
-                var temp3 = json[ctr]["RelatedEntityTitle"].stringValue
-                println("t3 incoming related entity nid is \(temp3)")
+                println("current title is \(title)")
                 
-            
+                var relatedNid: String
+                var tempNid: String
+                //let testing = json[ctr]["RelatedEntityTitle"][0]["target_id"].stringValue
+                //println("testing is \(testing)")
+                
+                relatedNid = json[ctr]["RelatedEntityTitle"][0]["target_id"].stringValue
+                tempNid = relatedNid
+                
+                println("relatedNID count is")
+                println(json[ctr]["RelatedEntityTitle"].count)
+                
+                if json[ctr]["RelatedEntityTitle"].count > 1 {
+                    tempNid = relatedNid + "," + json[ctr]["RelatedEntityTitle"][1]["target_id"].stringValue
+                }
+                
+                
+                infoArray.addObject(tempNid)
+                
                 let entityImageString = stripHtml(json[ctr]["Thumbnail"].stringValue)
                 let entityImageUrl = NSURL(string: entityImageString)
                 let imgData = NSData(contentsOfURL: entityImageUrl!)
@@ -474,6 +531,16 @@ class DataManager {
         var entityImageString = entityImageStringArray[2].stringByReplacingOccurrencesOfString("src=\"", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
         
         return entityImageString.stringByReplacingOccurrencesOfString("\"", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+    }
+    
+    func stripHtml2(urlObject: String) -> String {
+        
+        let entityStringArray = urlObject.componentsSeparatedByString(" ")
+        for string in entityStringArray {
+            println("current string is \(string)")
+        }
+        
+        return ""
     }
     
     func separateCityStateZip(cityStateZip: String) -> [String] {

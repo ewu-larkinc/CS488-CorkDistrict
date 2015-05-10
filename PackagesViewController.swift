@@ -22,6 +22,7 @@ class PackagesViewController: UIViewController, UITableViewDataSource, UITableVi
         
         let dataManager = DataManager.sharedInstance
         packages = dataManager.getPackages()
+        gatherAssociatedEntityInfo()
     }
     
     override func didReceiveMemoryWarning() {
@@ -35,6 +36,122 @@ class PackagesViewController: UIViewController, UITableViewDataSource, UITableVi
         self.automaticallyAdjustsScrollViewInsets = false
     }
     
+    func gatherAssociatedEntityInfo() {
+        let dataManager = DataManager.sharedInstance
+        
+        let tempWineries: [NSManagedObject] = dataManager.getWineries()
+        
+        for package in packages {
+            
+            
+            if let tempNodeID = package.valueForKey("relatedNodeID") as? String {
+                
+                var nodeIDS = tempNodeID.componentsSeparatedByString(",")
+                var finalNodeID: String
+                
+                if (nodeIDS.count > 1) {
+                    println("Current Package has 2 ASSOCIATED ENTITIES")
+                    var nodeID1 = nodeIDS[0].toInt()
+                    println("First nodeID: \(nodeID1)")
+                    var nodeID2 = nodeIDS[1].toInt()
+                    println("Second nodeID: \(nodeID2)")
+                    
+                    var entity1 = dataManager.getEntityIndex(nodeID1!)
+                    
+                    var entity2 = dataManager.getEntityIndex(nodeID2!)
+                    println("index1: \(nodeID1)")
+                    println("index2: \(nodeID2)")
+                    
+                    if let testEntity1 = entity1.valueForKey("name") as? String {
+                        if testEntity1 != "blank" {
+                            println("associated winery1 is: ")
+                            println(testEntity1)
+                        }
+                        
+                        if let testEntity2 = entity2.valueForKey("name") as? String {
+                            if testEntity2 != "blank" {
+                                println("associated winery2 is: ")
+                                println(testEntity2)
+                            }
+                            
+                            var finalTitle = testEntity1 + ", " + testEntity2
+                            package.setValue(finalTitle, forKey: "relatedEntityName")
+                      
+                    
+                    /*if (index1 > 0) {
+                        println("associated winery1 is: ")
+                        if let title = winery1.valueForKey("name") as? String {
+                            println(title)
+                            
+                            
+                            if let title2 = winery2.valueForKey("name") as? String {
+                                println("associated winery2 is: ")
+                                println(title2)
+                                var finalTitle = title + ", " + title2
+                                package.setValue(title, forKey: "relatedEntityName")
+                            }
+                        }
+                        
+                    }*/
+                        }  }
+                } else {
+                    println("Current package has 1 ASSOCIATED ENTITY")
+                    var nodeID1 = nodeIDS[0].toInt()
+                    println("First nodeID: \(nodeID1)")
+                    var entity1 = dataManager.getEntityIndex(nodeID1!)
+                    println("index1: \(nodeID1)")
+                    
+                    if let testEntity1 = entity1.valueForKey("name") as? String {
+                        if testEntity1 != "blank" {
+                            println("associated winery1 is: ")
+                            println(testEntity1)
+                        }
+                        
+                        var finalTitle = testEntity1
+                        package.setValue(finalTitle, forKey: "relatedEntityName")
+                    }
+                }
+                
+                
+                
+                /*var nodeID = tempNodeID.toInt()!
+                println("searching for nodeID: \(nodeID)")
+                var index = dataManager.getEntityIndex(nodeID)
+                let theWinery = tempWineries[index]
+                
+                if (index >= 0) {
+                    println("associated winery is: ")
+                    if let title = tempWineries[index].valueForKey("name") as? String {
+                        println(title)
+                        package.setValue(title, forKey: "relatedEntityName")
+                    }
+                    
+                }*/
+            }
+            
+                
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            let managedContext = appDelegate.managedObjectContext!
+            appDelegate.saveContext()
+            
+            var error: NSError?
+            if !managedContext.save(&error) {
+                println("Could not save \(error), \(error?.userInfo)")
+            }
+            
+        }
+        
+    }
+
+    func stripHtml(urlObject: String) -> String {
+
+        //println("testing... entitiyImageString is \(urlObject)")
+        let entityImageStringArray = urlObject.componentsSeparatedByString("Optional(")
+        var entityImageString = entityImageStringArray[1].stringByReplacingOccurrencesOfString(")", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+        
+        return entityImageString
+        //return entityImageString.stringByReplacingOccurrencesOfString("\"", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+    }
     
     //# MARK: - TableView Methods
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -61,21 +178,24 @@ class PackagesViewController: UIViewController, UITableViewDataSource, UITableVi
         let package = packages[indexPath.row]
         let imageData = package.valueForKey("imageData") as? NSData
         let myImage = UIImage(data: imageData!)
+        var cost = package.valueForKey("cost") as? String
         var startDay = package.valueForKey("startDay") as? String
         var startMonth = package.valueForKey("StartMonth") as? String
         var startYear = package.valueForKey("startYear") as? String
         var endDay = package.valueForKey("endDay") as? String
         var endMonth = package.valueForKey("endMonth") as? String
         var endYear = package.valueForKey("endYear") as? String
-        var startDate = startMonth! + " " + startDay! + " " + startYear!
-        var endDate = endMonth! + " " + endDay! + " " + endYear!
+        var startDate = startMonth! + " " + startDay! + ", " + startYear!
+        var endDate = endMonth! + " " + endDay! + ", " + endYear!
         var nodeId = package.valueForKey("relatedNodeID") as? String
         println("Testing in packages - Node_ID: \(nodeId)")
         
         cell.titleLabel.text = package.valueForKey("name") as? String
+        cell.titleLabel.adjustsFontSizeToFitWidth = true
+        cell.titleLabel.sizeToFit()
         cell.entityTitleLabel.text = package.valueForKey("relatedEntityName") as? String
         cell.dateLabel.text = startDate + " - " + endDate
-        cell.costLabel.text = package.valueForKey("cost") as? String
+        cell.costLabel.text = "$" + cost!
         cell.cellImage.image = myImage
         
         cell.cellImage.layer.cornerRadius = 4.0
