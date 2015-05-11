@@ -16,8 +16,50 @@ class PackageDetailViewController : UIViewController, UITableViewDataSource, UIT
     let imageRowHeight : CGFloat = 300.0
     let defaultRowHeight : CGFloat = 60.0
     var currentSelection : NSManagedObject!
+    var relatedEntityName : String!
+    var relatedEntityAddress : String!
+    var relatedEntityPhone : String!
+    
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     
+    
+    override func viewDidLoad() {
+        
+        let dataManager = DataManager.sharedInstance
+        
+        let names = currentSelection.valueForKey("relatedEntityName") as? String
+        
+        if let nameArray = splitStringByComma(names!) {
+            let name1 = nameArray[0]
+            println("Name 1 is \(name1)")
+            let name2 = nameArray[1]
+            println("Name 2 is \(name2)")
+            
+            relatedEntityName = name1 + ", " + name2
+            let entity1 = dataManager.getEntity(name1)
+            let entity2 = dataManager.getEntity(name2)
+        }
+        else {
+            println("Name is \(names)")
+            relatedEntityName = names
+            let entity = dataManager.getEntity(names!)
+            relatedEntityAddress = entity.valueForKey("address") as? String
+            relatedEntityPhone = entity.valueForKey("phone") as? String
+        }
+        
+        gatherAssociatedEntityInfo(names!)
+    }
+    
+    func gatherAssociatedEntityInfo(entityName: String) {
+        
+    }
+    
+    func splitStringByComma(name: String) -> [String]? {
+        
+        //println("testing... entitiyImageString is \(urlObject)")
+        let entityImageStringArray = name.componentsSeparatedByString(",")
+        return entityImageStringArray
+    }
     
     //# MARK: - TableView Methods
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -36,12 +78,15 @@ class PackageDetailViewController : UIViewController, UITableViewDataSource, UIT
         
         switch (indexPath.row) {
         case 0:
-            let titleLabel = UILabel(frame: CGRectMake(15.0,0.0,350.0,82.0))
+            cell.textLabel?.text = currentSelection.valueForKey("name") as? String
+            cell.textLabel?.adjustsFontSizeToFitWidth = true
+            
+            /*let titleLabel = UILabel(frame: CGRectMake(15.0,0.0,350.0,82.0))
             titleLabel.font = UIFont(name: "STHeitiTC-Light", size: 36.0)
             titleLabel.textAlignment = NSTextAlignment.Left
             titleLabel.text = currentSelection.valueForKey("name") as? String
             titleLabel.adjustsFontSizeToFitWidth = true
-            cell.addSubview(titleLabel)
+            cell.addSubview(titleLabel)*/
             break
         case 1:
             cell.textLabel?.text = currentSelection.valueForKey("cost") as? String

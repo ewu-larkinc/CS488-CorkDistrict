@@ -74,7 +74,7 @@ class WineriesViewController: UIViewController, UITableViewDataSource, UITableVi
         var name = winery.valueForKey("name") as? String
         var address = winery.valueForKey("address") as? String
         var city = winery.valueForKey("city") as? String
-        var website = winery.valueForKey("website") as? String
+        var hours = winery.valueForKey("hours") as? String
         var phone = winery.valueForKey("phone") as? String
         var zip = winery.valueForKey("zipcode") as? String
         var state = "WA"
@@ -88,7 +88,7 @@ class WineriesViewController: UIViewController, UITableViewDataSource, UITableVi
         cell.cityLabel.text = city! + ", " + state + " " + zip!
         cell.cityLabel.sizeToFit()
         cell.phoneLabel.text = phone
-        cell.websiteLabel.text = website
+        cell.websiteLabel.text = hours
         cell.cellImage.image = cellImage
         
         cell.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.2)

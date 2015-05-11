@@ -54,6 +54,7 @@
         <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="city" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="cluster" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="hours" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="imageData" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="nodeID" optional="YES" attributeType="String" syncable="YES"/>
@@ -67,6 +68,6 @@
         <element name="Package" positionX="-45" positionY="99" width="128" height="255"/>
         <element name="Parking" positionX="-45" positionY="108" width="128" height="150"/>
         <element name="Restaurant" positionX="-54" positionY="54" width="128" height="195"/>
-        <element name="Winery" positionX="-63" positionY="-18" width="128" height="210"/>
+        <element name="Winery" positionX="-63" positionY="-18" width="128" height="225"/>
     </elements>
 </model>

@@ -14,6 +14,7 @@ class CorkDistrictEntity {
     var webCount = Int(0)
     var type = String()
     var URL = NSURL()
+    var needsWebUpdate = Bool()
     var entities = [NSManagedObject]()
 
     func clearEntities() {

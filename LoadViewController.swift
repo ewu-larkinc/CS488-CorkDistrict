@@ -41,7 +41,7 @@ class LoadViewController : UIViewController {
             self.isRotating = true
         }
         
-        self.timer = Timer(duration: 5.0, completionHandler: {
+        self.timer = Timer(duration: 3.0, completionHandler: {
             self.getProgress()
         })
         timer.start()
@@ -52,6 +52,7 @@ class LoadViewController : UIViewController {
         let dataManager = DataManager.sharedInstance
         
         while (progress < 1.0) {
+            dataManager.updateProgress()
             progress = dataManager.getProgress()
             progressView.setProgress(progress, animated: true)
         }

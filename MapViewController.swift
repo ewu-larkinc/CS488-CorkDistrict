@@ -20,176 +20,154 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     let locationManager = CLLocationManager()
     
-    var wineries = [NSManagedObject]()
-    var restaurants = [NSManagedObject]()
-    var hotels = [NSManagedObject]()
-    var parking = [NSManagedObject]()
     var showWineries: Bool = false
-    var pins = [MKPointAnnotation]()
+    var showHotels: Bool = false
+    var showParking: Bool = false
+    var showRest: Bool = false
+    
     var winePins = [MKPointAnnotation]()
-    var currentPin = Int()
-    var currentType = NSString()
+    var hotelPins = [MKPointAnnotation]()
+    var parkPins = [MKPointAnnotation]()
+    var restPins = [MKPointAnnotation]()
+    
+    let util = MapUtilities()
+    var mapRoutes = [MKRoute]()
     
     @IBOutlet var theMapView: MKMapView!
     
+    @IBOutlet var parkButton: UIButton!
+    @IBOutlet var restButton: UIButton!
     @IBOutlet var wineButton: UIButton!
+    @IBOutlet var hotelButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //hi
-        // Do any additional setup after loading the view, typically from a nib.
-        var lat: CLLocationDegrees = 47.66
-        var long: CLLocationDegrees = -117.2999
-        
-        var latDelta: CLLocationDegrees = 0.5
-        var longDelta: CLLocationDegrees = 0.5
         
         
+        util.mapView = theMapView
+        util.multiPinsMap()
         
-        var theSpan: MKCoordinateSpan = MKCoordinateSpanMake(latDelta, longDelta)
+        //request user location
+        locationManager.requestWhenInUseAuthorization()
         
-        var centerLocation: CLLocationCoordinate2D = CLLocationCoordinate2DMake(lat, long)
+        self.theMapView.showsUserLocation = true
+        
+        //fill pin arrays
+        winePins = util.pinTypeOnMap("winery")
+        
+        restPins = util.pinTypeOnMap("rest")
+        
+        hotelPins = util.pinTypeOnMap("hotel")
+        
+        parkPins = util.pinTypeOnMap("park")
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        
+        super.viewWillAppear(animated)
+        
+        self.navigationController?.navigationBar.hidden = false
+        
+        self.automaticallyAdjustsScrollViewInsets = false
+        
+        var theSpan: MKCoordinateSpan = MKCoordinateSpanMake(0.05, 0.05)
+        
+        var centerLocation: CLLocationCoordinate2D = CLLocationCoordinate2DMake(47.655262, -117.414129)
         
         var theRegion: MKCoordinateRegion = MKCoordinateRegionMake(centerLocation, theSpan)
         
         self.theMapView.setRegion(theRegion, animated: true)
-
-        //CoreData
-        let dataManager = DataManager.sharedInstance
-        wineries = dataManager.getWineries()
-        restaurants = dataManager.getRestaurants()
-        
-        let util = MapUtilities()
-        util.mapView = theMapView
-        //util.distanceRequired = true
-        
-        
-        //util.sortByDistance()
-        
-        //request user location
-        locationManager.requestWhenInUseAuthorization()
-        //  if locationManager.
-        self.theMapView.showsUserLocation = true
-        var wineriesTemp = [NSManagedObject]()
-        wineriesTemp.append(wineries[1]);
-        
-       // util.getDirections(wineriesTemp, start: wineries[2]);
-        
-        util.placePinsOnMap(wineries, type: "winery")
-        util.placePinsOnMap(restaurants, type: "rest")
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        self.navigationController?.navigationBar.hidden = false
-        self.automaticallyAdjustsScrollViewInsets = false
     }
     
     @IBAction func filterWineries(AnyObject) {
         if(showWineries){
-            //MapUtilities.placePinsOnMap(wineries, type: "winery")
+            addPins(winePins)
             showWineries = false
             wineButton.alpha = 1.0
         }
         else {
-            removeWineries()
+            removePins(winePins)
             showWineries = true
             wineButton.alpha = 0.5
         }
     }
-    func removeWineries() {
-        for var i = 0; i < wineries.count; i++ {
-            theMapView.removeAnnotation(pins[i])
+    @IBAction func filterHotels(AnyObject) {
+        if(showHotels){
+            addPins(hotelPins)
+            showHotels = false
+            hotelButton.alpha = 1.0
+        }
+        else {
+            removePins(hotelPins)
+            showHotels = true
+            hotelButton.alpha = 0.5
+        }
+    }
+    @IBAction func filterRest(AnyObject) {
+        if(showRest){
+            addPins(restPins)
+            showRest = false
+            restButton.alpha = 1.0
+        }
+        else {
+            removePins(restPins)
+            showRest = true
+            restButton.alpha = 0.5
+        }
+    }
+    @IBAction func filterParking(AnyObject) {
+        if(showParking){
+            addPins(parkPins)
+            showParking = false
+            parkButton.alpha = 1.0
+        }
+        else {
+            removePins(parkPins)
+            showParking = true
+            parkButton.alpha = 0.5
+        }
+    }
+    func removePins(arraytype: [MKPointAnnotation]) {
+        for var i = 0; i < arraytype.count; i++ {
+            theMapView.removeAnnotation(arraytype[i])
         }
     }
     
+    func addPins(arraytype: [MKPointAnnotation]) {
+        for var i = 0; i < arraytype.count; i++ {
+            theMapView.addAnnotation(arraytype[i])
+        }
+    }
     func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
         if !(annotation is MKPointAnnotation) {
             return nil
         }
         
-        let reuseId = "test"
-        
-        var anView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId)
-        if anView == nil {
-            anView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
-            if(annotation.subtitle == "winery") {
-                anView.image = UIImage(named:"Wine_Icon")
-                self.currentType = "wine"
-            }
-            if(annotation.subtitle == "rest") {
-                anView.image = UIImage(named:"Food_Icon")
-                self.currentType = "rest"
-
-            }
-            if(annotation.subtitle == "hotel") {
-                anView.image = UIImage(named:"Hotel_Icon")
-                self.currentType = "hotel"
-
-            }
-            if(annotation.subtitle == "park") {
-                anView.image = UIImage(named:"Park_Icon")
-                self.currentType = "park"
-
-            }
-            anView.canShowCallout = false
-            
-        }
-        else {
-            anView.annotation = annotation
-            
-        }
-    
-        return anView
+        return util.viewForAnnotation(mapView, viewForAnnotation: annotation)
     }
     func mapView(mapView: MKMapView!, rendererForOverlay overlay: MKOverlay!) -> MKOverlayRenderer! {
-        println("rendererForOverlay");
         
         if (overlay is MKPolyline) {
-            var pr = MKPolylineRenderer(overlay: overlay);
-            pr.strokeColor = UIColor.blueColor().colorWithAlphaComponent(0.5);
-            pr.lineWidth = 5;
-            return pr;
+            
+            return util.renderForOverlay(mapView, rendererForOverlay: overlay)
         }
-        
         
         return nil
     }
     func mapView(mapView: MKMapView!, didSelectAnnotationView view: MKAnnotationView!) {
-//......Determines what kind of pin was touched...........................................................//
-        //var temp = NSManagedObject()
-        currentPin = view.annotation.title!.toInt()!
-        var temp = wineries[view.annotation.title!.toInt()!]
-
-        if(view.annotation.subtitle == "winery") {
-            temp = wineries[view.annotation.title!.toInt()!]
-            self.currentType = "wine"
-        }
-        else if(view.annotation.subtitle == "rest") {
-            temp = restaurants[view.annotation.title!.toInt()!]
-            self.currentType = "rest"
-        }
-        else if(view.annotation.subtitle == "hotel") {
-            temp = hotels[view.annotation.title!.toInt()!]
-            self.currentType = "hotel"
-        }
-        else if(view.annotation.subtitle == "park") {
-            
-            temp = parking[view.annotation.title!.toInt()!]
-            self.currentType = "park"
-        }
-        
-//......Create a alertView when pin is clicked...........................................................//
+        //......Determines what kind of pin was touched...........................................................//
+        var temp = util.didSelectAnnotationView(view)
+        //......Create a alertView when pin is clicked...........................................................//
         var alertView = UIAlertController(title: temp.valueForKey("name") as? String, message: temp.valueForKey("address") as? String, preferredStyle: .Alert)
         
         var imageView = UIImageView(frame: CGRectMake(10, 15, 50, 50))
-        
-        let imageData = temp.valueForKey("imageData") as? NSData
-        
-        imageView.image = UIImage(data: imageData!)
-        
-        alertView.view.addSubview(imageView)
-        
+        if(view.annotation.subtitle != "park") {
+            let imageData = temp.valueForKey("imageData") as? NSData
+            
+            imageView.image = UIImage(data: imageData!)
+            
+            alertView.view.addSubview(imageView)
+        }
         let callAction = UIAlertAction(title: "Call", style: .Default, handler: {
             action in
             let alertMessage = UIAlertController(title: "Are you sure?", message: "Are you sure you want to call this winery?", preferredStyle: .Alert)
@@ -210,12 +188,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         let detailAction = UIAlertAction(title: "Details", style: .Default, handler: {
             action in
-            let detailVC = DetailViewController()
-            self.performSegueWithIdentifier("mapDetail", sender: self)
             
         })
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: {
             action in
+            
         })
         
         alertView.addAction(callAction)
@@ -224,54 +201,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         
         
-        self.presentViewController(alertView, animated: true, completion: nil)
-        
-        
+        presentViewController(alertView, animated: true, completion: nil)
     }
-
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!)
-    {
-        
-        
-        var detailVC: DetailViewController = segue.destinationViewController as! DetailViewController
-        
-        var selectedItem: NSManagedObject = wineries[currentPin] as NSManagedObject
-        
-        
-        if(currentType == "wine")
-        {
-            selectedItem = wineries[currentPin] as NSManagedObject
-            detailVC.currentSelection = selectedItem
-
-            
-        }
-        else if(currentType == "rest")
-        {
-            selectedItem = restaurants[currentPin] as NSManagedObject
-            detailVC.currentSelection = selectedItem
-
-        }
-        else if(currentType == "hotel")
-        {
-            selectedItem = hotels[currentPin] as NSManagedObject
-            detailVC.currentSelection = selectedItem
-
-
-        }
-        else if(currentType == "park")
-        {
-            //selectedItem = parks[currentPin] as NSManagedObject
-            //
-            detailVC.currentSelection = selectedItem
-        }
-        
-        
-        //print("HMD IT works kinda \n")
-
-        
-        
-      
-    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

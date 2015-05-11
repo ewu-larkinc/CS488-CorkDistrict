@@ -56,9 +56,9 @@ class PackagesViewController: UIViewController, UITableViewDataSource, UITableVi
                     var nodeID2 = nodeIDS[1].toInt()
                     println("Second nodeID: \(nodeID2)")
                     
-                    var entity1 = dataManager.getEntityIndex(nodeID1!)
+                    var entity1 = dataManager.getEntity(nodeID1!)
                     
-                    var entity2 = dataManager.getEntityIndex(nodeID2!)
+                    var entity2 = dataManager.getEntity(nodeID2!)
                     println("index1: \(nodeID1)")
                     println("index2: \(nodeID2)")
                     
@@ -98,7 +98,7 @@ class PackagesViewController: UIViewController, UITableViewDataSource, UITableVi
                     println("Current package has 1 ASSOCIATED ENTITY")
                     var nodeID1 = nodeIDS[0].toInt()
                     println("First nodeID: \(nodeID1)")
-                    var entity1 = dataManager.getEntityIndex(nodeID1!)
+                    var entity1 = dataManager.getEntity(nodeID1!)
                     println("index1: \(nodeID1)")
                     
                     if let testEntity1 = entity1.valueForKey("name") as? String {
@@ -192,7 +192,9 @@ class PackagesViewController: UIViewController, UITableViewDataSource, UITableVi
         
         cell.titleLabel.text = package.valueForKey("name") as? String
         cell.titleLabel.adjustsFontSizeToFitWidth = true
-        cell.titleLabel.sizeToFit()
+        //cell.titleLabel.sizeToFit()
+        
+        
         cell.entityTitleLabel.text = package.valueForKey("relatedEntityName") as? String
         cell.dateLabel.text = startDate + " - " + endDate
         cell.costLabel.text = "$" + cost!

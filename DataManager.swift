@@ -47,6 +47,10 @@ class DataManager {
         return progress
     }
     
+    func checkProgress() -> Float {
+        return progress
+    }
+    
     func getWineries() -> [NSManagedObject] {
         return wineries.entities 
     }
@@ -55,7 +59,7 @@ class DataManager {
         return URL_NOTIFICATIONS!
     }
     
-    func getEntityIndex(nid: Int) -> NSManagedObject {
+    func getEntity(nid: Int) -> NSManagedObject {
         
         var i : Int
         
@@ -94,6 +98,54 @@ class DataManager {
             println("comparing against nid \(nid)")
             
             if (test == nid) {
+                return accommodations.entities[i]
+            }
+        }
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let managedContext = appDelegate.managedObjectContext!
+        let entityType = "Winery"
+        
+        let newEntity = NSEntityDescription.insertNewObjectForEntityForName(entityType, inManagedObjectContext:
+            managedContext) as! NSManagedObject
+        newEntity.setValue("blank", forKey: "name")
+        
+        return newEntity
+    }
+    
+    func getEntity(entityName: String) -> NSManagedObject {
+        
+        var i : Int
+        
+        for (i=0; i < wineries.entities.count; i++) {
+            
+            var tempTitle = wineries.entities[i].valueForKey("name") as! String
+            println("current Name is: \(tempTitle)")
+            println("comparing against entity: \(entityName)")
+            
+            if (tempTitle == entityName) {
+                return wineries.entities[i]
+            }
+        }
+        
+        for (i=0; i < restaurants.entities.count; i++) {
+            
+            var tempTitle = restaurants.entities[i].valueForKey("name") as! String
+            println("current Name is: \(tempTitle)")
+            println("comparing against entity: \(entityName)")
+            
+            if (tempTitle == entityName) {
+                return restaurants.entities[i]
+            }
+        }
+        
+        for (i=0; i < accommodations.entities.count; i++) {
+            
+            var tempTitle = accommodations.entities[i].valueForKey("name") as! String
+            println("current Name is: \(tempTitle)")
+            println("comparing against entity: \(entityName)")
+            
+            if (tempTitle == entityName) {
                 return accommodations.entities[i]
             }
         }
@@ -237,6 +289,7 @@ class DataManager {
             
             if (entityType == wineries.type) {
                 newEntity.setValue(entityInfo[9], forKey: "cluster")
+                newEntity.setValue(entityInfo[10], forKey: "hours")
             }
         }
         
@@ -360,17 +413,70 @@ class DataManager {
         packages.entities.append(newEntity)
     }
     
+    func updateProgress() {
+        
+        progress = 0
+        
+        println("wineries count and webcount: \(wineries.entities.count) \(wineries.webCount)")
+        if (wineries.needsWebUpdate) {
+            if (wineries.entities.count == wineries.webCount && wineries.webCount != 0) {
+                progress += 0.2
+            }
+        }
+        else {
+            progress += 0.2
+        }
+        println("restaurants count and webcount: \(restaurants.entities.count) \(restaurants.webCount)")
+        if (restaurants.needsWebUpdate) {
+            if (restaurants.entities.count == restaurants.webCount && restaurants.webCount != 0) {
+                progress += 0.2
+            }
+        }
+        else {
+            progress += 0.2
+        }
+        println("accommodations count and webcount: \(accommodations.entities.count) \(accommodations.webCount)")
+        if (accommodations.needsWebUpdate) {
+            if (accommodations.entities.count == accommodations.webCount && accommodations.webCount != 0) {
+                progress += 0.2
+            }
+        }
+        else {
+            progress += 0.2
+        }
+        println("parking count and webcount: \(parking.entities.count) \(parking.webCount)")
+        if (parking.needsWebUpdate) {
+            if (parking.entities.count == parking.webCount && parking.webCount != 0) {
+                progress += 0.2
+            }
+        }
+        else {
+            progress += 0.2
+        }
+        println("packages count and webcount: \(packages.entities.count) \(packages.webCount)")
+        if (packages.needsWebUpdate) {
+            if (packages.entities.count == packages.webCount && packages.webCount != 0) {
+                progress += 0.2
+            }
+        }
+        else {
+            progress += 0.2
+        }
+        
+        updateProgress()
+    }
+    
     //#MARK: - NSURLSession Methods
     func fetchAllEntitiesFromWeb() {
+        
+        progress = 0
+        
         fetchEntitiesFromWeb(wineries)
-        progress = 0.2
         fetchEntitiesFromWeb(restaurants)
-        progress = 0.4
         fetchEntitiesFromWeb(accommodations)
-        progress = 0.6
         fetchEntitiesFromWeb(parking)
-        progress = 0.8
         fetchEntitiesFromWeb(packages)
+        
     }
     
     func fetchEntitiesFromWeb(entity: CorkDistrictEntity) -> Void {
@@ -396,10 +502,13 @@ class DataManager {
             parseJSONPackage(data, entity: entity)
             
         } else {
-            
             let json = JSON(data: data)
             println("\(entity.type) webCount: \(json.count) cdCount: \(entity.entities.count)")
+            entity.webCount = json.count
+            entity.needsWebUpdate = false
+            
             if (json.count != entity.entities.count) {
+                entity.needsWebUpdate = true
                 println("Downloading \(entity.type)...")
                 deleteFromCoreData(entity)
                 var ctr=0
@@ -438,6 +547,7 @@ class DataManager {
                     
                         if (entity.type == wineries.type) {
                             infoArray.addObject(json[ctr]["Cluster"].stringValue)
+                            infoArray.addObject(json[ctr]["Hours of Operation"].stringValue)
                     }
                     
                     addEntityToCoreData(infoArray, entityImage: entityImage!)
@@ -464,12 +574,16 @@ class DataManager {
         
         if (json.count != entity.entities.count) {
             println("Downloading \(entity.type)...")
+            entity.webCount = json.count
+            entity.needsWebUpdate = false
+            
             deleteFromCoreData(entity)
             var ctr=0
             
         
             while (ctr < json.count) {
                 var infoArray = NSMutableArray()
+                entity.needsWebUpdate = true
                 
                 infoArray.addObject(json[ctr]["node_title"].stringValue)
                 infoArray.addObject(json[ctr]["Description"].stringValue)
