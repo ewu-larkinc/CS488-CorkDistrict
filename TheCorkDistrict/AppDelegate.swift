@@ -29,6 +29,56 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return true
     }
+    
+    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+        var characterSet: NSCharacterSet = NSCharacterSet( charactersInString: "<>" )
+        
+        var deviceTokenString: String = ( deviceToken.description as NSString )
+            .stringByTrimmingCharactersInSet( characterSet )
+            .stringByReplacingOccurrencesOfString( " ", withString: "" ) as String
+        
+        currentDeviceToken = deviceToken
+        println(deviceTokenString)
+        
+        var request = NSMutableURLRequest(URL: URL_NOTIFICATIONS)
+        var session = NSURLSession.sharedSession()
+        var err: NSError?
+        var params = ["token":deviceTokenString, "type":"ios"]
+        
+        
+        request.HTTPMethod = "POST"
+        request.HTTPBody = NSJSONSerialization.dataWithJSONObject(params, options: nil, error: &err)
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        
+        var task = session.dataTaskWithRequest(request, completionHandler: {data, response, error -> Void in
+            
+            var strData = NSString(data: data, encoding: NSUTF8StringEncoding)
+            var err: NSError?
+            var json = NSJSONSerialization.JSONObjectWithData(data, options: .MutableLeaves, error: &err) as? NSDictionary
+            
+            if (err != nil) {
+                println(err!.localizedDescription)
+                let jsonStr = NSString(data: data, encoding: NSUTF8StringEncoding)
+                println("Error. Could not parse JSON: \(jsonStr)")
+            }
+            else {
+                if let parseJSON = json {
+                    var success = parseJSON["success"] as? Int
+                    println("Success: \(success)")
+                }
+                else {
+                    println("JSON object was nil!!!")
+                }
+            }
+        })
+        
+        task.resume()
+    }
+    
+    func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
+        println("Couldn’t register: \(error)")
+    }
 
     func applicationWillResignActive(application: UIApplication) {
         
