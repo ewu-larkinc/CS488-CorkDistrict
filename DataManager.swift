@@ -27,9 +27,10 @@ class DataManager : NSObject, NSURLConnectionDataDelegate {
     private var packages = [NSManagedObject]()
     private var parking = [NSManagedObject]()
     
+    private let URL_NOTIFICATIONS = NSURL(string: "http://www.corkdistrictapp.com/rest/push_notifications")
     private let ENTITY_URL_WINERY = NSURL(string: "http://www.nathanpilgrim.net/rest/wineries.json")
     private let ENTITY_URL_RESTAURANT = NSURL(string: "http://www.nathanpilgrim.net/rest/restaurants.json")
-    private let ENTITY_URL_ACCOMMODATION = NSURL(string: "http://www.nathanpilgrim.net/rest/lodging.json")
+    private let ENTITY_URL_ACCOMMODATION = NSURL(string: "http://www.corkdistrictapp.com/rest/lodging.json")
     private let ENTITY_URL_PACKAGE = NSURL(string: "http://www.nathanpilgrim.net/rest/packages.json")
     private let ENTITY_URL_PARKING = NSURL(string: "http://www.nathanpilgrim.net/rest/parking.json")
     private let ENTITY_TYPE_WINERY : String = "Winery"
@@ -64,6 +65,10 @@ class DataManager : NSObject, NSURLConnectionDataDelegate {
     
     func getWineries() -> [NSManagedObject] {
         return wineries 
+    }
+    
+    func getNotificationURL() -> NSURL {
+        return URL_NOTIFICATIONS!
     }
     
     func getWineryIndex(title: String) -> Int {

@@ -24,8 +24,8 @@
                                     <outlet property="delegate" destination="2ZD-wG-sk8" id="4qk-PE-Hl5"/>
                                 </connections>
                             </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" restorationIdentifier="wineButton" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mRt-cK-sOP">
-                                <rect key="frame" x="36" y="525" width="75" height="75"/>
+                            <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="wineButton" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mRt-cK-sOP">
+                                <rect key="frame" x="8" y="525" width="75" height="75"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="75" id="IO5-nv-nEx"/>
@@ -41,8 +41,8 @@
                                     <action selector="filterWineries:" destination="2ZD-wG-sk8" eventType="touchUpInside" id="CFr-RE-c2Y"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" restorationIdentifier="hotelButton" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xHW-WL-vwx">
-                                <rect key="frame" x="111" y="525" width="75" height="75"/>
+                            <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="hotelButton" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xHW-WL-vwx">
+                                <rect key="frame" x="83" y="525" width="75" height="75"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="75" id="WsF-qj-bc3"/>
@@ -58,8 +58,8 @@
                                     <action selector="filterHotels:" destination="2ZD-wG-sk8" eventType="touchUpInside" id="lDr-la-JAC"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oWT-P3-kBr">
-                                <rect key="frame" x="185" y="525" width="75" height="75"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oWT-P3-kBr">
+                                <rect key="frame" x="158" y="525" width="75" height="75"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="75" id="3jp-6t-SFd"/>
@@ -75,8 +75,8 @@
                                     <action selector="filterParking:" destination="2ZD-wG-sk8" eventType="touchUpInside" id="VBE-DL-KQK"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uXb-V7-vLU">
-                                <rect key="frame" x="260" y="525" width="75" height="75"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uXb-V7-vLU">
+                                <rect key="frame" x="233" y="525" width="75" height="75"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="75" id="H06-qS-VUl"/>
@@ -96,10 +96,14 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="v1x-e4-KaP" firstAttribute="top" secondItem="xHW-WL-vwx" secondAttribute="bottom" id="5ta-Jq-cSR"/>
+                            <constraint firstItem="uXb-V7-vLU" firstAttribute="leading" secondItem="ihZ-MV-rBX" secondAttribute="leading" constant="233" id="7jb-fq-aWB"/>
                             <constraint firstItem="v1x-e4-KaP" firstAttribute="top" secondItem="Xgh-rz-LwX" secondAttribute="bottom" id="90r-M1-88R"/>
                             <constraint firstItem="v1x-e4-KaP" firstAttribute="top" secondItem="mRt-cK-sOP" secondAttribute="bottom" id="LmS-qB-VCb"/>
+                            <constraint firstItem="xHW-WL-vwx" firstAttribute="leading" secondItem="mRt-cK-sOP" secondAttribute="trailing" id="Ore-dk-Hzn"/>
                             <constraint firstItem="Xgh-rz-LwX" firstAttribute="top" secondItem="X85-gW-TJL" secondAttribute="bottom" id="SKk-G2-7tG"/>
+                            <constraint firstItem="uXb-V7-vLU" firstAttribute="leading" secondItem="oWT-P3-kBr" secondAttribute="trailing" id="Uda-M0-yjX"/>
                             <constraint firstItem="Xgh-rz-LwX" firstAttribute="leading" secondItem="ihZ-MV-rBX" secondAttribute="leading" id="Wah-9d-m6V"/>
+                            <constraint firstItem="oWT-P3-kBr" firstAttribute="leading" secondItem="xHW-WL-vwx" secondAttribute="trailing" id="WnL-dw-1DL"/>
                             <constraint firstItem="v1x-e4-KaP" firstAttribute="top" secondItem="uXb-V7-vLU" secondAttribute="bottom" id="hxh-y5-jk3"/>
                             <constraint firstAttribute="trailing" secondItem="Xgh-rz-LwX" secondAttribute="trailing" id="jam-MC-md8"/>
                             <constraint firstItem="v1x-e4-KaP" firstAttribute="top" secondItem="oWT-P3-kBr" secondAttribute="bottom" id="yl5-r7-dEA"/>
