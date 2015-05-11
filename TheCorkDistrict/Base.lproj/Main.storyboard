@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Yvq-3g-fua">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Yvq-3g-fua">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -34,6 +34,9 @@
                                 <state key="normal" image="Wine_Button">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <variation key="heightClass=regular-widthClass=compact" ambiguous="YES" misplaced="YES">
+                                    <rect key="frame" x="36" y="725" width="75" height="75"/>
+                                </variation>
                                 <connections>
                                     <action selector="filterWineries:" destination="2ZD-wG-sk8" eventType="touchUpInside" id="CFr-RE-c2Y"/>
                                 </connections>
@@ -48,6 +51,9 @@
                                 <state key="normal" image="Hotel_Button">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <variation key="heightClass=regular-widthClass=compact" ambiguous="YES" misplaced="YES">
+                                    <rect key="frame" x="111" y="725" width="75" height="75"/>
+                                </variation>
                                 <connections>
                                     <action selector="filterHotels:" destination="2ZD-wG-sk8" eventType="touchUpInside" id="lDr-la-JAC"/>
                                 </connections>
@@ -62,6 +68,9 @@
                                 <state key="normal" image="Car_Button">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <variation key="heightClass=regular-widthClass=compact" ambiguous="YES" misplaced="YES">
+                                    <rect key="frame" x="185" y="725" width="75" height="75"/>
+                                </variation>
                                 <connections>
                                     <action selector="filterParking:" destination="2ZD-wG-sk8" eventType="touchUpInside" id="VBE-DL-KQK"/>
                                 </connections>
@@ -76,6 +85,9 @@
                                 <state key="normal" image="Rest_Button">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <variation key="heightClass=regular-widthClass=compact" ambiguous="YES" misplaced="YES">
+                                    <rect key="frame" x="260" y="725" width="75" height="75"/>
+                                </variation>
                                 <connections>
                                     <action selector="filterRest:" destination="2ZD-wG-sk8" eventType="touchUpInside" id="o7r-Sx-6Pn"/>
                                 </connections>
