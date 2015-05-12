@@ -18,7 +18,7 @@ class PackagesViewController: UIViewController, UITableViewDataSource, UITableVi
     //# MARK: - ViewController Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "restBackground")!)
+        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "packagesBackground")!)
         
         let dataManager = DataManager.sharedInstance
         packages = dataManager.getPackages()
