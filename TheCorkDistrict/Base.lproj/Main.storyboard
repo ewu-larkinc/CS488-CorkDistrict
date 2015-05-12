@@ -45,6 +45,9 @@
                                         <include reference="yYK-LG-7W0"/>
                                     </mask>
                                 </variation>
+                                <connections>
+                                    <action selector="filterWineries:" destination="2ZD-wG-sk8" eventType="touchUpInside" id="KSz-Tf-77Y"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="piB-ar-k1Q">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -67,6 +70,9 @@
                                         <include reference="mMD-ij-syC"/>
                                     </mask>
                                 </variation>
+                                <connections>
+                                    <action selector="filterHotels:" destination="2ZD-wG-sk8" eventType="touchUpInside" id="FEs-Sd-pl1"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SdX-0V-SBS">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -89,6 +95,9 @@
                                         <include reference="l31-FV-rUt"/>
                                     </mask>
                                 </variation>
+                                <connections>
+                                    <action selector="filterParking:" destination="2ZD-wG-sk8" eventType="touchUpInside" id="9tX-NX-ZQc"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FhS-jq-2K1">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -111,6 +120,9 @@
                                         <include reference="Zn2-rv-j9l"/>
                                     </mask>
                                 </variation>
+                                <connections>
+                                    <action selector="filterRest:" destination="2ZD-wG-sk8" eventType="touchUpInside" id="By4-0q-J2n"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
