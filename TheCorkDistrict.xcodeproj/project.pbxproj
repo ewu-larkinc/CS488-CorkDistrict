@@ -14,6 +14,7 @@
 		225A2DFB1AF6D06600D072C2 /* EntityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225A2DFA1AF6D06600D072C2 /* EntityCell.swift */; };
 		225A2DFD1AF6D1FE00D072C2 /* ParkingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225A2DFC1AF6D1FE00D072C2 /* ParkingCell.swift */; };
 		225A2DFF1AF6D35600D072C2 /* PackageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225A2DFE1AF6D35600D072C2 /* PackageCell.swift */; };
+		225E43E91B02EB55001DE744 /* AlaskaWinePassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225E43E81B02EB55001DE744 /* AlaskaWinePassViewController.swift */; };
 		2281672C1AE20CFE00CCC9DF /* LoadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2281672A1AE20CFE00CCC9DF /* LoadViewController.swift */; };
 		2281672D1AE20CFE00CCC9DF /* LoadViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2281672B1AE20CFE00CCC9DF /* LoadViewController.xib */; };
 		2298E07F1AB00B7B003CEFFA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2298E07E1AB00B7B003CEFFA /* AppDelegate.swift */; };
@@ -55,6 +56,7 @@
 		225A2DFA1AF6D06600D072C2 /* EntityCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EntityCell.swift; path = ../EntityCell.swift; sourceTree = "<group>"; };
 		225A2DFC1AF6D1FE00D072C2 /* ParkingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ParkingCell.swift; path = ../ParkingCell.swift; sourceTree = "<group>"; };
 		225A2DFE1AF6D35600D072C2 /* PackageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PackageCell.swift; path = ../PackageCell.swift; sourceTree = "<group>"; };
+		225E43E81B02EB55001DE744 /* AlaskaWinePassViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AlaskaWinePassViewController.swift; path = ../AlaskaWinePassViewController.swift; sourceTree = "<group>"; };
 		2281672A1AE20CFE00CCC9DF /* LoadViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoadViewController.swift; path = ../LoadViewController.swift; sourceTree = "<group>"; };
 		2281672B1AE20CFE00CCC9DF /* LoadViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LoadViewController.xib; path = ../LoadViewController.xib; sourceTree = "<group>"; };
 		2298E0791AB00B7B003CEFFA /* TheCorkDistrict.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheCorkDistrict.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -142,6 +144,7 @@
 				2298E0A71AB011CB003CEFFA /* AccommodationsViewController.swift */,
 				221D72861ACA8F87005C26EB /* ParkingViewController.swift */,
 				2298E0A91AB011EA003CEFFA /* PackagesViewController.swift */,
+				225E43E81B02EB55001DE744 /* AlaskaWinePassViewController.swift */,
 				225A2DFE1AF6D35600D072C2 /* PackageCell.swift */,
 				225A2DFA1AF6D06600D072C2 /* EntityCell.swift */,
 				225A2DFC1AF6D1FE00D072C2 /* ParkingCell.swift */,
@@ -291,6 +294,7 @@
 				22D2B2DB1AC3B96B008E0CE1 /* PackageDetailViewController.swift in Sources */,
 				2281672C1AE20CFE00CCC9DF /* LoadViewController.swift in Sources */,
 				2298E0A41AB01188003CEFFA /* DataManager.swift in Sources */,
+				225E43E91B02EB55001DE744 /* AlaskaWinePassViewController.swift in Sources */,
 				84E875691AE4A42700BDF4A0 /* MapUtilities.swift in Sources */,
 				2298E0841AB00B7B003CEFFA /* ViewController.swift in Sources */,
 				225A2DFF1AF6D35600D072C2 /* PackageCell.swift in Sources */,
