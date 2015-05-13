@@ -166,7 +166,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         else {
             detailAlertView(temp, view: view)
         }
-        //Need call detailAlertView from alertV...edit actions in if statement???????
         
     }
     func sameAddress(var temp: NSManagedObject, view: MKAnnotationView!) -> UIAlertController{

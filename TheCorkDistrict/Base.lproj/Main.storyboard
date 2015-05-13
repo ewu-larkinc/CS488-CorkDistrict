@@ -1863,6 +1863,41 @@
             </objects>
             <point key="canvasLocation" x="1206" y="201.75"/>
         </scene>
+        <!--Route Map View-->
+        <scene sceneID="VkI-7c-kmv">
+            <objects>
+                <viewController title="Map View" id="Rlv-yw-EDu" userLabel="Route Map View" customClass="RouteMapViewController" customModule="TheCorkDistrict" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="wzO-Z2-yb1"/>
+                        <viewControllerLayoutGuide type="bottom" id="Bld-no-ffu"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Sim-rt-iNR">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="WuT-Qb-SV9">
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Rlv-yw-EDu" id="Aw7-QU-Twl"/>
+                                </connections>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="WuT-Qb-SV9" firstAttribute="top" secondItem="wzO-Z2-yb1" secondAttribute="bottom" id="02y-lk-4Ut"/>
+                            <constraint firstItem="WuT-Qb-SV9" firstAttribute="leading" secondItem="Sim-rt-iNR" secondAttribute="leading" id="Kxa-fJ-ojo"/>
+                            <constraint firstItem="Bld-no-ffu" firstAttribute="top" secondItem="WuT-Qb-SV9" secondAttribute="bottom" id="gZZ-K1-RUn"/>
+                            <constraint firstAttribute="trailing" secondItem="WuT-Qb-SV9" secondAttribute="trailing" id="vfi-c8-x0U"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="theMapView" destination="WuT-Qb-SV9" id="Mvj-UO-ccI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="f9K-dq-xrP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2875" y="2295"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Car_Button" width="600" height="600"/>
