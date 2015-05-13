@@ -463,7 +463,7 @@ class DataManager {
             progress += 0.2
         }
         
-        updateProgress()
+        //updateProgress()
     }
     
     //#MARK: - NSURLSession Methods

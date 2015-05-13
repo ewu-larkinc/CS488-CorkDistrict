@@ -20,7 +20,6 @@ class AlaskaWinePassViewController : UIViewController {
         UIApplication.sharedApplication().openURL(winePassURL!)
     }
     
-    
     override func viewDidLoad() {
         winePassButton.layer.shadowColor = UIColor.blackColor().CGColor
         winePassButton.layer.shadowOpacity = 0.3

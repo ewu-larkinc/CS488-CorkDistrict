@@ -6,6 +6,7 @@
 
 
 import UIKit
+import QuartzCore
 
 class LoadViewController : UIViewController {
     
@@ -26,25 +27,22 @@ class LoadViewController : UIViewController {
         progress = 0
         
         progressView.setProgress(0, animated: true)
-        startCount()
+        
         
         if (self.isRotating == false) {
             
             self.loadingLabel.fadeIn()
             self.loadingLogo.fadeIn()
             self.loadingImage.rotate360Degrees(completionDelegate: self)
-            
-            /*self.timer = Timer(duration: 12.0, completionHandler: {
-                self.shouldStopRotating = true
-            })
-            self.timer.start()*/
             self.isRotating = true
         }
         
-        self.timer = Timer(duration: 3.0, completionHandler: {
+        self.timer = Timer(duration: 5.0, completionHandler: {
+            self.startCount()
             self.getProgress()
         })
         timer.start()
+        
     }
     
     func getProgress() {
@@ -63,21 +61,21 @@ class LoadViewController : UIViewController {
     func startCount() {
         
         let dataManager = DataManager.sharedInstance
-        progress = 0
+        var barProgress : Float = 0
         var ctr2 = 0
         var ctr = 0
         for i in 0..<250 {
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), {
                 sleep(2)
-                if (self.progress < dataManager.getProgress()) {
-                    self.progress = dataManager.getProgress()
+                if (barProgress < dataManager.getProgress()) {
+                    barProgress = dataManager.getProgress()
                     println("Progress is \(self.progress)")
-                    self.progressView.setProgress(self.progress, animated: true)
+                    self.progressView.setProgress(barProgress, animated: true)
                 }
                 
                 dispatch_async(dispatch_get_main_queue(), {
-                    self.progress += 0.004
-                    self.progressView.setProgress(self.progress, animated: true)
+                    barProgress += 0.004
+                    self.progressView.setProgress(barProgress, animated: true)
                     return
                 })
             })

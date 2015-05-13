@@ -501,7 +501,7 @@
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cx5-Bj-vHa">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                                <string key="text">Present your Alaska Airlines boarding pass, with Spokane as the final destination, to receive a complimentary wine tasting at one of the Cork District's tasting rooms.</string>
+                                <string key="text">Flying into Spokane with Alaska Airlines? Present your boarding pass within 48 hours to receive a complimentary wine tasting at one of the Cork District's tasting rooms. Click on the wine pass above for more info.</string>
                                 <fontDescription key="fontDescription" name="STHeitiTC-Light" family="Heiti TC" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -512,9 +512,13 @@
                             <constraint firstItem="Cx5-Bj-vHa" firstAttribute="leading" secondItem="BEE-dp-yJ9" secondAttribute="leading" constant="16" id="diw-Kf-Iyj"/>
                             <constraint firstAttribute="trailing" secondItem="Cx5-Bj-vHa" secondAttribute="trailing" constant="16" id="dvv-qG-MWb"/>
                             <constraint firstItem="Qlw-rp-WL9" firstAttribute="leading" secondItem="BEE-dp-yJ9" secondAttribute="leading" constant="72" id="hDQ-fa-UPa"/>
-                            <constraint firstItem="Cx5-Bj-vHa" firstAttribute="top" secondItem="Qlw-rp-WL9" secondAttribute="bottom" constant="55" id="lZj-Sg-d69"/>
+                            <constraint firstItem="Cx5-Bj-vHa" firstAttribute="top" secondItem="Qlw-rp-WL9" secondAttribute="bottom" constant="55" id="lZj-Sg-d69">
+                                <variation key="heightClass=regular-widthClass=compact" constant="56"/>
+                            </constraint>
                             <constraint firstAttribute="trailing" secondItem="Qlw-rp-WL9" secondAttribute="trailing" constant="71" id="sVk-2u-YAh"/>
-                            <constraint firstItem="Qlw-rp-WL9" firstAttribute="top" secondItem="Nqz-xG-U9K" secondAttribute="bottom" constant="106" id="vJ3-KP-gVL"/>
+                            <constraint firstItem="Qlw-rp-WL9" firstAttribute="top" secondItem="Nqz-xG-U9K" secondAttribute="bottom" constant="106" id="vJ3-KP-gVL">
+                                <variation key="heightClass=regular-widthClass=compact" constant="88"/>
+                            </constraint>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">

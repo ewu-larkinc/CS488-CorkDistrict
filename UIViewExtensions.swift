@@ -13,7 +13,7 @@ extension UIView {
         rotateAnimation.fromValue = 0.0
         rotateAnimation.toValue = CGFloat(M_PI * 2.0)
         rotateAnimation.duration = duration
-        //rotateAnimation.repeatCount = 50
+        rotateAnimation.repeatCount = 50
         
         if let delegate: AnyObject = completionDelegate {
             rotateAnimation.delegate = delegate
