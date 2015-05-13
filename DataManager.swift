@@ -293,9 +293,8 @@ class DataManager {
             }
         }
         
-        
         var geocoder = CLGeocoder() 
-        geocoder.geocodeAddressString( "\(entityInfo[1]), \(entityInfo[3]), WA, USA", completionHandler: {(placemarks: [AnyObject]!, error: NSError!) -> Void in
+        geocoder.geocodeAddressString( "\(entityInfo[Index.Address.rawValue]), \(entityInfo[Index.City.rawValue]), WA, USA", completionHandler: {(placemarks: [AnyObject]!, error: NSError!) -> Void in
             if let placemark = placemarks?[0]  as? CLPlacemark
             {
         

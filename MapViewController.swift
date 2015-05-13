@@ -155,9 +155,21 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         return nil
     }
     func mapView(mapView: MKMapView!, didSelectAnnotationView view: MKAnnotationView!) {
-        //......Determines what kind of pin was touched...........................................................//
+        
         var temp = util.didSelectAnnotationView(view)
-        //......Create a alertView when pin is clicked...........................................................//
+        
+        var alertV: UIAlertController = util.sameAddress(temp)
+        
+        if(alertV.actions.count > 1) {
+            self.presentViewController(alertV, animated: true, completion: nil)
+        }
+        detailAlertView(temp, view: view)
+        //Need call detailAlertView from alertV...edit actions in if statement???????
+        
+    }
+    
+    func detailAlertView(var temp: NSManagedObject, view: MKAnnotationView!) {
+        
         var alertView = UIAlertController(title: temp.valueForKey("name") as? String, message: temp.valueForKey("address") as? String, preferredStyle: .Alert)
         
         var imageView = UIImageView(frame: CGRectMake(10, 15, 50, 50))
@@ -201,7 +213,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         
         
-        presentViewController(alertView, animated: true, completion: nil)
+        self.presentViewController(alertView, animated: true, completion: nil)
     }
     
     override func didReceiveMemoryWarning() {
