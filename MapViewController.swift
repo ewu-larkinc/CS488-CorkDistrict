@@ -244,7 +244,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         let detailAction = UIAlertAction(title: "Details", style: .Default, handler: {
             action in
-            let detailVC = DetailViewController()
             self.performSegueWithIdentifier("mapDetail", sender: self)
             
         })

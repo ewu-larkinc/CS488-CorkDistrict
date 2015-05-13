@@ -91,6 +91,9 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
             var tempNumStr = tempNum.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
             UIApplication.sharedApplication().openURL(NSURL(string: "tel://#\(tempNumStr)")!)
         }
+        if(indexPath.row == 1) {
+            self.performSegueWithIdentifier("detailToRoute", sender: self)
+        }
         self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
@@ -109,7 +112,13 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
                 return defaultRowHeight
         }
     }
-    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!)
+    {
+        
+        var rMVC: RouteMapViewController = segue.destinationViewController as! RouteMapViewController
+        rMVC.destination = self.currentSelection
+        
+    }
     func getSizeForText(cellText: String) -> CGFloat {
         var length = CGFloat(count(cellText.utf16))
         var rowSize : CGFloat = (length/13.0)*12.0

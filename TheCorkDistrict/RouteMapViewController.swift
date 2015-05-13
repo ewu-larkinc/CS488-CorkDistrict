@@ -24,7 +24,7 @@ class RouteMapViewController: UIViewController, MKMapViewDelegate, CLLocationMan
     
     let util = MapUtilities()
     
-    var destination = NSManagedObject()
+    var destination: NSManagedObject!
     
     var mapRoutes = [MKRoute]()
     
@@ -42,7 +42,7 @@ class RouteMapViewController: UIViewController, MKMapViewDelegate, CLLocationMan
         
         var theSpan: MKCoordinateSpan = MKCoordinateSpanMake(0.05, 0.05)
         
-        var centerLocation: CLLocationCoordinate2D = self.theMapView.userLocation.location.coordinate
+        var centerLocation: CLLocationCoordinate2D = CLLocationCoordinate2DMake(47.655262, -117.414129)//self.theMapView.userLocation.location.coordinate
         //CLLocationCoordinate2DMake(47.655262, -117.414129)
         
         var theRegion: MKCoordinateRegion = MKCoordinateRegionMake(centerLocation, theSpan)
@@ -55,7 +55,7 @@ class RouteMapViewController: UIViewController, MKMapViewDelegate, CLLocationMan
         
         util.placePinsOnMap(destinationArray, type: "winery")
         
-        util.getDirections(destinationArray, start: self.theMapView.userLocation.location.coordinate)
+        //util.getDirections(destinationArray, start: self.theMapView.userLocation.location.coordinate)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -85,9 +85,9 @@ class RouteMapViewController: UIViewController, MKMapViewDelegate, CLLocationMan
     }
     func mapView(mapView: MKMapView!, didSelectAnnotationView view: MKAnnotationView!) {
         
-        var temp = util.didSelectAnnotationView(view)
+        //var temp = util.didSelectAnnotationView(view)
         
-        detailAlertView(temp, view: view)
+        detailAlertView(destination, view: view)
         
     }
     func detailAlertView(var temp: NSManagedObject, view: MKAnnotationView!) {
@@ -123,7 +123,7 @@ class RouteMapViewController: UIViewController, MKMapViewDelegate, CLLocationMan
         
         let detailAction = UIAlertAction(title: "Details", style: .Default, handler: {
             action in
-            
+            self.performSegueWithIdentifier("routeToDetail", sender: self)
         })
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: {
             action in
@@ -137,6 +137,12 @@ class RouteMapViewController: UIViewController, MKMapViewDelegate, CLLocationMan
         
         
         self.presentViewController(alertView, animated: true, completion: nil)
+    }
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!)
+    {
+        var detailVC: DetailViewController = segue.destinationViewController as! DetailViewController
+
+        detailVC.currentSelection = destination
     }
     
     override func didReceiveMemoryWarning() {
