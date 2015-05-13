@@ -19,6 +19,9 @@ class MapUtilities {
     var hotels = [NSManagedObject]()
     var parking = [NSManagedObject]()
     
+    var currentType = NSString()
+    var currentPin = Int()
+    
     @IBOutlet var mapView: MKMapView!
     
     func multiPinsMap() {
@@ -170,7 +173,8 @@ class MapUtilities {
         else if(view.annotation.subtitle == "park") {
             temp = parking[view.annotation.title!.toInt()!]
         }
-        
+        self.currentPin = view.annotation.title!.toInt()!
+        self.currentType = view.annotation.subtitle!
         return temp
     }
     

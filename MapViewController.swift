@@ -49,7 +49,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         //request user location
         locationManager.requestWhenInUseAuthorization()
-        
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
         self.theMapView.showsUserLocation = true
         
         //fill pin arrays
@@ -244,6 +244,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         let detailAction = UIAlertAction(title: "Details", style: .Default, handler: {
             action in
+            let detailVC = DetailViewController()
+            self.performSegueWithIdentifier("mapDetail", sender: self)
             
         })
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: {
@@ -258,6 +260,51 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         
         self.presentViewController(alertView, animated: true, completion: nil)
+    }
+    
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!)
+    {
+        
+        
+        var detailVC: DetailViewController = segue.destinationViewController as! DetailViewController
+        
+        var selectedItem: NSManagedObject = util.wineries[util.currentPin] as NSManagedObject
+        
+        
+        if(util.currentType == "winery")
+        {
+            selectedItem = util.wineries[util.currentPin] as NSManagedObject
+            detailVC.currentSelection = selectedItem
+            
+            
+        }
+        else if(util.currentType == "rest")
+        {
+            selectedItem = util.restaurants[util.currentPin] as NSManagedObject
+            detailVC.currentSelection = selectedItem
+            
+        }
+        else if(util.currentType == "hotel")
+        {
+            selectedItem = util.hotels[util.currentPin] as NSManagedObject
+            detailVC.currentSelection = selectedItem
+            
+            
+        }
+        else if(util.currentType == "park")
+        {
+            //selectedItem = parks[currentPin] as NSManagedObject
+            //
+            detailVC.currentSelection = selectedItem
+        }
+        
+        
+        //print("HMD IT works kinda \n")
+        
+        
+        
+        
     }
     
     override func didReceiveMemoryWarning() {
