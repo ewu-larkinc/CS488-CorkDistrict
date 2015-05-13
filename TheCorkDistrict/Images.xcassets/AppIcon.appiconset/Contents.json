@@ -13,25 +13,25 @@
     {
       "size" : "40x40",
       "idiom" : "iphone",
-      "filename" : "AppIconx80.png",
+      "filename" : "App_Iconx80.png",
       "scale" : "2x"
     },
     {
       "size" : "40x40",
       "idiom" : "iphone",
-      "filename" : "AppIconx120.png",
+      "filename" : "App_Iconx120-1.png",
       "scale" : "3x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "AppIconx120-1.png",
+      "filename" : "App_Iconx120.png",
       "scale" : "2x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "AppIconx180.png",
+      "filename" : "App_Iconx180.png",
       "scale" : "3x"
     }
   ],
