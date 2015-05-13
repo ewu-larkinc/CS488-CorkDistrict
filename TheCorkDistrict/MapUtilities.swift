@@ -30,10 +30,12 @@ class MapUtilities {
         restaurants = dataManager.getRestaurants()
         
         hotels = dataManager.getAccommodations()
-        //println("HOTELS: \(hotels.count)")
         
         parking = dataManager.getParking()
         
+    }
+    func getWineries() -> [NSManagedObject] {
+        return wineries
     }
     
     func pinTypeOnMap(type: String) -> [MKPointAnnotation]{
@@ -105,49 +107,7 @@ class MapUtilities {
         
         return myRoutes
     }
-    func sameAddress(var temp: NSManagedObject) -> UIAlertController{
-        
-        var returnType = UIAlertController()
-        
-        var shouldAlert: Bool = false
-        
-        var address:String = temp.valueForKey("address") as! String
-        
-        var alertView = UIAlertController(title: "Warning: Same Address", message: "", preferredStyle: .Alert)
-        
-        var imageView = UIImageView(frame: CGRectMake(10, 15, 50, 50))
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: {
-            action in
-            
-        })
-        var tempAction = UIAlertAction(title: temp.valueForKey("name") as! String, style: .Default, handler: {
-            action in
-            
-        })
-        
-        alertView.addAction(tempAction)
-        alertView.addAction(cancelAction)
-        
-        for location in wineries {
-            if(location.valueForKey("address") as! String == address && temp != location) {
-                
-                shouldAlert = true
-                
-                tempAction = UIAlertAction(title: location.valueForKey("name") as! String, style: .Default, handler: {
-                    action in
-                    
-                })
-                
-                alertView.addAction(tempAction)
-                
-            }
-        }
-        if(shouldAlert) {
-            returnType = alertView
-        }
-        return returnType
-    }
+
     func sortByDistance(var mapRoutes: [MKRoute]) {
         
         println(mapRoutes)
