@@ -19,6 +19,14 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     var currentSelection : NSManagedObject!
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     
+    enum Index: Int {
+        case Name = 0
+        case Address = 1
+        case Phone = 2
+        case Image = 3
+        case Description = 4
+    }
+    
     
     //# MARK: - ViewController Methods
     override func viewDidLoad() {
@@ -55,17 +63,17 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         
         switch (indexPath.row) {
-            case 0:
+            case Index.Name.rawValue:
                 cell.textLabel?.text = currentSelection.valueForKey("name") as? String
-            case 1:
+            case Index.Address.rawValue:
                 let city = currentSelection.valueForKey("city") as? String
                 let zipcode = currentSelection.valueForKey("zipcode") as? String
                 var addressLine = currentSelection.valueForKey("address") as? String
                 var cityLine = "\n" + city! + ", WA " + zipcode!
                 cell.textLabel?.text = addressLine! + cityLine
-            case 2:
+            case Index.Phone.rawValue:
                 cell.textLabel?.text = currentSelection.valueForKey("phone") as? String
-            case 3:
+            case Index.Image.rawValue:
                 let imageData = currentSelection.valueForKey("imageData") as? NSData
                 let mainImage = UIImage(data: imageData!)
                 let newImageView = UIImageView(frame: CGRectMake((imageViewMargin),cell.frame.origin.y,(tableView.frame.width-(imageViewMargin*2)), imageRowHeight))
@@ -74,7 +82,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
                 newImageView.layer.borderWidth = 2.0
                 newImageView.image = mainImage
                 cell.addSubview(newImageView)
-            case 4:
+            case Index.Description.rawValue:
                 cell.textLabel?.text = currentSelection.valueForKey("about") as? String
                 cell.textLabel?.textAlignment = NSTextAlignment.Justified
             default:
@@ -86,7 +94,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
 
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if (indexPath.row == 2) {
+        if (indexPath.row == Index.Phone.rawValue) {
             var tempNum = currentSelection.valueForKey("phone") as! NSString
             var tempNumStr = tempNum.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
             UIApplication.sharedApplication().openURL(NSURL(string: "tel://#\(tempNumStr)")!)
