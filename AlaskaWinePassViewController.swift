@@ -22,9 +22,9 @@ class AlaskaWinePassViewController : UIViewController {
     
     override func viewDidLoad() {
         winePassButton.layer.shadowColor = UIColor.blackColor().CGColor
-        winePassButton.layer.shadowOpacity = 0.3
+        winePassButton.layer.shadowOpacity = 0.5
         winePassButton.layer.shadowRadius = 5
-        winePassButton.layer.shadowOffset = CGSizeMake(5,5)
+        winePassButton.layer.shadowOffset = CGSizeMake(0,0)
     }
     
     override func viewWillAppear(animated: Bool) {
