@@ -93,6 +93,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         }
         if(indexPath.row == 1) {
             self.performSegueWithIdentifier("detailToRoute", sender: self)
+            println("THEY'RE HERE")
         }
         self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }

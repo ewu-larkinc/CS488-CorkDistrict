@@ -289,20 +289,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             selectedItem = util.hotels[util.currentPin] as NSManagedObject
             detailVC.currentSelection = selectedItem
             
-            
         }
-        else if(util.currentType == "park")
-        {
-            //selectedItem = parks[currentPin] as NSManagedObject
-            //
-            detailVC.currentSelection = selectedItem
-        }
-        
-        
-        //print("HMD IT works kinda \n")
-        
-        
-        
+  
         
     }
     
