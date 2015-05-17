@@ -38,6 +38,10 @@ class DataManager {
     private var accommodations = CorkDistrictEntity()
     private var packages = CorkDistrictEntity()
     private var parking = CorkDistrictEntity()
+    
+    private var downtownCluster = [NSManagedObject]()
+    private var mtCluster = [NSManagedObject]()
+    private var sodoCluster = [NSManagedObject]()
     private var progress = Float()
     
     
@@ -161,6 +165,42 @@ class DataManager {
         return newEntity
     }
     
+    func getMtCluster() -> [NSManagedObject] {
+        return mtCluster
+    }
+    
+    func getSoDoCluster() -> [NSManagedObject] {
+        return sodoCluster
+    }
+    
+    func getDowntownCluster() -> [NSManagedObject] {
+        return downtownCluster
+    }
+    
+    func separateClusters() {
+        
+        var curCluster : String
+        
+        for winery in wineries.entities {
+            
+            curCluster = (winery.valueForKey("cluster") as? String)!
+            println("CLUSTER TYPE: \(curCluster)")
+            
+            switch (curCluster) {
+            case "Mt. to Lake":
+                mtCluster.append(winery)
+            case "Downtown":
+                downtownCluster.append(winery)
+            case "SoDo":
+                sodoCluster.append(winery)
+            default:
+                println("Invalid cluster type")
+            }
+            
+            curCluster = ""
+        }
+    }
+    
     func getRestaurants() -> [NSManagedObject] {
         return restaurants.entities 
     }
@@ -265,6 +305,7 @@ class DataManager {
         fetchEntitiesFromCoreData(accommodations)
         fetchEntitiesFromCoreData(parking)
         fetchEntitiesFromCoreData(packages)
+        
     }
     
     func addEntityToCoreData(entityInfo: NSMutableArray, entityImage: UIImage) -> Void {

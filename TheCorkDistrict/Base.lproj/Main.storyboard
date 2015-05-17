@@ -9,7 +9,7 @@
         <!--Map View-->
         <scene sceneID="AZZ-zh-3cs">
             <objects>
-                <viewController title="Map View" id="2ZD-wG-sk8" customClass="MapViewController" customModule="TheCorkDistrict" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Map View" id="2ZD-wG-sk8" customClass="MapViewController" customModule="Cork_District" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="X85-gW-TJL"/>
                         <viewControllerLayoutGuide type="bottom" id="v1x-e4-KaP"/>
@@ -197,12 +197,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EjK-Ls-rK8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4380" y="983.25"/>
+            <point key="canvasLocation" x="3240" y="323.25"/>
         </scene>
         <!--Wineries-->
         <scene sceneID="DXy-ef-RSP">
             <objects>
-                <viewController title="Wineries" modalTransitionStyle="partialCurl" id="SfZ-l6-YqH" customClass="WineriesViewController" customModule="TheCorkDistrict" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Wineries" modalTransitionStyle="partialCurl" id="SfZ-l6-YqH" customClass="WineriesViewController" customModule="Cork_District" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="3t5-yn-v8C"/>
                         <viewControllerLayoutGuide type="bottom" id="vIc-MF-Iqu"/>
@@ -215,7 +215,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="EntityCell" rowHeight="93" id="yqq-U9-meb" customClass="EntityCell" customModule="TheCorkDistrict" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="EntityCell" rowHeight="93" id="yqq-U9-meb" customClass="EntityCell" customModule="Cork_District" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yqq-U9-meb" id="X0i-AK-I0s">
@@ -465,7 +465,7 @@
         <!--Alaska Wine Pass-->
         <scene sceneID="tel-F2-tyV">
             <objects>
-                <viewController title="Alaska Wine Pass" id="Zxh-oZ-Vxx" customClass="AlaskaWinePassViewController" customModule="TheCorkDistrict" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Alaska Wine Pass" id="Zxh-oZ-Vxx" customClass="AlaskaWinePassViewController" customModule="Cork_District" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Nqz-xG-U9K"/>
                         <viewControllerLayoutGuide type="bottom" id="2jX-Yz-u18"/>
@@ -501,7 +501,7 @@
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cx5-Bj-vHa">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                                <string key="text">Flying into Spokane with Alaska Airlines? Present your boarding pass within 48 hours to receive a complimentary wine tasting at one of the Cork District's tasting rooms. Click on the wine pass below for more info.</string>
+                                <string key="text">Flying into Spokane with Alaska Airlines? Present your boarding pass within 48 hours to receive a complimentary wine tasting at one of the Cork District's tasting rooms. Tap the wine pass below for more info.</string>
                                 <fontDescription key="fontDescription" name="STHeitiTC-Light" family="Heiti TC" pointSize="17"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -526,12 +526,12 @@
                                 <exclude reference="Cx5-Bj-vHa"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="4Nr-Id-H1p"/>
                                 <exclude reference="2yb-yP-sBa"/>
                                 <exclude reference="cIb-1E-B1L"/>
                                 <exclude reference="fW9-xa-fa9"/>
                                 <exclude reference="hDQ-fa-UPa"/>
                                 <exclude reference="sVk-2u-YAh"/>
-                                <exclude reference="4Nr-Id-H1p"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -540,12 +540,12 @@
                                 <include reference="Cx5-Bj-vHa"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="4Nr-Id-H1p"/>
                                 <include reference="2yb-yP-sBa"/>
                                 <include reference="cIb-1E-B1L"/>
                                 <include reference="fW9-xa-fa9"/>
                                 <include reference="hDQ-fa-UPa"/>
                                 <include reference="sVk-2u-YAh"/>
-                                <include reference="4Nr-Id-H1p"/>
                             </mask>
                         </variation>
                     </view>
@@ -555,12 +555,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xHN-Hr-oMM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3261" y="1171.5"/>
+            <point key="canvasLocation" x="3414" y="1217.25"/>
         </scene>
         <!--Packages-->
         <scene sceneID="V5H-Ka-xxg">
             <objects>
-                <viewController title="Packages" id="WU1-wP-IZL" customClass="PackagesViewController" customModule="TheCorkDistrict" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Packages" id="WU1-wP-IZL" customClass="PackagesViewController" customModule="Cork_District" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ftz-uz-zqI"/>
                         <viewControllerLayoutGuide type="bottom" id="Uwy-1A-0Y1"/>
@@ -573,7 +573,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PackageCell" rowHeight="94" id="oAF-QB-NEz" customClass="PackageCell" customModule="TheCorkDistrict" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PackageCell" rowHeight="94" id="oAF-QB-NEz" customClass="PackageCell" customModule="Cork_District" customModuleProvider="target">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="oAF-QB-NEz" id="YSq-EZ-7s1">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -772,7 +772,6 @@
                                             <outlet property="dateLabel" destination="CLn-ED-wIo" id="QwS-uU-c2X"/>
                                             <outlet property="entityTitleLabel" destination="pwA-N2-U1o" id="VZk-pQ-EtD"/>
                                             <outlet property="titleLabel" destination="and-he-k8B" id="rrZ-1R-Cbo"/>
-                                            <segue destination="rV9-zB-CPx" kind="show" id="sbs-KG-E8g"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -803,12 +802,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qez-uO-ixu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="517.5" y="1171.5"/>
+            <point key="canvasLocation" x="508.5" y="1170"/>
         </scene>
         <!--Accomodations-->
         <scene sceneID="6XK-T5-Aex">
             <objects>
-                <viewController title="Accomodations" id="56B-xV-tFM" customClass="AccomodationsViewController" customModule="TheCorkDistrict" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Accomodations" id="56B-xV-tFM" customClass="AccomodationsViewController" customModule="Cork_District" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="v3m-s9-r3t"/>
                         <viewControllerLayoutGuide type="bottom" id="XRi-Uu-Vin"/>
@@ -821,7 +820,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="EntityCell" rowHeight="93" id="wiX-9T-eff" customClass="EntityCell" customModule="TheCorkDistrict" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="EntityCell" rowHeight="93" id="wiX-9T-eff" customClass="EntityCell" customModule="Cork_District" customModuleProvider="target">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wiX-9T-eff" id="LIw-Qe-VZi">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -1045,7 +1044,7 @@
         <!--Restaurants-->
         <scene sceneID="uiy-7L-Qwy">
             <objects>
-                <viewController title="Restaurants" id="4Sy-9S-VPz" customClass="RestaurantsViewController" customModule="TheCorkDistrict" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Restaurants" id="4Sy-9S-VPz" customClass="RestaurantsViewController" customModule="Cork_District" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="i0s-s9-635"/>
                         <viewControllerLayoutGuide type="bottom" id="MiO-qU-guJ"/>
@@ -1058,7 +1057,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationWidth="10" reuseIdentifier="EntityCell" rowHeight="93" id="sXc-YS-XqJ" customClass="EntityCell" customModule="TheCorkDistrict" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationWidth="10" reuseIdentifier="EntityCell" rowHeight="93" id="sXc-YS-XqJ" customClass="EntityCell" customModule="Cork_District" customModuleProvider="target">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sXc-YS-XqJ" id="bAd-5L-r3B">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -1280,66 +1279,10 @@
             </objects>
             <point key="canvasLocation" x="1881" y="1171.5"/>
         </scene>
-        <!--Package Details-->
-        <scene sceneID="Jxm-jQ-nTr">
-            <objects>
-                <viewController title="Package Details" id="rV9-zB-CPx" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="HUZ-zE-LaO"/>
-                        <viewControllerLayoutGuide type="bottom" id="E5y-br-dJl"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Y87-do-Htd">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="93" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="LJA-gX-lLS">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="detailCell" textLabel="2Hr-Kd-Pat" rowHeight="93" style="IBUITableViewCellStyleDefault" id="C1S-GP-GRs">
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="C1S-GP-GRs" id="6OL-c1-487">
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2Hr-Kd-Pat">
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                    <variation key="heightClass=regular-widthClass=compact">
-                                                        <fontDescription key="fontDescription" name="STHeitiTC-Light" family="Heiti TC" pointSize="24"/>
-                                                    </variation>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
-                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="0.0" y="0.0" width="400" height="800"/>
-                                </variation>
-                            </tableView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <variation key="default">
-                            <mask key="subviews">
-                                <exclude reference="LJA-gX-lLS"/>
-                            </mask>
-                        </variation>
-                        <variation key="heightClass=regular-widthClass=compact">
-                            <mask key="subviews">
-                                <include reference="LJA-gX-lLS"/>
-                            </mask>
-                        </variation>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ztn-h6-wvO" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="517.5" y="1975.5"/>
-        </scene>
         <!--Details-->
         <scene sceneID="xgv-gK-i3l">
             <objects>
-                <viewController title="Details" id="Sjx-3I-6ZT" customClass="DetailViewController" customModule="TheCorkDistrict" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Details" id="Sjx-3I-6ZT" customClass="DetailViewController" customModule="Cork_District" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="PVT-WA-HeD"/>
                         <viewControllerLayoutGuide type="bottom" id="ItX-Dz-9JQ"/>
@@ -1417,7 +1360,7 @@
         <!--Wine Tours-->
         <scene sceneID="zQZ-K5-GSL">
             <objects>
-                <viewController title="Wine Tours" id="R5a-XM-1fx" customClass="WineToursViewController" customModule="TheCorkDistrict" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Wine Tours" id="R5a-XM-1fx" customClass="WineToursViewController" customModule="Cork_District" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Aqf-Y2-lEN"/>
                         <viewControllerLayoutGuide type="bottom" id="Rhx-sm-xRN"/>
@@ -1425,17 +1368,160 @@
                     <view key="view" contentMode="scaleToFill" id="erA-Ok-NUK">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Y6x-YP-J7e">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="WineTourCell" rowHeight="70" id="6vk-8K-e1b" customClass="WineTourCell" customModule="Cork_District" customModuleProvider="target">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6vk-8K-e1b" id="GbQ-Jq-Rbq">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Winery Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2J4-Bh-rLw">
+                                                    <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="25" id="cTd-D1-PQV"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="STHeitiTC-Light" family="Heiti TC" pointSize="22"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <variation key="default">
+                                                        <mask key="constraints">
+                                                            <exclude reference="cTd-D1-PQV"/>
+                                                        </mask>
+                                                    </variation>
+                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                        <mask key="constraints">
+                                                            <include reference="cTd-D1-PQV"/>
+                                                        </mask>
+                                                    </variation>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100 mi" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FgA-LA-3wD">
+                                                    <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="25" id="4xF-82-ZBe"/>
+                                                        <constraint firstAttribute="width" constant="60" id="rHK-6u-czp">
+                                                            <variation key="heightClass=regular-widthClass=compact" constant="48"/>
+                                                        </constraint>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="STHeitiTC-Light" family="Heiti TC" pointSize="13"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <variation key="default">
+                                                        <mask key="constraints">
+                                                            <exclude reference="4xF-82-ZBe"/>
+                                                            <exclude reference="rHK-6u-czp"/>
+                                                        </mask>
+                                                    </variation>
+                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                        <mask key="constraints">
+                                                            <include reference="4xF-82-ZBe"/>
+                                                            <include reference="rHK-6u-czp"/>
+                                                        </mask>
+                                                    </variation>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstItem="FgA-LA-3wD" firstAttribute="top" secondItem="GbQ-Jq-Rbq" secondAttribute="top" constant="22" id="AsN-De-iP7"/>
+                                                <constraint firstItem="2J4-Bh-rLw" firstAttribute="top" secondItem="GbQ-Jq-Rbq" secondAttribute="top" constant="22" id="HaR-yA-XOR"/>
+                                                <constraint firstAttribute="trailing" secondItem="FgA-LA-3wD" secondAttribute="trailing" constant="36" id="Kpw-xN-z1G"/>
+                                                <constraint firstItem="FgA-LA-3wD" firstAttribute="leading" relation="lessThanOrEqual" secondItem="2J4-Bh-rLw" secondAttribute="trailing" constant="24" id="WDF-pA-dCM"/>
+                                                <constraint firstAttribute="bottom" secondItem="FgA-LA-3wD" secondAttribute="bottom" constant="22" id="fxf-3n-RQA"/>
+                                                <constraint firstAttribute="trailing" secondItem="FgA-LA-3wD" secondAttribute="trailing" constant="8" id="hJz-FK-TbE">
+                                                    <variation key="heightClass=regular-widthClass=compact" constant="36"/>
+                                                </constraint>
+                                                <constraint firstAttribute="bottom" secondItem="2J4-Bh-rLw" secondAttribute="bottom" constant="22" id="iYy-2g-dkh"/>
+                                                <constraint firstItem="2J4-Bh-rLw" firstAttribute="leading" secondItem="GbQ-Jq-Rbq" secondAttribute="leading" constant="8" id="yBf-ZI-25k"/>
+                                            </constraints>
+                                            <variation key="default">
+                                                <mask key="subviews">
+                                                    <exclude reference="2J4-Bh-rLw"/>
+                                                    <exclude reference="FgA-LA-3wD"/>
+                                                </mask>
+                                                <mask key="constraints">
+                                                    <exclude reference="HaR-yA-XOR"/>
+                                                    <exclude reference="iYy-2g-dkh"/>
+                                                    <exclude reference="yBf-ZI-25k"/>
+                                                    <exclude reference="AsN-De-iP7"/>
+                                                    <exclude reference="Kpw-xN-z1G"/>
+                                                    <exclude reference="WDF-pA-dCM"/>
+                                                    <exclude reference="fxf-3n-RQA"/>
+                                                    <exclude reference="hJz-FK-TbE"/>
+                                                </mask>
+                                            </variation>
+                                            <variation key="heightClass=regular-widthClass=compact">
+                                                <mask key="subviews">
+                                                    <include reference="2J4-Bh-rLw"/>
+                                                    <include reference="FgA-LA-3wD"/>
+                                                </mask>
+                                                <mask key="constraints">
+                                                    <include reference="HaR-yA-XOR"/>
+                                                    <include reference="iYy-2g-dkh"/>
+                                                    <include reference="yBf-ZI-25k"/>
+                                                    <include reference="AsN-De-iP7"/>
+                                                    <include reference="Kpw-xN-z1G"/>
+                                                    <include reference="WDF-pA-dCM"/>
+                                                    <include reference="fxf-3n-RQA"/>
+                                                    <include reference="hJz-FK-TbE"/>
+                                                </mask>
+                                            </variation>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="distanceLabel" destination="FgA-LA-3wD" id="to6-zF-fCf"/>
+                                            <outlet property="nameLabel" destination="2J4-Bh-rLw" id="LTA-Hx-hHH"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="R5a-XM-1fx" id="JGJ-XN-EM4"/>
+                                    <outlet property="delegate" destination="R5a-XM-1fx" id="4Yx-xa-ZHP"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Y6x-YP-J7e" firstAttribute="leading" secondItem="erA-Ok-NUK" secondAttribute="leading" id="2GS-dD-CYU"/>
+                            <constraint firstAttribute="trailing" secondItem="Y6x-YP-J7e" secondAttribute="trailing" id="8FK-uD-O4T"/>
+                            <constraint firstItem="Rhx-sm-xRN" firstAttribute="top" secondItem="Y6x-YP-J7e" secondAttribute="bottom" id="ltc-iP-TSn"/>
+                            <constraint firstItem="Y6x-YP-J7e" firstAttribute="top" secondItem="Aqf-Y2-lEN" secondAttribute="bottom" id="tV7-wR-jxP"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="Y6x-YP-J7e"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="2GS-dD-CYU"/>
+                                <exclude reference="8FK-uD-O4T"/>
+                                <exclude reference="tV7-wR-jxP"/>
+                                <exclude reference="ltc-iP-TSn"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="Y6x-YP-J7e"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="2GS-dD-CYU"/>
+                                <include reference="8FK-uD-O4T"/>
+                                <include reference="tV7-wR-jxP"/>
+                                <include reference="ltc-iP-TSn"/>
+                            </mask>
+                        </variation>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="Y6x-YP-J7e" id="a2J-Ms-Imu"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IEb-to-ePp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3844.5" y="-729.75"/>
+            <point key="canvasLocation" x="3346.5" y="-700.5"/>
         </scene>
         <!--The Cork District-->
         <scene sceneID="8Vu-vb-LYn">
             <objects>
-                <tableViewController title="The Cork District" modalTransitionStyle="crossDissolve" id="zPQ-7U-YTK" customClass="ViewController" customModule="TheCorkDistrict" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="The Cork District" modalTransitionStyle="crossDissolve" id="zPQ-7U-YTK" customClass="ViewController" customModule="Cork_District" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="ICq-Vr-7PW">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1456,13 +1542,13 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="QB5-xf-lcb" id="FZg-aw-kmk">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wine Tours" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GDo-eh-1LQ">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Map View" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GDo-eh-1LQ">
                                                     <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="199" id="P4o-7o-qYU"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="STHeitiTC-Light" family="Heiti TC" pointSize="29"/>
-                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="default">
                                                         <mask key="constraints">
@@ -1502,7 +1588,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
-                                            <segue destination="R5a-XM-1fx" kind="show" id="HQI-Fp-KU2"/>
+                                            <segue destination="2ZD-wG-sk8" kind="show" id="Nee-oZ-3Wh"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell alpha="0.20000000000000001" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="65" id="BqN-e1-cS9">
@@ -1510,13 +1596,13 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BqN-e1-cS9" id="g9O-P3-czy">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Map View" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MhY-Ur-EYh">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wine Tours" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MhY-Ur-EYh">
                                                     <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="199" id="FOi-nd-dUo"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="STHeitiTC-Light" family="Heiti TC" pointSize="29"/>
-                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="default">
                                                         <mask key="constraints">
@@ -1556,7 +1642,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
-                                            <segue destination="2ZD-wG-sk8" kind="show" id="wLX-D7-LlP"/>
+                                            <segue destination="R5a-XM-1fx" kind="show" id="RBD-vD-FEg"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell alpha="0.20000000000000001" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="65" id="M6n-0V-L1L">
@@ -1570,7 +1656,7 @@
                                                         <constraint firstAttribute="width" constant="199" id="9J6-kz-0Gf"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="STHeitiTC-Light" family="Heiti TC" pointSize="29"/>
-                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="default">
                                                         <mask key="constraints">
@@ -1624,7 +1710,7 @@
                                                         <constraint firstAttribute="width" constant="199" id="ZmY-c7-mc4"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="STHeitiTC-Light" family="Heiti TC" pointSize="29"/>
-                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="default">
                                                         <mask key="constraints">
@@ -1680,7 +1766,7 @@
                                                         </constraint>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="STHeitiTC-Light" family="Heiti TC" pointSize="29"/>
-                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="default">
                                                         <mask key="constraints">
@@ -1728,13 +1814,15 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lLK-uY-2xu" id="SVO-KP-9KA">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Packages" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FNY-cT-7Kh">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Alaska Wine Pass" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FNY-cT-7Kh">
                                                     <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="199" id="dH9-tS-ajq"/>
+                                                        <constraint firstAttribute="width" constant="199" id="dH9-tS-ajq">
+                                                            <variation key="heightClass=regular-widthClass=compact" constant="301"/>
+                                                        </constraint>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="STHeitiTC-Light" family="Heiti TC" pointSize="29"/>
-                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="default">
                                                         <mask key="constraints">
@@ -1774,7 +1862,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
-                                            <segue destination="WU1-wP-IZL" kind="show" id="eRO-HJ-mJa"/>
+                                            <segue destination="Zxh-oZ-Vxx" kind="show" id="SKQ-PR-vc1"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell alpha="0.20000000298023224" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="65" id="nam-GG-GrF">
@@ -1782,7 +1870,7 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nam-GG-GrF" id="hjN-dX-Bv2">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Alaska Wine Pass" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Noh-X2-6dF">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Packages" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Noh-X2-6dF">
                                                     <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="199" id="FGT-zO-5Cm">
@@ -1830,7 +1918,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
-                                            <segue destination="Zxh-oZ-Vxx" kind="show" id="hGC-n5-kmf"/>
+                                            <segue destination="WU1-wP-IZL" kind="show" id="thC-A0-R6j"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -1876,6 +1964,6 @@
         <image name="alaska_pass" width="336" height="420"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Zit-jM-rnd"/>
+        <segue reference="Ysb-z2-Hox"/>
     </inferredMetricsTieBreakers>
 </document>
