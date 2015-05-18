@@ -18,7 +18,7 @@ class PackagesViewController: UIViewController, UITableViewDataSource, UITableVi
     //# MARK: - ViewController Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "packagesBackground")!)
+        self.tableView.backgroundView = UIImageView(image:UIImage(named: "packagesBackground"))
         
         let dataManager = DataManager.sharedInstance
         packages = dataManager.getPackages()
@@ -194,7 +194,7 @@ class PackagesViewController: UIViewController, UITableViewDataSource, UITableVi
         cell.titleLabel.adjustsFontSizeToFitWidth = true
         //cell.titleLabel.sizeToFit()
         
-        
+        cell.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.2)
         cell.entityTitleLabel.text = package.valueForKey("relatedEntityName") as? String
         cell.dateLabel.text = startDate + " - " + endDate
         cell.costLabel.text = "$" + cost!
@@ -202,6 +202,11 @@ class PackagesViewController: UIViewController, UITableViewDataSource, UITableVi
         
         cell.cellImage.layer.cornerRadius = 4.0
         cell.cellImage.clipsToBounds = true
+        cell.titleLabel.textColor = UIColor.whiteColor()
+        cell.dateLabel.textColor = UIColor.whiteColor()
+        cell.costLabel.textColor = UIColor.whiteColor()
+        cell.entityTitleLabel.textColor = UIColor.whiteColor()
+
         cell.cellImage.contentMode = UIViewContentMode.ScaleToFill
     }
 
