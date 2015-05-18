@@ -22,7 +22,7 @@ extension UIView {
     }
     
     func fadeIn(duration: NSTimeInterval = 2.0, delay: NSTimeInterval = 0.0) {
-            UIView.animateWithDuration(duration, delay: delay, options: UIViewAnimationOptions.CurveEaseIn, animations: {
+            UIView.animateWithDuration(duration, delay: delay, options: UIViewAnimationOptions.CurveEaseIn |  UIViewAnimationOptions.Autoreverse | UIViewAnimationOptions.Repeat, animations: {
                 self.alpha = 1.0
                 }, completion: {(finished: Bool) -> Void in
                     self.fadeOut()

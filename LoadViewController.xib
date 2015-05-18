@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoadViewController" customModule="TheCorkDistrict" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoadViewController" customModule="Cork_District" customModuleProvider="target">
             <connections>
                 <outlet property="loadingImage" destination="X9X-gl-iIq" id="wzd-yS-YZP"/>
                 <outlet property="loadingLabel" destination="ZOL-pO-UmM" id="Asi-kU-Jyr"/>

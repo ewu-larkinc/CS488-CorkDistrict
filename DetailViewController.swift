@@ -57,6 +57,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("detailCell") as! UITableViewCell
+        var newImageView : UIImageView
         cell.textLabel?.textAlignment = NSTextAlignment.Left
         cell.textLabel?.text = ""
         cell.backgroundColor = UIColor.clearColor()
@@ -76,7 +77,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
             case Index.Image.rawValue:
                 let imageData = currentSelection.valueForKey("imageData") as? NSData
                 let mainImage = UIImage(data: imageData!)
-                let newImageView = UIImageView(frame: CGRectMake((imageViewMargin),cell.frame.origin.y,(tableView.frame.width-(imageViewMargin*2)), imageRowHeight))
+                newImageView = UIImageView(frame: CGRectMake((imageViewMargin),cell.frame.origin.y,(tableView.frame.width-(imageViewMargin*2)), imageRowHeight))
             
                 newImageView.layer.borderColor = UIColor.whiteColor().CGColor
                 newImageView.layer.borderWidth = 2.0

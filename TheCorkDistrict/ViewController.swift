@@ -27,9 +27,9 @@ class ViewController: UITableViewController {
         
         
         //loadview commented out for now while testing other
-        let testData = dataManager.getPackages()
+        let dataCheckFinished = dataManager.dataCheckFinished
         
-        /*if (testData.count == 0) {
+        if (!dataCheckFinished) {
             
             let loadingVC = LoadViewController(nibName: "LoadViewController", bundle: nil)
             loadingVC.modalTransitionStyle = UIModalTransitionStyle.CrossDissolve
@@ -41,7 +41,7 @@ class ViewController: UITableViewController {
             })
             
             timer.start()
-        }*/
+        }
         
     }
     

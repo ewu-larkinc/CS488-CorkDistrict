@@ -37,8 +37,8 @@ class LoadViewController : UIViewController {
             self.isRotating = true
         }
         
-        self.timer = Timer(duration: 5.0, completionHandler: {
-            self.startCount()
+        self.timer = Timer(duration: 3.0, completionHandler: {
+            //self.startCount()
             self.getProgress()
         })
         timer.start()

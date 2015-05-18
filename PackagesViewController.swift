@@ -50,28 +50,28 @@ class PackagesViewController: UIViewController, UITableViewDataSource, UITableVi
                 var finalNodeID: String
                 
                 if (nodeIDS.count > 1) {
-                    println("Current Package has 2 ASSOCIATED ENTITIES")
+                    //println("Current Package has 2 ASSOCIATED ENTITIES")
                     var nodeID1 = nodeIDS[0].toInt()
-                    println("First nodeID: \(nodeID1)")
+                    //println("First nodeID: \(nodeID1)")
                     var nodeID2 = nodeIDS[1].toInt()
-                    println("Second nodeID: \(nodeID2)")
+                    //println("Second nodeID: \(nodeID2)")
                     
                     var entity1 = dataManager.getEntity(nodeID1!)
                     
                     var entity2 = dataManager.getEntity(nodeID2!)
-                    println("index1: \(nodeID1)")
-                    println("index2: \(nodeID2)")
+                    //println("index1: \(nodeID1)")
+                    //println("index2: \(nodeID2)")
                     
                     if let testEntity1 = entity1.valueForKey("name") as? String {
                         if testEntity1 != "blank" {
-                            println("associated winery1 is: ")
-                            println(testEntity1)
+                            //println("associated winery1 is: ")
+                            //println(testEntity1)
                         }
                         
                         if let testEntity2 = entity2.valueForKey("name") as? String {
                             if testEntity2 != "blank" {
-                                println("associated winery2 is: ")
-                                println(testEntity2)
+                                //println("associated winery2 is: ")
+                                //println(testEntity2)
                             }
                             
                             var finalTitle = testEntity1 + ", " + testEntity2
@@ -82,16 +82,16 @@ class PackagesViewController: UIViewController, UITableViewDataSource, UITableVi
                     }
                 }
                 else {
-                    println("Current package has 1 ASSOCIATED ENTITY")
+                    //println("Current package has 1 ASSOCIATED ENTITY")
                     var nodeID1 = nodeIDS[0].toInt()
-                    println("First nodeID: \(nodeID1)")
+                    //println("First nodeID: \(nodeID1)")
                     var entity1 = dataManager.getEntity(nodeID1!)
-                    println("index1: \(nodeID1)")
+                    //println("index1: \(nodeID1)")
                     
                     if let testEntity1 = entity1.valueForKey("name") as? String {
                         if testEntity1 != "blank" {
-                            println("associated winery1 is: ")
-                            println(testEntity1)
+                            //println("associated winery1 is: ")
+                            //println(testEntity1)
                         }
                         
                         var finalTitle = testEntity1
@@ -126,7 +126,6 @@ class PackagesViewController: UIViewController, UITableViewDataSource, UITableVi
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         if let urlString = packages[indexPath.row].valueForKey("website") as? String {
-            println("website is: \(urlString)")
             var URLString = "http://" + urlString
             let entityURL = NSURL(string: URLString)
             UIApplication.sharedApplication().openURL(entityURL!)
@@ -157,9 +156,21 @@ class PackagesViewController: UIViewController, UITableViewDataSource, UITableVi
         var startDate = startMonth! + " " + startDay! + ", " + startYear!
         var endDate = endMonth! + " " + endDay! + ", " + endYear!
         var nodeId = package.valueForKey("relatedNodeID") as? String
-        println("Testing in packages - Node_ID: \(nodeId)")
+        var titleText : String
         
-        cell.titleLabel.text = package.valueForKey("name") as? String
+        
+        if let tempTitle = package.valueForKey("name") as? String {
+            if count(tempTitle) > 23 {
+                let index: String.Index = advance(tempTitle.startIndex, 23)
+                titleText = tempTitle.substringToIndex(index)
+                cell.titleLabel.text = titleText
+            }
+            else {
+                cell.titleLabel.text = tempTitle
+            }
+        }
+        
+        
         cell.titleLabel.adjustsFontSizeToFitWidth = true
         
         cell.entityTitleLabel.text = package.valueForKey("relatedEntityName") as? String

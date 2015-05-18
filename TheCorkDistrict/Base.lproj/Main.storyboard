@@ -1369,7 +1369,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Y6x-YP-J7e">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="70" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Y6x-YP-J7e">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -1378,12 +1378,14 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6vk-8K-e1b" id="GbQ-Jq-Rbq">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Winery Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2J4-Bh-rLw">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Winery Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="2J4-Bh-rLw">
                                                     <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="25" id="cTd-D1-PQV"/>
+                                                        <constraint firstAttribute="height" constant="25" id="cTd-D1-PQV">
+                                                            <variation key="heightClass=regular-widthClass=compact" constant="22"/>
+                                                        </constraint>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" name="STHeitiTC-Light" family="Heiti TC" pointSize="22"/>
+                                                    <fontDescription key="fontDescription" name="STHeitiTC-Light" family="Heiti TC" pointSize="19"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="default">
@@ -1400,12 +1402,14 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100 mi" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FgA-LA-3wD">
                                                     <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="25" id="4xF-82-ZBe"/>
+                                                        <constraint firstAttribute="height" constant="25" id="4xF-82-ZBe">
+                                                            <variation key="heightClass=regular-widthClass=compact" constant="23"/>
+                                                        </constraint>
                                                         <constraint firstAttribute="width" constant="60" id="rHK-6u-czp">
                                                             <variation key="heightClass=regular-widthClass=compact" constant="48"/>
                                                         </constraint>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" name="STHeitiTC-Light" family="Heiti TC" pointSize="13"/>
+                                                    <fontDescription key="fontDescription" name="STHeitiTC-Light" family="Heiti TC" pointSize="11"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="default">
@@ -1424,15 +1428,22 @@
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
-                                                <constraint firstItem="FgA-LA-3wD" firstAttribute="top" secondItem="GbQ-Jq-Rbq" secondAttribute="top" constant="22" id="AsN-De-iP7"/>
-                                                <constraint firstItem="2J4-Bh-rLw" firstAttribute="top" secondItem="GbQ-Jq-Rbq" secondAttribute="top" constant="22" id="HaR-yA-XOR"/>
-                                                <constraint firstAttribute="trailing" secondItem="FgA-LA-3wD" secondAttribute="trailing" constant="36" id="Kpw-xN-z1G"/>
-                                                <constraint firstItem="FgA-LA-3wD" firstAttribute="leading" relation="lessThanOrEqual" secondItem="2J4-Bh-rLw" secondAttribute="trailing" constant="24" id="WDF-pA-dCM"/>
-                                                <constraint firstAttribute="bottom" secondItem="FgA-LA-3wD" secondAttribute="bottom" constant="22" id="fxf-3n-RQA"/>
-                                                <constraint firstAttribute="trailing" secondItem="FgA-LA-3wD" secondAttribute="trailing" constant="8" id="hJz-FK-TbE">
-                                                    <variation key="heightClass=regular-widthClass=compact" constant="36"/>
+                                                <constraint firstItem="FgA-LA-3wD" firstAttribute="top" secondItem="GbQ-Jq-Rbq" secondAttribute="top" constant="22" id="AsN-De-iP7">
+                                                    <variation key="heightClass=regular-widthClass=compact" constant="24"/>
                                                 </constraint>
-                                                <constraint firstAttribute="bottom" secondItem="2J4-Bh-rLw" secondAttribute="bottom" constant="22" id="iYy-2g-dkh"/>
+                                                <constraint firstItem="2J4-Bh-rLw" firstAttribute="top" secondItem="GbQ-Jq-Rbq" secondAttribute="top" constant="22" id="HaR-yA-XOR">
+                                                    <variation key="heightClass=regular-widthClass=compact" constant="24"/>
+                                                </constraint>
+                                                <constraint firstAttribute="trailing" secondItem="FgA-LA-3wD" secondAttribute="trailing" constant="36" id="Kpw-xN-z1G"/>
+                                                <constraint firstItem="FgA-LA-3wD" firstAttribute="leading" relation="lessThanOrEqual" secondItem="2J4-Bh-rLw" secondAttribute="trailing" constant="24" id="WDF-pA-dCM">
+                                                    <variation key="heightClass=regular-widthClass=compact" constant="57"/>
+                                                </constraint>
+                                                <constraint firstAttribute="bottom" secondItem="FgA-LA-3wD" secondAttribute="bottom" constant="22" id="fxf-3n-RQA">
+                                                    <variation key="heightClass=regular-widthClass=compact" constant="22"/>
+                                                </constraint>
+                                                <constraint firstAttribute="bottom" secondItem="2J4-Bh-rLw" secondAttribute="bottom" constant="22" id="iYy-2g-dkh">
+                                                    <variation key="heightClass=regular-widthClass=compact" constant="23"/>
+                                                </constraint>
                                                 <constraint firstItem="2J4-Bh-rLw" firstAttribute="leading" secondItem="GbQ-Jq-Rbq" secondAttribute="leading" constant="8" id="yBf-ZI-25k"/>
                                             </constraints>
                                             <variation key="default">
@@ -1448,7 +1459,6 @@
                                                     <exclude reference="Kpw-xN-z1G"/>
                                                     <exclude reference="WDF-pA-dCM"/>
                                                     <exclude reference="fxf-3n-RQA"/>
-                                                    <exclude reference="hJz-FK-TbE"/>
                                                 </mask>
                                             </variation>
                                             <variation key="heightClass=regular-widthClass=compact">
@@ -1464,7 +1474,6 @@
                                                     <include reference="Kpw-xN-z1G"/>
                                                     <include reference="WDF-pA-dCM"/>
                                                     <include reference="fxf-3n-RQA"/>
-                                                    <include reference="hJz-FK-TbE"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
@@ -1492,10 +1501,10 @@
                                 <exclude reference="Y6x-YP-J7e"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="ltc-iP-TSn"/>
                                 <exclude reference="2GS-dD-CYU"/>
                                 <exclude reference="8FK-uD-O4T"/>
                                 <exclude reference="tV7-wR-jxP"/>
-                                <exclude reference="ltc-iP-TSn"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -1503,10 +1512,10 @@
                                 <include reference="Y6x-YP-J7e"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="ltc-iP-TSn"/>
                                 <include reference="2GS-dD-CYU"/>
                                 <include reference="8FK-uD-O4T"/>
                                 <include reference="tV7-wR-jxP"/>
-                                <include reference="ltc-iP-TSn"/>
                             </mask>
                         </variation>
                     </view>

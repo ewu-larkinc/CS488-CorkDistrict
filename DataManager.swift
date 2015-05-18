@@ -42,8 +42,16 @@ class DataManager {
     private var downtownCluster = [NSManagedObject]()
     private var mtCluster = [NSManagedObject]()
     private var sodoCluster = [NSManagedObject]()
+    var dataCheckFinished = false
     private var progress = Float()
     
+    //TESTING
+    private var wineDone = false
+    private var restDone = false
+    private var packDone = false
+    private var parkDone = false
+    private var accomDone = false
+    //
     
     
     //#MARK: - Access Methods
@@ -172,7 +180,7 @@ class DataManager {
         for winery in wineries.entities {
             
             curCluster = (winery.valueForKey("cluster") as? String)!
-            println("CLUSTER TYPE: \(curCluster)")
+            //println("CLUSTER TYPE: \(curCluster)")
             
             switch (curCluster) {
             case "Mt. to Lake":
@@ -468,55 +476,52 @@ class DataManager {
     
     func updateProgress() {
         
-        progress = 0
+        //progress = 0
         
         println("wineries count and webcount: \(wineries.entities.count) \(wineries.webCount)")
-        if (wineries.needsWebUpdate) {
+        if (!wineDone) {
             if (wineries.entities.count == wineries.webCount && wineries.webCount != 0) {
                 progress += 0.2
+                wineDone = true
             }
-        }
-        else {
-            progress += 0.2
-        }
-        println("restaurants count and webcount: \(restaurants.entities.count) \(restaurants.webCount)")
-        if (restaurants.needsWebUpdate) {
-            if (restaurants.entities.count == restaurants.webCount && restaurants.webCount != 0) {
-                progress += 0.2
-            }
-        }
-        else {
-            progress += 0.2
-        }
-        println("accommodations count and webcount: \(accommodations.entities.count) \(accommodations.webCount)")
-        if (accommodations.needsWebUpdate) {
-            if (accommodations.entities.count == accommodations.webCount && accommodations.webCount != 0) {
-                progress += 0.2
-            }
-        }
-        else {
-            progress += 0.2
-        }
-        println("parking count and webcount: \(parking.entities.count) \(parking.webCount)")
-        if (parking.needsWebUpdate) {
-            if (parking.entities.count == parking.webCount && parking.webCount != 0) {
-                progress += 0.2
-            }
-        }
-        else {
-            progress += 0.2
-        }
-        println("packages count and webcount: \(packages.entities.count) \(packages.webCount)")
-        if (packages.needsWebUpdate) {
-            if (packages.entities.count == packages.webCount && packages.webCount != 0) {
-                progress += 0.2
-            }
-        }
-        else {
-            progress += 0.2
         }
         
-        //updateProgress()
+        println("restaurants count and webcount: \(restaurants.entities.count) \(restaurants.webCount)")
+        if (!restDone) {
+            if (restaurants.entities.count == restaurants.webCount && restaurants.webCount != 0) {
+                progress += 0.2
+                restDone = true
+            }
+        }
+        
+        println("accommodations count and webcount: \(accommodations.entities.count) \(accommodations.webCount)")
+        if (!accomDone) {
+            if (accommodations.entities.count == accommodations.webCount && accommodations.webCount != 0) {
+                progress += 0.2
+                accomDone = true
+            }
+        }
+        
+        println("parking count and webcount: \(parking.entities.count) \(parking.webCount)")
+        if (!parkDone) {
+            if (parking.entities.count == parking.webCount && parking.webCount != 0) {
+                progress += 0.2
+                parkDone = true
+            }
+        }
+        
+        println("packages count and webcount: \(packages.entities.count) \(packages.webCount)")
+        if (!packDone) {
+            if (packages.entities.count == packages.webCount && packages.webCount != 0) {
+                progress += 0.2
+                packDone = true
+            }
+        }
+        
+        if progress >= 1 {
+            dataCheckFinished = true
+        }
+        
     }
     
     //#MARK: - NSURLSession Methods
@@ -532,7 +537,7 @@ class DataManager {
     }
     
     func fetchDatesFromWeb() {
-        println("Fetching dates from web")
+        //println("Fetching dates from web")
         var session = NSURLSession.sharedSession()
         
         var task = session.dataTaskWithURL(URL_CHANGELOG!) {
@@ -572,14 +577,14 @@ class DataManager {
             
         } else {
             let json = JSON(data: data)
-            //println("\(entity.type) webCount: \(json.count) cdCount: \(entity.entities.count)")
+            
             println("\(entity.type) lastChangedCD: \(entity.lastChangedCD) lastChangedWeb: \(entity.lastChangedWeb)")
             entity.webCount = json.count
             entity.needsWebUpdate = false
             
             //json.count != entity.entities.count
             if (entity.isOutOfDate()) {
-                entity.needsWebUpdate = true
+                //entity.needsWebUpdate = true
                 println("Downloading \(entity.type)...")
                 deleteFromCoreData(entity)
                 var ctr=0
@@ -652,31 +657,26 @@ class DataManager {
         while (ctr < json.count) {
             
             if json[ctr]["node_type"] == "lodging" && !accommIn {
-                println("adding accommodations date")
                 let accommodationsDate = json[0]["node_changed"].stringValue
                 dates.append(accommodationsDate)
                 accommIn = true
             }
             else if json[ctr]["node_type"] == "packages" && !packIn {
-                println("adding packages date")
                 let packagesDate = json[1]["node_changed"].stringValue
                 dates.append(packagesDate)
                 packIn = true
             }
             else if json[ctr]["node_type"] == "parking" && !parkIn {
-                println("Adding parking date")
                 let parkingDate = json[2]["node_changed"].stringValue
                 dates.append(parkingDate)
                 parkIn = true
             }
             else if json[ctr]["node_type"] == "winery" && !wineriesIn {
-                println("Adding winery date")
                 let wineryDate = json[3]["node_changed"].stringValue
                 dates.append(wineryDate)
                 wineriesIn = true
             }
             else if json[ctr]["node_type"] == "restaurant" && !restIn {
-                println("Adding restaurant date")
                 let restaurantDate = json[4]["node_changed"].stringValue
                 dates.append(restaurantDate)
                 restIn = true
@@ -703,7 +703,7 @@ class DataManager {
     func parseJSONPackage(data: NSData, entity: CorkDistrictEntity) -> Void {
         
         let json = JSON(data: data)
-        //println("\(entity.type) webCount: \(json.count) cdCount: \(entity.entities.count)")
+        
         println("\(entity.type) lastChangedCD: \(entity.lastChangedCD) lastChangedWeb: \(entity.lastChangedWeb)")
         
         //json.count != entity.entities.count
@@ -735,11 +735,11 @@ class DataManager {
                 
                 if let node = json[ctr]["nid"].string {
                     var nodeId = node
-                    println("current nodeID is \(nodeId)")
+                    //println("current nodeID is \(nodeId)")
                 }
                 var title = json[ctr]["node_title"]
                 
-                println("current title is \(title)")
+                //println("current title is \(title)")
                 
                 var relatedNid: String
                 var tempNid: String
@@ -747,8 +747,8 @@ class DataManager {
                 relatedNid = json[ctr]["RelatedEntityTitle"][0]["target_id"].stringValue
                 tempNid = relatedNid
                 
-                println("relatedNID count is")
-                println(json[ctr]["RelatedEntityTitle"].count)
+                //println("relatedNID count is")
+                //println(json[ctr]["RelatedEntityTitle"].count)
                 
                 if json[ctr]["RelatedEntityTitle"].count > 1 {
                     tempNid = relatedNid + "," + json[ctr]["RelatedEntityTitle"][1]["target_id"].stringValue
@@ -784,7 +784,7 @@ class DataManager {
         
         let entityStringArray = urlObject.componentsSeparatedByString(" ")
         for string in entityStringArray {
-            println("current string is \(string)")
+            //println("current string is \(string)")
         }
         
         return ""
