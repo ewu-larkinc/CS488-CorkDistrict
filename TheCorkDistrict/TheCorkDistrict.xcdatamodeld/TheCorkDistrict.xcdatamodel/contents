@@ -12,6 +12,13 @@
         <attribute name="website" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="zipcode" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
+    <entity name="LastChanged" syncable="YES">
+        <attribute name="accommodations" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="packages" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="parking" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="restaurants" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="wineries" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="Package" syncable="YES">
         <attribute name="about" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="cost" optional="YES" attributeType="String" syncable="YES"/>
@@ -52,6 +59,7 @@
     <entity name="Winery" syncable="YES">
         <attribute name="about" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="cardAccepted" optional="YES" attributeType="Integer 16" syncable="YES"/>
         <attribute name="city" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="cluster" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="hours" optional="YES" attributeType="String" syncable="YES"/>
@@ -65,9 +73,10 @@
     </entity>
     <elements>
         <element name="Accommodation" positionX="-36" positionY="99" width="128" height="195"/>
+        <element name="LastChanged" positionX="-45" positionY="135" width="128" height="120"/>
         <element name="Package" positionX="-45" positionY="99" width="128" height="255"/>
         <element name="Parking" positionX="-45" positionY="108" width="128" height="150"/>
         <element name="Restaurant" positionX="-54" positionY="54" width="128" height="195"/>
-        <element name="Winery" positionX="-63" positionY="-18" width="128" height="225"/>
+        <element name="Winery" positionX="-63" positionY="-18" width="128" height="240"/>
     </elements>
 </model>

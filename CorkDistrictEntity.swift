@@ -16,9 +16,19 @@ class CorkDistrictEntity {
     var URL = NSURL()
     var needsWebUpdate = Bool()
     var entities = [NSManagedObject]()
+    var lastChangedWeb = String()
+    var lastChangedCD = String()
 
     func clearEntities() {
         entities = [NSManagedObject]()
+    }
+    
+    func isOutOfDate() -> Bool {
+        if (lastChangedWeb != "" && lastChangedCD == "") {
+            return lastChangedCD != lastChangedWeb
+        }
+        
+        return false
     }
     
 }

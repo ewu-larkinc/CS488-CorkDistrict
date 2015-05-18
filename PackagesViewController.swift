@@ -77,24 +77,11 @@ class PackagesViewController: UIViewController, UITableViewDataSource, UITableVi
                             var finalTitle = testEntity1 + ", " + testEntity2
                             package.setValue(finalTitle, forKey: "relatedEntityName")
                       
-                    
-                    /*if (index1 > 0) {
-                        println("associated winery1 is: ")
-                        if let title = winery1.valueForKey("name") as? String {
-                            println(title)
-                            
-                            
-                            if let title2 = winery2.valueForKey("name") as? String {
-                                println("associated winery2 is: ")
-                                println(title2)
-                                var finalTitle = title + ", " + title2
-                                package.setValue(title, forKey: "relatedEntityName")
-                            }
+                
                         }
-                        
-                    }*/
-                        }  }
-                } else {
+                    }
+                }
+                else {
                     println("Current package has 1 ASSOCIATED ENTITY")
                     var nodeID1 = nodeIDS[0].toInt()
                     println("First nodeID: \(nodeID1)")
@@ -111,22 +98,6 @@ class PackagesViewController: UIViewController, UITableViewDataSource, UITableVi
                         package.setValue(finalTitle, forKey: "relatedEntityName")
                     }
                 }
-                
-                
-                
-                /*var nodeID = tempNodeID.toInt()!
-                println("searching for nodeID: \(nodeID)")
-                var index = dataManager.getEntityIndex(nodeID)
-                let theWinery = tempWineries[index]
-                
-                if (index >= 0) {
-                    println("associated winery is: ")
-                    if let title = tempWineries[index].valueForKey("name") as? String {
-                        println(title)
-                        package.setValue(title, forKey: "relatedEntityName")
-                    }
-                    
-                }*/
             }
             
                 
@@ -142,16 +113,6 @@ class PackagesViewController: UIViewController, UITableViewDataSource, UITableVi
         }
         
     }
-
-    func stripHtml(urlObject: String) -> String {
-
-        //println("testing... entitiyImageString is \(urlObject)")
-        let entityImageStringArray = urlObject.componentsSeparatedByString("Optional(")
-        var entityImageString = entityImageStringArray[1].stringByReplacingOccurrencesOfString(")", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
-        
-        return entityImageString
-        //return entityImageString.stringByReplacingOccurrencesOfString("\"", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
-    }
     
     //# MARK: - TableView Methods
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -163,6 +124,14 @@ class PackagesViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        if let urlString = packages[indexPath.row].valueForKey("website") as? String {
+            println("website is: \(urlString)")
+            var URLString = "http://" + urlString
+            let entityURL = NSURL(string: URLString)
+            UIApplication.sharedApplication().openURL(entityURL!)
+        }
+        
         self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
@@ -192,8 +161,6 @@ class PackagesViewController: UIViewController, UITableViewDataSource, UITableVi
         
         cell.titleLabel.text = package.valueForKey("name") as? String
         cell.titleLabel.adjustsFontSizeToFitWidth = true
-        //cell.titleLabel.sizeToFit()
-        
         
         cell.entityTitleLabel.text = package.valueForKey("relatedEntityName") as? String
         cell.dateLabel.text = startDate + " - " + endDate
