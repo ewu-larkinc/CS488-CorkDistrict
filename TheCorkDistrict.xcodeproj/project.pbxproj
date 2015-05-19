@@ -30,7 +30,6 @@
 		2298E0A81AB011CB003CEFFA /* AccommodationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2298E0A71AB011CB003CEFFA /* AccommodationsViewController.swift */; };
 		2298E0AA1AB011EA003CEFFA /* PackagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2298E0A91AB011EA003CEFFA /* PackagesViewController.swift */; };
 		2298E0AE1AB01902003CEFFA /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2298E0AD1AB01902003CEFFA /* DetailViewController.swift */; };
-		2298E0B01AB01CF2003CEFFA /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2298E0AF1AB01CF2003CEFFA /* CoreLocation.framework */; };
 		2298E0B81AB01D91003CEFFA /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2298E0B71AB01D91003CEFFA /* MapViewController.swift */; };
 		2298E0BA1AB01E53003CEFFA /* WineToursViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2298E0B91AB01E53003CEFFA /* WineToursViewController.swift */; };
 		22A85A0A1AB18B2000B45713 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A85A091AB18B2000B45713 /* SwiftyJSON.swift */; };
@@ -78,7 +77,6 @@
 		2298E0A71AB011CB003CEFFA /* AccommodationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccommodationsViewController.swift; path = ../AccommodationsViewController.swift; sourceTree = "<group>"; };
 		2298E0A91AB011EA003CEFFA /* PackagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PackagesViewController.swift; path = ../PackagesViewController.swift; sourceTree = "<group>"; };
 		2298E0AD1AB01902003CEFFA /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DetailViewController.swift; path = ../DetailViewController.swift; sourceTree = "<group>"; };
-		2298E0AF1AB01CF2003CEFFA /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		2298E0B71AB01D91003CEFFA /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapViewController.swift; path = ../MapViewController.swift; sourceTree = "<group>"; };
 		2298E0B91AB01E53003CEFFA /* WineToursViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WineToursViewController.swift; path = ../WineToursViewController.swift; sourceTree = "<group>"; };
 		22A85A091AB18B2000B45713 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftyJSON.swift; path = ../SwiftyJSON.swift; sourceTree = "<group>"; };
@@ -93,7 +91,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2298E0B01AB01CF2003CEFFA /* CoreLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -110,7 +107,6 @@
 		2298E0701AB00B7B003CEFFA = {
 			isa = PBXGroup;
 			children = (
-				2298E0AF1AB01CF2003CEFFA /* CoreLocation.framework */,
 				2298E07B1AB00B7B003CEFFA /* TheCorkDistrict */,
 				2298E0941AB00B7B003CEFFA /* TheCorkDistrictTests */,
 				2298E07A1AB00B7B003CEFFA /* Products */,

@@ -38,7 +38,7 @@ class RouteMapViewController: UIViewController, MKMapViewDelegate, CLLocationMan
         
         locationManager.requestWhenInUseAuthorization()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        
+        locationManager.startUpdatingLocation()
         self.theMapView.showsUserLocation = true
         
         var theSpan: MKCoordinateSpan = MKCoordinateSpanMake(0.09, 0.09)
@@ -57,8 +57,14 @@ class RouteMapViewController: UIViewController, MKMapViewDelegate, CLLocationMan
         destinationArray.append(destination)
         
         util.placePinsOnMap(destinationArray, type: "winery")
+        print("Lat: ")
+        println(self.locationManager.location.coordinate.latitude)
+        print("Long: ")
+        println(self.locationManager.location.coordinate.longitude)
         
-        //util.getDirections(destinationArray, start: self.theMapView.userLocation.location.coordinate)
+        util.getDirections(destinationArray, start: CLLocationCoordinate2DMake(self.locationManager.location.coordinate.latitude, self.locationManager.location.coordinate.longitude))
+
+
     }
     
     override func viewWillAppear(animated: Bool) {
