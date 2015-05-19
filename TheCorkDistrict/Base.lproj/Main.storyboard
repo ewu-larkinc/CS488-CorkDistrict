@@ -1867,7 +1867,7 @@
         <!--Route Map View-->
         <scene sceneID="VkI-7c-kmv">
             <objects>
-                <viewController title="Map View" id="Rlv-yw-EDu" userLabel="Route Map View" customClass="RouteMapViewController" customModule="TheCorkDistrict" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Route" id="Rlv-yw-EDu" userLabel="Route Map View" customClass="RouteMapViewController" customModule="TheCorkDistrict" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="wzO-Z2-yb1"/>
                         <viewControllerLayoutGuide type="bottom" id="Bld-no-ffu"/>

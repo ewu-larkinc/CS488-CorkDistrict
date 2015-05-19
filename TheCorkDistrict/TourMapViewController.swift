@@ -1,5 +1,5 @@
 //
-//  RouteMapViewController.swift
+//  TourMapViewController.swift
 //  TheCorkDistrict
 //
 //  Created by Bowman on 5/13/15.
@@ -11,7 +11,7 @@ import UIKit
 import MapKit
 import CoreData
 
-class RouteMapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
+class TourMapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     
     
     @IBAction func returnToHomePage(AnyObject) {
@@ -20,16 +20,16 @@ class RouteMapViewController: UIViewController, MKMapViewDelegate, CLLocationMan
     
     let locationManager = CLLocationManager()
     
-    var locationPin = [MKPointAnnotation]()
+    var tourPins = [MKPointAnnotation]()
     
     let util = MapUtilities()
     
-    var destination: NSManagedObject!
+    var tour: [NSManagedObject]!
     
     var mapRoutes = [MKRoute]()
     
     @IBOutlet var theMapView: MKMapView!
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,28 +37,20 @@ class RouteMapViewController: UIViewController, MKMapViewDelegate, CLLocationMan
         util.mapView = theMapView
         
         locationManager.requestWhenInUseAuthorization()
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
         
         self.theMapView.showsUserLocation = true
         
-        var theSpan: MKCoordinateSpan = MKCoordinateSpanMake(0.09, 0.09)
-        var mypin: String = destination.valueForKey("placemark") as! String
-        var llarray = mypin.componentsSeparatedByString(",")
+        var theSpan: MKCoordinateSpan = MKCoordinateSpanMake(0.05, 0.05)
         
-        var centerLocation: CLLocationCoordinate2D = CLLocationCoordinate2DMake(NSString(string: llarray[0]).doubleValue, NSString(string: llarray[1]).doubleValue)//self.theMapView.userLocation.location.coordinate
-        //CLLocationCoordinate2DMake(47.655262, -117.414129)
+        var centerLocation: CLLocationCoordinate2D = CLLocationCoordinate2DMake(47.655262, -117.414129)
         
         var theRegion: MKCoordinateRegion = MKCoordinateRegionMake(centerLocation, theSpan)
         
         self.theMapView.setRegion(theRegion, animated: true)
         
-        var destinationArray = [NSManagedObject]()
+        tourPins = util.placePinsOnMap(tour, type: "winery")
         
-        destinationArray.append(destination)
-        
-        util.placePinsOnMap(destinationArray, type: "winery")
-        
-        //util.getDirections(destinationArray, start: self.theMapView.userLocation.location.coordinate)
+        util.getDirections(tour, start: tourPins[0].coordinate)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -74,8 +66,13 @@ class RouteMapViewController: UIViewController, MKMapViewDelegate, CLLocationMan
         if !(annotation is MKPointAnnotation) {
             return nil
         }
+        var anView = MKAnnotationView(annotation: annotation, reuseIdentifier: nil)
         
-        return util.viewForAnnotation(mapView, viewForAnnotation: annotation)
+        anView.image = UIImage(named:"Wine_Icon")
+
+        anView.canShowCallout = false
+        
+        return anView
     }
     func mapView(mapView: MKMapView!, rendererForOverlay overlay: MKOverlay!) -> MKOverlayRenderer! {
         
@@ -87,9 +84,61 @@ class RouteMapViewController: UIViewController, MKMapViewDelegate, CLLocationMan
         return nil
     }
     func mapView(mapView: MKMapView!, didSelectAnnotationView view: MKAnnotationView!) {
-
-        detailAlertView(destination, view: view)
         
+        var temp = util.didSelectAnnotationView(view)
+        
+        var alertV: UIAlertController = sameAddress(temp, view: view)
+        
+        if(alertV.actions.count > 1) {
+            self.presentViewController(alertV, animated: true, completion: nil)
+        }
+        else {
+            detailAlertView(temp, view: view)
+        }
+        
+    }
+    func sameAddress(var temp: NSManagedObject, view: MKAnnotationView!) -> UIAlertController{
+        
+        var returnType = UIAlertController()
+        
+        var shouldAlert: Bool = false
+        
+        var address:String = temp.valueForKey("address") as! String
+        
+        var alertView = UIAlertController(title: "Warning: Same Address", message: "", preferredStyle: .Alert)
+        
+        var imageView = UIImageView(frame: CGRectMake(10, 15, 50, 50))
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: {
+            action in
+            
+        })
+        var tempAction = UIAlertAction(title: temp.valueForKey("name") as! String, style: .Default, handler: {
+            action in
+            self.detailAlertView(temp, view: view)
+        })
+        
+        alertView.addAction(tempAction)
+        alertView.addAction(cancelAction)
+        
+        for location in util.getWineries() {
+            if(location.valueForKey("address") as! String == address && temp != location) {
+                
+                shouldAlert = true
+                
+                tempAction = UIAlertAction(title: location.valueForKey("name") as! String, style: .Default, handler: {
+                    action in
+                    self.detailAlertView(location, view: view)
+                })
+                
+                alertView.addAction(tempAction)
+                
+            }
+        }
+        if(shouldAlert) {
+            returnType = alertView
+        }
+        return returnType
     }
     func detailAlertView(var temp: NSManagedObject, view: MKAnnotationView!) {
         
@@ -142,8 +191,24 @@ class RouteMapViewController: UIViewController, MKMapViewDelegate, CLLocationMan
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!)
     {
         var detailVC: DetailViewController = segue.destinationViewController as! DetailViewController
-
-        detailVC.currentSelection = destination
+        
+        var selectedItem: NSManagedObject = util.wineries[util.currentPin] as NSManagedObject
+        
+        if(util.currentType == "winery")
+        {
+            selectedItem = util.wineries[util.currentPin] as NSManagedObject
+            detailVC.currentSelection = selectedItem
+        }
+        else if(util.currentType == "rest")
+        {
+            selectedItem = util.restaurants[util.currentPin] as NSManagedObject
+            detailVC.currentSelection = selectedItem
+        }
+        else if(util.currentType == "hotel")
+        {
+            selectedItem = util.hotels[util.currentPin] as NSManagedObject
+            detailVC.currentSelection = selectedItem
+        }
     }
     
     override func didReceiveMemoryWarning() {
