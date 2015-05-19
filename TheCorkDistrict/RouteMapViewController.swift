@@ -37,12 +37,15 @@ class RouteMapViewController: UIViewController, MKMapViewDelegate, CLLocationMan
         util.mapView = theMapView
         
         locationManager.requestWhenInUseAuthorization()
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
         
         self.theMapView.showsUserLocation = true
         
-        var theSpan: MKCoordinateSpan = MKCoordinateSpanMake(0.05, 0.05)
+        var theSpan: MKCoordinateSpan = MKCoordinateSpanMake(0.09, 0.09)
+        var mypin: String = destination.valueForKey("placemark") as! String
+        var llarray = mypin.componentsSeparatedByString(",")
         
-        var centerLocation: CLLocationCoordinate2D = CLLocationCoordinate2DMake(47.655262, -117.414129)//self.theMapView.userLocation.location.coordinate
+        var centerLocation: CLLocationCoordinate2D = CLLocationCoordinate2DMake(NSString(string: llarray[0]).doubleValue, NSString(string: llarray[1]).doubleValue)//self.theMapView.userLocation.location.coordinate
         //CLLocationCoordinate2DMake(47.655262, -117.414129)
         
         var theRegion: MKCoordinateRegion = MKCoordinateRegionMake(centerLocation, theSpan)

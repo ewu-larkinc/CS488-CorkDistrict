@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Yvq-3g-fua">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Yvq-3g-fua">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -1366,9 +1366,6 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="Rlv-yw-EDu" kind="show" identifier="detailToRoute" id="J43-2J-FQ5"/>
-                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -1407,11 +1404,12 @@
                     </view>
                     <connections>
                         <outlet property="tableView" destination="BkR-6i-Isc" id="9H2-wj-LDw"/>
+                        <segue destination="Rlv-yw-EDu" kind="show" identifier="detailToRoute" id="S90-bt-pz1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GeZ-Kk-9hT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1623" y="2056"/>
+            <point key="canvasLocation" x="2439" y="2320"/>
         </scene>
         <!--Wine Tours-->
         <scene sceneID="zQZ-K5-GSL">
@@ -1895,12 +1893,12 @@
                     </view>
                     <connections>
                         <outlet property="theMapView" destination="WuT-Qb-SV9" id="Mvj-UO-ccI"/>
-                        <segue destination="Sjx-3I-6ZT" kind="show" identifier="routeToDetail" id="NsA-pd-A0N"/>
+                        <segue destination="Sjx-3I-6ZT" kind="show" identifier="routeToDetail" id="Fo5-t2-ARf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f9K-dq-xrP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2638" y="2056"/>
+            <point key="canvasLocation" x="3588" y="2092"/>
         </scene>
     </scenes>
     <resources>
@@ -1911,6 +1909,6 @@
         <image name="alaska_pass" width="336" height="420"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="NsA-pd-A0N"/>
+        <segue reference="Fo5-t2-ARf"/>
     </inferredMetricsTieBreakers>
 </document>
