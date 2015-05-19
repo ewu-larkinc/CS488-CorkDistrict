@@ -35,9 +35,10 @@ class RouteMapViewController: UIViewController, MKMapViewDelegate, CLLocationMan
         super.viewDidLoad()
         
         util.mapView = theMapView
-        
+       /*
         locationManager.requestWhenInUseAuthorization()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
+*/
         locationManager.startUpdatingLocation()
         self.theMapView.showsUserLocation = true
         

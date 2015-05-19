@@ -23,7 +23,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>By allowing access to your location, this app with help find your closest winery in The Cork District</string>
+	<string>By allowing access to your location, this app with help you navigate your way between wineries in the District</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

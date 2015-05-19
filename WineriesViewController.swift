@@ -7,6 +7,7 @@
 import Foundation
 import UIKit
 import CoreData
+import MapKit
 
 class WineriesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
@@ -22,6 +23,8 @@ class WineriesViewController: UIViewController, UITableViewDataSource, UITableVi
         let dataManager = DataManager.sharedInstance
         wineries = dataManager.getWineries()
         //wineries.sort(<#isOrderedBefore: (T, T) -> Bool##(T, T) -> Bool#>)
+        
+
 
     }
     
