@@ -5,11 +5,19 @@
 //
 
 import UIKit
+import MapKit
+import CoreData
 
-class ViewController: UITableViewController {
-    
+class ViewController: UITableViewController, CLLocationManagerDelegate {
+    let locationManager = CLLocationManager()
+
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        
+        
+
+        
         let dataManager = DataManager.sharedInstance
         dataManager.loadData()
         
@@ -44,6 +52,10 @@ class ViewController: UITableViewController {
             
             self.navigationController?.presentViewController(loadingVC, animated: false, completion: nil)
         }
+        
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+       
         
     }
     

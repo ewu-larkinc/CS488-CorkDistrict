@@ -360,7 +360,6 @@ class DataManager {
             }
         }
         
-        
         var geocoder = CLGeocoder() 
         geocoder.geocodeAddressString( "\(Index.Address.rawValue), \(Index.Zipcode.rawValue), WA, USA", completionHandler: {(placemarks: [AnyObject]!, error: NSError!) -> Void in
             if let placemark = placemarks?[0]  as? CLPlacemark

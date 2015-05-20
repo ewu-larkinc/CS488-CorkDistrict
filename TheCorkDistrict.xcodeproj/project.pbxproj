@@ -30,7 +30,6 @@
 		2298E0A81AB011CB003CEFFA /* AccommodationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2298E0A71AB011CB003CEFFA /* AccommodationsViewController.swift */; };
 		2298E0AA1AB011EA003CEFFA /* PackagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2298E0A91AB011EA003CEFFA /* PackagesViewController.swift */; };
 		2298E0AE1AB01902003CEFFA /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2298E0AD1AB01902003CEFFA /* DetailViewController.swift */; };
-		2298E0B01AB01CF2003CEFFA /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2298E0AF1AB01CF2003CEFFA /* CoreLocation.framework */; };
 		2298E0B81AB01D91003CEFFA /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2298E0B71AB01D91003CEFFA /* MapViewController.swift */; };
 		2298E0BA1AB01E53003CEFFA /* WineToursViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2298E0B91AB01E53003CEFFA /* WineToursViewController.swift */; };
 		22A85A0A1AB18B2000B45713 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A85A091AB18B2000B45713 /* SwiftyJSON.swift */; };
@@ -77,7 +76,6 @@
 		2298E0A71AB011CB003CEFFA /* AccommodationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccommodationsViewController.swift; path = ../AccommodationsViewController.swift; sourceTree = "<group>"; };
 		2298E0A91AB011EA003CEFFA /* PackagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PackagesViewController.swift; path = ../PackagesViewController.swift; sourceTree = "<group>"; };
 		2298E0AD1AB01902003CEFFA /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DetailViewController.swift; path = ../DetailViewController.swift; sourceTree = "<group>"; };
-		2298E0AF1AB01CF2003CEFFA /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		2298E0B71AB01D91003CEFFA /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapViewController.swift; path = ../MapViewController.swift; sourceTree = "<group>"; };
 		2298E0B91AB01E53003CEFFA /* WineToursViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WineToursViewController.swift; path = ../WineToursViewController.swift; sourceTree = "<group>"; };
 		22A85A091AB18B2000B45713 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftyJSON.swift; path = ../SwiftyJSON.swift; sourceTree = "<group>"; };
@@ -91,7 +89,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2298E0B01AB01CF2003CEFFA /* CoreLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,7 +105,6 @@
 		2298E0701AB00B7B003CEFFA = {
 			isa = PBXGroup;
 			children = (
-				2298E0AF1AB01CF2003CEFFA /* CoreLocation.framework */,
 				2298E07B1AB00B7B003CEFFA /* TheCorkDistrict */,
 				2298E0941AB00B7B003CEFFA /* TheCorkDistrictTests */,
 				2298E07A1AB00B7B003CEFFA /* Products */,
@@ -294,6 +290,7 @@
 				225A2DF91AF619B700D072C2 /* CorkDistrictEntity.swift in Sources */,
 				2298E0BA1AB01E53003CEFFA /* WineToursViewController.swift in Sources */,
 				225A2DFD1AF6D1FE00D072C2 /* ParkingCell.swift in Sources */,
+				840AEAC31B04247E00DBB6EF /* TourMapViewController.swift in Sources */,
 				2298E0A61AB011B5003CEFFA /* RestaurantsViewController.swift in Sources */,
 				2281672C1AE20CFE00CCC9DF /* LoadViewController.swift in Sources */,
 				2298E0A41AB01188003CEFFA /* DataManager.swift in Sources */,
@@ -307,6 +304,7 @@
 				225A2DFB1AF6D06600D072C2 /* EntityCell.swift in Sources */,
 				22F9FCAE1B05CA5500CA43B7 /* WineTourCell.swift in Sources */,
 				2298E0821AB00B7B003CEFFA /* TheCorkDistrict.xcdatamodeld in Sources */,
+				840AEAC11B03DC9400DBB6EF /* RouteMapViewController.swift in Sources */,
 				22A85A0A1AB18B2000B45713 /* SwiftyJSON.swift in Sources */,
 				221D72871ACA8F87005C26EB /* ParkingViewController.swift in Sources */,
 				221346EB1AD92A3F009633DB /* UIViewExtensions.swift in Sources */,

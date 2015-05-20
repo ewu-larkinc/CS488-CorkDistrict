@@ -2,6 +2,8 @@
 //  MapUtilities.swift
 //  TheCorkDistrict
 //
+//  Created by Bowman on 4/19/15.
+//  Copyright (c) 2015 Chris Larkin. All rights reserved.
 //
 
 import Foundation
@@ -17,6 +19,9 @@ class MapUtilities {
     var hotels = [NSManagedObject]()
     var parking = [NSManagedObject]()
     
+    var currentType = NSString()
+    var currentPin = Int()
+    
     @IBOutlet var mapView: MKMapView!
     
     func multiPinsMap() {
@@ -31,6 +36,9 @@ class MapUtilities {
         
         parking = dataManager.getParking()
         
+    }
+    func getWineries() -> [NSManagedObject] {
+        return wineries
     }
     
     func pinTypeOnMap(type: String) -> [MKPointAnnotation]{
@@ -102,7 +110,7 @@ class MapUtilities {
         
         return myRoutes
     }
-    
+
     func sortByDistance(var mapRoutes: [MKRoute]) {
         
         println(mapRoutes)
@@ -165,7 +173,8 @@ class MapUtilities {
         else if(view.annotation.subtitle == "park") {
             temp = parking[view.annotation.title!.toInt()!]
         }
-        
+        self.currentPin = view.annotation.title!.toInt()!
+        self.currentType = view.annotation.subtitle!
         return temp
     }
     

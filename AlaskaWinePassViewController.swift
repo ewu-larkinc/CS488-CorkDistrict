@@ -21,6 +21,7 @@ class AlaskaWinePassViewController : UIViewController {
     }
     
     override func viewDidLoad() {
+        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "parchmentBackground")!)
         winePassButton.layer.shadowColor = UIColor.blackColor().CGColor
         winePassButton.layer.shadowOpacity = 0.5
         winePassButton.layer.shadowRadius = 5

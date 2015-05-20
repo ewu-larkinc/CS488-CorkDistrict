@@ -23,7 +23,7 @@ class AccomodationsViewController: UIViewController, UITableViewDataSource, UITa
         let dataManager = DataManager.sharedInstance
         accommodations = dataManager.getAccommodations()
         
-        self.tableView.backgroundView = UIImageView(image:UIImage(named: "restBackground"))
+        self.tableView.backgroundView = UIImageView(image:UIImage(named: "hotelBackground"))
     }
     
     override func didReceiveMemoryWarning() {

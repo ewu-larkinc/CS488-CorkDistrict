@@ -164,6 +164,11 @@ class PackagesViewController: UIViewController, UITableViewDataSource, UITableVi
         
         cell.cellImage.layer.cornerRadius = 4.0
         cell.cellImage.clipsToBounds = true
+        cell.titleLabel.textColor = UIColor.whiteColor()
+        cell.dateLabel.textColor = UIColor.whiteColor()
+        cell.costLabel.textColor = UIColor.whiteColor()
+        cell.entityTitleLabel.textColor = UIColor.whiteColor()
+
         cell.cellImage.contentMode = UIViewContentMode.ScaleToFill
     }
 

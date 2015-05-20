@@ -49,7 +49,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         //request user location
         locationManager.requestWhenInUseAuthorization()
-        
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
         self.theMapView.showsUserLocation = true
         
         //fill pin arrays
@@ -155,13 +155,69 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         return nil
     }
     func mapView(mapView: MKMapView!, didSelectAnnotationView view: MKAnnotationView!) {
-        //......Determines what kind of pin was touched...........................................................//
+        
         var temp = util.didSelectAnnotationView(view)
-        //......Create a alertView when pin is clicked...........................................................//
-        var alertView = UIAlertController(title: temp.valueForKey("name") as? String, message: temp.valueForKey("address") as? String, preferredStyle: .Alert)
+        
+        var alertV: UIAlertController = sameAddress(temp, view: view)
+        
+        if(alertV.actions.count > 1) {
+            self.presentViewController(alertV, animated: true, completion: nil)
+        }
+        else {
+            detailAlertView(temp, view: view)
+        }
+        
+    }
+    func sameAddress(var temp: NSManagedObject, view: MKAnnotationView!) -> UIAlertController{
+        
+        var returnType = UIAlertController()
+        
+        var shouldAlert: Bool = false
+        
+        var address:String = temp.valueForKey("address") as! String
+        
+        var alertView = UIAlertController(title: "Warning: Same Address", message: "", preferredStyle: .Alert)
         
         var imageView = UIImageView(frame: CGRectMake(10, 15, 50, 50))
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: {
+            action in
+            
+        })
+        var tempAction = UIAlertAction(title: temp.valueForKey("name") as! String, style: .Default, handler: {
+            action in
+            self.detailAlertView(temp, view: view)
+        })
+        
+        alertView.addAction(tempAction)
+        alertView.addAction(cancelAction)
+        
+        for location in util.getWineries() {
+            if(location.valueForKey("address") as! String == address && temp != location) {
+                
+                shouldAlert = true
+                
+                tempAction = UIAlertAction(title: location.valueForKey("name") as! String, style: .Default, handler: {
+                    action in
+                    self.detailAlertView(location, view: view)
+                })
+                
+                alertView.addAction(tempAction)
+                
+            }
+        }
+        if(shouldAlert) {
+            returnType = alertView
+        }
+        return returnType
+    }
+    func detailAlertView(var temp: NSManagedObject, view: MKAnnotationView!) {
+        
+        var alertView = UIAlertController(title: temp.valueForKey("name") as? String, message: temp.valueForKey("address") as? String, preferredStyle: .Alert)
+        
         if(view.annotation.subtitle != "park") {
+            var imageView = UIImageView(frame: CGRectMake(10, 15, 50, 50))
+            
             let imageData = temp.valueForKey("imageData") as? NSData
             
             imageView.image = UIImage(data: imageData!)
@@ -188,6 +244,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         let detailAction = UIAlertAction(title: "Details", style: .Default, handler: {
             action in
+            self.performSegueWithIdentifier("mapDetail", sender: self)
             
         })
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: {
@@ -201,7 +258,40 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         
         
-        presentViewController(alertView, animated: true, completion: nil)
+        self.presentViewController(alertView, animated: true, completion: nil)
+    }
+    
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!)
+    {
+        
+        
+        var detailVC: DetailViewController = segue.destinationViewController as! DetailViewController
+        
+        var selectedItem: NSManagedObject = util.wineries[util.currentPin] as NSManagedObject
+        
+        
+        if(util.currentType == "winery")
+        {
+            selectedItem = util.wineries[util.currentPin] as NSManagedObject
+            detailVC.currentSelection = selectedItem
+            
+            
+        }
+        else if(util.currentType == "rest")
+        {
+            selectedItem = util.restaurants[util.currentPin] as NSManagedObject
+            detailVC.currentSelection = selectedItem
+            
+        }
+        else if(util.currentType == "hotel")
+        {
+            selectedItem = util.hotels[util.currentPin] as NSManagedObject
+            detailVC.currentSelection = selectedItem
+            
+        }
+  
+        
     }
     
     override func didReceiveMemoryWarning() {

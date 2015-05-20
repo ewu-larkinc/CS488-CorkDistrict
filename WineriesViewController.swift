@@ -7,6 +7,7 @@
 import Foundation
 import UIKit
 import CoreData
+import MapKit
 
 class WineriesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
@@ -19,7 +20,6 @@ class WineriesViewController: UIViewController, UITableViewDataSource, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.backgroundView = UIImageView(image:UIImage(named: "wineBackground"))
-        
         let dataManager = DataManager.sharedInstance
         wineries = dataManager.getWineries()
         

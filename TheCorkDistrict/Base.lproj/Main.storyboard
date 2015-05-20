@@ -1410,11 +1410,12 @@
                     </view>
                     <connections>
                         <outlet property="tableView" destination="BkR-6i-Isc" id="9H2-wj-LDw"/>
+                        <segue destination="Rlv-yw-EDu" kind="show" identifier="detailToRoute" id="S90-bt-pz1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GeZ-Kk-9hT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1881" y="2295"/>
+            <point key="canvasLocation" x="2439" y="2320"/>
         </scene>
         <!--Wine Tours-->
         <scene sceneID="zQZ-K5-GSL">
@@ -2025,6 +2026,42 @@
             </objects>
             <point key="canvasLocation" x="1206" y="201.75"/>
         </scene>
+        <!--Route Map View-->
+        <scene sceneID="VkI-7c-kmv">
+            <objects>
+                <viewController title="Route" id="Rlv-yw-EDu" userLabel="Route Map View" customClass="RouteMapViewController" customModule="TheCorkDistrict" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="wzO-Z2-yb1"/>
+                        <viewControllerLayoutGuide type="bottom" id="Bld-no-ffu"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Sim-rt-iNR">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="WuT-Qb-SV9">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Rlv-yw-EDu" id="Aw7-QU-Twl"/>
+                                </connections>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="WuT-Qb-SV9" firstAttribute="bottom" secondItem="Bld-no-ffu" secondAttribute="top" id="11K-2c-uwt"/>
+                            <constraint firstItem="WuT-Qb-SV9" firstAttribute="top" secondItem="Sim-rt-iNR" secondAttribute="topMargin" id="USm-YH-oFf"/>
+                            <constraint firstItem="WuT-Qb-SV9" firstAttribute="leading" secondItem="Sim-rt-iNR" secondAttribute="leading" id="Vmh-oa-gAe"/>
+                            <constraint firstAttribute="trailing" secondItem="WuT-Qb-SV9" secondAttribute="trailing" id="elG-4K-g2o"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="theMapView" destination="WuT-Qb-SV9" id="Mvj-UO-ccI"/>
+                        <segue destination="Sjx-3I-6ZT" kind="show" identifier="routeToDetail" id="Fo5-t2-ARf"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="f9K-dq-xrP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3588" y="2092"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Car_Button" width="600" height="600"/>
@@ -2034,6 +2071,6 @@
         <image name="alaska_pass" width="336" height="420"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Ysb-z2-Hox"/>
+        <segue reference="Fo5-t2-ARf"/>
     </inferredMetricsTieBreakers>
 </document>
