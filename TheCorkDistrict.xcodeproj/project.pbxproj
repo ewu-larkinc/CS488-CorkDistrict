@@ -33,6 +33,9 @@
 		2298E0B81AB01D91003CEFFA /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2298E0B71AB01D91003CEFFA /* MapViewController.swift */; };
 		2298E0BA1AB01E53003CEFFA /* WineToursViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2298E0B91AB01E53003CEFFA /* WineToursViewController.swift */; };
 		22A85A0A1AB18B2000B45713 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A85A091AB18B2000B45713 /* SwiftyJSON.swift */; };
+		22D2B2DB1AC3B96B008E0CE1 /* PackageDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D2B2DA1AC3B96B008E0CE1 /* PackageDetailViewController.swift */; };
+		840AEAC11B03DC9400DBB6EF /* RouteMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840AEAC01B03DC9400DBB6EF /* RouteMapViewController.swift */; };
+		840AEAC31B04247E00DBB6EF /* TourMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840AEAC21B04247E00DBB6EF /* TourMapViewController.swift */; };
 		22F9FCAE1B05CA5500CA43B7 /* WineTourCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F9FCAD1B05CA5500CA43B7 /* WineTourCell.swift */; };
 		84E875691AE4A42700BDF4A0 /* MapUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E875681AE4A42700BDF4A0 /* MapUtilities.swift */; };
 		C141C79E1B03E891007EBFF8 /* App_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = C141C79D1B03E891007EBFF8 /* App_Icon.png */; };
@@ -136,6 +139,9 @@
 				2298E0B91AB01E53003CEFFA /* WineToursViewController.swift */,
 				2298E0A11AB010FF003CEFFA /* WineriesViewController.swift */,
 				2298E0AD1AB01902003CEFFA /* DetailViewController.swift */,
+				22D2B2DA1AC3B96B008E0CE1 /* PackageDetailViewController.swift */,
+				840AEAC01B03DC9400DBB6EF /* RouteMapViewController.swift */,
+				840AEAC21B04247E00DBB6EF /* TourMapViewController.swift */,
 				2298E0B71AB01D91003CEFFA /* MapViewController.swift */,
 				84E875681AE4A42700BDF4A0 /* MapUtilities.swift */,
 				2298E0A51AB011B5003CEFFA /* RestaurantsViewController.swift */,

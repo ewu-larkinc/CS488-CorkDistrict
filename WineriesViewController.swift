@@ -22,6 +22,7 @@ class WineriesViewController: UIViewController, UITableViewDataSource, UITableVi
         self.tableView.backgroundView = UIImageView(image:UIImage(named: "wineBackground"))
         let dataManager = DataManager.sharedInstance
         wineries = dataManager.getWineries()
+        //wineries.sort(<#isOrderedBefore: (T, T) -> Bool##(T, T) -> Bool#>)
         
         dataManager.sortWineriesByName()
     }

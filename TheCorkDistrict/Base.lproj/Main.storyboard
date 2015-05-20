@@ -197,7 +197,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EjK-Ls-rK8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3240" y="323.25"/>
+            <point key="canvasLocation" x="4007" y="1171"/>
         </scene>
         <!--Wineries-->
         <scene sceneID="DXy-ef-RSP">
@@ -479,7 +479,8 @@
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="Cx5-Bj-vHa">
                                         <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                                        <string key="text">Flying into Spokane with Alaska Airlines? Present your boarding pass within 48 hours to receive a complimentary wine tasting at one of the Cork District's tasting rooms. Tap the wine pass below for more info.</string>
+                                        <string key="text">Flying into Spokane with Alaska Airlines?
+Present your boarding pass within 48 hours to receive a complimentary wine tasting at one of the Cork District's tasting rooms. Tap the wine pass below for more info.</string>
                                         <fontDescription key="fontDescription" name="STHeitiTC-Light" family="Heiti TC" pointSize="16"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -577,6 +578,12 @@
                             <mask key="constraints">
                                 <exclude reference="Dng-qu-Of5"/>
                                 <exclude reference="mQo-L0-sMF"/>
+                                <exclude reference="diw-Kf-Iyj"/>
+                                <exclude reference="dvv-qG-MWb"/>
+                                <exclude reference="lZj-Sg-d69"/>
+                                <exclude reference="hDQ-fa-UPa"/>
+                                <exclude reference="sVk-2u-YAh"/>
+                                <exclude reference="vJ3-KP-gVL"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -586,6 +593,12 @@
                             <mask key="constraints">
                                 <include reference="Dng-qu-Of5"/>
                                 <include reference="mQo-L0-sMF"/>
+                                <include reference="diw-Kf-Iyj"/>
+                                <include reference="dvv-qG-MWb"/>
+                                <include reference="lZj-Sg-d69"/>
+                                <include reference="hDQ-fa-UPa"/>
+                                <include reference="sVk-2u-YAh"/>
+                                <include reference="vJ3-KP-gVL"/>
                             </mask>
                         </variation>
                     </view>
