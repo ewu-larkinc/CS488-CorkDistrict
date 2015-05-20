@@ -44,34 +44,11 @@ class WineToursViewController: UIViewController, UITableViewDataSource, UITableV
     
     //# MARK: - TableView Methods
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        switch (section) {
-            case 0:
-                return downtownCluster.count
-            case 1:
-                return mtCluster.count
-            case 2:
-                return sodoCluster.count
-            default:
-                return -1
-        }
-    }
-    
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        switch (section) {
-            case 0:
-                return "Downtown Cluster"
-            case 1:
-                return "Mt. to Lake Cluster"
-            case 2:
-                return "SoDo Cluster"
-            default:
-                return "Default Cluster"
-        }
+        return 3
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 3
+        return 1
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -85,27 +62,54 @@ class WineToursViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        if indexPath.row == 0 {
+            
+        }else if indexPath.row == 1 {
+            
+        } else {
+            
+        }
+        
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+        
+        let dvc = segue.destinationViewController as! RouteMapViewController
+        
+        if let indexPath = self.tableView.indexPathForSelectedRow() {
+            
+            if indexPath.row == 0 {
+                dvc.clusterArray = downtownCluster
+            } else if indexPath.row == 1 {
+                dvc.clusterArray = mtCluster
+            }
+            else {
+                dvc.clusterArray = sodoCluster
+            }
+            
+        }
+        
     }
     
     func setContentForCell(cell:WineTourCell, indexPath:NSIndexPath) {
         
-        var entity : NSManagedObject
+        var mainText: String
         
-        if indexPath.section == 0 {
-            entity = downtownCluster[indexPath.row]
+        if indexPath.row == 0 {
+            mainText = "Downtown Cluster"
         }
-        else if indexPath.section == 1 {
-            entity = mtCluster[indexPath.row]
+        else if indexPath.row == 1 {
+            mainText = "Mt. Spokane Cluster"
         }
         else {
-            entity = sodoCluster[indexPath.row]
+            mainText = "SoDo Cluster"
         }
         
-        var name = entity.valueForKey("name") as? String
         var fakeDistance: String = "0 miles"
         
-        cell.nameLabel.text = name
+        cell.nameLabel.text = mainText
         cell.nameLabel.adjustsFontSizeToFitWidth = true
         cell.distanceLabel.text = fakeDistance
         cell.distanceLabel.adjustsFontSizeToFitWidth = true

@@ -19,6 +19,7 @@ class RouteMapViewController: UIViewController, MKMapViewDelegate, CLLocationMan
     }
     
     let locationManager = CLLocationManager()
+    var clusterArray = [NSManagedObject]()
     
     var locationPin = [MKPointAnnotation]()
     
