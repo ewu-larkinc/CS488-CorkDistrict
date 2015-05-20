@@ -1489,7 +1489,7 @@ Present your boarding pass within 48 hours to receive a complimentary wine tasti
                                                     </variation>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstItem="FgA-LA-3wD" firstAttribute="top" secondItem="GbQ-Jq-Rbq" secondAttribute="top" constant="22" id="AsN-De-iP7">
                                                     <variation key="heightClass=regular-widthClass=compact" constant="24"/>
@@ -1540,6 +1540,7 @@ Present your boarding pass within 48 hours to receive a complimentary wine tasti
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="distanceLabel" destination="FgA-LA-3wD" id="to6-zF-fCf"/>
                                             <outlet property="nameLabel" destination="2J4-Bh-rLw" id="LTA-Hx-hHH"/>

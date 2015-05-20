@@ -22,7 +22,8 @@ class WineToursViewController: UIViewController, UITableViewDataSource, UITableV
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.tableView.backgroundView = UIImageView(image:UIImage(named: "restBackground"))
+
         let dataManager = DataManager.sharedInstance
         dataManager.separateClusters()
         downtownCluster = dataManager.getDowntownCluster()
@@ -112,10 +113,10 @@ class WineToursViewController: UIViewController, UITableViewDataSource, UITableV
         
         cell.nameLabel.text = mainText
         cell.nameLabel.adjustsFontSizeToFitWidth = true
+        cell.nameLabel.textColor = UIColor.whiteColor()
         cell.distanceLabel.text = fakeDistance
         cell.distanceLabel.adjustsFontSizeToFitWidth = true
-        
-        //cell.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.2)
+        cell.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.2)
     }
     
     
