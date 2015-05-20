@@ -100,6 +100,21 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
             var tempNumStr = tempNum.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
             UIApplication.sharedApplication().openURL(NSURL(string: "tel://#\(tempNumStr)")!)
         }
+        if(indexPath.row == 2)
+        {
+            let alertMessage = UIAlertController(title: "Are you sure?", message: "Are you sure you want to call this winery?", preferredStyle: .Alert)
+            let callFinalAction = UIAlertAction(title: "Call", style: .Default, handler: {
+                action in
+                var pNumber = "tel://"
+                pNumber += (self.currentSelection.valueForKey("phone")as? String)!
+                var url:NSURL? = NSURL(string: pNumber)
+                UIApplication.sharedApplication().openURL(url!)
+            })
+            alertMessage.addAction(callFinalAction)
+            alertMessage.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+            self.presentViewController(alertMessage, animated: true, completion: nil)
+
+        }
         if(indexPath.row == 1) {
             self.performSegueWithIdentifier("detailToRoute", sender: self)
             println("THEY'RE HERE")

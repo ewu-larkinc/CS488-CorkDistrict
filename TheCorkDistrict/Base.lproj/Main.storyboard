@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Yvq-3g-fua">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Yvq-3g-fua">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -578,12 +578,6 @@ Present your boarding pass within 48 hours to receive a complimentary wine tasti
                             <mask key="constraints">
                                 <exclude reference="Dng-qu-Of5"/>
                                 <exclude reference="mQo-L0-sMF"/>
-                                <exclude reference="diw-Kf-Iyj"/>
-                                <exclude reference="dvv-qG-MWb"/>
-                                <exclude reference="lZj-Sg-d69"/>
-                                <exclude reference="hDQ-fa-UPa"/>
-                                <exclude reference="sVk-2u-YAh"/>
-                                <exclude reference="vJ3-KP-gVL"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -593,12 +587,6 @@ Present your boarding pass within 48 hours to receive a complimentary wine tasti
                             <mask key="constraints">
                                 <include reference="Dng-qu-Of5"/>
                                 <include reference="mQo-L0-sMF"/>
-                                <include reference="diw-Kf-Iyj"/>
-                                <include reference="dvv-qG-MWb"/>
-                                <include reference="lZj-Sg-d69"/>
-                                <include reference="hDQ-fa-UPa"/>
-                                <include reference="sVk-2u-YAh"/>
-                                <include reference="vJ3-KP-gVL"/>
                             </mask>
                         </variation>
                     </view>
@@ -1596,11 +1584,12 @@ Present your boarding pass within 48 hours to receive a complimentary wine tasti
                     </view>
                     <connections>
                         <outlet property="tableView" destination="Y6x-YP-J7e" id="a2J-Ms-Imu"/>
+                        <segue destination="GUS-ej-BRR" kind="show" identifier="tourRoute" id="XOx-0b-HWh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IEb-to-ePp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3346.5" y="-700.5"/>
+            <point key="canvasLocation" x="3282" y="-541"/>
         </scene>
         <!--The Cork District-->
         <scene sceneID="8Vu-vb-LYn">
@@ -2042,7 +2031,7 @@ Present your boarding pass within 48 hours to receive a complimentary wine tasti
         <!--Route Map View-->
         <scene sceneID="VkI-7c-kmv">
             <objects>
-                <viewController title="Route" id="Rlv-yw-EDu" userLabel="Route Map View" customClass="RouteMapViewController" customModule="TheCorkDistrict" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Route" id="Rlv-yw-EDu" userLabel="Route Map View" customClass="RouteMapViewController" customModule="Cork_District" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="wzO-Z2-yb1"/>
                         <viewControllerLayoutGuide type="bottom" id="Bld-no-ffu"/>
@@ -2075,6 +2064,42 @@ Present your boarding pass within 48 hours to receive a complimentary wine tasti
             </objects>
             <point key="canvasLocation" x="3588" y="2092"/>
         </scene>
+        <!--Map View-->
+        <scene sceneID="7Hr-NW-E5f">
+            <objects>
+                <viewController title="Map View" id="GUS-ej-BRR" customClass="TourMapViewController" customModule="Cork_District" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="EF2-d2-GLo"/>
+                        <viewControllerLayoutGuide type="bottom" id="kB8-57-1T0"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="MpJ-jA-Vgs">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="bsG-IA-NRU">
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                                <connections>
+                                    <outlet property="delegate" destination="GUS-ej-BRR" id="zQ4-Qp-4r7"/>
+                                </connections>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="bsG-IA-NRU" firstAttribute="leading" secondItem="MpJ-jA-Vgs" secondAttribute="leading" id="5Q4-qV-9B7"/>
+                            <constraint firstItem="bsG-IA-NRU" firstAttribute="bottom" secondItem="kB8-57-1T0" secondAttribute="top" id="7Ab-l8-8Fp"/>
+                            <constraint firstAttribute="trailing" secondItem="bsG-IA-NRU" secondAttribute="trailing" id="aes-2p-lyn"/>
+                            <constraint firstItem="bsG-IA-NRU" firstAttribute="top" secondItem="EF2-d2-GLo" secondAttribute="bottom" id="xk1-tt-fLE"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="theMapView" destination="bsG-IA-NRU" id="1QB-Io-Las"/>
+                        <segue destination="Sjx-3I-6ZT" kind="show" identifier="tourDetail" id="Tmw-cN-3t0"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gKq-dB-srB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4095" y="179"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Car_Button" width="600" height="600"/>
@@ -2084,6 +2109,6 @@ Present your boarding pass within 48 hours to receive a complimentary wine tasti
         <image name="alaska_pass" width="336" height="420"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Fo5-t2-ARf"/>
+        <segue reference="Tmw-cN-3t0"/>
     </inferredMetricsTieBreakers>
 </document>

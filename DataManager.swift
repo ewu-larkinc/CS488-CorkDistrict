@@ -30,7 +30,7 @@ class DataManager {
     var dataReceived: Bool = false
     
     
-    private let URL_NOTIFICATIONS = NSURL(string: "http://www.nathanpilgrim.net/apns/push_notifications")
+    private let URL_NOTIFICATIONS = NSURL(string: "http://www.corkdistrictapp.com/rest/push_notifications")
     private let URL_CHANGELOG = NSURL(string: "http://www.nathanpilgrim.net/rest/all.json")
     
     private var wineries = CorkDistrictEntity()

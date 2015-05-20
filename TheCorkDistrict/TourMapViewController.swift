@@ -23,9 +23,8 @@ class TourMapViewController: UIViewController, MKMapViewDelegate, CLLocationMana
     var tourPins = [MKPointAnnotation]()
     
     let util = MapUtilities()
-    
+    var currentCluster = Int()
     var tour: [NSManagedObject]!
-    
     var mapRoutes = [MKRoute]()
     
     @IBOutlet var theMapView: MKMapView!
@@ -36,13 +35,29 @@ class TourMapViewController: UIViewController, MKMapViewDelegate, CLLocationMana
         
         util.mapView = theMapView
         
-        locationManager.requestWhenInUseAuthorization()
+        //locationManager.requestWhenInUseAuthorization()
         
         self.theMapView.showsUserLocation = true
         
         var theSpan: MKCoordinateSpan = MKCoordinateSpanMake(0.05, 0.05)
-        
         var centerLocation: CLLocationCoordinate2D = CLLocationCoordinate2DMake(47.655262, -117.414129)
+
+        
+        if(currentCluster == 0) // Downtown
+        {
+            theSpan = MKCoordinateSpanMake(0.025, 0.025)
+            centerLocation = CLLocationCoordinate2DMake(47.654447, -117.424911)
+        }
+        if(currentCluster == 1) // Mtn to Lake
+        {
+            theSpan = MKCoordinateSpanMake(0.2, 0.2)
+            centerLocation = CLLocationCoordinate2DMake(47.765638, -117.303686)//47.654461, -117.425019)
+        }
+        if(currentCluster == 2) // SODO
+        {
+            theSpan = MKCoordinateSpanMake(0.03, 0.03)
+            centerLocation = CLLocationCoordinate2DMake(47.657251, -117.409676)
+        }
         
         var theRegion: MKCoordinateRegion = MKCoordinateRegionMake(centerLocation, theSpan)
         
@@ -50,7 +65,7 @@ class TourMapViewController: UIViewController, MKMapViewDelegate, CLLocationMana
         
         tourPins = util.placePinsOnMap(tour, type: "winery")
         
-        util.getDirections(tour, start: tourPins[0].coordinate)
+       // util.getDirections(tour, start: tourPins[0].coordinate)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -85,7 +100,8 @@ class TourMapViewController: UIViewController, MKMapViewDelegate, CLLocationMana
     }
     func mapView(mapView: MKMapView!, didSelectAnnotationView view: MKAnnotationView!) {
         
-        var temp = util.didSelectAnnotationView(view)
+        var temp = tour[view.annotation.title!.toInt()!]
+        util.currentPin = view.annotation.title!.toInt()!
         
         var alertV: UIAlertController = sameAddress(temp, view: view)
         
@@ -95,7 +111,6 @@ class TourMapViewController: UIViewController, MKMapViewDelegate, CLLocationMana
         else {
             detailAlertView(temp, view: view)
         }
-        
     }
     func sameAddress(var temp: NSManagedObject, view: MKAnnotationView!) -> UIAlertController{
         
@@ -143,16 +158,6 @@ class TourMapViewController: UIViewController, MKMapViewDelegate, CLLocationMana
     func detailAlertView(var temp: NSManagedObject, view: MKAnnotationView!) {
         
         var alertView = UIAlertController(title: temp.valueForKey("name") as? String, message: temp.valueForKey("address") as? String, preferredStyle: .Alert)
-        
-        if(view.annotation.subtitle != "park") {
-            var imageView = UIImageView(frame: CGRectMake(10, 15, 50, 50))
-            
-            let imageData = temp.valueForKey("imageData") as? NSData
-            
-            imageView.image = UIImage(data: imageData!)
-            
-            alertView.view.addSubview(imageView)
-        }
         let callAction = UIAlertAction(title: "Call", style: .Default, handler: {
             action in
             let alertMessage = UIAlertController(title: "Are you sure?", message: "Are you sure you want to call this winery?", preferredStyle: .Alert)
@@ -173,7 +178,7 @@ class TourMapViewController: UIViewController, MKMapViewDelegate, CLLocationMana
         
         let detailAction = UIAlertAction(title: "Details", style: .Default, handler: {
             action in
-            self.performSegueWithIdentifier("routeToDetail", sender: self)
+            self.performSegueWithIdentifier("tourDetail", sender: self)
         })
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: {
             action in
@@ -191,24 +196,11 @@ class TourMapViewController: UIViewController, MKMapViewDelegate, CLLocationMana
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!)
     {
         var detailVC: DetailViewController = segue.destinationViewController as! DetailViewController
+        var selectedItem: NSManagedObject = tour[util.currentPin] as NSManagedObject
+        selectedItem = tour[util.currentPin] as NSManagedObject
+        detailVC.currentSelection = selectedItem
         
-        var selectedItem: NSManagedObject = util.wineries[util.currentPin] as NSManagedObject
-        
-        if(util.currentType == "winery")
-        {
-            selectedItem = util.wineries[util.currentPin] as NSManagedObject
-            detailVC.currentSelection = selectedItem
-        }
-        else if(util.currentType == "rest")
-        {
-            selectedItem = util.restaurants[util.currentPin] as NSManagedObject
-            detailVC.currentSelection = selectedItem
-        }
-        else if(util.currentType == "hotel")
-        {
-            selectedItem = util.hotels[util.currentPin] as NSManagedObject
-            detailVC.currentSelection = selectedItem
-        }
+
     }
     
     override func didReceiveMemoryWarning() {

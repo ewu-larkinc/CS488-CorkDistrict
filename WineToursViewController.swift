@@ -62,33 +62,34 @@ class WineToursViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
-        if indexPath.row == 0 {
-            
-        }else if indexPath.row == 1 {
-            
-        } else {
-            
-        }
-        
+
+        self.performSegueWithIdentifier("tourRoute", sender: self)
+
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         
-        let dvc = segue.destinationViewController as! RouteMapViewController
+        let dvc = segue.destinationViewController as! TourMapViewController
         
         if let indexPath = self.tableView.indexPathForSelectedRow() {
             
             if indexPath.row == 0 {
-                dvc.clusterArray = downtownCluster
+             //   println(downtownCluster)
+                dvc.tour = downtownCluster
+                dvc.currentCluster = 0
+                
             } else if indexPath.row == 1 {
-                dvc.clusterArray = mtCluster
+                
+                dvc.tour = mtCluster
+                dvc.currentCluster = 1
             }
             else {
-                dvc.clusterArray = sodoCluster
+                dvc.tour = sodoCluster
+                dvc.currentCluster = 2
+                
             }
-            
+        
         }
         
     }
@@ -107,7 +108,7 @@ class WineToursViewController: UIViewController, UITableViewDataSource, UITableV
             mainText = "SoDo Cluster"
         }
         
-        var fakeDistance: String = "0 miles"
+        var fakeDistance: String = ""
         
         cell.nameLabel.text = mainText
         cell.nameLabel.adjustsFontSizeToFitWidth = true

@@ -214,16 +214,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     func detailAlertView(var temp: NSManagedObject, view: MKAnnotationView!) {
         
         var alertView = UIAlertController(title: temp.valueForKey("name") as? String, message: temp.valueForKey("address") as? String, preferredStyle: .Alert)
-        
-        if(view.annotation.subtitle != "park") {
-            var imageView = UIImageView(frame: CGRectMake(10, 15, 50, 50))
-            
-            let imageData = temp.valueForKey("imageData") as? NSData
-            
-            imageView.image = UIImage(data: imageData!)
-            
-            alertView.view.addSubview(imageView)
-        }
+
         let callAction = UIAlertAction(title: "Call", style: .Default, handler: {
             action in
             let alertMessage = UIAlertController(title: "Are you sure?", message: "Are you sure you want to call this winery?", preferredStyle: .Alert)
