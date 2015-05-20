@@ -252,13 +252,13 @@
                                                         <rect key="frame" x="93" y="32" width="194" height="13"/>
                                                     </variation>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Ir-Ec-haw">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cork District Card" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Ir-Ec-haw">
                                                     <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" name="STHeitiTC-Light" family="Heiti TC" pointSize="13"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="93" y="61" width="194" height="13"/>
+                                                        <rect key="frame" x="93" y="74" width="194" height="13"/>
                                                     </variation>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Smh-uG-xX0">
@@ -303,25 +303,24 @@
                                                         </mask>
                                                     </variation>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Website" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="ONu-5l-LPA">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hours of Operation" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="ONu-5l-LPA">
                                                     <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" name="STHeitiTC-Light" family="Heiti TC" pointSize="13"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="93" y="74" width="194" height="13"/>
+                                                        <rect key="frame" x="93" y="60" width="194" height="13"/>
                                                     </variation>
                                                 </label>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="ONu-5l-LPA" firstAttribute="leading" secondItem="Smh-uG-xX0" secondAttribute="trailing" constant="7" id="4X4-pu-SvH"/>
                                                 <constraint firstItem="3ZL-nu-rIp" firstAttribute="leading" secondItem="Smh-uG-xX0" secondAttribute="trailing" constant="5" id="Axu-zA-dr2">
                                                     <variation key="heightClass=regular-widthClass=compact" constant="7"/>
                                                 </constraint>
-                                                <constraint firstItem="5Ir-Ec-haw" firstAttribute="top" secondItem="Unk-Rg-dAf" secondAttribute="bottom" constant="1.5" id="Dde-YK-SsF"/>
                                                 <constraint firstItem="lhF-QB-8If" firstAttribute="top" secondItem="3ZL-nu-rIp" secondAttribute="bottom" constant="8" id="Ddz-32-JNj">
                                                     <variation key="heightClass=regular-widthClass=compact" constant="3"/>
                                                 </constraint>
-                                                <constraint firstAttribute="trailing" secondItem="ONu-5l-LPA" secondAttribute="trailing" id="IEo-N7-wEm"/>
                                                 <constraint firstAttribute="trailing" secondItem="5Ir-Ec-haw" secondAttribute="trailing" id="JlN-yM-kJd"/>
                                                 <constraint firstItem="Unk-Rg-dAf" firstAttribute="top" secondItem="lhF-QB-8If" secondAttribute="bottom" constant="2" id="Nme-Cd-z7C">
                                                     <variation key="heightClass=regular-widthClass=compact" constant="1"/>
@@ -336,10 +335,11 @@
                                                 <constraint firstAttribute="trailing" secondItem="lhF-QB-8If" secondAttribute="trailing" constant="5" id="YJe-hH-kPl">
                                                     <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                                                 </constraint>
-                                                <constraint firstItem="ONu-5l-LPA" firstAttribute="top" secondItem="5Ir-Ec-haw" secondAttribute="bottom" constant="0.5" id="aa6-Qw-069"/>
                                                 <constraint firstItem="Smh-uG-xX0" firstAttribute="leading" secondItem="X0i-AK-I0s" secondAttribute="leading" constant="6" id="b0D-fN-dz3"/>
                                                 <constraint firstItem="Smh-uG-xX0" firstAttribute="top" secondItem="X0i-AK-I0s" secondAttribute="top" constant="7" id="bOg-Uu-ibf"/>
-                                                <constraint firstItem="ONu-5l-LPA" firstAttribute="leading" secondItem="Smh-uG-xX0" secondAttribute="trailing" constant="7" id="lzk-Ar-uG9"/>
+                                                <constraint firstItem="5Ir-Ec-haw" firstAttribute="top" secondItem="ONu-5l-LPA" secondAttribute="bottom" constant="1" id="cVL-ga-TYW"/>
+                                                <constraint firstAttribute="trailing" secondItem="ONu-5l-LPA" secondAttribute="trailing" id="fJO-ds-1PD"/>
+                                                <constraint firstItem="ONu-5l-LPA" firstAttribute="top" secondItem="Unk-Rg-dAf" secondAttribute="bottom" constant="1" id="j43-qA-UjX"/>
                                                 <constraint firstItem="lhF-QB-8If" firstAttribute="leading" secondItem="Smh-uG-xX0" secondAttribute="trailing" constant="5" id="y1H-2E-gNR">
                                                     <variation key="heightClass=regular-widthClass=compact" constant="7"/>
                                                 </constraint>
@@ -361,12 +361,12 @@
                                                     <exclude reference="Axu-zA-dr2"/>
                                                     <exclude reference="UR2-BS-RiH"/>
                                                     <exclude reference="yFq-c9-BqE"/>
-                                                    <exclude reference="Dde-YK-SsF"/>
                                                     <exclude reference="JlN-yM-kJd"/>
                                                     <exclude reference="Obd-5S-FNH"/>
-                                                    <exclude reference="IEo-N7-wEm"/>
-                                                    <exclude reference="aa6-Qw-069"/>
-                                                    <exclude reference="lzk-Ar-uG9"/>
+                                                    <exclude reference="cVL-ga-TYW"/>
+                                                    <exclude reference="4X4-pu-SvH"/>
+                                                    <exclude reference="fJO-ds-1PD"/>
+                                                    <exclude reference="j43-qA-UjX"/>
                                                     <exclude reference="Nme-Cd-z7C"/>
                                                     <exclude reference="SMM-Ez-6U6"/>
                                                     <exclude reference="Ddz-32-JNj"/>
@@ -390,12 +390,12 @@
                                                     <include reference="Axu-zA-dr2"/>
                                                     <include reference="UR2-BS-RiH"/>
                                                     <include reference="yFq-c9-BqE"/>
-                                                    <include reference="Dde-YK-SsF"/>
                                                     <include reference="JlN-yM-kJd"/>
                                                     <include reference="Obd-5S-FNH"/>
-                                                    <include reference="IEo-N7-wEm"/>
-                                                    <include reference="aa6-Qw-069"/>
-                                                    <include reference="lzk-Ar-uG9"/>
+                                                    <include reference="cVL-ga-TYW"/>
+                                                    <include reference="4X4-pu-SvH"/>
+                                                    <include reference="fJO-ds-1PD"/>
+                                                    <include reference="j43-qA-UjX"/>
                                                     <include reference="Nme-Cd-z7C"/>
                                                     <include reference="SMM-Ez-6U6"/>
                                                     <include reference="Ddz-32-JNj"/>
@@ -474,78 +474,118 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qlw-rp-WL9">
-                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vkd-YU-4K5">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="Cx5-Bj-vHa">
+                                        <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                        <string key="text">Flying into Spokane with Alaska Airlines? Present your boarding pass within 48 hours to receive a complimentary wine tasting at one of the Cork District's tasting rooms. Tap the wine pass below for more info.</string>
+                                        <fontDescription key="fontDescription" name="STHeitiTC-Light" family="Heiti TC" pointSize="16"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="752" verticalCompressionResistancePriority="752" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qlw-rp-WL9">
+                                        <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="257" id="HyK-gx-4rj"/>
+                                            <constraint firstAttribute="height" constant="295" id="Y8b-b8-2jK"/>
+                                        </constraints>
+                                        <state key="normal" image="alaska_pass">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="HyK-gx-4rj"/>
+                                                <exclude reference="Y8b-b8-2jK"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="heightClass=regular-widthClass=compact">
+                                            <mask key="constraints">
+                                                <include reference="HyK-gx-4rj"/>
+                                                <include reference="Y8b-b8-2jK"/>
+                                            </mask>
+                                        </variation>
+                                        <connections>
+                                            <action selector="winePassButtonPress:" destination="Zxh-oZ-Vxx" eventType="touchUpInside" id="Dgq-23-t85"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="257" id="Hhu-PC-0Xq"/>
-                                    <constraint firstAttribute="height" constant="297" id="qYN-Sg-3IR"/>
+                                    <constraint firstAttribute="trailing" secondItem="Qlw-rp-WL9" secondAttribute="trailing" constant="55" id="5vo-cQ-MaO"/>
+                                    <constraint firstAttribute="bottom" secondItem="Qlw-rp-WL9" secondAttribute="bottom" constant="32" id="8HS-jO-PM2"/>
+                                    <constraint firstItem="Cx5-Bj-vHa" firstAttribute="leading" secondItem="Vkd-YU-4K5" secondAttribute="leading" constant="8" id="C7p-cn-OWJ">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="26"/>
+                                    </constraint>
+                                    <constraint firstAttribute="trailing" secondItem="Cx5-Bj-vHa" secondAttribute="trailing" constant="7" id="IcT-bo-gIH">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="26"/>
+                                    </constraint>
+                                    <constraint firstItem="Qlw-rp-WL9" firstAttribute="top" secondItem="Cx5-Bj-vHa" secondAttribute="bottom" constant="36" id="IiN-HU-Y6G">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="34"/>
+                                    </constraint>
+                                    <constraint firstAttribute="height" constant="534" id="JIi-Oq-Zie">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="477"/>
+                                    </constraint>
+                                    <constraint firstAttribute="width" constant="368" id="WlD-I9-wsA"/>
+                                    <constraint firstItem="Qlw-rp-WL9" firstAttribute="leading" secondItem="Vkd-YU-4K5" secondAttribute="leading" constant="56" id="cmy-Xx-RND"/>
                                 </constraints>
-                                <state key="normal" image="alaska_pass">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
                                 <variation key="default">
+                                    <mask key="subviews">
+                                        <exclude reference="Cx5-Bj-vHa"/>
+                                        <exclude reference="Qlw-rp-WL9"/>
+                                    </mask>
                                     <mask key="constraints">
-                                        <exclude reference="Hhu-PC-0Xq"/>
-                                        <exclude reference="qYN-Sg-3IR"/>
+                                        <exclude reference="JIi-Oq-Zie"/>
+                                        <exclude reference="WlD-I9-wsA"/>
+                                        <exclude reference="C7p-cn-OWJ"/>
+                                        <exclude reference="IcT-bo-gIH"/>
+                                        <exclude reference="5vo-cQ-MaO"/>
+                                        <exclude reference="8HS-jO-PM2"/>
+                                        <exclude reference="IiN-HU-Y6G"/>
+                                        <exclude reference="cmy-Xx-RND"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="subviews">
+                                        <include reference="Cx5-Bj-vHa"/>
+                                        <include reference="Qlw-rp-WL9"/>
+                                    </mask>
                                     <mask key="constraints">
-                                        <include reference="Hhu-PC-0Xq"/>
-                                        <include reference="qYN-Sg-3IR"/>
+                                        <include reference="JIi-Oq-Zie"/>
+                                        <include reference="WlD-I9-wsA"/>
+                                        <include reference="C7p-cn-OWJ"/>
+                                        <include reference="IcT-bo-gIH"/>
+                                        <include reference="5vo-cQ-MaO"/>
+                                        <include reference="8HS-jO-PM2"/>
+                                        <include reference="IiN-HU-Y6G"/>
+                                        <include reference="cmy-Xx-RND"/>
                                     </mask>
                                 </variation>
-                                <connections>
-                                    <action selector="winePassButtonPress:" destination="Zxh-oZ-Vxx" eventType="touchUpInside" id="Dgq-23-t85"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cx5-Bj-vHa">
-                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                                <string key="text">Flying into Spokane with Alaska Airlines? Present your boarding pass within 48 hours to receive a complimentary wine tasting at one of the Cork District's tasting rooms. Tap the wine pass below for more info.</string>
-                                <fontDescription key="fontDescription" name="STHeitiTC-Light" family="Heiti TC" pointSize="17"/>
-                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="Cx5-Bj-vHa" secondAttribute="trailing" constant="16" id="2yb-yP-sBa"/>
-                            <constraint firstItem="2jX-Yz-u18" firstAttribute="top" secondItem="Qlw-rp-WL9" secondAttribute="bottom" constant="237" id="4Nr-Id-H1p">
-                                <variation key="heightClass=regular-widthClass=compact" constant="102"/>
+                            <constraint firstAttribute="centerX" secondItem="Vkd-YU-4K5" secondAttribute="centerX" id="Dng-qu-Of5"/>
+                            <constraint firstAttribute="centerY" secondItem="Vkd-YU-4K5" secondAttribute="centerY" id="mQo-L0-sMF">
+                                <variation key="heightClass=regular-widthClass=compact" constant="-33.5"/>
                             </constraint>
-                            <constraint firstItem="Cx5-Bj-vHa" firstAttribute="leading" secondItem="BEE-dp-yJ9" secondAttribute="leading" constant="16" id="cIb-1E-B1L"/>
-                            <constraint firstItem="Qlw-rp-WL9" firstAttribute="top" secondItem="Cx5-Bj-vHa" secondAttribute="bottom" constant="59" id="fW9-xa-fa9">
-                                <variation key="heightClass=regular-widthClass=compact" constant="67"/>
-                            </constraint>
-                            <constraint firstItem="Qlw-rp-WL9" firstAttribute="leading" secondItem="BEE-dp-yJ9" secondAttribute="leading" constant="72" id="hDQ-fa-UPa"/>
-                            <constraint firstAttribute="trailing" secondItem="Qlw-rp-WL9" secondAttribute="trailing" constant="71" id="sVk-2u-YAh"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
-                                <exclude reference="Qlw-rp-WL9"/>
-                                <exclude reference="Cx5-Bj-vHa"/>
+                                <exclude reference="Vkd-YU-4K5"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="4Nr-Id-H1p"/>
-                                <exclude reference="2yb-yP-sBa"/>
-                                <exclude reference="cIb-1E-B1L"/>
-                                <exclude reference="fW9-xa-fa9"/>
-                                <exclude reference="hDQ-fa-UPa"/>
-                                <exclude reference="sVk-2u-YAh"/>
+                                <exclude reference="Dng-qu-Of5"/>
+                                <exclude reference="mQo-L0-sMF"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
                             <mask key="subviews">
-                                <include reference="Qlw-rp-WL9"/>
-                                <include reference="Cx5-Bj-vHa"/>
+                                <include reference="Vkd-YU-4K5"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="4Nr-Id-H1p"/>
-                                <include reference="2yb-yP-sBa"/>
-                                <include reference="cIb-1E-B1L"/>
-                                <include reference="fW9-xa-fa9"/>
-                                <include reference="hDQ-fa-UPa"/>
-                                <include reference="sVk-2u-YAh"/>
+                                <include reference="Dng-qu-Of5"/>
+                                <include reference="mQo-L0-sMF"/>
                             </mask>
                         </variation>
                     </view>
@@ -605,14 +645,15 @@
                                                         <constraint firstAttribute="height" constant="22" id="Xsb-ns-QSd"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="STHeitiTC-Light" family="Heiti TC" pointSize="19"/>
-                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="default">
                                                         <mask key="constraints">
                                                             <exclude reference="Xsb-ns-QSd"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="94" y="8" width="192" height="22"/>
                                                         <mask key="constraints">
                                                             <include reference="Xsb-ns-QSd"/>
                                                         </mask>
@@ -624,14 +665,15 @@
                                                         <constraint firstAttribute="height" constant="16" id="JZQ-lt-Jt9"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="STHeitiTC-Light" family="Heiti TC" pointSize="13"/>
-                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="default">
                                                         <mask key="constraints">
                                                             <exclude reference="JZQ-lt-Jt9"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="94" y="50" width="185" height="16"/>
                                                         <mask key="constraints">
                                                             <include reference="JZQ-lt-Jt9"/>
                                                         </mask>
@@ -643,14 +685,15 @@
                                                         <constraint firstAttribute="height" constant="16" id="vjV-iY-13T"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="STHeitiTC-Light" family="Heiti TC" pointSize="13"/>
-                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="default">
                                                         <mask key="constraints">
                                                             <exclude reference="vjV-iY-13T"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="94" y="32" width="185" height="16"/>
                                                         <mask key="constraints">
                                                             <include reference="vjV-iY-13T"/>
                                                         </mask>
@@ -662,14 +705,15 @@
                                                         <constraint firstAttribute="height" constant="16" id="uBF-Lx-SHq"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="STHeitiTC-Light" family="Heiti TC" pointSize="13"/>
-                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="default">
                                                         <mask key="constraints">
                                                             <exclude reference="uBF-Lx-SHq"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="94" y="68" width="185" height="16"/>
                                                         <mask key="constraints">
                                                             <include reference="uBF-Lx-SHq"/>
                                                         </mask>
@@ -775,9 +819,6 @@
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
-                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="0.0" y="64" width="400" height="736"/>
-                                </variation>
                                 <connections>
                                     <outlet property="dataSource" destination="WU1-wP-IZL" id="bwX-cc-q6Z"/>
                                     <outlet property="delegate" destination="WU1-wP-IZL" id="qyd-rj-zgI"/>
@@ -785,14 +826,32 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Uwy-1A-0Y1" firstAttribute="top" secondItem="0Y2-5I-qSE" secondAttribute="bottom" id="6vr-nY-8iM"/>
+                            <constraint firstItem="0Y2-5I-qSE" firstAttribute="top" secondItem="ftz-uz-zqI" secondAttribute="bottom" id="Isc-iu-kXJ"/>
+                            <constraint firstItem="0Y2-5I-qSE" firstAttribute="leading" secondItem="lNX-LI-FUK" secondAttribute="leading" id="XpZ-H6-uXj"/>
+                            <constraint firstAttribute="trailing" secondItem="0Y2-5I-qSE" secondAttribute="trailing" id="rFm-Ir-dfa"/>
+                        </constraints>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="0Y2-5I-qSE"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="6vr-nY-8iM"/>
+                                <exclude reference="Isc-iu-kXJ"/>
+                                <exclude reference="XpZ-H6-uXj"/>
+                                <exclude reference="rFm-Ir-dfa"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
                             <mask key="subviews">
                                 <include reference="0Y2-5I-qSE"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="6vr-nY-8iM"/>
+                                <include reference="Isc-iu-kXJ"/>
+                                <include reference="XpZ-H6-uXj"/>
+                                <include reference="rFm-Ir-dfa"/>
                             </mask>
                         </variation>
                     </view>
@@ -1386,14 +1445,15 @@
                                                         </constraint>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="STHeitiTC-Light" family="Heiti TC" pointSize="19"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="default">
                                                         <mask key="constraints">
                                                             <exclude reference="cTd-D1-PQV"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="8" y="24" width="171" height="22"/>
                                                         <mask key="constraints">
                                                             <include reference="cTd-D1-PQV"/>
                                                         </mask>
@@ -1410,7 +1470,7 @@
                                                         </constraint>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="STHeitiTC-Light" family="Heiti TC" pointSize="11"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="default">
                                                         <mask key="constraints">
@@ -1418,7 +1478,8 @@
                                                             <exclude reference="rHK-6u-czp"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="236" y="24" width="48" height="23"/>
                                                         <mask key="constraints">
                                                             <include reference="4xF-82-ZBe"/>
                                                             <include reference="rHK-6u-czp"/>

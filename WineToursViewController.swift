@@ -110,7 +110,7 @@ class WineToursViewController: UIViewController, UITableViewDataSource, UITableV
         cell.distanceLabel.text = fakeDistance
         cell.distanceLabel.adjustsFontSizeToFitWidth = true
         
-        cell.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.2)
+        //cell.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.2)
     }
     
     

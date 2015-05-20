@@ -22,6 +22,8 @@ class WineriesViewController: UIViewController, UITableViewDataSource, UITableVi
         
         let dataManager = DataManager.sharedInstance
         wineries = dataManager.getWineries()
+        
+        dataManager.sortWineriesByName()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -75,7 +77,7 @@ class WineriesViewController: UIViewController, UITableViewDataSource, UITableVi
         var address = winery.valueForKey("address") as? String
         var city = winery.valueForKey("city") as? String
         var hours = winery.valueForKey("hours") as? String
-        var phone = winery.valueForKey("phone") as? String
+        var cardAccepted = winery.valueForKey("cardAccepted") as? String
         var zip = winery.valueForKey("zipcode") as? String
         var state = "WA"
         
@@ -87,7 +89,7 @@ class WineriesViewController: UIViewController, UITableViewDataSource, UITableVi
         cell.addressLabel.text = address
         cell.cityLabel.text = city! + ", " + state + " " + zip!
         cell.cityLabel.sizeToFit()
-        cell.phoneLabel.text = phone
+        cell.phoneLabel.text = cardAccepted
         cell.websiteLabel.text = hours
         cell.cellImage.image = cellImage
         

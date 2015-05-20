@@ -173,30 +173,6 @@ class DataManager {
         return downtownCluster
     }
     
-    func separateClusters() {
-        
-        var curCluster : String
-        
-        for winery in wineries.entities {
-            
-            curCluster = (winery.valueForKey("cluster") as? String)!
-            //println("CLUSTER TYPE: \(curCluster)")
-            
-            switch (curCluster) {
-            case "Mt. to Lake":
-                mtCluster.append(winery)
-            case "Downtown":
-                downtownCluster.append(winery)
-            case "SoDo":
-                sodoCluster.append(winery)
-            default:
-                println("Invalid cluster type")
-            }
-            
-            curCluster = ""
-        }
-    }
-    
     func getRestaurants() -> [NSManagedObject] {
         return restaurants.entities 
     }
@@ -354,6 +330,7 @@ class DataManager {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate 
         let managedContext = appDelegate.managedObjectContext! 
         var entityType = entityInfo[6] as! String
+        var stringCheck = "Not"
         
         let newEntity = NSEntityDescription.insertNewObjectForEntityForName(entityType, inManagedObjectContext: managedContext) as! NSManagedObject 
         
@@ -373,8 +350,13 @@ class DataManager {
                 newEntity.setValue(entityInfo[9], forKey: "cluster")
                 newEntity.setValue(entityInfo[10], forKey: "hours")
                 
-                //let cardAccepted = entityInfo[11] as? Int
-                //newEntity.setValue(cardAccepted, forKey: "cardAccepted")
+                if let cardAccepted = entityInfo[11] as? String {
+                    
+                    newEntity.setValue(cardAccepted, forKey: "cardAccepted")
+                }
+                
+                
+                
             }
         }
         
@@ -481,6 +463,7 @@ class DataManager {
         println("wineries count and webcount: \(wineries.entities.count) \(wineries.webCount)")
         if (!wineDone) {
             if (wineries.entities.count == wineries.webCount && wineries.webCount != 0) {
+                println("wineries determined to be done!")
                 progress += 0.2
                 wineDone = true
             }
@@ -489,6 +472,7 @@ class DataManager {
         println("restaurants count and webcount: \(restaurants.entities.count) \(restaurants.webCount)")
         if (!restDone) {
             if (restaurants.entities.count == restaurants.webCount && restaurants.webCount != 0) {
+                println("restaurants determined to be done!")
                 progress += 0.2
                 restDone = true
             }
@@ -497,6 +481,7 @@ class DataManager {
         println("accommodations count and webcount: \(accommodations.entities.count) \(accommodations.webCount)")
         if (!accomDone) {
             if (accommodations.entities.count == accommodations.webCount && accommodations.webCount != 0) {
+                println("accommodations determined to be done!")
                 progress += 0.2
                 accomDone = true
             }
@@ -505,6 +490,7 @@ class DataManager {
         println("parking count and webcount: \(parking.entities.count) \(parking.webCount)")
         if (!parkDone) {
             if (parking.entities.count == parking.webCount && parking.webCount != 0) {
+                println("parking determined to be done!")
                 progress += 0.2
                 parkDone = true
             }
@@ -513,6 +499,7 @@ class DataManager {
         println("packages count and webcount: \(packages.entities.count) \(packages.webCount)")
         if (!packDone) {
             if (packages.entities.count == packages.webCount && packages.webCount != 0) {
+                println("packages determined to be done!")
                 progress += 0.2
                 packDone = true
             }
@@ -537,7 +524,7 @@ class DataManager {
     }
     
     func fetchDatesFromWeb() {
-        //println("Fetching dates from web")
+        
         var session = NSURLSession.sharedSession()
         
         var task = session.dataTaskWithURL(URL_CHANGELOG!) {
@@ -621,7 +608,9 @@ class DataManager {
                         if (entity.type == wineries.type) {
                             infoArray.addObject(json[ctr]["Cluster"].stringValue)
                             infoArray.addObject(json[ctr]["Hours of Operation"].stringValue)
-                            infoArray.addObject(json[ctr]["CorkCard"].stringValue)
+                            let test = json[ctr]["Cork District Card"].stringValue
+                            infoArray.addObject(test)
+                            println("cardAccepted value: \(test)")
                     }
                     
                     addEntityToCoreData(infoArray, entityImage: entityImage!)
@@ -643,8 +632,6 @@ class DataManager {
     
     func parseDatesTotals(data: NSData) {
         let json = JSON(data: data)
-        //lodging, packages, parking, restaurant, winery
-        //println("json count is \(json.count)")
         
         var ctr: Int = 0
         var dates = [String]()
@@ -655,6 +642,11 @@ class DataManager {
         var parkIn = false
         
         while (ctr < json.count) {
+            
+            let date = json[ctr]["node_changed"].stringValue
+            let ent = json[ctr]["node_type"].stringValue
+            
+            println("Pulling in date: \(date) for entity type: \(ent)")
             
             if json[ctr]["node_type"] == "lodging" && !accommIn {
                 let accommodationsDate = json[0]["node_changed"].stringValue
@@ -684,12 +676,6 @@ class DataManager {
             
             ctr++
         }
-        
-        //let accommodationsDate = json[0]["node_changed"].stringValue
-        //let packagesDate = json[1]["node_changed"].stringValue
-        //let parkingDate = json[2]["node_changed"].stringValue
-        //let restaurantDate = json[3]["node_changed"].stringValue
-        //let wineryDate = json[4]["node_changed"].stringValue
         
         accommodations.lastChangedWeb = dates[0]
         restaurants.lastChangedWeb = dates[4]
@@ -733,28 +719,16 @@ class DataManager {
                 infoArray.addObject(json[ctr]["nid"].stringValue)
                 infoArray.addObject(entity.type)
                 
-                if let node = json[ctr]["nid"].string {
-                    var nodeId = node
-                    //println("current nodeID is \(nodeId)")
-                }
-                var title = json[ctr]["node_title"]
-                
-                //println("current title is \(title)")
-                
                 var relatedNid: String
                 var tempNid: String
                 
-                relatedNid = json[ctr]["RelatedEntityTitle"][0]["target_id"].stringValue
+                relatedNid = json[ctr]["Related Items"][0]["target_id"].stringValue
+                println("TESTING relatedNID coming in as: \(relatedNid)")
                 tempNid = relatedNid
                 
-                //println("relatedNID count is")
-                //println(json[ctr]["RelatedEntityTitle"].count)
-                
-                if json[ctr]["RelatedEntityTitle"].count > 1 {
-                    tempNid = relatedNid + "," + json[ctr]["RelatedEntityTitle"][1]["target_id"].stringValue
+                if json[ctr]["Related Items"].count > 1 {
+                    tempNid = relatedNid + "," + json[ctr]["Related Items"][1]["target_id"].stringValue
                 }
-                
-                
                 infoArray.addObject(tempNid)
                 
                 let entityImageString = stripHtml(json[ctr]["Thumbnail"].stringValue)
@@ -766,28 +740,16 @@ class DataManager {
                 ctr++
             }
         }
-        
     }
     
     
     //#MARK: - Misc. Methods
     func stripHtml(urlObject: String) -> String {
         
-        //println("testing... entitiyImageString is \(urlObject)")
         let entityImageStringArray = urlObject.componentsSeparatedByString(" ")
         var entityImageString = entityImageStringArray[2].stringByReplacingOccurrencesOfString("src=\"", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
         
         return entityImageString.stringByReplacingOccurrencesOfString("\"", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
-    }
-    
-    func stripHtml2(urlObject: String) -> String {
-        
-        let entityStringArray = urlObject.componentsSeparatedByString(" ")
-        for string in entityStringArray {
-            //println("current string is \(string)")
-        }
-        
-        return ""
     }
     
     func separateCityStateZip(cityStateZip: String) -> [String] {
@@ -810,6 +772,77 @@ class DataManager {
         resultArray[0] = resultArray[0].stringByReplacingOccurrencesOfString(",", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
         
         return resultArray
+    }
+    
+    func separateClusters() {
+        
+        var curCluster : String
+        
+        for winery in wineries.entities {
+            
+            curCluster = (winery.valueForKey("cluster") as? String)!
+            //println("CLUSTER TYPE: \(curCluster)")
+            
+            switch (curCluster) {
+            case "Mt. to Lake":
+                mtCluster.append(winery)
+            case "Downtown":
+                downtownCluster.append(winery)
+            case "SoDo":
+                sodoCluster.append(winery)
+            default:
+                println("Invalid cluster type")
+            }
+            
+            curCluster = ""
+        }
+    }
+    
+    func sortWineriesByName() {
+        
+        var ctr: Int = 0
+        var ctr2: Int = 1
+        var temp = String()
+        var index: Int = 0
+        var name1 = [String]()
+        var name2 = [String]()
+        
+        var tempArray: [String]
+        var titlesArray = [String]()
+        
+        
+        while (ctr < wineries.entities.count) {
+            
+            if let name = wineries.entities[ctr].valueForKey("name") as? String {
+                titlesArray.append(name)
+            }
+            
+            ctr++
+        }
+        ctr = 1
+        name1 = titlesArray[0].componentsSeparatedByString(" ")
+        
+        while (ctr < titlesArray.count) {
+            
+            name2 = titlesArray[ctr].componentsSeparatedByString(" ")
+            
+            if name2[0] < name1[0] {
+                temp = titlesArray[ctr]
+                titlesArray[ctr] = titlesArray[0]
+                titlesArray[0] = temp
+            }
+        
+            ctr++
+        }
+    
+        ctr = 0
+        println("Printing wineries after alphabetical sort...\n")
+        while ctr < titlesArray.count {
+            
+            println(titlesArray[ctr])
+            ctr++
+        }
+        
     }
     
     

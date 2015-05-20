@@ -18,7 +18,7 @@ class PackagesViewController: UIViewController, UITableViewDataSource, UITableVi
     //# MARK: - ViewController Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "packagesBackground")!)
+        tableView.backgroundView = UIImageView(image: UIImage(named: "packagesBackground"))
         
         let dataManager = DataManager.sharedInstance
         packages = dataManager.getPackages()
@@ -39,60 +39,36 @@ class PackagesViewController: UIViewController, UITableViewDataSource, UITableVi
     func gatherAssociatedEntityInfo() {
         let dataManager = DataManager.sharedInstance
         
-        let tempWineries: [NSManagedObject] = dataManager.getWineries()
         
         for package in packages {
             
-            
             if let tempNodeID = package.valueForKey("relatedNodeID") as? String {
-                
+                println("nodeIDS before separation is: \(tempNodeID)")
                 var nodeIDS = tempNodeID.componentsSeparatedByString(",")
                 var finalNodeID: String
                 
                 if (nodeIDS.count > 1) {
-                    //println("Current Package has 2 ASSOCIATED ENTITIES")
                     var nodeID1 = nodeIDS[0].toInt()
-                    //println("First nodeID: \(nodeID1)")
                     var nodeID2 = nodeIDS[1].toInt()
-                    //println("Second nodeID: \(nodeID2)")
                     
                     var entity1 = dataManager.getEntity(nodeID1!)
-                    
                     var entity2 = dataManager.getEntity(nodeID2!)
-                    //println("index1: \(nodeID1)")
-                    //println("index2: \(nodeID2)")
                     
                     if let testEntity1 = entity1.valueForKey("name") as? String {
-                        if testEntity1 != "blank" {
-                            //println("associated winery1 is: ")
-                            //println(testEntity1)
-                        }
                         
                         if let testEntity2 = entity2.valueForKey("name") as? String {
-                            if testEntity2 != "blank" {
-                                //println("associated winery2 is: ")
-                                //println(testEntity2)
-                            }
                             
                             var finalTitle = testEntity1 + ", " + testEntity2
                             package.setValue(finalTitle, forKey: "relatedEntityName")
-                      
-                
                         }
                     }
                 }
                 else {
-                    //println("Current package has 1 ASSOCIATED ENTITY")
+                    
                     var nodeID1 = nodeIDS[0].toInt()
-                    //println("First nodeID: \(nodeID1)")
                     var entity1 = dataManager.getEntity(nodeID1!)
-                    //println("index1: \(nodeID1)")
                     
                     if let testEntity1 = entity1.valueForKey("name") as? String {
-                        if testEntity1 != "blank" {
-                            //println("associated winery1 is: ")
-                            //println(testEntity1)
-                        }
                         
                         var finalTitle = testEntity1
                         package.setValue(finalTitle, forKey: "relatedEntityName")
@@ -126,7 +102,14 @@ class PackagesViewController: UIViewController, UITableViewDataSource, UITableVi
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         if let urlString = packages[indexPath.row].valueForKey("website") as? String {
-            var URLString = "http://" + urlString
+            
+            var URLString : String
+            if urlString.rangeOfString("http://") == nil {
+                URLString = "http://" + urlString
+            }
+            else {
+                URLString = urlString
+            }
             let entityURL = NSURL(string: URLString)
             UIApplication.sharedApplication().openURL(entityURL!)
         }
@@ -143,6 +126,7 @@ class PackagesViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func setContentForCell(cell:PackageCell, indexPath:NSIndexPath) {
         
+        let maxStringLength = 24;
         let package = packages[indexPath.row]
         let imageData = package.valueForKey("imageData") as? NSData
         let myImage = UIImage(data: imageData!)
@@ -156,26 +140,26 @@ class PackagesViewController: UIViewController, UITableViewDataSource, UITableVi
         var startDate = startMonth! + " " + startDay! + ", " + startYear!
         var endDate = endMonth! + " " + endDay! + ", " + endYear!
         var nodeId = package.valueForKey("relatedNodeID") as? String
-        var titleText : String
+        var titleText = package.valueForKey("name") as? String
         
         
-        if let tempTitle = package.valueForKey("name") as? String {
-            if count(tempTitle) > 23 {
-                let index: String.Index = advance(tempTitle.startIndex, 23)
+        /*if let tempTitle = package.valueForKey("name") as? String {
+            if count(tempTitle) > maxStringLength {
+                let index: String.Index = advance(tempTitle.startIndex, maxStringLength)
                 titleText = tempTitle.substringToIndex(index)
                 cell.titleLabel.text = titleText
             }
             else {
                 cell.titleLabel.text = tempTitle
             }
-        }
+        }*/
         
-        
+        cell.titleLabel.text = titleText
         cell.titleLabel.adjustsFontSizeToFitWidth = true
         
         cell.entityTitleLabel.text = package.valueForKey("relatedEntityName") as? String
         cell.dateLabel.text = startDate + " - " + endDate
-        cell.costLabel.text = "$" + cost!
+        cell.costLabel.text = cost!
         cell.cellImage.image = myImage
         
         cell.cellImage.layer.cornerRadius = 4.0

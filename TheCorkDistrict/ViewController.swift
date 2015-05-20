@@ -36,11 +36,13 @@ class ViewController: UITableViewController {
             //loadingVC.modalPresentationStyle = UIModalPresentationStyle.OverCurrentContext
             
             //error logged if I don't wait at least 1 second before calling the presentViewController method
-            var timer = Timer(duration: 1.0, completionHandler: {
+            /*var timer = Timer(duration: 1.0, completionHandler: {
                 self.navigationController?.presentViewController(loadingVC, animated: false, completion: nil)
             })
             
-            timer.start()
+            timer.start()*/
+            
+            self.navigationController?.presentViewController(loadingVC, animated: false, completion: nil)
         }
         
     }
