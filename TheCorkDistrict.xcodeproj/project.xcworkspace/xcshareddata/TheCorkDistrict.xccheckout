@@ -5,16 +5,16 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>C1A20339-735E-4D04-AEC2-DDA2CA59DD87</string>
+	<string>2DC02567-71BC-456B-BF38-A445FA31E16C</string>
 	<key>IDESourceControlProjectName</key>
-	<string>TheCorkDistrict</string>
+	<string>project</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>52E8626BDC3681BA022470C95F21D371E6659621</key>
 		<string>https://github.com/ewu-larkinc/CS488-CorkDistrict.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>TheCorkDistrict.xcodeproj</string>
+	<string>TheCorkDistrict.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>52E8626BDC3681BA022470C95F21D371E6659621</key>
