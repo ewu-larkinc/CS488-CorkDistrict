@@ -31,7 +31,7 @@ class DataManager {
     
     
     private let URL_NOTIFICATIONS = NSURL(string: "http://www.corkdistrictapp.com/rest/push_notifications")
-    private let URL_CHANGELOG = NSURL(string: "http://www.nathanpilgrim.net/rest/all.json")
+    private let URL_CHANGELOG = NSURL(string: "http://www.corkdistrictapp.com/rest/all.json")
     
     private var wineries = CorkDistrictEntity()
     private var restaurants = CorkDistrictEntity()
@@ -675,13 +675,13 @@ class DataManager {
             
             ctr++
         }
-        
+      /*
         accommodations.lastChangedWeb = dates[0]
         restaurants.lastChangedWeb = dates[4]
         wineries.lastChangedWeb = dates[3]
         packages.lastChangedWeb = dates[1]
         parking.lastChangedWeb = dates[2]
-        
+        */
         saveDatesToCoreData()
     }
     

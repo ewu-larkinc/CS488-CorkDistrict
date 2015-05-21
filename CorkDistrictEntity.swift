@@ -26,7 +26,7 @@ class CorkDistrictEntity {
     
     func isOutOfDate() -> Bool {
         
-        if (lastChangedCD == "") {
+        if (lastChangedCD == "" || lastChangedWeb == "") {
             println("Entity type \(self.type) is out of date!")
             return true
         }

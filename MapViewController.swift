@@ -236,6 +236,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         let detailAction = UIAlertAction(title: "Details", style: .Default, handler: {
             action in
             self.performSegueWithIdentifier("mapDetail", sender: self)
+
             
         })
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: {
@@ -255,7 +256,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!)
     {
-        
         
         var detailVC: DetailViewController = segue.destinationViewController as! DetailViewController
         
