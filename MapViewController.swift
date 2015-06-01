@@ -16,8 +16,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         self.dismissViewControllerAnimated(true, completion: {});
     }
     
-    //let geocoder = CLGeocoder()
-    
     let locationManager = CLLocationManager()
     
     var showWineries: Bool = false
@@ -245,7 +243,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         })
         
         alertView.addAction(callAction)
-        alertView.addAction(detailAction)
+        if(view.annotation.subtitle != "park") {
+            alertView.addAction(detailAction)
+        }
         alertView.addAction(cancelAction)
         
         
