@@ -34,7 +34,6 @@ class ViewController: UITableViewController, CLLocationManagerDelegate {
         //self.tableView.backgroundColor = UIColor(patternImage: background!)
         
         
-        //loadview commented out for now while testing other
         let dataCheckFinished = dataManager.dataCheckFinished
         
         if (!dataCheckFinished) {

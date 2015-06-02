@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>2DC02567-71BC-456B-BF38-A445FA31E16C</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>TheCorkDistrict</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>52E8626BDC3681BA022470C95F21D371E6659621</key>
 		<string>https://github.com/ewu-larkinc/CS488-CorkDistrict.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>TheCorkDistrict.xcodeproj/project.xcworkspace</string>
+	<string>TheCorkDistrict.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>52E8626BDC3681BA022470C95F21D371E6659621</key>
@@ -34,7 +34,7 @@
 			<key>IDESourceControlWCCIdentifierKey</key>
 			<string>52E8626BDC3681BA022470C95F21D371E6659621</string>
 			<key>IDESourceControlWCCName</key>
-			<string>bondok</string>
+			<string>Version1.01-Master</string>
 		</dict>
 	</array>
 </dict>

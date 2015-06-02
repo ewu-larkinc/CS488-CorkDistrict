@@ -13,7 +13,7 @@ import QuartzCore
 let winePassURL = NSURL(string: "http://www.visitspokane.com/cork-district/winepass")
 
 
-class AlaskaWinePassViewController : UIViewController {
+class AlaskaWinePassViewController : UITableViewController {
     @IBOutlet weak var winePassButton: UIButton!
     
     @IBAction func winePassButtonPress(sender: AnyObject) {
@@ -21,9 +21,9 @@ class AlaskaWinePassViewController : UIViewController {
     }
     
     override func viewDidLoad() {
-        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "parchmentBackground")!)
+        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "greyWood")!)
         winePassButton.layer.shadowColor = UIColor.blackColor().CGColor
-        winePassButton.layer.shadowOpacity = 0.5
+        winePassButton.layer.shadowOpacity = 0.8
         winePassButton.layer.shadowRadius = 5
         winePassButton.layer.shadowOffset = CGSizeMake(0,0)
     }

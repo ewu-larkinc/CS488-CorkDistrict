@@ -10,8 +10,6 @@ import QuartzCore
 
 class LoadViewController : UIViewController {
     
-    @IBOutlet weak var progressView: UIProgressView!
-    @IBOutlet weak var loadingLabel: UILabel!
     @IBOutlet weak var loadingLogo: UIImageView!
     @IBOutlet weak var loadingImage: UIButton!
     
@@ -26,22 +24,18 @@ class LoadViewController : UIViewController {
         let dataManager = DataManager.sharedInstance
         progress = 0
         
-        progressView.setProgress(0, animated: true)
-        
-        
         if (self.isRotating == false) {
             
-            self.loadingLabel.fadeIn()
             self.loadingLogo.fadeIn()
             self.loadingImage.rotate360Degrees(completionDelegate: self)
             self.isRotating = true
         }
         
-        self.timer = Timer(duration: 3.0, completionHandler: {
+        var timer = Timer(duration: 3.0, completionHandler: {
             self.getProgress()
         })
-        timer.start()
         
+        timer.start()
     }
     
     func getProgress() {
@@ -51,13 +45,16 @@ class LoadViewController : UIViewController {
         while (self.progress < 1.0) {
             dataManager.updateProgress()
             self.progress = dataManager.getProgress()
-            self.progressView.setProgress(self.progress, animated: true)
         }
         
-        self.view.window?.rootViewController?.dismissViewControllerAnimated(false, completion: nil)
+        var timer = Timer(duration: 2.0, completionHandler: {
+            self.view.window?.rootViewController?.dismissViewControllerAnimated(false, completion: nil)
+        })
+        
+        timer.start()
     }
     
-    func startCount() {
+    /*func startCount() {
         
         let dataManager = DataManager.sharedInstance
         var barProgress : Float = 0
@@ -79,7 +76,7 @@ class LoadViewController : UIViewController {
                 })
             })
         }
-    }
+    }*/
     
     /*var ctr: Int = 0 {
         didSet {

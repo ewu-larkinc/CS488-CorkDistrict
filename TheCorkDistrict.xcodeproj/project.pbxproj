@@ -9,12 +9,12 @@
 /* Begin PBXBuildFile section */
 		221346EB1AD92A3F009633DB /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221346EA1AD92A3F009633DB /* UIViewExtensions.swift */; };
 		221346EF1AD92B31009633DB /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221346EE1AD92B31009633DB /* Timer.swift */; };
-		221D72871ACA8F87005C26EB /* ParkingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221D72861ACA8F87005C26EB /* ParkingViewController.swift */; };
 		225A2DF91AF619B700D072C2 /* CorkDistrictEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225A2DF81AF619B700D072C2 /* CorkDistrictEntity.swift */; };
 		225A2DFB1AF6D06600D072C2 /* EntityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225A2DFA1AF6D06600D072C2 /* EntityCell.swift */; };
 		225A2DFD1AF6D1FE00D072C2 /* ParkingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225A2DFC1AF6D1FE00D072C2 /* ParkingCell.swift */; };
 		225A2DFF1AF6D35600D072C2 /* PackageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225A2DFE1AF6D35600D072C2 /* PackageCell.swift */; };
 		225E43E91B02EB55001DE744 /* AlaskaWinePassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225E43E81B02EB55001DE744 /* AlaskaWinePassViewController.swift */; };
+		227BB7D41B1AEFB00062DFBC /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227BB7D31B1AEFB00062DFBC /* ImageCell.swift */; };
 		2281672C1AE20CFE00CCC9DF /* LoadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2281672A1AE20CFE00CCC9DF /* LoadViewController.swift */; };
 		2281672D1AE20CFE00CCC9DF /* LoadViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2281672B1AE20CFE00CCC9DF /* LoadViewController.xib */; };
 		2298E07F1AB00B7B003CEFFA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2298E07E1AB00B7B003CEFFA /* AppDelegate.swift */; };
@@ -55,12 +55,12 @@
 /* Begin PBXFileReference section */
 		221346EA1AD92A3F009633DB /* UIViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIViewExtensions.swift; path = ../UIViewExtensions.swift; sourceTree = "<group>"; };
 		221346EE1AD92B31009633DB /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Timer.swift; path = ../Timer.swift; sourceTree = "<group>"; };
-		221D72861ACA8F87005C26EB /* ParkingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ParkingViewController.swift; path = ../ParkingViewController.swift; sourceTree = "<group>"; };
 		225A2DF81AF619B700D072C2 /* CorkDistrictEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CorkDistrictEntity.swift; path = ../CorkDistrictEntity.swift; sourceTree = "<group>"; };
 		225A2DFA1AF6D06600D072C2 /* EntityCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EntityCell.swift; path = ../EntityCell.swift; sourceTree = "<group>"; };
 		225A2DFC1AF6D1FE00D072C2 /* ParkingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ParkingCell.swift; path = ../ParkingCell.swift; sourceTree = "<group>"; };
 		225A2DFE1AF6D35600D072C2 /* PackageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PackageCell.swift; path = ../PackageCell.swift; sourceTree = "<group>"; };
 		225E43E81B02EB55001DE744 /* AlaskaWinePassViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AlaskaWinePassViewController.swift; path = ../AlaskaWinePassViewController.swift; sourceTree = "<group>"; };
+		227BB7D31B1AEFB00062DFBC /* ImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageCell.swift; path = ../ImageCell.swift; sourceTree = "<group>"; };
 		2281672A1AE20CFE00CCC9DF /* LoadViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoadViewController.swift; path = ../LoadViewController.swift; sourceTree = "<group>"; };
 		2281672B1AE20CFE00CCC9DF /* LoadViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LoadViewController.xib; path = ../LoadViewController.xib; sourceTree = "<group>"; };
 		2298E0791AB00B7B003CEFFA /* Cork District.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Cork District.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -148,10 +148,10 @@
 				C124D0541B0D3BE6004CAF23 /* TourMapViewController.swift */,
 				2298E0A51AB011B5003CEFFA /* RestaurantsViewController.swift */,
 				2298E0A71AB011CB003CEFFA /* AccommodationsViewController.swift */,
-				221D72861ACA8F87005C26EB /* ParkingViewController.swift */,
 				2298E0A91AB011EA003CEFFA /* PackagesViewController.swift */,
 				225E43E81B02EB55001DE744 /* AlaskaWinePassViewController.swift */,
 				22F9FCAD1B05CA5500CA43B7 /* WineTourCell.swift */,
+				227BB7D31B1AEFB00062DFBC /* ImageCell.swift */,
 				225A2DFE1AF6D35600D072C2 /* PackageCell.swift */,
 				225A2DFA1AF6D06600D072C2 /* EntityCell.swift */,
 				225A2DFC1AF6D1FE00D072C2 /* ParkingCell.swift */,
@@ -297,6 +297,7 @@
 				221346EF1AD92B31009633DB /* Timer.swift in Sources */,
 				225A2DF91AF619B700D072C2 /* CorkDistrictEntity.swift in Sources */,
 				2298E0BA1AB01E53003CEFFA /* WineToursViewController.swift in Sources */,
+				227BB7D41B1AEFB00062DFBC /* ImageCell.swift in Sources */,
 				225A2DFD1AF6D1FE00D072C2 /* ParkingCell.swift in Sources */,
 				840AEAC31B04247E00DBB6EF /* (null) in Sources */,
 				2298E0A61AB011B5003CEFFA /* RestaurantsViewController.swift in Sources */,
@@ -316,7 +317,6 @@
 				2298E0821AB00B7B003CEFFA /* TheCorkDistrict.xcdatamodeld in Sources */,
 				840AEAC11B03DC9400DBB6EF /* (null) in Sources */,
 				22A85A0A1AB18B2000B45713 /* SwiftyJSON.swift in Sources */,
-				221D72871ACA8F87005C26EB /* ParkingViewController.swift in Sources */,
 				221346EB1AD92A3F009633DB /* UIViewExtensions.swift in Sources */,
 				2298E07F1AB00B7B003CEFFA /* AppDelegate.swift in Sources */,
 			);
@@ -448,6 +448,7 @@
 				INFOPLIST_FILE = TheCorkDistrict/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "Cork District";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -464,6 +465,7 @@
 				INFOPLIST_FILE = TheCorkDistrict/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "Cork District";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
