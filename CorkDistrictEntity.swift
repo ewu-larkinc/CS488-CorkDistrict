@@ -23,6 +23,14 @@ class CorkDistrictEntity {
         entities = [NSManagedObject]()
     }
     
+    func doChangedDatesMatch() -> Bool {
+        return lastChangedCD == lastChangedWeb
+    }
+    
+    func doCountsMatch() -> Bool {
+        return cdCount == webCount
+    }
+    
     func isOutOfDate() -> Bool {
         
         println("Testing in isOutOfDate method...")
