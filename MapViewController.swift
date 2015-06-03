@@ -158,13 +158,17 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         var temp = util.didSelectAnnotationView(view)
         
-        var alertV: UIAlertController = sameAddress(temp, view: view)
+        if(temp != nil)
+        {
         
-        if(alertV.actions.count > 1) {
-            self.presentViewController(alertV, animated: true, completion: nil)
-        }
-        else {
-            detailAlertView(temp, view: view)
+            var alertV: UIAlertController = sameAddress(temp!, view: view)
+        
+            if(alertV.actions.count > 1) {
+                self.presentViewController(alertV, animated: true, completion: nil)
+            }
+            else {
+                detailAlertView(temp!, view: view)
+            }
         }
         
     }

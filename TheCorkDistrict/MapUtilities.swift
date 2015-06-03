@@ -158,24 +158,32 @@ class MapUtilities {
         return pr
     }
     
-    func didSelectAnnotationView(view: MKAnnotationView!) -> NSManagedObject {
-        var temp = wineries[view.annotation.title!.toInt()!]
+    func didSelectAnnotationView(view: MKAnnotationView!) -> NSManagedObject? {
+      //  var temp = wineries[view.annotation.title!.toInt()!]
+
         
-        if(view.annotation.subtitle == "winery") {
-            temp = wineries[view.annotation.title!.toInt()!]
+        var id = view.annotation
+        if id.isKindOfClass(MKUserLocation)
+        {
+            var temp = wineries[view.annotation.title!.toInt()!]
+            if(view.annotation.subtitle == "winery") {
+                temp = wineries[view.annotation.title!.toInt()!]
+            }
+            else if(view.annotation.subtitle == "rest") {
+                temp = restaurants[view.annotation.title!.toInt()!]
+            }
+            else if(view.annotation.subtitle == "hotel") {
+                temp = hotels[view.annotation.title!.toInt()!]
+            }
+            else if(view.annotation.subtitle == "park") {
+                temp = parking[view.annotation.title!.toInt()!]
+            }
+            self.currentPin = view.annotation.title!.toInt()!
+            self.currentType = view.annotation.subtitle!
+            return temp
         }
-        else if(view.annotation.subtitle == "rest") {
-            temp = restaurants[view.annotation.title!.toInt()!]
-        }
-        else if(view.annotation.subtitle == "hotel") {
-            temp = hotels[view.annotation.title!.toInt()!]
-        }
-        else if(view.annotation.subtitle == "park") {
-            temp = parking[view.annotation.title!.toInt()!]
-        }
-        self.currentPin = view.annotation.title!.toInt()!
-        self.currentType = view.annotation.subtitle!
-        return temp
+
+        return nil
     }
     
     
