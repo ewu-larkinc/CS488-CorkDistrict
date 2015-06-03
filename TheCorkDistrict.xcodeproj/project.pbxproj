@@ -14,7 +14,6 @@
 		225A2DFD1AF6D1FE00D072C2 /* ParkingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225A2DFC1AF6D1FE00D072C2 /* ParkingCell.swift */; };
 		225A2DFF1AF6D35600D072C2 /* PackageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225A2DFE1AF6D35600D072C2 /* PackageCell.swift */; };
 		225E43E91B02EB55001DE744 /* AlaskaWinePassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225E43E81B02EB55001DE744 /* AlaskaWinePassViewController.swift */; };
-		227BB7D41B1AEFB00062DFBC /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227BB7D31B1AEFB00062DFBC /* ImageCell.swift */; };
 		2281672C1AE20CFE00CCC9DF /* LoadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2281672A1AE20CFE00CCC9DF /* LoadViewController.swift */; };
 		2281672D1AE20CFE00CCC9DF /* LoadViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2281672B1AE20CFE00CCC9DF /* LoadViewController.xib */; };
 		2298E07F1AB00B7B003CEFFA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2298E07E1AB00B7B003CEFFA /* AppDelegate.swift */; };
@@ -60,7 +59,6 @@
 		225A2DFC1AF6D1FE00D072C2 /* ParkingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ParkingCell.swift; path = ../ParkingCell.swift; sourceTree = "<group>"; };
 		225A2DFE1AF6D35600D072C2 /* PackageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PackageCell.swift; path = ../PackageCell.swift; sourceTree = "<group>"; };
 		225E43E81B02EB55001DE744 /* AlaskaWinePassViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AlaskaWinePassViewController.swift; path = ../AlaskaWinePassViewController.swift; sourceTree = "<group>"; };
-		227BB7D31B1AEFB00062DFBC /* ImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageCell.swift; path = ../ImageCell.swift; sourceTree = "<group>"; };
 		2281672A1AE20CFE00CCC9DF /* LoadViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoadViewController.swift; path = ../LoadViewController.swift; sourceTree = "<group>"; };
 		2281672B1AE20CFE00CCC9DF /* LoadViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LoadViewController.xib; path = ../LoadViewController.xib; sourceTree = "<group>"; };
 		2298E0791AB00B7B003CEFFA /* Cork District.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Cork District.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -151,7 +149,6 @@
 				2298E0A91AB011EA003CEFFA /* PackagesViewController.swift */,
 				225E43E81B02EB55001DE744 /* AlaskaWinePassViewController.swift */,
 				22F9FCAD1B05CA5500CA43B7 /* WineTourCell.swift */,
-				227BB7D31B1AEFB00062DFBC /* ImageCell.swift */,
 				225A2DFE1AF6D35600D072C2 /* PackageCell.swift */,
 				225A2DFA1AF6D06600D072C2 /* EntityCell.swift */,
 				225A2DFC1AF6D1FE00D072C2 /* ParkingCell.swift */,
@@ -297,7 +294,6 @@
 				221346EF1AD92B31009633DB /* Timer.swift in Sources */,
 				225A2DF91AF619B700D072C2 /* CorkDistrictEntity.swift in Sources */,
 				2298E0BA1AB01E53003CEFFA /* WineToursViewController.swift in Sources */,
-				227BB7D41B1AEFB00062DFBC /* ImageCell.swift in Sources */,
 				225A2DFD1AF6D1FE00D072C2 /* ParkingCell.swift in Sources */,
 				840AEAC31B04247E00DBB6EF /* (null) in Sources */,
 				2298E0A61AB011B5003CEFFA /* RestaurantsViewController.swift in Sources */,

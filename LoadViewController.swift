@@ -41,10 +41,12 @@ class LoadViewController : UIViewController {
     func getProgress() {
         
         let dataManager = DataManager.sharedInstance
+        var timeouts = dataManager.getNumTimeouts()
         
         while (self.progress < 1.0) {
             dataManager.updateProgress()
             self.progress = dataManager.getProgress()
+            timeouts = dataManager.getNumTimeouts()
         }
         
         var timer = Timer(duration: 2.0, completionHandler: {
@@ -53,39 +55,6 @@ class LoadViewController : UIViewController {
         
         timer.start()
     }
-    
-    /*func startCount() {
-        
-        let dataManager = DataManager.sharedInstance
-        var barProgress : Float = 0
-        var ctr2 = 0
-        var ctr = 0
-        for i in 0..<250 {
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), {
-                sleep(2)
-                if (barProgress < dataManager.getProgress()) {
-                    barProgress = dataManager.getProgress()
-                    println("Progress is \(self.progress)")
-                    self.progressView.setProgress(barProgress, animated: true)
-                }
-                
-                dispatch_async(dispatch_get_main_queue(), {
-                    barProgress += 0.004
-                    self.progressView.setProgress(barProgress, animated: true)
-                    return
-                })
-            })
-        }
-    }*/
-    
-    /*var ctr: Int = 0 {
-        didSet {
-            let fractionalProgress = Float(ctr)/250.0
-            let animated = ctr != 0
-            
-            progressView.setProgress(fractionalProgress, animated: animated)
-        }
-    }*/
     
     override func animationDidStop(anim: CAAnimation!, finished flag: Bool) {
         if self.shouldStopRotating == false {

@@ -63,34 +63,6 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         cell.backgroundColor = UIColor.clearColor()
         tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         
-        
-        /*switch (indexPath.row) {
-            case Index.Name.rawValue:
-                cell.textLabel?.text = currentSelection.valueForKey("name") as? String
-            case Index.Address.rawValue:
-                let city = currentSelection.valueForKey("city") as? String
-                let zipcode = currentSelection.valueForKey("zipcode") as? String
-                var addressLine = currentSelection.valueForKey("address") as? String
-                var cityLine = "\n" + city! + ", WA " + zipcode!
-                cell.textLabel?.text = addressLine! + cityLine
-            case Index.Phone.rawValue:
-                cell.textLabel?.text = currentSelection.valueForKey("phone") as? String
-            case Index.Image.rawValue:
-                let imageData = currentSelection.valueForKey("imageData") as? NSData
-                let mainImage = UIImage(data: imageData!)
-                newImageView = UIImageView(frame: CGRectMake((imageViewMargin),cell.frame.origin.y,(tableView.frame.width-(imageViewMargin*2)), imageRowHeight))
-            
-                newImageView.layer.borderColor = UIColor.whiteColor().CGColor
-                newImageView.layer.borderWidth = 2.0
-                newImageView.image = mainImage
-                cell.addSubview(newImageView)
-            case Index.Description.rawValue:
-                cell.textLabel?.text = currentSelection.valueForKey("about") as? String
-                cell.textLabel?.textAlignment = NSTextAlignment.Justified
-            default:
-                break
-        }*/
-        
         if (indexPath.row == Index.Name.rawValue) {
             cell.textLabel?.text = currentSelection.valueForKey("name") as? String
         }

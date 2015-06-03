@@ -8,6 +8,7 @@ import Foundation
 import CoreData
 import UIKit
 import CoreLocation
+import SystemConfiguration
 
 
 private let _SingletonSharedInstance = DataManager()
@@ -49,6 +50,7 @@ class DataManager {
     private var packDone = false
     private var parkDone = false
     private var accomDone = false
+    private var timeOuts = Int(0)
 
     
     
@@ -57,8 +59,8 @@ class DataManager {
         return progress
     }
     
-    func checkProgress() -> Float {
-        return progress
+    func getNumTimeouts() -> Int {
+        return timeOuts
     }
     
     func getWineries() -> [NSManagedObject] {
@@ -191,20 +193,48 @@ class DataManager {
         return packages.entities.count != 0
     }
     
+    func isDeviceConnectedToNetwork() -> Bool {
+        
+        var zeroAddress = sockaddr_in(sin_len: 0, sin_family: 0, sin_port: 0, sin_addr: in_addr(s_addr: 0), sin_zero: (0, 0, 0, 0, 0, 0, 0, 0))
+        
+        zeroAddress.sin_len = UInt8(sizeofValue(zeroAddress))
+        zeroAddress.sin_family = sa_family_t(AF_INET)
+        
+        let defaultRouteReachability = withUnsafePointer(&zeroAddress) {
+            SCNetworkReachabilityCreateWithAddress(nil, UnsafePointer($0)).takeRetainedValue()
+        }
+        
+        var flags: SCNetworkReachabilityFlags = 0
+        if SCNetworkReachabilityGetFlags(defaultRouteReachability, &flags) == 0 {
+            return false
+        }
+        
+        let isReachable = (flags & UInt32(kSCNetworkFlagsReachable)) != 0
+        let needsConnection = (flags & UInt32(kSCNetworkFlagsConnectionRequired)) != 0
+        
+        return (isReachable && !needsConnection) ? true : false
+    }
+    
     //#MARK: - Data Management Methods
     func loadData() -> Void {
         
         initializeEntityObjects()
-        fetchDatesFromWeb()
-        fetchDatesFromCoreData()
-        fetchAllCountsFromCoreData()
         
-        if (!dataReceived) {
-            var timer = Timer(duration: 1.0, completionHandler: {
-                self.fetchAllEntitiesFromWeb()
-            })
+        if isDeviceConnectedToNetwork() {
             
-            timer.start()
+            fetchDatesFromWeb()
+            fetchDatesFromCoreData()
+            fetchAllCountsFromCoreData()
+            
+            if (!dataReceived) {
+                var timer = Timer(duration: 1.0, completionHandler: {
+                    self.fetchAllEntitiesFromWeb()
+                })
+                
+                timer.start()
+            }
+        } else {
+            fetchAllEntitiesFromCoreData()
         }
         
         dataReceived = true
@@ -313,9 +343,8 @@ class DataManager {
         newEntity.setValue(wineries.lastChangedWeb, forKey: "wineries")
         newEntity.setValue(restaurants.lastChangedWeb, forKey: "restaurants")
         newEntity.setValue(accommodations.lastChangedWeb, forKey: "accommodations")
-        newEntity.setValue(packages.lastChangedWeb, forKey: "packages")
         newEntity.setValue(parking.lastChangedWeb, forKey: "parking")
-        
+        newEntity.setValue(packages.lastChangedWeb, forKey: "packages")
         
         var error: NSError?
         if !managedContext.save(&error) {
@@ -379,7 +408,6 @@ class DataManager {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate 
         let managedContext = appDelegate.managedObjectContext! 
         var entityType = entityInfo[6] as! String
-        var stringCheck = "Not"
         
         let newEntity = NSEntityDescription.insertNewObjectForEntityForName(entityType, inManagedObjectContext: managedContext) as! NSManagedObject 
         
@@ -544,7 +572,7 @@ class DataManager {
         
         
         if (!packDone) {
-            if (packages.entities.count == packages.webCount && packages.webCount != 0) {
+            if (packages.entities.count == packages.webCount) {
                 println("packages determined to be done!")
                 progress += 0.2
                 packDone = true
@@ -560,6 +588,7 @@ class DataManager {
     //#MARK: - NSURLSession Methods
     func fetchDatesFromWeb() {
         
+        NSURLSession.sharedSession().configuration.timeoutIntervalForResource = 5.0
         var session = NSURLSession.sharedSession()
         
         var task = session.dataTaskWithURL(URL_CHANGELOG!) {
@@ -577,7 +606,9 @@ class DataManager {
     
     func fetchEntityFromWeb(entity: CorkDistrictEntity) -> Void {
         
+        NSURLSession.sharedSession().configuration.timeoutIntervalForResource = 10.0
         var session = NSURLSession.sharedSession()
+        
         var task = session.dataTaskWithURL(entity.URL) {
             (data, response, error) -> Void in
             

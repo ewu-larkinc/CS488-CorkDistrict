@@ -33,10 +33,9 @@ class CorkDistrictEntity {
     
     func isOutOfDate() -> Bool {
         
-        println("Testing in isOutOfDate method...")
-        println("cdCount is \(cdCount) and webcount is \(webCount)")
+        println("In isOutOfDate method cdCount is \(cdCount) and webcount is \(webCount)")
         
-        if (lastChangedCD == "" || lastChangedWeb == "") {
+        if (lastChangedCD == "") {
             println("Entity type \(self.type) out of date! (NO DATE STORED IN CORE DATA)")
             println("lastChangedCD is \(lastChangedCD) and lastChangedWeb is \(lastChangedWeb)")
             return true

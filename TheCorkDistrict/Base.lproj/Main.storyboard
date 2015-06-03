@@ -479,7 +479,7 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="XDB-tB-BCS" id="GtY-LL-zpP">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Flying into Spokane with  Alaska Airlines?" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" id="fzC-iZ-WCD">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Flying into Spokane with  Alaska Airlines?" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" id="fzC-iZ-WCD">
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="STHeitiTC-Light" family="Heiti TC" pointSize="16"/>
                                                     <color key="textColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -497,7 +497,7 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nEI-FN-O5u" id="meo-CV-SYv">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="12" id="cw9-Nd-OdB">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="12" id="cw9-Nd-OdB">
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <string key="text">Present your boarding pass at any Cork District tasting room within 48 hours to receive a complimentary wine tasting. Tap the wine pass below for more info.</string>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -519,19 +519,19 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gMx-Vr-iTf">
                                                     <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" secondItem="gMx-Vr-iTf" secondAttribute="height" multiplier="126:157" id="DjL-ku-9RE"/>
+                                                        <constraint firstAttribute="width" secondItem="gMx-Vr-iTf" secondAttribute="height" multiplier="126:157" id="hps-xS-dDc"/>
                                                     </constraints>
                                                     <state key="normal" image="alaska_pass">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <variation key="default">
                                                         <mask key="constraints">
-                                                            <exclude reference="DjL-ku-9RE"/>
+                                                            <exclude reference="hps-xS-dDc"/>
                                                         </mask>
                                                     </variation>
                                                     <variation key="heightClass=regular-widthClass=compact">
                                                         <mask key="constraints">
-                                                            <include reference="DjL-ku-9RE"/>
+                                                            <include reference="hps-xS-dDc"/>
                                                         </mask>
                                                     </variation>
                                                     <connections>
@@ -540,20 +540,18 @@
                                                 </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="gMx-Vr-iTf" secondAttribute="trailing" constant="74" id="20M-RJ-G5W"/>
-                                                <constraint firstItem="gMx-Vr-iTf" firstAttribute="top" secondItem="Il0-qH-Tqu" secondAttribute="top" constant="21" id="BCr-jv-8sv"/>
-                                                <constraint firstItem="gMx-Vr-iTf" firstAttribute="leading" secondItem="Il0-qH-Tqu" secondAttribute="leading" constant="74" id="o68-XN-Tnb"/>
-                                                <constraint firstAttribute="bottom" secondItem="gMx-Vr-iTf" secondAttribute="bottom" constant="22.5" id="wlN-Gg-85U"/>
+                                                <constraint firstAttribute="trailing" secondItem="gMx-Vr-iTf" secondAttribute="trailing" constant="74" id="D8Y-47-LNU"/>
+                                                <constraint firstItem="gMx-Vr-iTf" firstAttribute="top" secondItem="Il0-qH-Tqu" secondAttribute="top" constant="21" id="OaE-94-tK0"/>
+                                                <constraint firstItem="gMx-Vr-iTf" firstAttribute="leading" secondItem="Il0-qH-Tqu" secondAttribute="leading" constant="74" id="uqo-w5-omV"/>
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="subviews">
                                                     <exclude reference="gMx-Vr-iTf"/>
                                                 </mask>
                                                 <mask key="constraints">
-                                                    <exclude reference="20M-RJ-G5W"/>
-                                                    <exclude reference="BCr-jv-8sv"/>
-                                                    <exclude reference="o68-XN-Tnb"/>
-                                                    <exclude reference="wlN-Gg-85U"/>
+                                                    <exclude reference="D8Y-47-LNU"/>
+                                                    <exclude reference="OaE-94-tK0"/>
+                                                    <exclude reference="uqo-w5-omV"/>
                                                 </mask>
                                             </variation>
                                             <variation key="heightClass=regular-widthClass=compact">
@@ -561,10 +559,9 @@
                                                     <include reference="gMx-Vr-iTf"/>
                                                 </mask>
                                                 <mask key="constraints">
-                                                    <include reference="20M-RJ-G5W"/>
-                                                    <include reference="BCr-jv-8sv"/>
-                                                    <include reference="o68-XN-Tnb"/>
-                                                    <include reference="wlN-Gg-85U"/>
+                                                    <include reference="D8Y-47-LNU"/>
+                                                    <include reference="OaE-94-tK0"/>
+                                                    <include reference="uqo-w5-omV"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
@@ -941,7 +938,7 @@
                                                         <rect key="frame" x="93" y="60" width="194" height="13"/>
                                                     </variation>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hours of Operation" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="UG6-fM-jBf">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Website" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="UG6-fM-jBf">
                                                     <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" name="STHeitiTC-Light" family="Heiti TC" pointSize="13"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -2098,6 +2095,6 @@
         <image name="alaska_pass" width="336" height="420"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="nDA-69-liF"/>
+        <segue reference="LDX-gq-k6W"/>
     </inferredMetricsTieBreakers>
 </document>

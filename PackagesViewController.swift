@@ -43,7 +43,7 @@ class PackagesViewController: UIViewController, UITableViewDataSource, UITableVi
         for package in packages {
             
             if let tempNodeID = package.valueForKey("relatedNodeID") as? String {
-                println("nodeIDS before separation is: \(tempNodeID)")
+    
                 var nodeIDS = tempNodeID.componentsSeparatedByString(",")
                 var finalNodeID: String
                 
