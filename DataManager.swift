@@ -43,7 +43,6 @@ class DataManager {
     private var downtownCluster = [NSManagedObject]()
     private var mtCluster = [NSManagedObject]()
     private var sodoCluster = [NSManagedObject]()
-    var dataCheckFinished = false
     private var progress = Float()
     private var wineDone = false
     private var restDone = false
@@ -309,7 +308,7 @@ class DataManager {
     }
     
     //#MARK: - Core Data Methods
-    func deleteFromCoreData(entity: CorkDistrictEntity) -> Void {
+    func deleteFromCoreData(entity: CorkDistrictEntity) {
         
         entity.clearEntities()
         
@@ -320,7 +319,6 @@ class DataManager {
         var error: NSError?
         let fetchedResults = managedContext.executeFetchRequest(deletionFetchRequest, error: &error) as! [NSManagedObject]
         
-        var i = Int()
         for result in fetchedResults {
             managedContext.deleteObject(result)
         }
@@ -330,6 +328,23 @@ class DataManager {
             println("Could not save \(error2), \(error2?.userInfo)")
         }
         
+    }
+    
+    func deleteDatesFromCoreData() {
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let managedContext = appDelegate.managedObjectContext!
+        let fetchRequest = NSFetchRequest(entityName: "LastChanged")
+        
+        var error: NSError?
+        let fetchedResults = managedContext.executeFetchRequest(fetchRequest, error: &error) as! [NSManagedObject]
+        
+        for result in fetchedResults {
+            managedContext.deleteObject(result)
+        }
+        
+        if !managedContext.save(&error) {
+            println("Could not save \(error), \(error?.userInfo)")
+        }
     }
     
     func saveDatesToCoreData() {
@@ -578,11 +593,6 @@ class DataManager {
                 packDone = true
             }
         }
-        
-        if progress >= 1 {
-            dataCheckFinished = true
-        }
-        
     }
     
     //#MARK: - NSURLSession Methods
@@ -683,7 +693,6 @@ class DataManager {
                 ctr++
                 
             }
-            
         }
         
         if (entity.type == accommodations.type) {
@@ -693,6 +702,8 @@ class DataManager {
     }
     
     func parseDatesAndTotals(data: NSData) {
+        
+        
         let json = JSON(data: data)
         
         var ctr: Int = 0
@@ -749,6 +760,7 @@ class DataManager {
             ctr++
         }
       
+        deleteDatesFromCoreData()
         saveDatesToCoreData()
     }
     
