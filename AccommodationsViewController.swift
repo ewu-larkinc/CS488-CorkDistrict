@@ -96,7 +96,9 @@ class AccomodationsViewController: UIViewController, UITableViewDataSource, UITa
         cell.cellImage.clipsToBounds = true
         cell.titleLabel.textColor = UIColor.whiteColor()
         cell.addressLabel.textColor = UIColor.whiteColor()
+        cell.addressLabel.adjustsFontSizeToFitWidth = true
         cell.cityLabel.textColor = UIColor.whiteColor()
+        cell.cityLabel.adjustsFontSizeToFitWidth = true
         cell.phoneLabel.textColor = UIColor.whiteColor()
         cell.websiteLabel.textColor = UIColor.whiteColor()
         cell.websiteLabel.adjustsFontSizeToFitWidth = true
