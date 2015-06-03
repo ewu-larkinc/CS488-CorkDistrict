@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoadViewController" customModule="Cork_District" customModuleProvider="target">
             <connections>
                 <outlet property="loadingImage" destination="X9X-gl-iIq" id="wzd-yS-YZP"/>
-                <outlet property="loadingLabel" destination="ZOL-pO-UmM" id="Asi-kU-Jyr"/>
-                <outlet property="loadingLogo" destination="E9q-aQ-Qil" id="EMx-hF-i8F"/>
-                <outlet property="progressView" destination="T8Y-Jb-Hj1" id="iPb-K8-9Vh"/>
+                <outlet property="loadingLogo" destination="xUK-Un-NYK" id="eIk-Ty-uoR"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -32,91 +30,59 @@
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
-                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" progress="2.7755575615628914e-17" translatesAutoresizingMaskIntoConstraints="NO" id="T8Y-Jb-Hj1">
-                    <rect key="frame" x="50" y="507" width="500" height="2"/>
-                    <color key="progressTintColor" red="0.92549026012420654" green="0.88627457618713379" blue="0.22352942824363708" alpha="1" colorSpace="deviceRGB"/>
-                    <color key="trackTintColor" red="0.50196081399917603" green="0.37254902720451355" blue="0.13725490868091583" alpha="1" colorSpace="deviceRGB"/>
-                </progressView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="CORKDISTRICT_LOGO" translatesAutoresizingMaskIntoConstraints="NO" id="E9q-aQ-Qil">
-                    <rect key="frame" x="219" y="201" width="162" height="98"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loadingLogo" translatesAutoresizingMaskIntoConstraints="NO" id="xUK-Un-NYK">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="98" id="USD-fJ-EDf">
-                            <variation key="heightClass=regular-widthClass=compact" constant="109"/>
-                        </constraint>
-                        <constraint firstAttribute="width" constant="162" id="WRH-J3-HR0">
-                            <variation key="heightClass=regular-widthClass=compact" constant="181"/>
-                        </constraint>
+                        <constraint firstAttribute="width" constant="181" id="Uiq-16-8Ej"/>
+                        <constraint firstAttribute="height" constant="181" id="V2S-71-Smd"/>
                     </constraints>
-                </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="LOADING" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZOL-pO-UmM">
-                    <rect key="frame" x="150" y="409" width="300" height="35"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="30" id="HO7-cn-MWp"/>
-                        <constraint firstAttribute="width" constant="129" id="cXT-Ea-8Uw"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" name="STHeitiSC-Light" family="Heiti SC" pointSize="25"/>
-                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <nil key="highlightedColor"/>
                     <variation key="default">
                         <mask key="constraints">
-                            <exclude reference="HO7-cn-MWp"/>
-                            <exclude reference="cXT-Ea-8Uw"/>
+                            <exclude reference="Uiq-16-8Ej"/>
+                            <exclude reference="V2S-71-Smd"/>
                         </mask>
                     </variation>
                     <variation key="heightClass=regular-widthClass=compact">
-                        <fontDescription key="fontDescription" name="STHeitiSC-Light" family="Heiti SC" pointSize="25"/>
                         <mask key="constraints">
-                            <include reference="HO7-cn-MWp"/>
-                            <include reference="cXT-Ea-8Uw"/>
+                            <include reference="Uiq-16-8Ej"/>
+                            <include reference="V2S-71-Smd"/>
                         </mask>
                     </variation>
-                </label>
+                </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="ZOL-pO-UmM" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="393" id="8cb-TZ-Y39">
-                    <variation key="heightClass=regular-widthClass=compact" constant="345"/>
-                </constraint>
-                <constraint firstAttribute="centerX" secondItem="ZOL-pO-UmM" secondAttribute="centerX" id="E1e-Ty-34k"/>
-                <constraint firstItem="X9X-gl-iIq" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="245" id="NZN-Zw-wMf">
-                    <variation key="heightClass=regular-widthClass=compact" constant="190"/>
-                </constraint>
-                <constraint firstAttribute="centerX" secondItem="E9q-aQ-Qil" secondAttribute="centerX" id="UVh-xy-t4c"/>
-                <constraint firstItem="T8Y-Jb-Hj1" firstAttribute="top" secondItem="X9X-gl-iIq" secondAttribute="bottom" constant="73" id="gqO-cA-M5X">
-                    <variation key="heightClass=regular-widthClass=compact" constant="54"/>
-                </constraint>
-                <constraint firstAttribute="centerX" secondItem="X9X-gl-iIq" secondAttribute="centerX" id="omg-0x-sWj"/>
-                <constraint firstAttribute="centerX" secondItem="T8Y-Jb-Hj1" secondAttribute="centerX" id="vsS-cX-DhT"/>
-                <constraint firstAttribute="trailing" secondItem="T8Y-Jb-Hj1" secondAttribute="trailing" constant="50" id="x5E-BE-jaw"/>
-                <constraint firstItem="E9q-aQ-Qil" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="296" id="xWx-a4-dx4">
-                    <variation key="heightClass=regular-widthClass=compact" constant="233"/>
-                </constraint>
-                <constraint firstItem="T8Y-Jb-Hj1" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="50" id="ya3-EL-HYz"/>
+                <constraint firstAttribute="centerY" secondItem="X9X-gl-iIq" secondAttribute="centerY" id="0QS-c9-y36"/>
+                <constraint firstAttribute="centerX" secondItem="X9X-gl-iIq" secondAttribute="centerX" id="DZD-zd-ckD"/>
+                <constraint firstAttribute="centerX" secondItem="xUK-Un-NYK" secondAttribute="centerX" id="MQI-xj-Yve"/>
+                <constraint firstAttribute="centerY" secondItem="xUK-Un-NYK" secondAttribute="centerY" id="Ylm-UN-aYB"/>
             </constraints>
             <variation key="default">
+                <mask key="subviews">
+                    <exclude reference="xUK-Un-NYK"/>
+                </mask>
                 <mask key="constraints">
-                    <exclude reference="NZN-Zw-wMf"/>
-                    <exclude reference="xWx-a4-dx4"/>
-                    <exclude reference="8cb-TZ-Y39"/>
-                    <exclude reference="gqO-cA-M5X"/>
-                    <exclude reference="x5E-BE-jaw"/>
-                    <exclude reference="ya3-EL-HYz"/>
+                    <exclude reference="MQI-xj-Yve"/>
+                    <exclude reference="Ylm-UN-aYB"/>
+                    <exclude reference="0QS-c9-y36"/>
+                    <exclude reference="DZD-zd-ckD"/>
                 </mask>
             </variation>
             <variation key="heightClass=regular-widthClass=compact">
+                <mask key="subviews">
+                    <include reference="xUK-Un-NYK"/>
+                </mask>
                 <mask key="constraints">
-                    <include reference="NZN-Zw-wMf"/>
-                    <include reference="xWx-a4-dx4"/>
-                    <include reference="8cb-TZ-Y39"/>
-                    <include reference="gqO-cA-M5X"/>
-                    <include reference="x5E-BE-jaw"/>
-                    <include reference="ya3-EL-HYz"/>
+                    <include reference="MQI-xj-Yve"/>
+                    <include reference="Ylm-UN-aYB"/>
+                    <include reference="0QS-c9-y36"/>
+                    <include reference="DZD-zd-ckD"/>
                 </mask>
             </variation>
         </view>
     </objects>
     <resources>
-        <image name="CORKDISTRICT_LOGO" width="1050" height="618"/>
         <image name="barrelTop" width="602" height="605"/>
+        <image name="loadingLogo" width="1050" height="1050"/>
     </resources>
 </document>

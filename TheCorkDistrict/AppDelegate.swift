@@ -82,11 +82,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
         println("Couldn’t register: \(error)")
     }
-    
-    /*func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
-        <#code#>
-    }*/
-    
 
     func applicationWillResignActive(application: UIApplication) {
         

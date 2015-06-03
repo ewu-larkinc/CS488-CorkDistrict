@@ -23,8 +23,6 @@ class WineriesViewController: UIViewController, UITableViewDataSource, UITableVi
         let dataManager = DataManager.sharedInstance
         wineries = dataManager.getWineries()
         //wineries.sort(<#isOrderedBefore: (T, T) -> Bool##(T, T) -> Bool#>)
-        
-        dataManager.sortWineriesByName()
     }
     
     override func viewWillAppear(animated: Bool) {

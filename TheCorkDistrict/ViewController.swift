@@ -34,14 +34,10 @@ class ViewController: UITableViewController, CLLocationManagerDelegate {
         //self.tableView.backgroundColor = UIColor(patternImage: background!)
         
         
-        //loadview commented out for now while testing other
-        let dataCheckFinished = dataManager.dataCheckFinished
-        
-        if (!dataCheckFinished) {
+        if (dataManager.isDeviceConnectedToNetwork()) {
             
             let loadingVC = LoadViewController(nibName: "LoadViewController", bundle: nil)
             loadingVC.modalTransitionStyle = UIModalTransitionStyle.CrossDissolve
-            //loadingVC.modalPresentationStyle = UIModalPresentationStyle.OverCurrentContext
             
             //error logged if I don't wait at least 1 second before calling the presentViewController method
             /*var timer = Timer(duration: 1.0, completionHandler: {
@@ -51,12 +47,18 @@ class ViewController: UITableViewController, CLLocationManagerDelegate {
             timer.start()*/
             
             self.navigationController?.presentViewController(loadingVC, animated: false, completion: nil)
+        } else {
+            let alertMessage = UIAlertController(title: "Network Not Found!", message: "No network connection detected. For the full Cork District experience, please re-establish the network connection on your device.", preferredStyle: .Alert)
+            
+            alertMessage.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+            presentViewController(alertMessage, animated: true, completion: nil)
         }
+        
+        
+        
         
         locationManager.requestWhenInUseAuthorization()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-       
-        
     }
     
     override func viewWillAppear(animated: Bool) {

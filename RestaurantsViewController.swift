@@ -85,8 +85,10 @@ class RestaurantsViewController: UIViewController, UITableViewDataSource, UITabl
         cell.cellImage.image = cellImage
         cell.titleLabel.text = name
         cell.addressLabel.text = address
+        cell.addressLabel.adjustsFontSizeToFitWidth = true
         cell.phoneLabel.text = phone
         cell.websiteLabel.text = website
+        cell.websiteLabel.adjustsFontSizeToFitWidth = true
         cell.cityLabel.text = city! + ", " + state + " " + zip!
         cell.cityLabel.sizeToFit()
         

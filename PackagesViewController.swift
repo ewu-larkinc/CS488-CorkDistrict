@@ -43,7 +43,7 @@ class PackagesViewController: UIViewController, UITableViewDataSource, UITableVi
         for package in packages {
             
             if let tempNodeID = package.valueForKey("relatedNodeID") as? String {
-                println("nodeIDS before separation is: \(tempNodeID)")
+    
                 var nodeIDS = tempNodeID.componentsSeparatedByString(",")
                 var finalNodeID: String
                 
@@ -51,8 +51,8 @@ class PackagesViewController: UIViewController, UITableViewDataSource, UITableVi
                     var nodeID1 = nodeIDS[0].toInt()
                     var nodeID2 = nodeIDS[1].toInt()
                     
-                    var entity1 = dataManager.getEntity(nodeID1!)
-                    var entity2 = dataManager.getEntity(nodeID2!)
+                    var entity1 = dataManager.getEntityByNodeId(nodeID1!)
+                    var entity2 = dataManager.getEntityByNodeId(nodeID2!)
                     
                     if let testEntity1 = entity1.valueForKey("name") as? String {
                         
@@ -66,7 +66,7 @@ class PackagesViewController: UIViewController, UITableViewDataSource, UITableVi
                 else {
                     
                     var nodeID1 = nodeIDS[0].toInt()
-                    var entity1 = dataManager.getEntity(nodeID1!)
+                    var entity1 = dataManager.getEntityByNodeId(nodeID1!)
                     
                     if let testEntity1 = entity1.valueForKey("name") as? String {
                         
@@ -143,24 +143,16 @@ class PackagesViewController: UIViewController, UITableViewDataSource, UITableVi
         var titleText = package.valueForKey("name") as? String
         
         
-        /*if let tempTitle = package.valueForKey("name") as? String {
-            if count(tempTitle) > maxStringLength {
-                let index: String.Index = advance(tempTitle.startIndex, maxStringLength)
-                titleText = tempTitle.substringToIndex(index)
-                cell.titleLabel.text = titleText
-            }
-            else {
-                cell.titleLabel.text = tempTitle
-            }
-        }*/
-        
         cell.titleLabel.text = titleText
-        cell.titleLabel.adjustsFontSizeToFitWidth = true
-        
         cell.entityTitleLabel.text = package.valueForKey("relatedEntityName") as? String
         cell.dateLabel.text = startDate + " - " + endDate
         cell.costLabel.text = cost!
         cell.cellImage.image = myImage
+        
+        cell.titleLabel.adjustsFontSizeToFitWidth = true
+        cell.entityTitleLabel.adjustsFontSizeToFitWidth = true
+        cell.dateLabel.adjustsFontSizeToFitWidth = true
+        cell.costLabel.adjustsFontSizeToFitWidth = true
         
         cell.cellImage.layer.cornerRadius = 4.0
         cell.cellImage.clipsToBounds = true

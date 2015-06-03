@@ -8,6 +8,7 @@ import Foundation
 import CoreData
 import UIKit
 import CoreLocation
+import SystemConfiguration
 
 
 private let _SingletonSharedInstance = DataManager()
@@ -42,16 +43,14 @@ class DataManager {
     private var downtownCluster = [NSManagedObject]()
     private var mtCluster = [NSManagedObject]()
     private var sodoCluster = [NSManagedObject]()
-    var dataCheckFinished = false
     private var progress = Float()
-    
-    //TESTING
     private var wineDone = false
     private var restDone = false
     private var packDone = false
     private var parkDone = false
     private var accomDone = false
-    //
+    private var timeOuts = Int(0)
+
     
     
     //#MARK: - Access Methods
@@ -59,8 +58,8 @@ class DataManager {
         return progress
     }
     
-    func checkProgress() -> Float {
-        return progress
+    func getNumTimeouts() -> Int {
+        return timeOuts
     }
     
     func getWineries() -> [NSManagedObject] {
@@ -71,7 +70,7 @@ class DataManager {
         return URL_NOTIFICATIONS!
     }
     
-    func getEntity(nid: Int) -> NSManagedObject {
+    func getEntityByNodeId(nid: Int) -> NSManagedObject {
         
         var i : Int
         
@@ -114,12 +113,12 @@ class DataManager {
         
         let newEntity = NSEntityDescription.insertNewObjectForEntityForName(entityType, inManagedObjectContext:
             managedContext) as! NSManagedObject
-        newEntity.setValue("blank", forKey: "name")
+            newEntity.setValue("blank", forKey: "name")
         
         return newEntity
     }
     
-    func getEntity(entityName: String) -> NSManagedObject {
+    func getEntityByName(entityName: String) -> NSManagedObject {
         
         var i : Int
         
@@ -156,7 +155,7 @@ class DataManager {
         
         let newEntity = NSEntityDescription.insertNewObjectForEntityForName(entityType, inManagedObjectContext:
             managedContext) as! NSManagedObject
-        newEntity.setValue("blank", forKey: "name")
+            newEntity.setValue("blank", forKey: "name")
         
         return newEntity
     }
@@ -193,32 +192,108 @@ class DataManager {
         return packages.entities.count != 0
     }
     
+    func isDeviceConnectedToNetwork() -> Bool {
+        
+        var zeroAddress = sockaddr_in(sin_len: 0, sin_family: 0, sin_port: 0, sin_addr: in_addr(s_addr: 0), sin_zero: (0, 0, 0, 0, 0, 0, 0, 0))
+        
+        zeroAddress.sin_len = UInt8(sizeofValue(zeroAddress))
+        zeroAddress.sin_family = sa_family_t(AF_INET)
+        
+        let defaultRouteReachability = withUnsafePointer(&zeroAddress) {
+            SCNetworkReachabilityCreateWithAddress(nil, UnsafePointer($0)).takeRetainedValue()
+        }
+        
+        var flags: SCNetworkReachabilityFlags = 0
+        if SCNetworkReachabilityGetFlags(defaultRouteReachability, &flags) == 0 {
+            return false
+        }
+        
+        let isReachable = (flags & UInt32(kSCNetworkFlagsReachable)) != 0
+        let needsConnection = (flags & UInt32(kSCNetworkFlagsConnectionRequired)) != 0
+        
+        return (isReachable && !needsConnection) ? true : false
+    }
+    
     //#MARK: - Data Management Methods
     func loadData() -> Void {
         
         initializeEntityObjects()
-        fetchDatesFromWeb()
-        fetchAllEntitiesFromCoreData()
         
-        if (!dataReceived) {
-            fetchAllEntitiesFromWeb()
+        if isDeviceConnectedToNetwork() {
+            
+            fetchDatesFromWeb()
+            fetchDatesFromCoreData()
+            fetchAllCountsFromCoreData()
+            
+            if (!dataReceived) {
+                var timer = Timer(duration: 1.0, completionHandler: {
+                    self.fetchAllEntitiesFromWeb()
+                })
+                
+                timer.start()
+            }
+        } else {
+            fetchAllEntitiesFromCoreData()
         }
         
         dataReceived = true
     }
     
-    func initializeEntityObjects() {
+    func fetchAllEntitiesFromCoreData() {
         
-        /*wineries.URL = NSURL(string: "http://www.nathanpilgrim.net/rest/wineries.json")!
-        wineries.type = "Winery"
-        restaurants.URL = NSURL(string: "http://www.nathanpilgrim.net/rest/restaurants.json")!
-        restaurants.type = "Restaurant"
-        packages.URL = NSURL(string: "http://www.nathanpilgrim.net/rest/packages.json")!
-        packages.type = "Package"
-        parking.URL = NSURL(string: "http://www.nathanpilgrim.net/rest/parking.json")!
-        parking.type = "Parking"
-        accommodations.URL = NSURL(string: "http://www.nathanpilgrim.net/rest/accommodations.json")!
-        accommodations.type = "Accommodation"*/
+        fetchEntityFromCoreData(wineries)
+        fetchEntityFromCoreData(restaurants)
+        fetchEntityFromCoreData(accommodations)
+        fetchEntityFromCoreData(parking)
+        fetchEntityFromCoreData(packages)
+    }
+    
+    func fetchAllCountsFromCoreData() {
+        
+        fetchCountFromCoreData(wineries)
+        fetchCountFromCoreData(restaurants)
+        fetchCountFromCoreData(accommodations)
+        fetchCountFromCoreData(parking)
+        fetchCountFromCoreData(packages)
+    }
+    
+    func fetchAllEntitiesFromWeb() {
+        
+        progress = 0
+        
+        if wineries.isOutOfDate() {
+            fetchEntityFromWeb(wineries)
+        } else {
+            fetchEntityFromCoreData(wineries)
+        }
+        
+        if restaurants.isOutOfDate() {
+            fetchEntityFromWeb(restaurants)
+        } else {
+            fetchEntityFromCoreData(restaurants)
+        }
+        
+        if accommodations.isOutOfDate() {
+            fetchEntityFromWeb(accommodations)
+        } else {
+            fetchEntityFromCoreData(accommodations)
+        }
+        
+        if parking.isOutOfDate() {
+            fetchEntityFromWeb(parking)
+        } else {
+            fetchEntityFromCoreData(parking)
+        }
+        
+        if packages.isOutOfDate() {
+            fetchEntityFromWeb(packages)
+        } else {
+            fetchEntityFromCoreData(packages)
+        }
+        
+    }
+    
+    func initializeEntityObjects() {
         
         wineries.URL = NSURL(string: "http://www.corkdistrictapp.com/rest/wineries.json")!
         wineries.type = "Winery"
@@ -233,10 +308,9 @@ class DataManager {
     }
     
     //#MARK: - Core Data Methods
-    func deleteFromCoreData(entity: CorkDistrictEntity) -> Void {
+    func deleteFromCoreData(entity: CorkDistrictEntity) {
         
         entity.clearEntities()
-        println("Deleting \(entity.type) from coreData")
         
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext!
@@ -245,7 +319,6 @@ class DataManager {
         var error: NSError?
         let fetchedResults = managedContext.executeFetchRequest(deletionFetchRequest, error: &error) as! [NSManagedObject]
         
-        var i = Int()
         for result in fetchedResults {
             managedContext.deleteObject(result)
         }
@@ -257,18 +330,36 @@ class DataManager {
         
     }
     
+    func deleteDatesFromCoreData() {
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let managedContext = appDelegate.managedObjectContext!
+        let fetchRequest = NSFetchRequest(entityName: "LastChanged")
+        
+        var error: NSError?
+        let fetchedResults = managedContext.executeFetchRequest(fetchRequest, error: &error) as! [NSManagedObject]
+        
+        for result in fetchedResults {
+            managedContext.deleteObject(result)
+        }
+        
+        if !managedContext.save(&error) {
+            println("Could not save \(error), \(error?.userInfo)")
+        }
+    }
+    
     func saveDatesToCoreData() {
-        println("Saving dates to core data")
+        
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext!
         
         let newEntity = NSEntityDescription.insertNewObjectForEntityForName("LastChanged", inManagedObjectContext: managedContext) as! NSManagedObject
         
-        newEntity.setValue(accommodations.lastChangedWeb, forKey: "accommodations")
+        
         newEntity.setValue(wineries.lastChangedWeb, forKey: "wineries")
-        newEntity.setValue(packages.lastChangedWeb, forKey: "packages")
-        newEntity.setValue(parking.lastChangedWeb, forKey: "parking")
         newEntity.setValue(restaurants.lastChangedWeb, forKey: "restaurants")
+        newEntity.setValue(accommodations.lastChangedWeb, forKey: "accommodations")
+        newEntity.setValue(parking.lastChangedWeb, forKey: "parking")
+        newEntity.setValue(packages.lastChangedWeb, forKey: "packages")
         
         var error: NSError?
         if !managedContext.save(&error) {
@@ -276,9 +367,8 @@ class DataManager {
         }
     }
     
-    func fetchEntitiesFromCoreData(entity: CorkDistrictEntity) {
+    func fetchEntityFromCoreData(entity: CorkDistrictEntity) {
         
-        println("fetching \(entity.type) from coreData")
         
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate 
         let managedContext = appDelegate.managedObjectContext! 
@@ -289,6 +379,20 @@ class DataManager {
         let fetchedResults = managedContext.executeFetchRequest(fetchRequest, error: &error) as! [NSManagedObject]? 
         
         entity.entities = fetchedResults!
+    }
+    
+    func fetchCountFromCoreData(entity: CorkDistrictEntity) {
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let managedContext = appDelegate.managedObjectContext!
+        
+        let fetchRequest = NSFetchRequest(entityName: entity.type)
+        
+        var error: NSError?
+        let fetchedResult = managedContext.countForFetchRequest(fetchRequest, error: &error)
+        entity.setCDCount(fetchedResult)
+        println("Adding count of \(entity.cdCount) to entity type \(entity.type)")
+        //adding this print statement fixed the issue where all entity cdCounts were showing 0 when 
+        //evaluated later by the isOutOfDate method in the CorkDistrictEntity class - WTF??
     }
     
     func fetchDatesFromCoreData() {
@@ -302,35 +406,23 @@ class DataManager {
         
         if let results = fetchedResults {
             for result in results {
-                
-                //var type = result.valueForKey("node_type") as? String
-                //println("Assigning lastChangedCD to entityType: \(type)")
+            
                 accommodations.lastChangedCD = (result.valueForKey("accommodations") as? String)!
                 packages.lastChangedCD = (result.valueForKey("packages") as? String)!
                 parking.lastChangedCD = (result.valueForKey("parking") as? String)!
                 wineries.lastChangedCD = (result.valueForKey("wineries") as? String)!
                 restaurants.lastChangedCD = (result.valueForKey("restaurants") as? String)!
-                
             }
         }
     }
     
-    func fetchAllEntitiesFromCoreData() {
-        
-        fetchDatesFromCoreData()
-        fetchEntitiesFromCoreData(wineries)
-        fetchEntitiesFromCoreData(restaurants)
-        fetchEntitiesFromCoreData(accommodations)
-        fetchEntitiesFromCoreData(parking)
-        fetchEntitiesFromCoreData(packages)
-    }
+    
     
     func addEntityToCoreData(entityInfo: NSMutableArray, entityImage: UIImage) -> Void {
         
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate 
         let managedContext = appDelegate.managedObjectContext! 
         var entityType = entityInfo[6] as! String
-        var stringCheck = "Not"
         
         let newEntity = NSEntityDescription.insertNewObjectForEntityForName(entityType, inManagedObjectContext: managedContext) as! NSManagedObject 
         
@@ -383,16 +475,16 @@ class DataManager {
         
         switch (entityType) {
             
-        case "Winery":
-            self.wineries.entities.append(newEntity)
-        case "Restaurant":
-            self.restaurants.entities.append(newEntity)
-        case "Accommodation":
-            self.accommodations.entities.append(newEntity)
-        case "Package":
-            self.packages.entities.append(newEntity)
-        default:
-            println("Invalid entity type")
+            case "Winery":
+                self.wineries.entities.append(newEntity)
+            case "Restaurant":
+                self.restaurants.entities.append(newEntity)
+            case "Accommodation":
+                self.accommodations.entities.append(newEntity)
+            case "Package":
+                self.packages.entities.append(newEntity)
+            default:
+                println("Invalid entity type")
             
         }
     }
@@ -457,9 +549,7 @@ class DataManager {
     
     func updateProgress() {
         
-        //progress = 0
         
-        println("wineries count and webcount: \(wineries.entities.count) \(wineries.webCount)")
         if (!wineDone) {
             if (wineries.entities.count == wineries.webCount && wineries.webCount != 0) {
                 println("wineries determined to be done!")
@@ -468,7 +558,7 @@ class DataManager {
             }
         }
         
-        println("restaurants count and webcount: \(restaurants.entities.count) \(restaurants.webCount)")
+        
         if (!restDone) {
             if (restaurants.entities.count == restaurants.webCount && restaurants.webCount != 0) {
                 println("restaurants determined to be done!")
@@ -477,7 +567,7 @@ class DataManager {
             }
         }
         
-        println("accommodations count and webcount: \(accommodations.entities.count) \(accommodations.webCount)")
+        
         if (!accomDone) {
             if (accommodations.entities.count == accommodations.webCount && accommodations.webCount != 0) {
                 println("accommodations determined to be done!")
@@ -486,7 +576,7 @@ class DataManager {
             }
         }
         
-        println("parking count and webcount: \(parking.entities.count) \(parking.webCount)")
+        
         if (!parkDone) {
             if (parking.entities.count == parking.webCount && parking.webCount != 0) {
                 println("parking determined to be done!")
@@ -495,35 +585,20 @@ class DataManager {
             }
         }
         
-        println("packages count and webcount: \(packages.entities.count) \(packages.webCount)")
+        
         if (!packDone) {
-            if (packages.entities.count == packages.webCount && packages.webCount != 0) {
+            if (packages.entities.count == packages.webCount) {
                 println("packages determined to be done!")
                 progress += 0.2
                 packDone = true
             }
         }
-        
-        if progress >= 1 {
-            dataCheckFinished = true
-        }
-        
     }
     
     //#MARK: - NSURLSession Methods
-    func fetchAllEntitiesFromWeb() {
-        
-        progress = 0
-        fetchEntitiesFromWeb(wineries)
-        fetchEntitiesFromWeb(restaurants)
-        fetchEntitiesFromWeb(accommodations)
-        fetchEntitiesFromWeb(parking)
-        fetchEntitiesFromWeb(packages)
-        
-    }
-    
     func fetchDatesFromWeb() {
         
+        NSURLSession.sharedSession().configuration.timeoutIntervalForResource = 5.0
         var session = NSURLSession.sharedSession()
         
         var task = session.dataTaskWithURL(URL_CHANGELOG!) {
@@ -532,16 +607,18 @@ class DataManager {
             if error != nil {
                 println(error.localizedDescription)
             } else {
-                self.parseDatesTotals(data)
+                self.parseDatesAndTotals(data)
             }
         }
         
         task.resume()
     }
     
-    func fetchEntitiesFromWeb(entity: CorkDistrictEntity) -> Void {
+    func fetchEntityFromWeb(entity: CorkDistrictEntity) -> Void {
         
+        NSURLSession.sharedSession().configuration.timeoutIntervalForResource = 10.0
         var session = NSURLSession.sharedSession()
+        
         var task = session.dataTaskWithURL(entity.URL) {
             (data, response, error) -> Void in
             
@@ -562,65 +639,60 @@ class DataManager {
             parseJSONPackage(data, entity: entity)
             
         } else {
+            
             let json = JSON(data: data)
+                
+            deleteFromCoreData(entity)
             
-            println("\(entity.type) lastChangedCD: \(entity.lastChangedCD) lastChangedWeb: \(entity.lastChangedWeb)")
-            entity.webCount = json.count
-            entity.needsWebUpdate = false
-            
-            //json.count != entity.entities.count
-            if (entity.isOutOfDate()) {
-                //entity.needsWebUpdate = true
-                println("Downloading \(entity.type)...")
-                deleteFromCoreData(entity)
-                var ctr=0
-            
-                while (ctr < json.count) {
+            var ctr=0
+            while (ctr < json.count) {
                 
-                    let entityCityStateZip = json[ctr]["City State Zip"].stringValue
-                    let cityStateZipArray = separateCityStateZip(entityCityStateZip)
+                let entityCityStateZip = json[ctr]["City State Zip"].stringValue
+                let cityStateZipArray = separateCityStateZip(entityCityStateZip)
                 
-                    let entityCity = cityStateZipArray[0]
-                    let entityState = cityStateZipArray[1]
-                    let entityZip = cityStateZipArray[2]
+                let entityCity = cityStateZipArray[0]
+                let entityState = cityStateZipArray[1]
+                let entityZip = cityStateZipArray[2]
                 
-                    var infoArray = NSMutableArray()
-                    infoArray.addObject(json[ctr]["node_title"].stringValue)
-                    infoArray.addObject(json[ctr]["nid"].stringValue)
-                    infoArray.addObject(json[ctr]["Street Address"].stringValue)
-                    infoArray.addObject(entityZip)
-                    infoArray.addObject(entityCity)
-                    infoArray.addObject(json[ctr]["Phone"].stringValue)
-                    infoArray.addObject(entity.type)
+                var infoArray = NSMutableArray()
+                infoArray.addObject(json[ctr]["node_title"].stringValue)
+                infoArray.addObject(json[ctr]["nid"].stringValue)
+                infoArray.addObject(json[ctr]["Street Address"].stringValue)
+                infoArray.addObject(entityZip)
+                infoArray.addObject(entityCity)
+                infoArray.addObject(json[ctr]["Phone"].stringValue)
+                infoArray.addObject(entity.type)
                 
                 
-                    if (entity.type != parking.type) {
+                if (entity.type != parking.type) {
                     
-                        let entityImageString = stripHtml(json[ctr]["Thumbnail"].stringValue)
-                        let entityImageUrl = NSURL(string: entityImageString)
-                        let imgData = NSData(contentsOfURL: entityImageUrl!)
-                        let entityImage = UIImage(data: imgData!)
+                    let entityImageString = stripHtml(json[ctr]["Thumbnail"].stringValue)
+                    let entityImageUrl = NSURL(string: entityImageString)
+                    let imgData = NSData(contentsOfURL: entityImageUrl!)
+                    let entityImage = UIImage(data: imgData!)
+                        
+                    var desc = json[ctr]["Description"].stringValue as String
+                    let description = removeOddCharacters(desc)
                     
-                        infoArray.addObject(json[ctr]["Description"].stringValue)
-                        infoArray.addObject(json[ctr]["Website"].stringValue)
+                    infoArray.addObject(description)
+                    infoArray.addObject(json[ctr]["Website"].stringValue)
                     
-                        if (entity.type == wineries.type) {
-                            infoArray.addObject(json[ctr]["Cluster"].stringValue)
-                            infoArray.addObject(json[ctr]["Hours of Operation"].stringValue)
-                            let test = json[ctr]["Cork District Card"].stringValue
-                            infoArray.addObject(test)
-                            println("cardAccepted value: \(test)")
+                    if (entity.type == wineries.type) {
+                        infoArray.addObject(json[ctr]["Cluster"].stringValue)
+                        infoArray.addObject(json[ctr]["Hours of Operation"].stringValue)
+                        let test = json[ctr]["Cork District Card"].stringValue
+                        infoArray.addObject(test)
+                        println("cardAccepted value: \(test)")
                     }
                     
-                    addEntityToCoreData(infoArray, entityImage: entityImage!)
-                    } else {
-                        addParkingToCoreData(infoArray)
-                    }
-                
-                    ctr++
+                addEntityToCoreData(infoArray, entityImage: entityImage!)
+                } else {
+                    addParkingToCoreData(infoArray)
                 }
+                
+                ctr++
+                
             }
-            
         }
         
         if (entity.type == accommodations.type) {
@@ -629,7 +701,9 @@ class DataManager {
         
     }
     
-    func parseDatesTotals(data: NSData) {
+    func parseDatesAndTotals(data: NSData) {
+        
+        
         let json = JSON(data: data)
         
         var ctr: Int = 0
@@ -642,102 +716,97 @@ class DataManager {
         
         while (ctr < json.count) {
             
-            let date = json[ctr]["node_changed"].stringValue
-            let ent = json[ctr]["node_type"].stringValue
-            
-            println("Pulling in date: \(date) for entity type: \(ent)")
-            
             if json[ctr]["node_type"] == "lodging" && !accommIn {
-                let accommodationsDate = json[0]["node_changed"].stringValue
+                let accommodationsDate = json[ctr]["node_changed"].stringValue
+                let count = json[ctr]["count"].intValue
                 dates.append(accommodationsDate)
+                accommodations.setWebCount(count)
+                accommodations.lastChangedWeb = accommodationsDate
                 accommIn = true
             }
             else if json[ctr]["node_type"] == "packages" && !packIn {
-                let packagesDate = json[1]["node_changed"].stringValue
+                let packagesDate = json[ctr]["node_changed"].stringValue
+                let count = json[ctr]["count"].intValue
                 dates.append(packagesDate)
+                packages.setWebCount(count)
+                packages.lastChangedWeb = packagesDate
                 packIn = true
             }
             else if json[ctr]["node_type"] == "parking" && !parkIn {
-                let parkingDate = json[2]["node_changed"].stringValue
+                let parkingDate = json[ctr]["node_changed"].stringValue
+                let count = json[ctr]["count"].intValue
                 dates.append(parkingDate)
+                parking.setWebCount(count)
+                parking.lastChangedWeb = parkingDate
                 parkIn = true
             }
             else if json[ctr]["node_type"] == "winery" && !wineriesIn {
-                let wineryDate = json[3]["node_changed"].stringValue
+                let wineryDate = json[ctr]["node_changed"].stringValue
+                let count = json[ctr]["count"].intValue
                 dates.append(wineryDate)
+                wineries.setWebCount(count)
+                wineries.lastChangedWeb = wineryDate
                 wineriesIn = true
             }
             else if json[ctr]["node_type"] == "restaurant" && !restIn {
-                let restaurantDate = json[4]["node_changed"].stringValue
+                let restaurantDate = json[ctr]["node_changed"].stringValue
+                let count = json[ctr]["count"].intValue
                 dates.append(restaurantDate)
+                restaurants.setWebCount(count)
+                restaurants.lastChangedWeb = restaurantDate
                 restIn = true
             }
             
             ctr++
         }
-      /*
-        accommodations.lastChangedWeb = dates[0]
-        restaurants.lastChangedWeb = dates[4]
-        wineries.lastChangedWeb = dates[3]
-        packages.lastChangedWeb = dates[1]
-        parking.lastChangedWeb = dates[2]
-        */
+      
+        deleteDatesFromCoreData()
         saveDatesToCoreData()
     }
     
     func parseJSONPackage(data: NSData, entity: CorkDistrictEntity) -> Void {
         
         let json = JSON(data: data)
-        
-        println("\(entity.type) lastChangedCD: \(entity.lastChangedCD) lastChangedWeb: \(entity.lastChangedWeb)")
-        
-        //json.count != entity.entities.count
-        if (entity.isOutOfDate()) {
-            println("Downloading \(entity.type)...")
-            entity.webCount = json.count
-            entity.needsWebUpdate = false
             
-            deleteFromCoreData(entity)
-            var ctr=0
+        deleteFromCoreData(entity)
+        var ctr=0
             
         
-            while (ctr < json.count) {
-                var infoArray = NSMutableArray()
-                entity.needsWebUpdate = true
+        while (ctr < json.count) {
+            var infoArray = NSMutableArray()
                 
-                infoArray.addObject(json[ctr]["node_title"].stringValue)
-                infoArray.addObject(json[ctr]["Description"].stringValue)
-                infoArray.addObject(json[ctr]["Website"].stringValue)
-                infoArray.addObject(json[ctr]["Cost"].stringValue)
-                infoArray.addObject(json[ctr]["StartDay"].stringValue)
-                infoArray.addObject(json[ctr]["StartMonth"].stringValue)
-                infoArray.addObject(json[ctr]["EndDay"].stringValue)
-                infoArray.addObject(json[ctr]["EndMonth"].stringValue)
-                infoArray.addObject(json[ctr]["StartYear"].stringValue)
-                infoArray.addObject(json[ctr]["EndYear"].stringValue)
-                infoArray.addObject(json[ctr]["nid"].stringValue)
-                infoArray.addObject(entity.type)
+            infoArray.addObject(json[ctr]["node_title"].stringValue)
+            infoArray.addObject(json[ctr]["Description"].stringValue)
+            infoArray.addObject(json[ctr]["Website"].stringValue)
+            infoArray.addObject(json[ctr]["Cost"].stringValue)
+            infoArray.addObject(json[ctr]["StartDay"].stringValue)
+            infoArray.addObject(json[ctr]["StartMonth"].stringValue)
+            infoArray.addObject(json[ctr]["EndDay"].stringValue)
+            infoArray.addObject(json[ctr]["EndMonth"].stringValue)
+            infoArray.addObject(json[ctr]["StartYear"].stringValue)
+            infoArray.addObject(json[ctr]["EndYear"].stringValue)
+            infoArray.addObject(json[ctr]["nid"].stringValue)
+            infoArray.addObject(entity.type)
                 
-                var relatedNid: String
-                var tempNid: String
+            var relatedNid: String
+            var tempNid: String
                 
-                relatedNid = json[ctr]["Related Items"][0]["target_id"].stringValue
-                println("TESTING relatedNID coming in as: \(relatedNid)")
-                tempNid = relatedNid
+            relatedNid = json[ctr]["Related Items"][0]["target_id"].stringValue
                 
-                if json[ctr]["Related Items"].count > 1 {
-                    tempNid = relatedNid + "," + json[ctr]["Related Items"][1]["target_id"].stringValue
-                }
-                infoArray.addObject(tempNid)
+            tempNid = relatedNid
                 
-                let entityImageString = stripHtml(json[ctr]["Thumbnail"].stringValue)
-                let entityImageUrl = NSURL(string: entityImageString)
-                let imgData = NSData(contentsOfURL: entityImageUrl!)
-                let entityImage = UIImage(data: imgData!)
-            
-                addPackageToCoreData(infoArray, entityImage: entityImage!)
-                ctr++
+            if json[ctr]["Related Items"].count > 1 {
+                tempNid = relatedNid + "," + json[ctr]["Related Items"][1]["target_id"].stringValue
             }
+            infoArray.addObject(tempNid)
+            
+            let entityImageString = stripHtml(json[ctr]["Thumbnail"].stringValue)
+            let entityImageUrl = NSURL(string: entityImageString)
+            let imgData = NSData(contentsOfURL: entityImageUrl!)
+            let entityImage = UIImage(data: imgData!)
+            
+            addPackageToCoreData(infoArray, entityImage: entityImage!)
+            ctr++
         }
     }
     
@@ -751,9 +820,21 @@ class DataManager {
         return entityImageString.stringByReplacingOccurrencesOfString("\"", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
     }
     
+    func removeOddCharacters(string: String) -> String {
+        
+        let term1 = "&quot;"
+        let term2 = "&#039;"
+        let term3 = "&amp;"
+        
+        var tempString = string.stringByReplacingOccurrencesOfString(term1, withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+        
+        tempString = tempString.stringByReplacingOccurrencesOfString(term2, withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+        
+        return tempString.stringByReplacingOccurrencesOfString(term3, withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+    }
+    
     func separateCityStateZip(cityStateZip: String) -> [String] {
         
-        //println("Testing... cityStateZip is \(cityStateZip)")
         let cityStateZipArray = cityStateZip.componentsSeparatedByString(" ")
         var resultArray = [String]()
         
@@ -780,7 +861,6 @@ class DataManager {
         for winery in wineries.entities {
             
             curCluster = (winery.valueForKey("cluster") as? String)!
-            //println("CLUSTER TYPE: \(curCluster)")
             
             switch (curCluster) {
             case "Mt. to Lake":
@@ -795,53 +875,6 @@ class DataManager {
             
             curCluster = ""
         }
-    }
-    
-    func sortWineriesByName() {
-        
-        var ctr: Int = 0
-        var ctr2: Int = 1
-        var temp = String()
-        var index: Int = 0
-        var name1 = [String]()
-        var name2 = [String]()
-        
-        var tempArray: [String]
-        var titlesArray = [String]()
-        
-        
-        while (ctr < wineries.entities.count) {
-            
-            if let name = wineries.entities[ctr].valueForKey("name") as? String {
-                titlesArray.append(name)
-            }
-            
-            ctr++
-        }
-        ctr = 1
-        name1 = titlesArray[0].componentsSeparatedByString(" ")
-        
-        while (ctr < titlesArray.count) {
-            
-            name2 = titlesArray[ctr].componentsSeparatedByString(" ")
-            
-            if name2[0] < name1[0] {
-                temp = titlesArray[ctr]
-                titlesArray[ctr] = titlesArray[0]
-                titlesArray[0] = temp
-            }
-        
-            ctr++
-        }
-    
-        ctr = 0
-        println("Printing wineries after alphabetical sort...\n")
-        while ctr < titlesArray.count {
-            
-            println(titlesArray[ctr])
-            ctr++
-        }
-        
     }
     
     
