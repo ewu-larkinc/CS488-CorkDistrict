@@ -17,6 +17,7 @@ class LoadViewController : UIViewController {
     var shouldStopRotating = false
     var timer: Timer!
     var progress = Float()
+    var timedOut = false
     
 
     override func viewDidLoad() {
@@ -42,11 +43,28 @@ class LoadViewController : UIViewController {
         
         let dataManager = DataManager.sharedInstance
         var timeouts = dataManager.getNumTimeouts()
+        let startTime = NSDate()
+        var curTime : NSDate
+        var elapsedTime = Double()
         
-        while (self.progress < 1.0) {
+        while (progress < 1.0) {
             dataManager.updateProgress()
             self.progress = dataManager.getProgress()
-            timeouts = dataManager.getNumTimeouts()
+            curTime = NSDate()
+            elapsedTime = curTime.timeIntervalSinceDate(startTime)
+            
+            if elapsedTime > 25 {
+                progress = 1.0
+                timedOut = true
+            }
+        }
+        
+        if timedOut {
+            
+            let alertMessage = UIAlertController(title: "Connection Timed Out!", message: "The data connection timed out. The server may be performing routine maintenance, or the network connection on your device may be unreliable. Please check your network settings, or try again later.", preferredStyle: .Alert)
+            
+            alertMessage.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+            presentViewController(alertMessage, animated: true, completion: nil)
         }
         
         var timer = Timer(duration: 2.0, completionHandler: {
