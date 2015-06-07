@@ -91,8 +91,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
             cell.textLabel?.text = currentSelection.valueForKey("about") as? String
             cell.textLabel?.textAlignment = NSTextAlignment.Justified
         }
-        
-        
+
         return cell
     }
 

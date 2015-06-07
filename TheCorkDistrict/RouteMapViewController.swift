@@ -55,10 +55,11 @@ class RouteMapViewController: UIViewController, MKMapViewDelegate, CLLocationMan
         self.theMapView.setRegion(theRegion, animated: true)
         
         var destinationArray = [NSManagedObject]()
-        
         destinationArray.append(destination)
         
-        util.placePinsOnMap(destinationArray, type: "winery")
+        //destination.
+        
+        util.placePinsOnMap(destinationArray, type: "finish")
         print("Lat: ")
         println(self.locationManager.location.coordinate.latitude)
         print("Long: ")
@@ -82,8 +83,8 @@ class RouteMapViewController: UIViewController, MKMapViewDelegate, CLLocationMan
         if !(annotation is MKPointAnnotation) {
             return nil
         }
-        
-        return util.viewForAnnotation(mapView, viewForAnnotation: annotation)
+        //return nil
+       return util.viewForAnnotation(mapView, viewForAnnotation: annotation)
     }
     func mapView(mapView: MKMapView!, rendererForOverlay overlay: MKOverlay!) -> MKOverlayRenderer! {
         
@@ -100,19 +101,12 @@ class RouteMapViewController: UIViewController, MKMapViewDelegate, CLLocationMan
         
     }
     func detailAlertView(var temp: NSManagedObject, view: MKAnnotationView!) {
+    
+        
+        view.canShowCallout = false
         
         var alertView = UIAlertController(title: temp.valueForKey("name") as? String, message: temp.valueForKey("address") as? String, preferredStyle: .Alert)
-        
-        if(view.annotation.subtitle != "park") {
-            var imageView = UIImageView(frame: CGRectMake(10, 15, 50, 50))
-            
-            let imageData = temp.valueForKey("imageData") as? NSData
-            
-            imageView.image = UIImage(data: imageData!)
-            
-            alertView.view.addSubview(imageView)
-        }
-        let callAction = UIAlertAction(title: "Call", style: .Default, handler: {
+                let callAction = UIAlertAction(title: "Call", style: .Default, handler: {
             action in
             let alertMessage = UIAlertController(title: "Are you sure?", message: "Are you sure you want to call this winery?", preferredStyle: .Alert)
             let callFinalAction = UIAlertAction(title: "Call", style: .Default, handler: {

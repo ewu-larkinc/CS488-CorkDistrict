@@ -142,6 +142,9 @@ class MapUtilities {
         else if(annotation.subtitle == "park") {
             anView.image = UIImage(named:"Car_Icon")
         }
+        else if(annotation.subtitle == "finish") {
+            anView.image = UIImage(named: "flag_icon")
+        }
         anView.canShowCallout = false
         
         return anView
@@ -158,25 +161,37 @@ class MapUtilities {
         return pr
     }
     
-    func didSelectAnnotationView(view: MKAnnotationView!) -> NSManagedObject {
-        var temp = wineries[view.annotation.title!.toInt()!]
-        
-        if(view.annotation.subtitle == "winery") {
-            temp = wineries[view.annotation.title!.toInt()!]
+    func didSelectAnnotationView(view: MKAnnotationView!) -> NSManagedObject? {
+
+        view.canShowCallout = false;
+
+        var id = view.annotation
+        if !id.isKindOfClass(MKUserLocation)
+        {
+            var temp = wineries[view.annotation.title!.toInt()!]
+            if(view.annotation.subtitle == "winery") {
+                temp = wineries[view.annotation.title!.toInt()!]
+            }
+            else if(view.annotation.subtitle == "rest") {
+                temp = restaurants[view.annotation.title!.toInt()!]
+            }
+            else if(view.annotation.subtitle == "hotel") {
+                temp = hotels[view.annotation.title!.toInt()!]
+            }
+            else if(view.annotation.subtitle == "park") {
+                temp = parking[view.annotation.title!.toInt()!]
+            }
+            self.currentPin = view.annotation.title!.toInt()!
+            self.currentType = view.annotation.subtitle!
+            return temp
         }
-        else if(view.annotation.subtitle == "rest") {
-            temp = restaurants[view.annotation.title!.toInt()!]
+        else{
+           // view.annotation.title
+            view.canShowCallout = false;
+            return nil
         }
-        else if(view.annotation.subtitle == "hotel") {
-            temp = hotels[view.annotation.title!.toInt()!]
-        }
-        else if(view.annotation.subtitle == "park") {
-            temp = parking[view.annotation.title!.toInt()!]
-        }
-        self.currentPin = view.annotation.title!.toInt()!
-        self.currentType = view.annotation.subtitle!
-        return temp
     }
+        
     
     
     func placePinsOnMap(var array: [NSManagedObject], var type: String) -> [MKPointAnnotation]{

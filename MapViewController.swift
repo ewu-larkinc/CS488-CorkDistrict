@@ -48,6 +48,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         //request user location
         locationManager.requestWhenInUseAuthorization()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        
         self.theMapView.showsUserLocation = true
         
         //fill pin arrays
@@ -155,14 +156,23 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     func mapView(mapView: MKMapView!, didSelectAnnotationView view: MKAnnotationView!) {
         
         var temp = util.didSelectAnnotationView(view)
+        view.canShowCallout = false;
+
+        if(temp != nil)
+        {
         
-        var alertV: UIAlertController = sameAddress(temp, view: view)
+            var alertV: UIAlertController = sameAddress(temp!, view: view)
         
-        if(alertV.actions.count > 1) {
-            self.presentViewController(alertV, animated: true, completion: nil)
+            if(alertV.actions.count > 1) {
+                self.presentViewController(alertV, animated: true, completion: nil)
+            }
+            else {
+                detailAlertView(temp!, view: view)
+            }
         }
-        else {
-            detailAlertView(temp, view: view)
+        else{
+            view.canShowCallout = false;
+
         }
         
     }
