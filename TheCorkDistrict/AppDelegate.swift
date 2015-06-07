@@ -9,7 +9,7 @@ import CoreData
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+	
     var window: UIWindow?
     let dataManager = DataManager.sharedInstance
     var URL_NOTIFICATIONS = NSURL()

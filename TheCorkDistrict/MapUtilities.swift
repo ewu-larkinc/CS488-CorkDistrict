@@ -159,11 +159,11 @@ class MapUtilities {
     }
     
     func didSelectAnnotationView(view: MKAnnotationView!) -> NSManagedObject? {
-      //  var temp = wineries[view.annotation.title!.toInt()!]
 
-        
+        view.canShowCallout = false;
+
         var id = view.annotation
-        if id.isKindOfClass(MKUserLocation)
+        if !id.isKindOfClass(MKUserLocation)
         {
             var temp = wineries[view.annotation.title!.toInt()!]
             if(view.annotation.subtitle == "winery") {
@@ -182,9 +182,13 @@ class MapUtilities {
             self.currentType = view.annotation.subtitle!
             return temp
         }
-
-        return nil
+        else{
+           // view.annotation.title
+            view.canShowCallout = false;
+            return nil
+        }
     }
+        
     
     
     func placePinsOnMap(var array: [NSManagedObject], var type: String) -> [MKPointAnnotation]{
