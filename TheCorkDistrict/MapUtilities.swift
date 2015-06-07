@@ -142,6 +142,9 @@ class MapUtilities {
         else if(annotation.subtitle == "park") {
             anView.image = UIImage(named:"Car_Icon")
         }
+        else if(annotation.subtitle == "finish") {
+            anView.image = UIImage(named: "flag_icon")
+        }
         anView.canShowCallout = false
         
         return anView
