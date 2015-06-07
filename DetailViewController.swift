@@ -76,12 +76,12 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         }
         else if (indexPath.row == Index.Phone.rawValue) {
             cell.textLabel?.text = currentSelection.valueForKey("phone") as? String
+            cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
         }
         else if (indexPath.row == Index.Image.rawValue) {
             let imageData = currentSelection.valueForKey("imageData") as? NSData
             let mainImage = UIImage(data: imageData!)
             newImageView = UIImageView(frame: CGRectMake((imageViewMargin),cell.frame.origin.y,(tableView.frame.width-(imageViewMargin*2)), imageRowHeight))
-            
             newImageView.layer.borderColor = UIColor.whiteColor().CGColor
             newImageView.layer.borderWidth = 2.0
             newImageView.image = mainImage
