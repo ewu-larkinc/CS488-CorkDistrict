@@ -61,6 +61,8 @@ class LoadViewController : UIViewController {
         
         if timedOut {
             
+            dataManager.fetchAllEntitiesFromCoreData()
+            
             let alertMessage = UIAlertController(title: "Connection Timed Out!", message: "The data connection timed out. The server may be performing routine maintenance, or the network connection on your device may be unreliable. Please check your network settings, or try again later.", preferredStyle: .Alert)
             
             alertMessage.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
