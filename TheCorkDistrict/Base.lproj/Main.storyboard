@@ -1990,7 +1990,9 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <gestureRecognizers/>
                                         <connections>
+                                            <outletCollection property="gestureRecognizers" destination="fba-At-ZKl" appends="YES" id="LPN-Ca-bi7"/>
                                             <segue destination="WU1-wP-IZL" kind="show" id="thC-A0-R6j"/>
                                         </connections>
                                     </tableViewCell>
@@ -2007,6 +2009,11 @@
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6fz-vh-RVl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="4.9999999999999982" id="fba-At-ZKl">
+                    <connections>
+                        <action selector="detectLongPress:" destination="zPQ-7U-YTK" id="MkZ-4U-7bR"/>
+                    </connections>
+                </pongPressGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2238" y="201.75"/>
         </scene>

@@ -9,13 +9,21 @@ import MapKit
 import CoreData
 
 class ViewController: UITableViewController, CLLocationManagerDelegate {
+    
+    @IBAction func detectLongPress(sender: AnyObject) {
+        
+        let alertMessage = UIAlertController(title: "Credits Easter Egg!!!", message: "This breathtaking, and dare I say groundbreaking, application was developed by an EWU Senior Project team, whose members include: Chris Larkin, Justina Cargile, Kyle Bondo, Nate Pilgrim, and Zac Bowman.", preferredStyle: .Alert)
+        
+        alertMessage.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+        presentViewController(alertMessage, animated: true, completion: nil)
+        
+    }
+    
+    
     let locationManager = CLLocationManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        
-        
 
         
         let dataManager = DataManager.sharedInstance
@@ -38,13 +46,6 @@ class ViewController: UITableViewController, CLLocationManagerDelegate {
             
             let loadingVC = LoadViewController(nibName: "LoadViewController", bundle: nil)
             loadingVC.modalTransitionStyle = UIModalTransitionStyle.CrossDissolve
-            
-            //error logged if I don't wait at least 1 second before calling the presentViewController method
-            /*var timer = Timer(duration: 1.0, completionHandler: {
-                self.navigationController?.presentViewController(loadingVC, animated: false, completion: nil)
-            })
-            
-            timer.start()*/
             
             self.navigationController?.presentViewController(loadingVC, animated: false, completion: nil)
         } else {
