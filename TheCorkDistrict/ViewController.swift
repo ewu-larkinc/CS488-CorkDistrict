@@ -12,7 +12,7 @@ class ViewController: UITableViewController, CLLocationManagerDelegate {
     
     @IBAction func detectLongPress(sender: AnyObject) {
         
-        let alertMessage = UIAlertController(title: "Credits Easter Egg!!!", message: "This breathtaking, and dare I say groundbreaking, application was developed by an EWU Senior Project team, whose members include: Chris Larkin, Justina Cargile, Kyle Bondo, Nate Pilgrim, and Zac Bowman.", preferredStyle: .Alert)
+        let alertMessage = UIAlertController(title: "----Credits----", message: "This breathtaking, and dare I say groundbreaking, application was developed by an EWU Senior Project team, whose members include: Chris Larkin, Justina Cargile, Kyle Bondo, Nate Pilgrim, and Zac Bowman.", preferredStyle: .Alert)
         
         alertMessage.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
         presentViewController(alertMessage, animated: true, completion: nil)
