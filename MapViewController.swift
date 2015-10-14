@@ -12,7 +12,7 @@ import CoreData
 class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     
     
-    @IBAction func returnToHomePage(AnyObject) {
+    @IBAction func returnToHomePage(_: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: {});
     }
     
@@ -69,16 +69,16 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         self.automaticallyAdjustsScrollViewInsets = false
         
-        var theSpan: MKCoordinateSpan = MKCoordinateSpanMake(0.05, 0.05)
+        let theSpan: MKCoordinateSpan = MKCoordinateSpanMake(0.05, 0.05)
         
-        var centerLocation: CLLocationCoordinate2D = CLLocationCoordinate2DMake(47.655262, -117.414129)
+        let centerLocation: CLLocationCoordinate2D = CLLocationCoordinate2DMake(47.655262, -117.414129)
         
-        var theRegion: MKCoordinateRegion = MKCoordinateRegionMake(centerLocation, theSpan)
+        let theRegion: MKCoordinateRegion = MKCoordinateRegionMake(centerLocation, theSpan)
         
         self.theMapView.setRegion(theRegion, animated: true)
     }
     
-    @IBAction func filterWineries(AnyObject) {
+    @IBAction func filterWineries(_: AnyObject) {
         if(showWineries){
             addPins(winePins)
             showWineries = false
@@ -90,7 +90,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             wineButton.alpha = 0.5
         }
     }
-    @IBAction func filterHotels(AnyObject) {
+    @IBAction func filterHotels(_: AnyObject) {
         if(showHotels){
             addPins(hotelPins)
             showHotels = false
@@ -102,7 +102,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             hotelButton.alpha = 0.5
         }
     }
-    @IBAction func filterRest(AnyObject) {
+    @IBAction func filterRest(_: AnyObject) {
         if(showRest){
             addPins(restPins)
             showRest = false
@@ -114,7 +114,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             restButton.alpha = 0.5
         }
     }
-    @IBAction func filterParking(AnyObject) {
+    @IBAction func filterParking(_: AnyObject) {
         if(showParking){
             addPins(parkPins)
             showParking = false
@@ -155,13 +155,13 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     func mapView(mapView: MKMapView!, didSelectAnnotationView view: MKAnnotationView!) {
         
-        var temp = util.didSelectAnnotationView(view)
+        let temp = util.didSelectAnnotationView(view)
         view.canShowCallout = false;
 
         if(temp != nil)
         {
         
-            var alertV: UIAlertController = sameAddress(temp!, view: view)
+            let alertV: UIAlertController = sameAddress(temp!, view: view)
         
             if(alertV.actions.count > 1) {
                 self.presentViewController(alertV, animated: true, completion: nil)
@@ -176,23 +176,23 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
         
     }
-    func sameAddress(var temp: NSManagedObject, view: MKAnnotationView!) -> UIAlertController{
+    func sameAddress( temp: NSManagedObject, view: MKAnnotationView!) -> UIAlertController{
         
         var returnType = UIAlertController()
         
         var shouldAlert: Bool = false
         
-        var address:String = temp.valueForKey("address") as! String
+        let address:String = temp.valueForKey("address") as! String
         
-        var alertView = UIAlertController(title: "Warning: Same Address", message: "", preferredStyle: .Alert)
+        let alertView = UIAlertController(title: "Warning: Same Address", message: "", preferredStyle: .Alert)
         
-        var imageView = UIImageView(frame: CGRectMake(10, 15, 50, 50))
+        //var imageView = UIImageView(frame: CGRectMake(10, 15, 50, 50))
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: {
             action in
             
         })
-        var tempAction = UIAlertAction(title: temp.valueForKey("name") as! String, style: .Default, handler: {
+        var tempAction = UIAlertAction(title: (temp.valueForKey("name") as! String), style: .Default, handler: {
             action in
             self.detailAlertView(temp, view: view)
         })
@@ -205,7 +205,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 
                 shouldAlert = true
                 
-                tempAction = UIAlertAction(title: location.valueForKey("name") as! String, style: .Default, handler: {
+                tempAction = UIAlertAction(title: location.valueForKey("name") as? String, style: .Default, handler: {
                     action in
                     self.detailAlertView(location, view: view)
                 })
@@ -219,9 +219,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
         return returnType
     }
-    func detailAlertView(var temp: NSManagedObject, view: MKAnnotationView!) {
+    func detailAlertView( temp: NSManagedObject, view: MKAnnotationView!) {
         
-        var alertView = UIAlertController(title: temp.valueForKey("name") as? String, message: temp.valueForKey("address") as? String, preferredStyle: .Alert)
+        let alertView = UIAlertController(title: temp.valueForKey("name") as? String, message: temp.valueForKey("address") as? String, preferredStyle: .Alert)
 
         let callAction = UIAlertAction(title: "Call", style: .Default, handler: {
             action in
@@ -230,7 +230,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 action in
                 var pNumber = "tel://"
                 pNumber += (temp.valueForKey("phone")as? String)!
-                var url:NSURL? = NSURL(string: pNumber)
+                let url:NSURL? = NSURL(string: pNumber)
                 UIApplication.sharedApplication().openURL(url!)
             })
             alertMessage.addAction(callFinalAction)
@@ -238,7 +238,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             self.presentViewController(alertMessage, animated: true, completion: nil)
             
             
-            println(temp.valueForKey("phone") as? String)
+            print(temp.valueForKey("phone") as? String)
         })
         
         let detailAction = UIAlertAction(title: "Details", style: .Default, handler: {
@@ -253,7 +253,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         })
         
         alertView.addAction(callAction)
-        if(view.annotation.subtitle != "park") {
+        if(view.annotation!.subtitle! != "park") {
             alertView.addAction(detailAction)
         }
         alertView.addAction(cancelAction)
@@ -267,7 +267,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!)
     {
         
-        var detailVC: DetailViewController = segue.destinationViewController as! DetailViewController
+        let detailVC: DetailViewController = segue.destinationViewController as! DetailViewController
         
         var selectedItem: NSManagedObject = util.wineries[util.currentPin] as NSManagedObject
         

@@ -14,7 +14,7 @@ import CoreData
 class RouteMapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     
     
-    @IBAction func returnToHomePage(AnyObject) {
+    @IBAction func returnToHomePage(_: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: {});
     }
     
@@ -43,14 +43,14 @@ class RouteMapViewController: UIViewController, MKMapViewDelegate, CLLocationMan
         locationManager.startUpdatingLocation()
         self.theMapView.showsUserLocation = true
         
-        var theSpan: MKCoordinateSpan = MKCoordinateSpanMake(0.09, 0.09)
-        var mypin: String = destination.valueForKey("placemark") as! String
+        let theSpan: MKCoordinateSpan = MKCoordinateSpanMake(0.09, 0.09)
+        let mypin: String = destination.valueForKey("placemark") as! String
         var llarray = mypin.componentsSeparatedByString(",")
         
-        var centerLocation: CLLocationCoordinate2D = CLLocationCoordinate2DMake(NSString(string: llarray[0]).doubleValue, NSString(string: llarray[1]).doubleValue)//self.theMapView.userLocation.location.coordinate
+        let centerLocation: CLLocationCoordinate2D = CLLocationCoordinate2DMake(NSString(string: llarray[0]).doubleValue, NSString(string: llarray[1]).doubleValue)//self.theMapView.userLocation.location.coordinate
         //CLLocationCoordinate2DMake(47.655262, -117.414129)
         
-        var theRegion: MKCoordinateRegion = MKCoordinateRegionMake(centerLocation, theSpan)
+        let theRegion: MKCoordinateRegion = MKCoordinateRegionMake(centerLocation, theSpan)
         
         self.theMapView.setRegion(theRegion, animated: true)
         
@@ -61,11 +61,11 @@ class RouteMapViewController: UIViewController, MKMapViewDelegate, CLLocationMan
         
         util.placePinsOnMap(destinationArray, type: "finish")
         print("Lat: ")
-        println(self.locationManager.location.coordinate.latitude)
+        print(self.locationManager.location!.coordinate.latitude)
         print("Long: ")
-        println(self.locationManager.location.coordinate.longitude)
+        print(self.locationManager.location!.coordinate.longitude)
         
-        util.getDirections(destinationArray, start: CLLocationCoordinate2DMake(self.locationManager.location.coordinate.latitude, self.locationManager.location.coordinate.longitude))
+        util.getDirections(destinationArray, start: CLLocationCoordinate2DMake(self.locationManager.location!.coordinate.latitude, self.locationManager.location!.coordinate.longitude))
 
 
     }
@@ -79,33 +79,33 @@ class RouteMapViewController: UIViewController, MKMapViewDelegate, CLLocationMan
         self.automaticallyAdjustsScrollViewInsets = false
         
     }
-    func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         if !(annotation is MKPointAnnotation) {
             return nil
         }
         //return nil
        return util.viewForAnnotation(mapView, viewForAnnotation: annotation)
     }
-    func mapView(mapView: MKMapView!, rendererForOverlay overlay: MKOverlay!) -> MKOverlayRenderer! {
+    func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer {
         
-        if (overlay is MKPolyline) {
+        //if (overlay is MKPolyline) {
             
             return util.renderForOverlay(mapView, rendererForOverlay: overlay)
-        }
+        //}
         
-        return nil
+        
     }
-    func mapView(mapView: MKMapView!, didSelectAnnotationView view: MKAnnotationView!) {
+    func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
 
         detailAlertView(destination, view: view)
         
     }
-    func detailAlertView(var temp: NSManagedObject, view: MKAnnotationView!) {
+    func detailAlertView( temp: NSManagedObject, view: MKAnnotationView!) {
     
         
         view.canShowCallout = false
         
-        var alertView = UIAlertController(title: temp.valueForKey("name") as? String, message: temp.valueForKey("address") as? String, preferredStyle: .Alert)
+        let alertView = UIAlertController(title: temp.valueForKey("name") as? String, message: temp.valueForKey("address") as? String, preferredStyle: .Alert)
                 let callAction = UIAlertAction(title: "Call", style: .Default, handler: {
             action in
             let alertMessage = UIAlertController(title: "Are you sure?", message: "Are you sure you want to call this winery?", preferredStyle: .Alert)
@@ -113,7 +113,7 @@ class RouteMapViewController: UIViewController, MKMapViewDelegate, CLLocationMan
                 action in
                 var pNumber = "tel://"
                 pNumber += (temp.valueForKey("phone")as? String)!
-                var url:NSURL? = NSURL(string: pNumber)
+                let url:NSURL? = NSURL(string: pNumber)
                 UIApplication.sharedApplication().openURL(url!)
             })
             alertMessage.addAction(callFinalAction)
@@ -121,7 +121,7 @@ class RouteMapViewController: UIViewController, MKMapViewDelegate, CLLocationMan
             self.presentViewController(alertMessage, animated: true, completion: nil)
             
             
-            println(temp.valueForKey("phone") as? String)
+            print(temp.valueForKey("phone") as? String)
         })
         
         let detailAction = UIAlertAction(title: "Details", style: .Default, handler: {
@@ -143,7 +143,7 @@ class RouteMapViewController: UIViewController, MKMapViewDelegate, CLLocationMan
     }
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!)
     {
-        var detailVC: DetailViewController = segue.destinationViewController as! DetailViewController
+        let detailVC: DetailViewController = segue.destinationViewController as! DetailViewController
 
         detailVC.currentSelection = destination
     }

@@ -41,7 +41,7 @@ class AccomodationsViewController: UIViewController, UITableViewDataSource, UITa
         
         let dvc = segue.destinationViewController as! DetailViewController
         
-        if let indexPath = self.tableView.indexPathForSelectedRow() {
+        if let indexPath = self.tableView.indexPathForSelectedRow {
             let accommodation = accommodations[indexPath.row]
             dvc.currentSelection = accommodation
         }
@@ -75,12 +75,12 @@ class AccomodationsViewController: UIViewController, UITableViewDataSource, UITa
         let cellImage = UIImage(data: imageData!)
         
         var city = accommodation.valueForKey("city") as? String
-        var zip = accommodation.valueForKey("zipcode") as? String
-        var name = accommodation.valueForKey("name") as? String
-        var phone = accommodation.valueForKey("phone") as? String
-        var address = accommodation.valueForKey("address") as? String
-        var website = accommodation.valueForKey("website") as? String
-        var state = "WA"
+        let zip = accommodation.valueForKey("zipcode") as? String
+        let name = accommodation.valueForKey("name") as? String
+        let phone = accommodation.valueForKey("phone") as? String
+        let address = accommodation.valueForKey("address") as? String
+        let website = accommodation.valueForKey("website") as? String
+        let state = "WA"
         
         city = city?.stringByReplacingOccurrencesOfString(" ", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
         

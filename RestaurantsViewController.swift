@@ -40,7 +40,7 @@ class RestaurantsViewController: UIViewController, UITableViewDataSource, UITabl
         
         let dvc = segue.destinationViewController as! DetailViewController
         
-        if let indexPath = self.tableView.indexPathForSelectedRow() {
+        if let indexPath = self.tableView.indexPathForSelectedRow {
             let restaurant = restaurants[indexPath.row]
             dvc.currentSelection = restaurant
         }
@@ -73,12 +73,12 @@ class RestaurantsViewController: UIViewController, UITableViewDataSource, UITabl
         let cellImage = UIImage(data: imageData!)
         
         var city = restaurant.valueForKey("city") as? String
-        var zip = restaurant.valueForKey("zipcode") as? String
-        var phone = restaurant.valueForKey("phone") as? String
-        var address = restaurant.valueForKey("address") as? String
-        var website = restaurant.valueForKey("website") as? String
-        var name = restaurant.valueForKey("name") as? String
-        var state = "WA"
+        let zip = restaurant.valueForKey("zipcode") as? String
+        let phone = restaurant.valueForKey("phone") as? String
+        let address = restaurant.valueForKey("address") as? String
+        let website = restaurant.valueForKey("website") as? String
+        let name = restaurant.valueForKey("name") as? String
+        let state = "WA"
         
         city = city?.stringByReplacingOccurrencesOfString(" ", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
         

@@ -76,9 +76,8 @@ class DataManager {
         
         for (i=0; i < wineries.entities.count; i++) {
             
-            var tempTitle = wineries.entities[i].valueForKey("name") as! String
-            var tempID = wineries.entities[i].valueForKey("nodeID") as! String
-            var test = tempID.toInt()
+            let tempID = wineries.entities[i].valueForKey("nodeID") as! String
+            let test = Int(tempID)
             
             if (test == nid) {
                 return wineries.entities[i]
@@ -87,9 +86,9 @@ class DataManager {
         
         for (i=0; i < restaurants.entities.count; i++) {
             
-            var tempTitle = restaurants.entities[i].valueForKey("name") as! String
-            var tempID = restaurants.entities[i].valueForKey("nodeID") as! String
-            var test = tempID.toInt()
+            
+            let tempID = restaurants.entities[i].valueForKey("nodeID") as! String
+            let test = Int(tempID)
             
             if (test == nid) {
                 return restaurants.entities[i]
@@ -98,9 +97,8 @@ class DataManager {
         
         for (i=0; i < accommodations.entities.count; i++) {
             
-            var tempTitle = accommodations.entities[i].valueForKey("name") as! String
-            var tempID = accommodations.entities[i].valueForKey("nodeID") as! String
-            var test = tempID.toInt()
+            let tempID = accommodations.entities[i].valueForKey("nodeID") as! String
+            let test = Int(tempID)
             
             if (test == nid) {
                 return accommodations.entities[i]
@@ -108,11 +106,11 @@ class DataManager {
         }
         
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let managedContext = appDelegate.managedObjectContext!
+        let managedContext = appDelegate.managedObjectContext
         let entityType = "Winery"
         
         let newEntity = NSEntityDescription.insertNewObjectForEntityForName(entityType, inManagedObjectContext:
-            managedContext) as! NSManagedObject
+            managedContext) as NSManagedObject
             newEntity.setValue("blank", forKey: "name")
         
         return newEntity
@@ -124,7 +122,7 @@ class DataManager {
         
         for (i=0; i < wineries.entities.count; i++) {
             
-            var tempTitle = wineries.entities[i].valueForKey("name") as! String
+            let tempTitle = wineries.entities[i].valueForKey("name") as! String
             
             if (tempTitle == entityName) {
                 return wineries.entities[i]
@@ -133,7 +131,7 @@ class DataManager {
         
         for (i=0; i < restaurants.entities.count; i++) {
             
-            var tempTitle = restaurants.entities[i].valueForKey("name") as! String
+            let tempTitle = restaurants.entities[i].valueForKey("name") as! String
             
             if (tempTitle == entityName) {
                 return restaurants.entities[i]
@@ -142,7 +140,7 @@ class DataManager {
         
         for (i=0; i < accommodations.entities.count; i++) {
             
-            var tempTitle = accommodations.entities[i].valueForKey("name") as! String
+            let tempTitle = accommodations.entities[i].valueForKey("name") as! String
             
             if (tempTitle == entityName) {
                 return accommodations.entities[i]
@@ -150,11 +148,11 @@ class DataManager {
         }
         
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let managedContext = appDelegate.managedObjectContext!
+        let managedContext = appDelegate.managedObjectContext
         let entityType = "Winery"
         
         let newEntity = NSEntityDescription.insertNewObjectForEntityForName(entityType, inManagedObjectContext:
-            managedContext) as! NSManagedObject
+            managedContext) as NSManagedObject
             newEntity.setValue("blank", forKey: "name")
         
         return newEntity
@@ -199,19 +197,20 @@ class DataManager {
         zeroAddress.sin_len = UInt8(sizeofValue(zeroAddress))
         zeroAddress.sin_family = sa_family_t(AF_INET)
         
+        
         let defaultRouteReachability = withUnsafePointer(&zeroAddress) {
-            SCNetworkReachabilityCreateWithAddress(nil, UnsafePointer($0)).takeRetainedValue()
+            SCNetworkReachabilityCreateWithAddress(nil, UnsafePointer($0))
         }
         
-        var flags: SCNetworkReachabilityFlags = 0
-        if SCNetworkReachabilityGetFlags(defaultRouteReachability, &flags) == 0 {
+        var flags = SCNetworkReachabilityFlags()
+        if !SCNetworkReachabilityGetFlags(defaultRouteReachability!, &flags) {
             return false
         }
         
-        let isReachable = (flags & UInt32(kSCNetworkFlagsReachable)) != 0
-        let needsConnection = (flags & UInt32(kSCNetworkFlagsConnectionRequired)) != 0
+        let isReachable = (flags.rawValue & UInt32(kSCNetworkFlagsReachable)) != 0
+        let needsConnection = (flags.rawValue & UInt32(kSCNetworkFlagsConnectionRequired)) != 0
         
-        return (isReachable && !needsConnection) ? true : false
+        return (isReachable && !needsConnection) 
     }
     
     //#MARK: - Data Management Methods
@@ -226,7 +225,7 @@ class DataManager {
             fetchAllCountsFromCoreData()
             
             if (!dataReceived) {
-                var timer = Timer(duration: 1.0, completionHandler: {
+                let timer = Timer(duration: 1.0, completionHandler: {
                     self.fetchAllEntitiesFromWeb()
                 })
                 
@@ -313,46 +312,46 @@ class DataManager {
         entity.clearEntities()
         
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let managedContext = appDelegate.managedObjectContext!
+        let managedContext = appDelegate.managedObjectContext
         let deletionFetchRequest = NSFetchRequest(entityName: entity.type)
         
-        var error: NSError?
-        let fetchedResults = managedContext.executeFetchRequest(deletionFetchRequest, error: &error) as! [NSManagedObject]
+        let fetchedResults = try! managedContext.executeFetchRequest(deletionFetchRequest) as! [NSManagedObject]
         
         for result in fetchedResults {
             managedContext.deleteObject(result)
         }
         
-        var error2: NSError?
-        if !managedContext.save(&error2) {
-            println("Could not save \(error2), \(error2?.userInfo)")
+        do {
+            try managedContext.save()
+        } catch {
+            print("Could not save \(error)")
         }
-        
     }
     
     func deleteDatesFromCoreData() {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let managedContext = appDelegate.managedObjectContext!
+        let managedContext = appDelegate.managedObjectContext
         let fetchRequest = NSFetchRequest(entityName: "LastChanged")
         
-        var error: NSError?
-        let fetchedResults = managedContext.executeFetchRequest(fetchRequest, error: &error) as! [NSManagedObject]
+        let fetchedResults = try! managedContext.executeFetchRequest(fetchRequest) as! [NSManagedObject]
         
         for result in fetchedResults {
             managedContext.deleteObject(result)
         }
         
-        if !managedContext.save(&error) {
-            println("Could not save \(error), \(error?.userInfo)")
+        do {
+            try managedContext.save()
+        } catch {
+            print("Could not save \(error)")
         }
     }
     
     func saveDatesToCoreData() {
         
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let managedContext = appDelegate.managedObjectContext!
+        let managedContext = appDelegate.managedObjectContext
         
-        let newEntity = NSEntityDescription.insertNewObjectForEntityForName("LastChanged", inManagedObjectContext: managedContext) as! NSManagedObject
+        let newEntity = NSEntityDescription.insertNewObjectForEntityForName("LastChanged", inManagedObjectContext: managedContext)
         
         
         newEntity.setValue(wineries.lastChangedWeb, forKey: "wineries")
@@ -361,9 +360,10 @@ class DataManager {
         newEntity.setValue(parking.lastChangedWeb, forKey: "parking")
         newEntity.setValue(packages.lastChangedWeb, forKey: "packages")
         
-        var error: NSError?
-        if !managedContext.save(&error) {
-            println("Could not save \(error), \(error?.userInfo)")
+        do {
+            try managedContext.save()
+        } catch {
+            print("Could not save \(error)")
         }
     }
     
@@ -371,60 +371,56 @@ class DataManager {
         
         
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate 
-        let managedContext = appDelegate.managedObjectContext! 
+        let managedContext = appDelegate.managedObjectContext
         
         let fetchRequest = NSFetchRequest(entityName: entity.type)
         
-        var error: NSError? 
-        let fetchedResults = managedContext.executeFetchRequest(fetchRequest, error: &error) as! [NSManagedObject]? 
+        let fetchedResults = try! managedContext.executeFetchRequest(fetchRequest) as! [NSManagedObject]
         
-        entity.entities = fetchedResults!
+        entity.entities = fetchedResults
     }
     
     func fetchCountFromCoreData(entity: CorkDistrictEntity) {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let managedContext = appDelegate.managedObjectContext!
+        let managedContext = appDelegate.managedObjectContext
         
         let fetchRequest = NSFetchRequest(entityName: entity.type)
         
         var error: NSError?
         let fetchedResult = managedContext.countForFetchRequest(fetchRequest, error: &error)
         entity.setCDCount(fetchedResult)
-        println("Adding count of \(entity.cdCount) to entity type \(entity.type)")
+        print("Adding count of \(entity.cdCount) to entity type \(entity.type)")
         //adding this print statement fixed the issue where all entity cdCounts were showing 0 when 
         //evaluated later by the isOutOfDate method in the CorkDistrictEntity class - WTF??
     }
     
     func fetchDatesFromCoreData() {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let managedContext = appDelegate.managedObjectContext!
+        let managedContext = appDelegate.managedObjectContext
         
         let fetchRequest = NSFetchRequest(entityName: "LastChanged")
         
-        var error: NSError?
-        let fetchedResults = managedContext.executeFetchRequest(fetchRequest, error: &error) as! [NSManagedObject]?
+        let fetchedResults = try! managedContext.executeFetchRequest(fetchRequest) as! [NSManagedObject]
         
-        if let results = fetchedResults {
-            for result in results {
+        let results = fetchedResults
+        for result in results {
             
-                accommodations.lastChangedCD = (result.valueForKey("accommodations") as? String)!
-                packages.lastChangedCD = (result.valueForKey("packages") as? String)!
-                parking.lastChangedCD = (result.valueForKey("parking") as? String)!
-                wineries.lastChangedCD = (result.valueForKey("wineries") as? String)!
-                restaurants.lastChangedCD = (result.valueForKey("restaurants") as? String)!
-            }
+            accommodations.lastChangedCD = (result.valueForKey("accommodations") as! String)
+            packages.lastChangedCD = (result.valueForKey("packages") as! String)
+            parking.lastChangedCD = (result.valueForKey("parking") as! String)
+            wineries.lastChangedCD = (result.valueForKey("wineries") as! String)
+            restaurants.lastChangedCD = (result.valueForKey("restaurants") as! String)
         }
+        
     }
-    
-    
     
     func addEntityToCoreData(entityInfo: NSMutableArray, entityImage: UIImage) -> Void {
         
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate 
-        let managedContext = appDelegate.managedObjectContext! 
-        var entityType = entityInfo[6] as! String
+        let managedContext = appDelegate.managedObjectContext
+        let entityType = entityInfo[6] as! String
         
-        let newEntity = NSEntityDescription.insertNewObjectForEntityForName(entityType, inManagedObjectContext: managedContext) as! NSManagedObject 
+        let newEntity = NSEntityDescription.insertNewObjectForEntityForName(entityType, inManagedObjectContext: managedContext) as NSManagedObject
         
         newEntity.setValue(UIImageJPEGRepresentation(entityImage, 1), forKey: "imageData") 
         newEntity.setValue(entityInfo[Index.Name.rawValue], forKey: "name")
@@ -452,26 +448,29 @@ class DataManager {
             }
         }
         
-        var geocoder = CLGeocoder() 
-        geocoder.geocodeAddressString( "\(entityInfo[Index.Address.rawValue]), \(entityInfo[Index.City.rawValue]), WA, USA", completionHandler: {(placemarks: [AnyObject]!, error: NSError!) -> Void in
-            if let placemark = placemarks?[0]  as? CLPlacemark
-            {
+        let geocoder = CLGeocoder()
         
-                if let placemark = placemarks?[0]  as? CLPlacemark {
-                    var latlong: String = "\(placemark.location.coordinate.latitude)," 
-                    latlong += "\(placemark.location.coordinate.longitude)" 
-        
-                    var coord : CLLocationCoordinate2D
-                    newEntity.setValue(latlong, forKey: "placemark") 
-                }
-        
-        }
+        geocoder.geocodeAddressString( "\(entityInfo[Index.Address.rawValue]), \(entityInfo[Index.City.rawValue]), WA, USA", completionHandler: {(placemarks, error) -> Void in
+            
+            if let placeMarks = placemarks {
+                
+                let pm = placeMarks[0] as CLPlacemark
+                var latlong: String = "\(pm.location!.coordinate.latitude),"
+                latlong += "\(pm.location!.coordinate.longitude)"
+                
+                //var coord : CLLocationCoordinate2D
+                newEntity.setValue(latlong, forKey: "placemark")
+                
+            }
         })
         
-        var error: NSError?
-        if !managedContext.save(&error) {
-            println("Could not save \(error), \(error?.userInfo)")
+        
+        do {
+            try managedContext.save()
+        } catch {
+            print("Could not save \(error)")
         }
+        
         
         switch (entityType) {
             
@@ -484,7 +483,7 @@ class DataManager {
             case "Package":
                 self.packages.entities.append(newEntity)
             default:
-                println("Invalid entity type")
+                print("Invalid entity type")
             
         }
     }
@@ -492,10 +491,10 @@ class DataManager {
     func addParkingToCoreData(entityInfo: NSMutableArray) -> Void {
         
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let managedContext = appDelegate.managedObjectContext!
-        var entityType = entityInfo[6] as! String
+        let managedContext = appDelegate.managedObjectContext
+        let entityType = entityInfo[6] as! String
         
-        let newEntity = NSEntityDescription.insertNewObjectForEntityForName(entityType, inManagedObjectContext: managedContext) as! NSManagedObject
+        let newEntity = NSEntityDescription.insertNewObjectForEntityForName(entityType, inManagedObjectContext: managedContext) as NSManagedObject
         
         newEntity.setValue(entityInfo[Index.Name.rawValue], forKey: "name")
         newEntity.setValue(entityInfo[Index.NodeID.rawValue], forKey: "nodeID")
@@ -504,9 +503,11 @@ class DataManager {
         newEntity.setValue(entityInfo[Index.City.rawValue], forKey: "city")
         newEntity.setValue(entityInfo[Index.Phone.rawValue], forKey: "phone")
         
-        var error: NSError?
-        if !managedContext.save(&error) {
-            println("Could not save \(error), \(error?.userInfo)")
+       
+        do {
+            try managedContext.save()
+        } catch {
+            print("Could not save \(error)")
         }
         
         parking.entities.append(newEntity)
@@ -516,11 +517,11 @@ class DataManager {
     func addPackageToCoreData(entityInfo: NSMutableArray, entityImage: UIImage) -> Void {
         
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let managedContext = appDelegate.managedObjectContext!
+        let managedContext = appDelegate.managedObjectContext
         let entityType = entityInfo[11] as! String
         
         let newEntity = NSEntityDescription.insertNewObjectForEntityForName(entityType, inManagedObjectContext:
-            managedContext) as! NSManagedObject
+            managedContext) as NSManagedObject
         
         newEntity.setValue(UIImageJPEGRepresentation(entityImage, 1), forKey: "imageData")
         newEntity.setValue(entityInfo[0], forKey: "name")
@@ -536,12 +537,13 @@ class DataManager {
         newEntity.setValue(entityInfo[10], forKey: "nodeID")
         newEntity.setValue(entityInfo[12], forKey: "relatedNodeID")
         
-        var relatedNodeIDString = entityInfo[12] as! String
+        //var relatedNodeIDString = entityInfo[12] as! String
         
         
-        var error: NSError?
-        if !managedContext.save(&error) {
-            println("Could not save \(error), \(error?.userInfo)")
+        do {
+            try managedContext.save()
+        } catch {
+            print("Could not save \(error)")
         }
         
         packages.entities.append(newEntity)
@@ -552,7 +554,7 @@ class DataManager {
         
         if (!wineDone) {
             if (wineries.entities.count == wineries.webCount && wineries.webCount != 0) {
-                println("wineries determined to be done!")
+                print("wineries determined to be done!")
                 progress += 0.2
                 wineDone = true
             }
@@ -561,7 +563,7 @@ class DataManager {
         
         if (!restDone) {
             if (restaurants.entities.count == restaurants.webCount && restaurants.webCount != 0) {
-                println("restaurants determined to be done!")
+                print("restaurants determined to be done!")
                 progress += 0.2
                 restDone = true
             }
@@ -570,7 +572,7 @@ class DataManager {
         
         if (!accomDone) {
             if (accommodations.entities.count == accommodations.webCount && accommodations.webCount != 0) {
-                println("accommodations determined to be done!")
+                print("accommodations determined to be done!")
                 progress += 0.2
                 accomDone = true
             }
@@ -579,7 +581,7 @@ class DataManager {
         
         if (!parkDone) {
             if (parking.entities.count == parking.webCount && parking.webCount != 0) {
-                println("parking determined to be done!")
+                print("parking determined to be done!")
                 progress += 0.2
                 parkDone = true
             }
@@ -588,7 +590,7 @@ class DataManager {
         
         if (!packDone) {
             if (packages.entities.count == packages.webCount) {
-                println("packages determined to be done!")
+                print("packages determined to be done!")
                 progress += 0.2
                 packDone = true
             }
@@ -599,15 +601,15 @@ class DataManager {
     func fetchDatesFromWeb() {
         
         NSURLSession.sharedSession().configuration.timeoutIntervalForResource = 5.0
-        var session = NSURLSession.sharedSession()
+        let session = NSURLSession.sharedSession()
         
-        var task = session.dataTaskWithURL(URL_CHANGELOG!) {
+        let task = session.dataTaskWithURL(URL_CHANGELOG!) {
             (data, response, error) -> Void in
             
             if error != nil {
-                println(error.localizedDescription)
+                print(error!.localizedDescription)
             } else {
-                self.parseDatesAndTotals(data)
+                self.parseDatesAndTotals(data!)
             }
         }
         
@@ -617,15 +619,15 @@ class DataManager {
     func fetchEntityFromWeb(entity: CorkDistrictEntity) -> Void {
         
         NSURLSession.sharedSession().configuration.timeoutIntervalForResource = 10.0
-        var session = NSURLSession.sharedSession()
+        let session = NSURLSession.sharedSession()
         
-        var task = session.dataTaskWithURL(entity.URL) {
+        let task = session.dataTaskWithURL(entity.URL) {
             (data, response, error) -> Void in
             
             if error != nil {
-                println(error.localizedDescription)
+                print(error!.localizedDescription)
             } else {
-                self.parseJSONEntity(data, entity: entity)
+                self.parseJSONEntity(data!, entity: entity)
             }
         }
         
@@ -651,10 +653,10 @@ class DataManager {
                 let cityStateZipArray = separateCityStateZip(entityCityStateZip)
                 
                 let entityCity = cityStateZipArray[0]
-                let entityState = cityStateZipArray[1]
+                //let entityState = cityStateZipArray[1]
                 let entityZip = cityStateZipArray[2]
                 
-                var infoArray = NSMutableArray()
+                let infoArray = NSMutableArray()
                 infoArray.addObject(json[ctr]["node_title"].stringValue)
                 infoArray.addObject(json[ctr]["nid"].stringValue)
                 infoArray.addObject(json[ctr]["Street Address"].stringValue)
@@ -671,7 +673,7 @@ class DataManager {
                     let imgData = NSData(contentsOfURL: entityImageUrl!)
                     let entityImage = UIImage(data: imgData!)
                         
-                    var desc = json[ctr]["Description"].stringValue as String
+                    let desc = json[ctr]["Description"].stringValue as String
                     let description = removeOddCharacters(desc)
                     
                     infoArray.addObject(description)
@@ -682,7 +684,7 @@ class DataManager {
                         infoArray.addObject(json[ctr]["Hours of Operation"].stringValue)
                         let test = json[ctr]["Cork District Card"].stringValue
                         infoArray.addObject(test)
-                        println("cardAccepted value: \(test)")
+                        print("cardAccepted value: \(test)")
                     }
                     
                 addEntityToCoreData(infoArray, entityImage: entityImage!)
@@ -773,7 +775,7 @@ class DataManager {
             
         
         while (ctr < json.count) {
-            var infoArray = NSMutableArray()
+            let infoArray = NSMutableArray()
                 
             infoArray.addObject(json[ctr]["node_title"].stringValue)
             infoArray.addObject(json[ctr]["Description"].stringValue)
@@ -815,7 +817,7 @@ class DataManager {
     func stripHtml(urlObject: String) -> String {
         
         let entityImageStringArray = urlObject.componentsSeparatedByString(" ")
-        var entityImageString = entityImageStringArray[2].stringByReplacingOccurrencesOfString("src=\"", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+        let entityImageString = entityImageStringArray[2].stringByReplacingOccurrencesOfString("src=\"", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
         
         return entityImageString.stringByReplacingOccurrencesOfString("\"", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
     }
@@ -870,7 +872,7 @@ class DataManager {
             case "SoDo":
                 sodoCluster.append(winery)
             default:
-                println("Invalid cluster type")
+                print("Invalid cluster type")
             }
             
             curCluster = ""

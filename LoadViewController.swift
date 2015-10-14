@@ -22,7 +22,7 @@ class LoadViewController : UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let dataManager = DataManager.sharedInstance
+        
         progress = 0
         
         if (self.isRotating == false) {
@@ -32,7 +32,7 @@ class LoadViewController : UIViewController {
             self.isRotating = true
         }
         
-        var timer = Timer(duration: 3.0, completionHandler: {
+        let timer = Timer(duration: 3.0, completionHandler: {
             self.getProgress()
         })
         
@@ -42,7 +42,7 @@ class LoadViewController : UIViewController {
     func getProgress() {
         
         let dataManager = DataManager.sharedInstance
-        var timeouts = dataManager.getNumTimeouts()
+        //var timeouts = dataManager.getNumTimeouts()
         let startTime = NSDate()
         var curTime : NSDate
         var elapsedTime = Double()
@@ -69,14 +69,14 @@ class LoadViewController : UIViewController {
             presentViewController(alertMessage, animated: true, completion: nil)
         }
         
-        var timer = Timer(duration: 2.0, completionHandler: {
+        let timer = Timer(duration: 2.0, completionHandler: {
             self.view.window?.rootViewController?.dismissViewControllerAnimated(false, completion: nil)
         })
         
         timer.start()
     }
     
-    override func animationDidStop(anim: CAAnimation!, finished flag: Bool) {
+    override func animationDidStop(anim: CAAnimation, finished flag: Bool) {
         if self.shouldStopRotating == false {
             self.loadingImage.rotate360Degrees(completionDelegate: self)
         } else {

@@ -45,32 +45,32 @@ class PackagesViewController: UIViewController, UITableViewDataSource, UITableVi
             if let tempNodeID = package.valueForKey("relatedNodeID") as? String {
     
                 var nodeIDS = tempNodeID.componentsSeparatedByString(",")
-                var finalNodeID: String
+                //var finalNodeID: String
                 
                 if (nodeIDS.count > 1) {
-                    var nodeID1 = nodeIDS[0].toInt()
-                    var nodeID2 = nodeIDS[1].toInt()
+                    let nodeID1 = Int(nodeIDS[0])
+                    let nodeID2 = Int(nodeIDS[1])
                     
-                    var entity1 = dataManager.getEntityByNodeId(nodeID1!)
-                    var entity2 = dataManager.getEntityByNodeId(nodeID2!)
+                    let entity1 = dataManager.getEntityByNodeId(nodeID1!)
+                    let entity2 = dataManager.getEntityByNodeId(nodeID2!)
                     
                     if let testEntity1 = entity1.valueForKey("name") as? String {
                         
                         if let testEntity2 = entity2.valueForKey("name") as? String {
                             
-                            var finalTitle = testEntity1 + ", " + testEntity2
+                            let finalTitle = testEntity1 + ", " + testEntity2
                             package.setValue(finalTitle, forKey: "relatedEntityName")
                         }
                     }
                 }
                 else {
                     
-                    var nodeID1 = nodeIDS[0].toInt()
-                    var entity1 = dataManager.getEntityByNodeId(nodeID1!)
+                    let nodeID1 = Int(nodeIDS[0])
+                    let entity1 = dataManager.getEntityByNodeId(nodeID1!)
                     
                     if let testEntity1 = entity1.valueForKey("name") as? String {
                         
-                        var finalTitle = testEntity1
+                        let finalTitle = testEntity1
                         package.setValue(finalTitle, forKey: "relatedEntityName")
                     }
                 }
@@ -78,12 +78,13 @@ class PackagesViewController: UIViewController, UITableViewDataSource, UITableVi
             
                 
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-            let managedContext = appDelegate.managedObjectContext!
+            let managedContext = appDelegate.managedObjectContext
             appDelegate.saveContext()
             
-            var error: NSError?
-            if !managedContext.save(&error) {
-                println("Could not save \(error), \(error?.userInfo)")
+            do {
+                try managedContext.save()
+            } catch {
+                print("Could not save \(error)")
             }
             
         }
@@ -126,21 +127,21 @@ class PackagesViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func setContentForCell(cell:PackageCell, indexPath:NSIndexPath) {
         
-        let maxStringLength = 24;
+        //let maxStringLength = 24;
         let package = packages[indexPath.row]
         let imageData = package.valueForKey("imageData") as? NSData
         let myImage = UIImage(data: imageData!)
-        var cost = package.valueForKey("cost") as? String
-        var startDay = package.valueForKey("startDay") as? String
-        var startMonth = package.valueForKey("StartMonth") as? String
-        var startYear = package.valueForKey("startYear") as? String
-        var endDay = package.valueForKey("endDay") as? String
-        var endMonth = package.valueForKey("endMonth") as? String
-        var endYear = package.valueForKey("endYear") as? String
-        var startDate = startMonth! + " " + startDay! + ", " + startYear!
-        var endDate = endMonth! + " " + endDay! + ", " + endYear!
-        var nodeId = package.valueForKey("relatedNodeID") as? String
-        var titleText = package.valueForKey("name") as? String
+        let cost = package.valueForKey("cost") as? String
+        let startDay = package.valueForKey("startDay") as? String
+        let startMonth = package.valueForKey("StartMonth") as? String
+        let startYear = package.valueForKey("startYear") as? String
+        let endDay = package.valueForKey("endDay") as? String
+        let endMonth = package.valueForKey("endMonth") as? String
+        let endYear = package.valueForKey("endYear") as? String
+        let startDate = startMonth! + " " + startDay! + ", " + startYear!
+        let endDate = endMonth! + " " + endDay! + ", " + endYear!
+        //var nodeId = package.valueForKey("relatedNodeID") as? String
+        let titleText = package.valueForKey("name") as? String
         
         
         cell.titleLabel.text = titleText

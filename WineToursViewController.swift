@@ -73,7 +73,7 @@ class WineToursViewController: UIViewController, UITableViewDataSource, UITableV
         
         let dvc = segue.destinationViewController as! TourMapViewController
         
-        if let indexPath = self.tableView.indexPathForSelectedRow() {
+        if let indexPath = self.tableView.indexPathForSelectedRow {
             
             if indexPath.row == 0 {
              //   println(downtownCluster)
@@ -109,7 +109,7 @@ class WineToursViewController: UIViewController, UITableViewDataSource, UITableV
             mainText = "SoDo Cluster"
         }
         
-        var fakeDistance: String = ""
+        let fakeDistance: String = ""
         
         cell.nameLabel.text = mainText
         cell.nameLabel.adjustsFontSizeToFitWidth = true

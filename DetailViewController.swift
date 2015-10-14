@@ -55,7 +55,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
 
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("detailCell") as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("detailCell") as UITableViewCell!
         cell.prepareForReuse()
         var newImageView = UIImageView()
         cell.textLabel?.textAlignment = NSTextAlignment.Left
@@ -69,8 +69,8 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         else if (indexPath.row == Index.Address.rawValue) {
             let city = currentSelection.valueForKey("city") as? String
             let zipcode = currentSelection.valueForKey("zipcode") as? String
-            var addressLine = currentSelection.valueForKey("address") as? String
-            var cityLine = "\n" + city! + ", WA " + zipcode!
+            let addressLine = currentSelection.valueForKey("address") as? String
+            let cityLine = "\n" + city! + ", WA " + zipcode!
             cell.textLabel?.text = addressLine! + cityLine
             cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
         }
@@ -98,8 +98,8 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if (indexPath.row == Index.Phone.rawValue) {
-            var tempNum = currentSelection.valueForKey("phone") as! NSString
-            var tempNumStr = tempNum.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
+            let tempNum = currentSelection.valueForKey("phone") as! NSString
+            let tempNumStr = tempNum.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
             UIApplication.sharedApplication().openURL(NSURL(string: "tel://#\(tempNumStr)")!)
         }
         if(indexPath.row == 2)
@@ -109,7 +109,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
                 action in
                 var pNumber = "tel://"
                 pNumber += (self.currentSelection.valueForKey("phone")as? String)!
-                var url:NSURL? = NSURL(string: pNumber)
+                let url:NSURL? = NSURL(string: pNumber)
                 UIApplication.sharedApplication().openURL(url!)
             })
             alertMessage.addAction(callFinalAction)
@@ -119,7 +119,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         }
         if(indexPath.row == 1) {
             self.performSegueWithIdentifier("detailToRoute", sender: self)
-            println("THEY'RE HERE")
+            print("THEY'RE HERE")
         }
         self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
@@ -132,8 +132,8 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
             case 3:
                 return imageRowHeight
             case 4:
-                var tempStr = currentSelection.valueForKey("about") as! String
-                var size = getSizeForText(tempStr)
+                let tempStr = currentSelection.valueForKey("about") as! String
+                let size = getSizeForText(tempStr)
                 return size
             default:
                 return defaultRowHeight
@@ -142,13 +142,13 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!)
     {
         
-        var rMVC: RouteMapViewController = segue.destinationViewController as! RouteMapViewController
+        let rMVC: RouteMapViewController = segue.destinationViewController as! RouteMapViewController
         rMVC.destination = self.currentSelection
         
     }
     func getSizeForText(cellText: String) -> CGFloat {
-        var length = CGFloat(count(cellText.utf16))
-        var rowSize : CGFloat = (length/13.0)*12.0
+        let length = CGFloat(cellText.characters.count)
+        let rowSize : CGFloat = (length/13.0)*12.0
         return rowSize
     }
     

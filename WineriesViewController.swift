@@ -40,7 +40,7 @@ class WineriesViewController: UIViewController, UITableViewDataSource, UITableVi
         
         let dvc = segue.destinationViewController as! DetailViewController
         
-        if let indexPath = self.tableView.indexPathForSelectedRow() {
+        if let indexPath = self.tableView.indexPathForSelectedRow {
             let winery = wineries[indexPath.row]
             dvc.currentSelection = winery
         }
@@ -72,13 +72,13 @@ class WineriesViewController: UIViewController, UITableViewDataSource, UITableVi
         let imageData = winery.valueForKey("imageData") as? NSData
         let cellImage = UIImage(data: imageData!)
         
-        var name = winery.valueForKey("name") as? String
-        var address = winery.valueForKey("address") as? String
+        let name = winery.valueForKey("name") as? String
+        let address = winery.valueForKey("address") as? String
         var city = winery.valueForKey("city") as? String
-        var hours = winery.valueForKey("hours") as? String
-        var cardAccepted = winery.valueForKey("cardAccepted") as? String
-        var zip = winery.valueForKey("zipcode") as? String
-        var state = "WA"
+        let hours = winery.valueForKey("hours") as? String
+        let cardAccepted = winery.valueForKey("cardAccepted") as? String
+        let zip = winery.valueForKey("zipcode") as? String
+        let state = "WA"
         
         city = city?.stringByReplacingOccurrencesOfString(" ", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
         
