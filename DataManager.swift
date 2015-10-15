@@ -432,7 +432,10 @@ class DataManager {
         
         if (entityType != parking.type) {
             newEntity.setValue(entityInfo[7], forKey: "about")
-            newEntity.setValue(entityInfo[8], forKey: "website")
+            
+            let website = removeOddCharacters(entityInfo[8] as! String)
+            
+            newEntity.setValue(website, forKey: "website")
             
             if (entityType == wineries.type) {
                 newEntity.setValue(entityInfo[9], forKey: "cluster")
@@ -697,9 +700,9 @@ class DataManager {
             }
         }
         
-        if (entity.type == accommodations.type) {
+        /*if (entity.type == accommodations.type) {
             progress = 1.0
-        }
+        }*/
         
     }
     
@@ -827,10 +830,12 @@ class DataManager {
         let term1 = "&quot;"
         let term2 = "&#039;"
         let term3 = "&amp;"
+        let term4 = "http://"
         
         var tempString = string.stringByReplacingOccurrencesOfString(term1, withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
         
         tempString = tempString.stringByReplacingOccurrencesOfString(term2, withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+        tempString = tempString.stringByReplacingOccurrencesOfString(term4, withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
         
         return tempString.stringByReplacingOccurrencesOfString(term3, withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
     }

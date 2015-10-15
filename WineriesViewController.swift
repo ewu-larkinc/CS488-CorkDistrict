@@ -22,7 +22,6 @@ class WineriesViewController: UIViewController, UITableViewDataSource, UITableVi
         self.tableView.backgroundView = UIImageView(image:UIImage(named: "wineBackground"))
         let dataManager = DataManager.sharedInstance
         wineries = dataManager.getWineries()
-        //wineries.sort(<#isOrderedBefore: (T, T) -> Bool##(T, T) -> Bool#>)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -69,28 +68,23 @@ class WineriesViewController: UIViewController, UITableViewDataSource, UITableVi
     func setContentForCell(cell:EntityCell, indexPath:NSIndexPath) {
         
         let winery = wineries[indexPath.row]
-        let imageData = winery.valueForKey("imageData") as? NSData
-        let cellImage = UIImage(data: imageData!)
         
-        let name = winery.valueForKey("name") as? String
-        let address = winery.valueForKey("address") as? String
         var city = winery.valueForKey("city") as? String
-        let hours = winery.valueForKey("hours") as? String
-        let cardAccepted = winery.valueForKey("cardAccepted") as? String
-        let zip = winery.valueForKey("zipcode") as? String
-        let state = "WA"
-        
         city = city?.stringByReplacingOccurrencesOfString(" ", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
         
-        
-        cell.titleLabel.text = name
+        cell.titleLabel.text = winery.valueForKey("name") as? String
         cell.titleLabel.adjustsFontSizeToFitWidth = true
-        cell.addressLabel.text = address
+        cell.addressLabel.text = winery.valueForKey("address") as? String
+        
+        let zip = winery.valueForKey("zipcode") as? String
+        let state = "WA"
         cell.cityLabel.text = city! + ", " + state + " " + zip!
         cell.cityLabel.sizeToFit()
-        cell.phoneLabel.text = cardAccepted
-        cell.websiteLabel.text = hours
-        cell.cellImage.image = cellImage
+        cell.phoneLabel.text = winery.valueForKey("cardAccepted") as? String
+        cell.websiteLabel.text = winery.valueForKey("hours") as? String
+        
+        let imageData = winery.valueForKey("imageData") as? NSData
+        cell.cellImage.image = UIImage(data: imageData!)
         
         cell.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.2)
         cell.cellImage.layer.cornerRadius = 4.0

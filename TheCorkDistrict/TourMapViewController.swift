@@ -77,7 +77,7 @@ class TourMapViewController: UIViewController, MKMapViewDelegate, CLLocationMana
         self.automaticallyAdjustsScrollViewInsets = false
         
     }
-    func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         if !(annotation is MKPointAnnotation) {
             return nil
         }
@@ -89,14 +89,14 @@ class TourMapViewController: UIViewController, MKMapViewDelegate, CLLocationMana
         
         return anView
     }
-    func mapView(mapView: MKMapView!, rendererForOverlay overlay: MKOverlay!) -> MKOverlayRenderer! {
+    func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer {
         
-        if (overlay is MKPolyline) {
+        //if (overlay is MKPolyline) {
             
             return util.renderForOverlay(mapView, rendererForOverlay: overlay)
-        }
+        //}
         
-        return nil
+        //return nil
     }
     func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
         

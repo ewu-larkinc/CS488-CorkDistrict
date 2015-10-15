@@ -137,23 +137,23 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             theMapView.addAnnotation(arraytype[i])
         }
     }
-    func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         if !(annotation is MKPointAnnotation) {
             return nil
         }
         
         return util.viewForAnnotation(mapView, viewForAnnotation: annotation)
     }
-    func mapView(mapView: MKMapView!, rendererForOverlay overlay: MKOverlay!) -> MKOverlayRenderer! {
+    func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer {
         
-        if (overlay is MKPolyline) {
+        //if (overlay is MKPolyline) {
             
             return util.renderForOverlay(mapView, rendererForOverlay: overlay)
-        }
+        //}
         
-        return nil
+        //return nil
     }
-    func mapView(mapView: MKMapView!, didSelectAnnotationView view: MKAnnotationView!) {
+    func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
         
         let temp = util.didSelectAnnotationView(view)
         view.canShowCallout = false;
