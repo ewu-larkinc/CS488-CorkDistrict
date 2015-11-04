@@ -1,19 +1,18 @@
 //
-//  CorkDistrictEntity.swift
+//  CDEntity.swift
 //  TheCorkDistrict
 //
-//  Created by Chris Larkin on 10/23/15.
+//  Created by Chris Larkin on 10/19/15.
 //  Copyright © 2015 Madkatz. All rights reserved.
 //
 
 import Foundation
 import UIKit
-import MapKit
 
 
-class CorkDistrictEntity {
+class CDEntity {
     
-    var type: LocationType
+    var type: String
     var title: String
     var address: String
     var city: String
@@ -22,7 +21,6 @@ class CorkDistrictEntity {
     var nodeID: String
     var typePlural: String
     
-    var coordinate: CLLocationCoordinate2D?
     var webAddress: String?
     var description: String?
     var image: UIImage?
@@ -31,12 +29,8 @@ class CorkDistrictEntity {
     var hours: String?
     var cardAccepted: String?
     
-    /*static func setArtwork(imgName: String) {
-        artwork = UIImage(named: imgName)
-    }*/
-    
     //RESTAURANTS/ACCOMMODATIONS
-    init(title: String, address: String, zip: String, phone: String, city: String, nodeID: String, webAddress: String, description: String, type: LocationType, typePlural: String, image: UIImage) {
+    init(title: String, address: String, zip: String, phone: String, city: String, nodeID: String, webAddress: String, description: String, type: String, typePlural: String, image: UIImage) {
         self.type = type
         self.title = title
         self.address = address
@@ -52,7 +46,7 @@ class CorkDistrictEntity {
     }
     
     //PARKING
-    init(type: LocationType, title: String, address: String, city: String, zip: String, phone: String, nodeID: String, typePlural: String) {
+    init(type: String, title: String, address: String, city: String, zip: String, phone: String, nodeID: String, typePlural: String) {
         self.type = type
         self.title = title
         self.address = address
@@ -61,11 +55,10 @@ class CorkDistrictEntity {
         self.phone = phone
         self.nodeID = nodeID
         self.typePlural = typePlural
-
     }
     
     //WINERIES
-    init(title: String, address: String, zip: String, phone: String, city: String, nodeID: String, webAddress: String, description: String, type: LocationType, typePlural: String, image: UIImage, cluster: String, hours: String, cardAccepted: String) {
+    init(title: String, address: String, zip: String, phone: String, city: String, nodeID: String, webAddress: String, description: String, type: String, typePlural: String, image: UIImage, cluster: String, hours: String, cardAccepted: String) {
         self.type = type
         self.title = title
         self.address = address
@@ -82,9 +75,4 @@ class CorkDistrictEntity {
         self.hours = hours
         self.cardAccepted = cardAccepted
     }
-    
-    func setCoordinate(coordinate: CLLocationCoordinate2D) {
-        self.coordinate = coordinate
-    }
-
 }

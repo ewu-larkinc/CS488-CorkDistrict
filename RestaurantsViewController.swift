@@ -12,40 +12,28 @@ class RestaurantsViewController: UIViewController, UITableViewDataSource, UITabl
     
     @IBOutlet weak var tableView: UITableView!
     
-    var restaurants = [NSManagedObject]()
-    let entityCellIdentifier = "EntityCell"
     
-    //# MARK: - ViewController Methods
+    
+    var restaurants = [NSManagedObject]()
+    
+    @IBAction func returnToHomePage(AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: {});
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let dataManager = DataManager.sharedInstance
-        restaurants = dataManager.getRestaurants()
+        restaurants = dataManager.getWineries()
         
-        self.tableView.backgroundView = UIImageView(image:UIImage(named: "restBackground"))
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+        
     }
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        self.navigationController?.navigationBar.hidden = false
-        self.automaticallyAdjustsScrollViewInsets = false
-    }
-    
-    //# MARK: - Segue Methods
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
-        
-        let dvc = segue.destinationViewController as! DetailViewController
-        
-        if let indexPath = self.tableView.indexPathForSelectedRow {
-            let restaurant = restaurants[indexPath.row]
-            dvc.currentSelection = restaurant
-        }
-        
-    }
     
     //# MARK: - TableView Methods
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -53,57 +41,37 @@ class RestaurantsViewController: UIViewController, UITableViewDataSource, UITabl
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        return entityCellAtIndexPath(indexPath)
+        return basicCellAtIndexPath(indexPath)
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    func basicCellAtIndexPath(indexPath:NSIndexPath) -> BasicCell {
+        let basicCellIdentifier = "BasicCell"
+        let basicCell = tableView.dequeueReusableCellWithIdentifier(basicCellIdentifier) as BasicCell
+        setContentForCell(basicCell, indexPath: indexPath)
+        return basicCell
     }
     
-    func entityCellAtIndexPath(indexPath:NSIndexPath) -> EntityCell {
-        
-        let entityCell = tableView.dequeueReusableCellWithIdentifier(entityCellIdentifier) as! EntityCell
-        setContentForCell(entityCell, indexPath: indexPath)
-        return entityCell
-    }
-    
-    func setContentForCell(cell:EntityCell, indexPath:NSIndexPath) {
+    func setContentForCell(cell:BasicCell, indexPath:NSIndexPath) {
         let restaurant = restaurants[indexPath.row]
-        let imageData = restaurant.valueForKey("imageData") as? NSData
-        let cellImage = UIImage(data: imageData!)
+        cell.titleLabel.text = restaurant.valueForKey("name") as? String
+        cell.addressLabel.text = restaurant.valueForKey("address") as? String
         
         var city = restaurant.valueForKey("city") as? String
-        let zip = restaurant.valueForKey("zipcode") as? String
-        let phone = restaurant.valueForKey("phone") as? String
-        let address = restaurant.valueForKey("address") as? String
-        let website = restaurant.valueForKey("website") as? String
-        let name = restaurant.valueForKey("name") as? String
-        let state = "WA"
-        
         city = city?.stringByReplacingOccurrencesOfString(" ", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+        var state = "WA"
+        var zip = restaurant.valueForKey("zipcode") as? String
         
-        cell.cellImage.image = cellImage
-        cell.titleLabel.text = name
-        cell.addressLabel.text = address
-        cell.addressLabel.adjustsFontSizeToFitWidth = true
-        cell.phoneLabel.text = phone
-        cell.websiteLabel.text = website
-        cell.websiteLabel.adjustsFontSizeToFitWidth = true
         cell.cityLabel.text = city! + ", " + state + " " + zip!
         cell.cityLabel.sizeToFit()
         
-        cell.cellImage.layer.cornerRadius = 4.0
-        cell.cellImage.clipsToBounds = true
-        cell.titleLabel.textColor = UIColor.whiteColor()
-        cell.addressLabel.textColor = UIColor.whiteColor()
-        cell.cityLabel.textColor = UIColor.whiteColor()
-        cell.phoneLabel.textColor = UIColor.whiteColor()
-        cell.websiteLabel.textColor = UIColor.whiteColor()
-
-        cell.cellImage.contentMode = UIViewContentMode.ScaleToFill
-        cell.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.2)
+        cell.phoneLabel.text = restaurant.valueForKey("phone") as? String
+        
+        let imageData = restaurant.valueForKey("imageData") as? NSData
+        let myImage = UIImage(data: imageData!)
+        cell.cellImage.image = myImage
+        cell.cellImage.contentMode = UIViewContentMode.ScaleAspectFit
     }
-    
+
     
     
 }

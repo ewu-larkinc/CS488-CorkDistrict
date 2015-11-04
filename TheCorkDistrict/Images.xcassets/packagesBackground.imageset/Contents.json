@@ -2,8 +2,8 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "packagesBackground.png"
+      "filename" : "packagesBackground.png",
+      "scale" : "1x"
     },
     {
       "idiom" : "universal",

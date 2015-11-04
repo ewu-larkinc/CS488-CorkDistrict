@@ -7,31 +7,19 @@
 import Foundation
 import UIKit
 import CoreData
-import QuartzCore
 
 class DetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    @IBOutlet weak var tableView: UITableView!
-    let titleRowHeight : CGFloat = 75.0
-    let imageRowHeight : CGFloat = 300.0
+    let titleRowHeight : CGFloat = 80.0
+    let imageRowHeight : CGFloat = 240.0
     let defaultRowHeight : CGFloat = 60.0
-    let imageViewMargin = 17.0 as CGFloat
     var currentSelection : NSManagedObject!
-    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-    
-    enum Index: Int {
-        case Name = 0
-        case Address = 1
-        case Phone = 2
-        case Image = 3
-        case Description = 4
-    }
+    let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
     
     
-    //# MARK: - ViewController Methods
+    //# MARK: - View Controller Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tableView.backgroundView = UIImageView(image:UIImage(named: "detailBackground"))
     }
     
     override func didReceiveMemoryWarning() {
@@ -44,112 +32,80 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return 6
     }
-    
-    
-    func loadDetailView(id: Int)
-    {
-        
-    }
-
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("detailCell") as UITableViewCell!
-        cell.prepareForReuse()
-        var newImageView = UIImageView()
+        let cell = tableView.dequeueReusableCellWithIdentifier("detailCell") as UITableViewCell
         cell.textLabel?.textAlignment = NSTextAlignment.Left
         cell.textLabel?.text = ""
-        cell.backgroundColor = UIColor.clearColor()
-        tableView.separatorStyle = UITableViewCellSeparatorStyle.None
-        
-        if (indexPath.row == Index.Name.rawValue) {
-            cell.textLabel?.text = currentSelection.valueForKey("name") as? String
-        }
-        else if (indexPath.row == Index.Address.rawValue) {
-            let city = currentSelection.valueForKey("city") as? String
-            let zipcode = currentSelection.valueForKey("zipcode") as? String
-            let addressLine = currentSelection.valueForKey("address") as? String
-            let cityLine = "\n" + city! + ", WA " + zipcode!
-            cell.textLabel?.text = addressLine! + cityLine
-            cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
-        }
-        else if (indexPath.row == Index.Phone.rawValue) {
-            cell.textLabel?.text = currentSelection.valueForKey("phone") as? String
-            cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
-        }
-        else if (indexPath.row == Index.Image.rawValue) {
-            let imageData = currentSelection.valueForKey("imageData") as? NSData
-            let mainImage = UIImage(data: imageData!)
-            newImageView = UIImageView(frame: CGRectMake((imageViewMargin),cell.frame.origin.y,(tableView.frame.width-(imageViewMargin*2)), imageRowHeight))
-            newImageView.layer.borderColor = UIColor.whiteColor().CGColor
-            newImageView.layer.borderWidth = 2.0
-            newImageView.image = mainImage
-            cell.addSubview(newImageView)
-        }
-        else if (indexPath.row == Index.Description.rawValue) {
-            cell.textLabel?.text = currentSelection.valueForKey("about") as? String
-            cell.textLabel?.textAlignment = NSTextAlignment.Justified
-        }
-
-        return cell
-    }
-
-
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if (indexPath.row == Index.Phone.rawValue) {
-            let tempNum = currentSelection.valueForKey("phone") as! NSString
-            let tempNumStr = tempNum.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
-            UIApplication.sharedApplication().openURL(NSURL(string: "tel://#\(tempNumStr)")!)
-        }
-        if(indexPath.row == 2)
-        {
-            let alertMessage = UIAlertController(title: "Are you sure?", message: "Are you sure you want to call this winery?", preferredStyle: .Alert)
-            let callFinalAction = UIAlertAction(title: "Call", style: .Default, handler: {
-                action in
-                var pNumber = "tel://"
-                pNumber += (self.currentSelection.valueForKey("phone")as? String)!
-                let url:NSURL? = NSURL(string: pNumber)
-                UIApplication.sharedApplication().openURL(url!)
-            })
-            alertMessage.addAction(callFinalAction)
-            alertMessage.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
-            self.presentViewController(alertMessage, animated: true, completion: nil)
-
-        }
-        if(indexPath.row == 1) {
-            self.performSegueWithIdentifier("detailToRoute", sender: self)
-            print("THEY'RE HERE")
-        }
-        self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
-    }
-    
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
         switch (indexPath.row) {
-            case 1:
-                return titleRowHeight
-            case 3:
-                return imageRowHeight
-            case 4:
-                let tempStr = currentSelection.valueForKey("about") as! String
-                let size = getSizeForText(tempStr)
-                return size
-            default:
-                return defaultRowHeight
+        case 0:
+            let titleLabel = UILabel(frame: CGRectMake(15.0,0.0,350.0,82.0))
+            titleLabel.font = UIFont(name: "STHeitiTC-Light", size: 36.0)
+            titleLabel.textAlignment = NSTextAlignment.Left
+            titleLabel.text = currentSelection.valueForKey("name") as? String
+            cell.addSubview(titleLabel)
+            break
+        case 1:
+            cell.textLabel?.text = currentSelection.valueForKey("address") as? String
+            break
+        case 2:
+            let city = currentSelection.valueForKey("city") as? String
+            let zipcode = currentSelection.valueForKey("zipcode") as? String
+            cell.textLabel?.text = city! + " " + zipcode!
+            break
+        case 3:
+            cell.textLabel?.text = currentSelection.valueForKey("phone") as? String
+            break
+        case 4:
+            let imageData = currentSelection.valueForKey("imageData") as? NSData
+            let mainImage = UIImage(data: imageData!)
+            let newImageView = UIImageView(frame: CGRectMake(15.0,10.0,345.0,200.0))
+            newImageView.image = mainImage
+            cell.addSubview(newImageView)
+            break
+        case 5:
+            cell.textLabel?.text = currentSelection.valueForKey("about") as? String
+            break
+        default:
+            
+            break
+        }
+        
+        return cell
+    }
+    
+    func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if (indexPath.row == 3) {
+            var tempNum = currentSelection.valueForKey("phone") as NSString
+            var tempNumStr = tempNum.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
+            UIApplication.sharedApplication().openURL(NSURL(string: "tel://\(tempNumStr)")!)
         }
     }
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!)
-    {
+    
+    func tableView(tableView: UITableView!, heightForRowAtIndexPath indexPath: NSIndexPath!) -> CGFloat {
         
-        let rMVC: RouteMapViewController = segue.destinationViewController as! RouteMapViewController
-        rMVC.destination = self.currentSelection
-        
+        switch (indexPath.row) {
+        case 0:
+            return titleRowHeight
+        case 4:
+            return imageRowHeight
+        case 5:
+            var tempStr = currentSelection.valueForKey("about") as String
+            var size = getSizeForText(tempStr)
+            return size
+        default:
+            return defaultRowHeight
+        }
     }
+    
     func getSizeForText(cellText: String) -> CGFloat {
-        let length = CGFloat(cellText.characters.count)
-        let rowSize : CGFloat = (length/13.0)*12.0
+        var length = CGFloat(cellText.utf16Count)
+        var rowSize : CGFloat = (length/13.0)*12.0
         return rowSize
     }
+    
     
 }

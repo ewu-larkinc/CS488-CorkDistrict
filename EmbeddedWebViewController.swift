@@ -1,15 +1,17 @@
 //
-//  AlaskaWinePassViewController.swift
+//  EmbeddedWebViewController.swift
 //  TheCorkDistrict
 //
-//  Created by Chris Larkin on 10/21/15.
+//  Created by Chris Larkin on 10/23/15.
 //  Copyright © 2015 Madkatz. All rights reserved.
 //
 
 import Foundation
 import UIKit
 
-class AlaskaWinePassViewController: UIViewController, UIWebViewDelegate {
+
+class EmbeddedWebViewController: UIViewController {
+    
     
     @IBAction func refreshButtonSelected(sender: UIButton) {
         webView.reload()
@@ -30,6 +32,7 @@ class AlaskaWinePassViewController: UIViewController, UIWebViewDelegate {
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var forwardButton: UIButton!
     @IBOutlet weak var webView: UIWebView!
+    @IBOutlet weak var loadingLabel: UILabel!
     
     override func viewDidLoad() {
         self.navigationController?.navigationBarHidden = false
@@ -40,6 +43,7 @@ class AlaskaWinePassViewController: UIViewController, UIWebViewDelegate {
         let data = CorkDistrictData.sharedInstance
         
         if let url = data.getCurrentURL() {
+            print("loading url \(url)")
             let urlRequest = NSURLRequest(URL: url)
             webView.loadRequest(urlRequest)
         }
@@ -51,12 +55,20 @@ class AlaskaWinePassViewController: UIViewController, UIWebViewDelegate {
     }
     
     func webViewDidStartLoad(webView: UIWebView) {
-        self.navigationController?.navigationItem.title = "Loading..."
+        
+        UIView.animateKeyframesWithDuration(1.0, delay: 0.0, options: [.Autoreverse, .Repeat, .AllowUserInteraction], animations: {
+            UIView.addKeyframeWithRelativeStartTime(0, relativeDuration: 1/2, animations: {
+                self.loadingLabel.alpha = 0.2
+            })
+            
+            UIView.addKeyframeWithRelativeStartTime(1/2, relativeDuration: 1/2, animations: {
+                self.loadingLabel.alpha = 1.0
+            })
+            
+            }, completion: nil)
     }
     
     func webViewDidFinishLoad(webView: UIWebView) {
-        self.navigationController?.navigationItem.title = "Alaska Wine Pass"
+        loadingLabel.hidden = true
     }
-    
-    
 }

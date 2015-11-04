@@ -7,37 +7,36 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		221346EB1AD92A3F009633DB /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221346EA1AD92A3F009633DB /* UIViewExtensions.swift */; };
-		221346EF1AD92B31009633DB /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221346EE1AD92B31009633DB /* Timer.swift */; };
-		225A2DF91AF619B700D072C2 /* CorkDistrictEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225A2DF81AF619B700D072C2 /* CorkDistrictEntity.swift */; };
-		225A2DFB1AF6D06600D072C2 /* EntityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225A2DFA1AF6D06600D072C2 /* EntityCell.swift */; };
-		225A2DFD1AF6D1FE00D072C2 /* ParkingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225A2DFC1AF6D1FE00D072C2 /* ParkingCell.swift */; };
-		225A2DFF1AF6D35600D072C2 /* PackageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225A2DFE1AF6D35600D072C2 /* PackageCell.swift */; };
-		225E43E91B02EB55001DE744 /* AlaskaWinePassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225E43E81B02EB55001DE744 /* AlaskaWinePassViewController.swift */; };
-		2281672C1AE20CFE00CCC9DF /* LoadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2281672A1AE20CFE00CCC9DF /* LoadViewController.swift */; };
-		2281672D1AE20CFE00CCC9DF /* LoadViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2281672B1AE20CFE00CCC9DF /* LoadViewController.xib */; };
-		2298E07F1AB00B7B003CEFFA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2298E07E1AB00B7B003CEFFA /* AppDelegate.swift */; };
-		2298E0821AB00B7B003CEFFA /* TheCorkDistrict.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2298E0801AB00B7B003CEFFA /* TheCorkDistrict.xcdatamodeld */; };
-		2298E0841AB00B7B003CEFFA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2298E0831AB00B7B003CEFFA /* ViewController.swift */; };
-		2298E0871AB00B7B003CEFFA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2298E0851AB00B7B003CEFFA /* Main.storyboard */; };
-		2298E0891AB00B7B003CEFFA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2298E0881AB00B7B003CEFFA /* Images.xcassets */; };
-		2298E08C1AB00B7B003CEFFA /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2298E08A1AB00B7B003CEFFA /* LaunchScreen.xib */; };
 		2298E0981AB00B7B003CEFFA /* TheCorkDistrictTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2298E0971AB00B7B003CEFFA /* TheCorkDistrictTests.swift */; };
-		2298E0A21AB010FF003CEFFA /* WineriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2298E0A11AB010FF003CEFFA /* WineriesViewController.swift */; };
-		2298E0A41AB01188003CEFFA /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2298E0A31AB01188003CEFFA /* DataManager.swift */; };
-		2298E0A61AB011B5003CEFFA /* RestaurantsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2298E0A51AB011B5003CEFFA /* RestaurantsViewController.swift */; };
-		2298E0A81AB011CB003CEFFA /* AccommodationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2298E0A71AB011CB003CEFFA /* AccommodationsViewController.swift */; };
-		2298E0AA1AB011EA003CEFFA /* PackagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2298E0A91AB011EA003CEFFA /* PackagesViewController.swift */; };
-		2298E0AE1AB01902003CEFFA /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2298E0AD1AB01902003CEFFA /* DetailViewController.swift */; };
-		2298E0B81AB01D91003CEFFA /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2298E0B71AB01D91003CEFFA /* MapViewController.swift */; };
-		2298E0BA1AB01E53003CEFFA /* WineToursViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2298E0B91AB01E53003CEFFA /* WineToursViewController.swift */; };
-		22A85A0A1AB18B2000B45713 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A85A091AB18B2000B45713 /* SwiftyJSON.swift */; };
-		22F9FCAE1B05CA5500CA43B7 /* WineTourCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F9FCAD1B05CA5500CA43B7 /* WineTourCell.swift */; };
+		22DF396F1BE5F8940001E12F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22DF396E1BE5F8940001E12F /* Images.xcassets */; settings = {ASSET_TAGS = (); }; };
+		22DF39861BE5FD690001E12F /* CorkDistrictData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DF39731BE5FD690001E12F /* CorkDistrictData.swift */; settings = {ASSET_TAGS = (); }; };
+		22DF39871BE5FD690001E12F /* CorkDistrictEntityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DF39741BE5FD690001E12F /* CorkDistrictEntityViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		22DF39881BE5FD690001E12F /* DetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DF39751BE5FD690001E12F /* DetailTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		22DF39891BE5FD690001E12F /* MainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DF39761BE5FD690001E12F /* MainMenuViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		22DF398A1BE5FD690001E12F /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DF39771BE5FD690001E12F /* MapViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		22DF398B1BE5FD690001E12F /* RoutingMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DF39781BE5FD690001E12F /* RoutingMapViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		22DF398C1BE5FD690001E12F /* WineTourTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DF39791BE5FD690001E12F /* WineTourTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		22DF398D1BE5FD690001E12F /* AccommodationAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DF397A1BE5FD690001E12F /* AccommodationAnnotation.swift */; settings = {ASSET_TAGS = (); }; };
+		22DF398E1BE5FD690001E12F /* CorkDistrictAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DF397B1BE5FD690001E12F /* CorkDistrictAnnotation.swift */; settings = {ASSET_TAGS = (); }; };
+		22DF398F1BE5FD690001E12F /* CorkDistrictAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DF397C1BE5FD690001E12F /* CorkDistrictAnnotationView.swift */; settings = {ASSET_TAGS = (); }; };
+		22DF39901BE5FD690001E12F /* CorkDistrictEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DF397D1BE5FD690001E12F /* CorkDistrictEntity.swift */; settings = {ASSET_TAGS = (); }; };
+		22DF39911BE5FD690001E12F /* DestinationAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DF397E1BE5FD690001E12F /* DestinationAnnotation.swift */; settings = {ASSET_TAGS = (); }; };
+		22DF39921BE5FD690001E12F /* EmbeddedWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DF397F1BE5FD690001E12F /* EmbeddedWebViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		22DF39931BE5FD690001E12F /* EntityCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DF39801BE5FD690001E12F /* EntityCollection.swift */; settings = {ASSET_TAGS = (); }; };
+		22DF39941BE5FD690001E12F /* PackageCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DF39811BE5FD690001E12F /* PackageCollection.swift */; settings = {ASSET_TAGS = (); }; };
+		22DF39951BE5FD690001E12F /* ParkingAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DF39821BE5FD690001E12F /* ParkingAnnotation.swift */; settings = {ASSET_TAGS = (); }; };
+		22DF39961BE5FD690001E12F /* RestaurantAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DF39831BE5FD690001E12F /* RestaurantAnnotation.swift */; settings = {ASSET_TAGS = (); }; };
+		22DF39971BE5FD690001E12F /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DF39841BE5FD690001E12F /* SwiftyJSON.swift */; settings = {ASSET_TAGS = (); }; };
+		22DF39981BE5FD690001E12F /* WineryAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DF39851BE5FD690001E12F /* WineryAnnotation.swift */; settings = {ASSET_TAGS = (); }; };
+		22DF399E1BE5FDAF0001E12F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22DF39991BE5FDAF0001E12F /* LaunchScreen.storyboard */; settings = {ASSET_TAGS = (); }; };
+		22DF399F1BE5FDAF0001E12F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22DF399A1BE5FDAF0001E12F /* Main.storyboard */; settings = {ASSET_TAGS = (); }; };
+		22DF39A11BE5FDAF0001E12F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DF399D1BE5FDAF0001E12F /* AppDelegate.swift */; settings = {ASSET_TAGS = (); }; };
+		22DF39A51BE5FF3F0001E12F /* CorkDistrictEntityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DF39A21BE5FF3F0001E12F /* CorkDistrictEntityCell.swift */; settings = {ASSET_TAGS = (); }; };
+		22DF39A61BE5FF3F0001E12F /* CorkDistrictPackage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DF39A31BE5FF3F0001E12F /* CorkDistrictPackage.swift */; settings = {ASSET_TAGS = (); }; };
+		22DF39A71BE5FF3F0001E12F /* ImageDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DF39A41BE5FF3F0001E12F /* ImageDetailCell.swift */; settings = {ASSET_TAGS = (); }; };
+		22DF39AA1BE6006F0001E12F /* TheCorkDistrict.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 22DF39A81BE6006F0001E12F /* TheCorkDistrict.xcdatamodeld */; settings = {ASSET_TAGS = (); }; };
 		840AEAC11B03DC9400DBB6EF /* (null) in Sources */ = {isa = PBXBuildFile; };
 		840AEAC31B04247E00DBB6EF /* (null) in Sources */ = {isa = PBXBuildFile; };
-		84E875691AE4A42700BDF4A0 /* MapUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E875681AE4A42700BDF4A0 /* MapUtilities.swift */; };
-		C124D0511B0D35C6004CAF23 /* RouteMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C124D0501B0D35C6004CAF23 /* RouteMapViewController.swift */; };
-		C124D0551B0D3BE6004CAF23 /* TourMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C124D0541B0D3BE6004CAF23 /* TourMapViewController.swift */; };
 		C141C79E1B03E891007EBFF8 /* App_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = C141C79D1B03E891007EBFF8 /* App_Icon.png */; };
 /* End PBXBuildFile section */
 
@@ -52,39 +51,38 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		221346EA1AD92A3F009633DB /* UIViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIViewExtensions.swift; path = ../UIViewExtensions.swift; sourceTree = "<group>"; };
-		221346EE1AD92B31009633DB /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Timer.swift; path = ../Timer.swift; sourceTree = "<group>"; };
-		225A2DF81AF619B700D072C2 /* CorkDistrictEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CorkDistrictEntity.swift; path = ../CorkDistrictEntity.swift; sourceTree = "<group>"; };
-		225A2DFA1AF6D06600D072C2 /* EntityCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EntityCell.swift; path = ../EntityCell.swift; sourceTree = "<group>"; };
-		225A2DFC1AF6D1FE00D072C2 /* ParkingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ParkingCell.swift; path = ../ParkingCell.swift; sourceTree = "<group>"; };
-		225A2DFE1AF6D35600D072C2 /* PackageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PackageCell.swift; path = ../PackageCell.swift; sourceTree = "<group>"; };
-		225E43E81B02EB55001DE744 /* AlaskaWinePassViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AlaskaWinePassViewController.swift; path = ../AlaskaWinePassViewController.swift; sourceTree = "<group>"; };
-		2281672A1AE20CFE00CCC9DF /* LoadViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoadViewController.swift; path = ../LoadViewController.swift; sourceTree = "<group>"; };
-		2281672B1AE20CFE00CCC9DF /* LoadViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LoadViewController.xib; path = ../LoadViewController.xib; sourceTree = "<group>"; };
 		2298E0791AB00B7B003CEFFA /* Cork District.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Cork District.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2298E07D1AB00B7B003CEFFA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2298E07E1AB00B7B003CEFFA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		2298E0811AB00B7B003CEFFA /* TheCorkDistrict.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TheCorkDistrict.xcdatamodel; sourceTree = "<group>"; };
-		2298E0831AB00B7B003CEFFA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		2298E0861AB00B7B003CEFFA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		2298E0881AB00B7B003CEFFA /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		2298E08B1AB00B7B003CEFFA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		2298E0911AB00B7B003CEFFA /* TheCorkDistrictTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TheCorkDistrictTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2298E0961AB00B7B003CEFFA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2298E0971AB00B7B003CEFFA /* TheCorkDistrictTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheCorkDistrictTests.swift; sourceTree = "<group>"; };
-		2298E0A11AB010FF003CEFFA /* WineriesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WineriesViewController.swift; path = ../WineriesViewController.swift; sourceTree = "<group>"; };
-		2298E0A31AB01188003CEFFA /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataManager.swift; path = ../DataManager.swift; sourceTree = "<group>"; };
-		2298E0A51AB011B5003CEFFA /* RestaurantsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RestaurantsViewController.swift; path = ../RestaurantsViewController.swift; sourceTree = "<group>"; };
-		2298E0A71AB011CB003CEFFA /* AccommodationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccommodationsViewController.swift; path = ../AccommodationsViewController.swift; sourceTree = "<group>"; };
-		2298E0A91AB011EA003CEFFA /* PackagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PackagesViewController.swift; path = ../PackagesViewController.swift; sourceTree = "<group>"; };
-		2298E0AD1AB01902003CEFFA /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DetailViewController.swift; path = ../DetailViewController.swift; sourceTree = "<group>"; };
-		2298E0B71AB01D91003CEFFA /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapViewController.swift; path = ../MapViewController.swift; sourceTree = "<group>"; };
-		2298E0B91AB01E53003CEFFA /* WineToursViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WineToursViewController.swift; path = ../WineToursViewController.swift; sourceTree = "<group>"; };
-		22A85A091AB18B2000B45713 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftyJSON.swift; path = ../SwiftyJSON.swift; sourceTree = "<group>"; };
-		22F9FCAD1B05CA5500CA43B7 /* WineTourCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WineTourCell.swift; path = ../WineTourCell.swift; sourceTree = "<group>"; };
-		84E875681AE4A42700BDF4A0 /* MapUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapUtilities.swift; sourceTree = "<group>"; };
-		C124D0501B0D35C6004CAF23 /* RouteMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteMapViewController.swift; sourceTree = "<group>"; };
-		C124D0541B0D3BE6004CAF23 /* TourMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TourMapViewController.swift; sourceTree = "<group>"; };
+		22DF396E1BE5F8940001E12F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		22DF39731BE5FD690001E12F /* CorkDistrictData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CorkDistrictData.swift; path = ../CorkDistrictData.swift; sourceTree = "<group>"; };
+		22DF39741BE5FD690001E12F /* CorkDistrictEntityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CorkDistrictEntityViewController.swift; sourceTree = "<group>"; };
+		22DF39751BE5FD690001E12F /* DetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DetailTableViewController.swift; path = ../DetailTableViewController.swift; sourceTree = "<group>"; };
+		22DF39761BE5FD690001E12F /* MainMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainMenuViewController.swift; path = ../MainMenuViewController.swift; sourceTree = "<group>"; };
+		22DF39771BE5FD690001E12F /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		22DF39781BE5FD690001E12F /* RoutingMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RoutingMapViewController.swift; path = ../RoutingMapViewController.swift; sourceTree = "<group>"; };
+		22DF39791BE5FD690001E12F /* WineTourTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WineTourTableViewController.swift; path = ../WineTourTableViewController.swift; sourceTree = "<group>"; };
+		22DF397A1BE5FD690001E12F /* AccommodationAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccommodationAnnotation.swift; sourceTree = "<group>"; };
+		22DF397B1BE5FD690001E12F /* CorkDistrictAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CorkDistrictAnnotation.swift; sourceTree = "<group>"; };
+		22DF397C1BE5FD690001E12F /* CorkDistrictAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CorkDistrictAnnotationView.swift; sourceTree = "<group>"; };
+		22DF397D1BE5FD690001E12F /* CorkDistrictEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CorkDistrictEntity.swift; sourceTree = "<group>"; };
+		22DF397E1BE5FD690001E12F /* DestinationAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DestinationAnnotation.swift; path = ../DestinationAnnotation.swift; sourceTree = "<group>"; };
+		22DF397F1BE5FD690001E12F /* EmbeddedWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EmbeddedWebViewController.swift; path = ../EmbeddedWebViewController.swift; sourceTree = "<group>"; };
+		22DF39801BE5FD690001E12F /* EntityCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntityCollection.swift; sourceTree = "<group>"; };
+		22DF39811BE5FD690001E12F /* PackageCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PackageCollection.swift; sourceTree = "<group>"; };
+		22DF39821BE5FD690001E12F /* ParkingAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParkingAnnotation.swift; sourceTree = "<group>"; };
+		22DF39831BE5FD690001E12F /* RestaurantAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantAnnotation.swift; sourceTree = "<group>"; };
+		22DF39841BE5FD690001E12F /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftyJSON.swift; path = ../SwiftyJSON.swift; sourceTree = "<group>"; };
+		22DF39851BE5FD690001E12F /* WineryAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WineryAnnotation.swift; sourceTree = "<group>"; };
+		22DF39991BE5FDAF0001E12F /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		22DF399A1BE5FDAF0001E12F /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		22DF399D1BE5FDAF0001E12F /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		22DF39A21BE5FF3F0001E12F /* CorkDistrictEntityCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CorkDistrictEntityCell.swift; sourceTree = "<group>"; };
+		22DF39A31BE5FF3F0001E12F /* CorkDistrictPackage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CorkDistrictPackage.swift; sourceTree = "<group>"; };
+		22DF39A41BE5FF3F0001E12F /* ImageDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageDetailCell.swift; path = ../ImageDetailCell.swift; sourceTree = "<group>"; };
+		22DF39A91BE6006F0001E12F /* TheCorkDistrict.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TheCorkDistrict.xcdatamodel; sourceTree = "<group>"; };
 		C141C79D1B03E891007EBFF8 /* App_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = App_Icon.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -127,35 +125,23 @@
 		2298E07B1AB00B7B003CEFFA /* TheCorkDistrict */ = {
 			isa = PBXGroup;
 			children = (
-				2298E07E1AB00B7B003CEFFA /* AppDelegate.swift */,
-				2298E0831AB00B7B003CEFFA /* ViewController.swift */,
-				2298E0A31AB01188003CEFFA /* DataManager.swift */,
-				2298E0851AB00B7B003CEFFA /* Main.storyboard */,
-				2298E0881AB00B7B003CEFFA /* Images.xcassets */,
+				22DF399D1BE5FDAF0001E12F /* AppDelegate.swift */,
+				22DF39731BE5FD690001E12F /* CorkDistrictData.swift */,
+				22DF397F1BE5FD690001E12F /* EmbeddedWebViewController.swift */,
+				22DF39751BE5FD690001E12F /* DetailTableViewController.swift */,
+				22DF39841BE5FD690001E12F /* SwiftyJSON.swift */,
+				22DF39791BE5FD690001E12F /* WineTourTableViewController.swift */,
+				22DF39781BE5FD690001E12F /* RoutingMapViewController.swift */,
+				22DF399A1BE5FDAF0001E12F /* Main.storyboard */,
+				22DF39991BE5FDAF0001E12F /* LaunchScreen.storyboard */,
+				22DF39A81BE6006F0001E12F /* TheCorkDistrict.xcdatamodeld */,
+				22DF39A41BE5FF3F0001E12F /* ImageDetailCell.swift */,
+				22DF397E1BE5FD690001E12F /* DestinationAnnotation.swift */,
+				22DF39761BE5FD690001E12F /* MainMenuViewController.swift */,
 				C141C79D1B03E891007EBFF8 /* App_Icon.png */,
-				2298E08A1AB00B7B003CEFFA /* LaunchScreen.xib */,
-				2281672B1AE20CFE00CCC9DF /* LoadViewController.xib */,
-				2281672A1AE20CFE00CCC9DF /* LoadViewController.swift */,
-				2298E0801AB00B7B003CEFFA /* TheCorkDistrict.xcdatamodeld */,
-				2298E0B91AB01E53003CEFFA /* WineToursViewController.swift */,
-				2298E0A11AB010FF003CEFFA /* WineriesViewController.swift */,
-				2298E0AD1AB01902003CEFFA /* DetailViewController.swift */,
-				C124D0501B0D35C6004CAF23 /* RouteMapViewController.swift */,
-				2298E0B71AB01D91003CEFFA /* MapViewController.swift */,
-				84E875681AE4A42700BDF4A0 /* MapUtilities.swift */,
-				C124D0541B0D3BE6004CAF23 /* TourMapViewController.swift */,
-				2298E0A51AB011B5003CEFFA /* RestaurantsViewController.swift */,
-				2298E0A71AB011CB003CEFFA /* AccommodationsViewController.swift */,
-				2298E0A91AB011EA003CEFFA /* PackagesViewController.swift */,
-				225E43E81B02EB55001DE744 /* AlaskaWinePassViewController.swift */,
-				22F9FCAD1B05CA5500CA43B7 /* WineTourCell.swift */,
-				225A2DFE1AF6D35600D072C2 /* PackageCell.swift */,
-				225A2DFA1AF6D06600D072C2 /* EntityCell.swift */,
-				225A2DFC1AF6D1FE00D072C2 /* ParkingCell.swift */,
-				225A2DF81AF619B700D072C2 /* CorkDistrictEntity.swift */,
-				221346EE1AD92B31009633DB /* Timer.swift */,
-				221346EA1AD92A3F009633DB /* UIViewExtensions.swift */,
-				22A85A091AB18B2000B45713 /* SwiftyJSON.swift */,
+				22DF396E1BE5F8940001E12F /* Images.xcassets */,
+				22DF39AB1BE8785C0001E12F /* MapView */,
+				22DF39AC1BE8786C0001E12F /* EntityView */,
 				2298E07C1AB00B7B003CEFFA /* Supporting Files */,
 			);
 			path = TheCorkDistrict;
@@ -184,6 +170,35 @@
 				2298E0961AB00B7B003CEFFA /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		22DF39AB1BE8785C0001E12F /* MapView */ = {
+			isa = PBXGroup;
+			children = (
+				22DF397A1BE5FD690001E12F /* AccommodationAnnotation.swift */,
+				22DF397B1BE5FD690001E12F /* CorkDistrictAnnotation.swift */,
+				22DF397C1BE5FD690001E12F /* CorkDistrictAnnotationView.swift */,
+				22DF397D1BE5FD690001E12F /* CorkDistrictEntity.swift */,
+				22DF39771BE5FD690001E12F /* MapViewController.swift */,
+				22DF39821BE5FD690001E12F /* ParkingAnnotation.swift */,
+				22DF39831BE5FD690001E12F /* RestaurantAnnotation.swift */,
+				22DF39851BE5FD690001E12F /* WineryAnnotation.swift */,
+			);
+			name = MapView;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		22DF39AC1BE8786C0001E12F /* EntityView */ = {
+			isa = PBXGroup;
+			children = (
+				22DF39A21BE5FF3F0001E12F /* CorkDistrictEntityCell.swift */,
+				22DF39A31BE5FF3F0001E12F /* CorkDistrictPackage.swift */,
+				22DF39741BE5FD690001E12F /* CorkDistrictEntityViewController.swift */,
+				22DF39801BE5FD690001E12F /* EntityCollection.swift */,
+				22DF39811BE5FD690001E12F /* PackageCollection.swift */,
+			);
+			name = EntityView;
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -268,11 +283,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22DF399E1BE5FDAF0001E12F /* LaunchScreen.storyboard in Resources */,
 				C141C79E1B03E891007EBFF8 /* App_Icon.png in Resources */,
-				2298E0871AB00B7B003CEFFA /* Main.storyboard in Resources */,
-				2298E08C1AB00B7B003CEFFA /* LaunchScreen.xib in Resources */,
-				2281672D1AE20CFE00CCC9DF /* LoadViewController.xib in Resources */,
-				2298E0891AB00B7B003CEFFA /* Images.xcassets in Resources */,
+				22DF396F1BE5F8940001E12F /* Images.xcassets in Resources */,
+				22DF399F1BE5FDAF0001E12F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -290,32 +304,32 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2298E0A21AB010FF003CEFFA /* WineriesViewController.swift in Sources */,
-				2298E0A81AB011CB003CEFFA /* AccommodationsViewController.swift in Sources */,
-				221346EF1AD92B31009633DB /* Timer.swift in Sources */,
-				225A2DF91AF619B700D072C2 /* CorkDistrictEntity.swift in Sources */,
-				2298E0BA1AB01E53003CEFFA /* WineToursViewController.swift in Sources */,
-				225A2DFD1AF6D1FE00D072C2 /* ParkingCell.swift in Sources */,
+				22DF39891BE5FD690001E12F /* MainMenuViewController.swift in Sources */,
+				22DF39A51BE5FF3F0001E12F /* CorkDistrictEntityCell.swift in Sources */,
+				22DF39941BE5FD690001E12F /* PackageCollection.swift in Sources */,
+				22DF39881BE5FD690001E12F /* DetailTableViewController.swift in Sources */,
+				22DF39971BE5FD690001E12F /* SwiftyJSON.swift in Sources */,
+				22DF39901BE5FD690001E12F /* CorkDistrictEntity.swift in Sources */,
+				22DF39911BE5FD690001E12F /* DestinationAnnotation.swift in Sources */,
+				22DF398F1BE5FD690001E12F /* CorkDistrictAnnotationView.swift in Sources */,
+				22DF398E1BE5FD690001E12F /* CorkDistrictAnnotation.swift in Sources */,
 				840AEAC31B04247E00DBB6EF /* (null) in Sources */,
-				2298E0A61AB011B5003CEFFA /* RestaurantsViewController.swift in Sources */,
-				2281672C1AE20CFE00CCC9DF /* LoadViewController.swift in Sources */,
-				C124D0551B0D3BE6004CAF23 /* TourMapViewController.swift in Sources */,
-				2298E0A41AB01188003CEFFA /* DataManager.swift in Sources */,
-				225E43E91B02EB55001DE744 /* AlaskaWinePassViewController.swift in Sources */,
-				84E875691AE4A42700BDF4A0 /* MapUtilities.swift in Sources */,
-				2298E0841AB00B7B003CEFFA /* ViewController.swift in Sources */,
-				225A2DFF1AF6D35600D072C2 /* PackageCell.swift in Sources */,
-				2298E0B81AB01D91003CEFFA /* MapViewController.swift in Sources */,
-				C124D0511B0D35C6004CAF23 /* RouteMapViewController.swift in Sources */,
-				2298E0AA1AB011EA003CEFFA /* PackagesViewController.swift in Sources */,
-				2298E0AE1AB01902003CEFFA /* DetailViewController.swift in Sources */,
-				225A2DFB1AF6D06600D072C2 /* EntityCell.swift in Sources */,
-				22F9FCAE1B05CA5500CA43B7 /* WineTourCell.swift in Sources */,
-				2298E0821AB00B7B003CEFFA /* TheCorkDistrict.xcdatamodeld in Sources */,
+				22DF398A1BE5FD690001E12F /* MapViewController.swift in Sources */,
+				22DF39AA1BE6006F0001E12F /* TheCorkDistrict.xcdatamodeld in Sources */,
 				840AEAC11B03DC9400DBB6EF /* (null) in Sources */,
-				22A85A0A1AB18B2000B45713 /* SwiftyJSON.swift in Sources */,
-				221346EB1AD92A3F009633DB /* UIViewExtensions.swift in Sources */,
-				2298E07F1AB00B7B003CEFFA /* AppDelegate.swift in Sources */,
+				22DF39A11BE5FDAF0001E12F /* AppDelegate.swift in Sources */,
+				22DF39931BE5FD690001E12F /* EntityCollection.swift in Sources */,
+				22DF39921BE5FD690001E12F /* EmbeddedWebViewController.swift in Sources */,
+				22DF39961BE5FD690001E12F /* RestaurantAnnotation.swift in Sources */,
+				22DF39981BE5FD690001E12F /* WineryAnnotation.swift in Sources */,
+				22DF39A71BE5FF3F0001E12F /* ImageDetailCell.swift in Sources */,
+				22DF398C1BE5FD690001E12F /* WineTourTableViewController.swift in Sources */,
+				22DF39A61BE5FF3F0001E12F /* CorkDistrictPackage.swift in Sources */,
+				22DF398B1BE5FD690001E12F /* RoutingMapViewController.swift in Sources */,
+				22DF39861BE5FD690001E12F /* CorkDistrictData.swift in Sources */,
+				22DF398D1BE5FD690001E12F /* AccommodationAnnotation.swift in Sources */,
+				22DF39951BE5FD690001E12F /* ParkingAnnotation.swift in Sources */,
+				22DF39871BE5FD690001E12F /* CorkDistrictEntityViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -336,25 +350,6 @@
 			targetProxy = 2298E0921AB00B7B003CEFFA /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		2298E0851AB00B7B003CEFFA /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2298E0861AB00B7B003CEFFA /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		2298E08A1AB00B7B003CEFFA /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2298E08B1AB00B7B003CEFFA /* Base */,
-			);
-			name = LaunchScreen.xib;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		2298E0991AB00B7B003CEFFA /* Debug */ = {
@@ -541,12 +536,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		2298E0801AB00B7B003CEFFA /* TheCorkDistrict.xcdatamodeld */ = {
+		22DF39A81BE6006F0001E12F /* TheCorkDistrict.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				2298E0811AB00B7B003CEFFA /* TheCorkDistrict.xcdatamodel */,
+				22DF39A91BE6006F0001E12F /* TheCorkDistrict.xcdatamodel */,
 			);
-			currentVersion = 2298E0811AB00B7B003CEFFA /* TheCorkDistrict.xcdatamodel */;
+			currentVersion = 22DF39A91BE6006F0001E12F /* TheCorkDistrict.xcdatamodel */;
 			path = TheCorkDistrict.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

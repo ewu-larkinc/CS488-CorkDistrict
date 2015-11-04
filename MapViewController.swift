@@ -1,304 +1,325 @@
 //
 //  MapViewController.swift
-//  CorkDistrict
+//  TheCorkDistrict
 //
+//  Created by Chris Larkin on 10/24/15.
+//  Copyright © 2015 Madkatz. All rights reserved.
 //
 
 import Foundation
 import UIKit
 import MapKit
-import CoreData
 
-class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
+enum MapType: Int {
+    case Standard = 0
+    case Hybrid = 1
+    case Satellite = 2
+}
+
+enum EntityType: Int {
+    case Accommodation = 0
+    case Parking
+    case Restaurant
+    case Winery
+    case All
+}
+
+class MapViewController: UIViewController, MKMapViewDelegate {
+    
+    @IBOutlet weak var mapTypeSegmentedControl: UISegmentedControl!
+    @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var restaurantButton: UIButton!
+    @IBOutlet weak var accommodationButton: UIButton!
+    @IBOutlet weak var parkingButton: UIButton!
+    @IBOutlet weak var wineButton: UIButton!
     
     
-    @IBAction func returnToHomePage(_: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: {});
+    
+    @IBAction func restaurantBtnSelected(sender: AnyObject) {
+        
+        if btnSelected[EntityType.Restaurant.rawValue] {
+            btnSelected[EntityType.Restaurant.rawValue] = false
+            restaurantButton.alpha = 0.4
+            
+            for annot in mapView.annotations {
+                if annot is RestaurantAnnotation {
+                    mapView.removeAnnotation(annot)
+                }
+            }
+            
+        } else {
+            btnSelected[EntityType.Restaurant.rawValue] = true
+            addCorkDistrictPinsOfType(EntityType.Restaurant)
+            restaurantButton.alpha = 1
+            restaurantButton.setNeedsDisplay()
+        }
     }
     
-    let locationManager = CLLocationManager()
+    @IBAction func accommodationBtnSelected(sender: AnyObject) {
+        if btnSelected[EntityType.Accommodation.rawValue] {
+            btnSelected[EntityType.Accommodation.rawValue] = false
+            accommodationButton.alpha = 0.4
+            
+            for annot in mapView.annotations {
+                if annot is AccommodationAnnotation {
+                    mapView.removeAnnotation(annot)
+                }
+            }
+            
+        } else {
+            btnSelected[EntityType.Accommodation.rawValue] = true
+            addCorkDistrictPinsOfType(EntityType.Accommodation)
+            accommodationButton.alpha = 1
+            accommodationButton.setNeedsDisplay()
+        }
+    }
     
-    var showWineries: Bool = false
-    var showHotels: Bool = false
-    var showParking: Bool = false
-    var showRest: Bool = false
+    @IBAction func parkingBtnSelected(sender: AnyObject) {
+        if btnSelected[EntityType.Parking.rawValue] {
+            btnSelected[EntityType.Parking.rawValue] = false
+            parkingButton.alpha = 0.4
+            
+            for annot in mapView.annotations {
+                if annot is ParkingAnnotation {
+                    mapView.removeAnnotation(annot)
+                }
+            }
+            
+        } else {
+            btnSelected[EntityType.Parking.rawValue] = true
+            addCorkDistrictPinsOfType(EntityType.Parking)
+            parkingButton.alpha = 1
+            parkingButton.setNeedsDisplay()
+        }
+    }
     
-    var winePins = [MKPointAnnotation]()
-    var hotelPins = [MKPointAnnotation]()
-    var parkPins = [MKPointAnnotation]()
-    var restPins = [MKPointAnnotation]()
+    @IBAction func wineryBtnSelected(sender: AnyObject) {
+        if btnSelected[EntityType.Winery.rawValue] {
+            btnSelected[EntityType.Winery.rawValue] = false
+            wineButton.alpha = 0.4
+            
+            for annot in mapView.annotations {
+                if annot is WineryAnnotation {
+                    mapView.removeAnnotation(annot)
+                }
+            }
+            
+        } else {
+            btnSelected[EntityType.Winery.rawValue] = true
+            addCorkDistrictPinsOfType(EntityType.Winery)
+            wineButton.alpha = 1
+            wineButton.setNeedsDisplay()
+        }
+    }
     
-    let util = MapUtilities()
-    var mapRoutes = [MKRoute]()
+    @IBAction func mapTypeChanged(sender: AnyObject) {
+        
+        let mapType = MapType(rawValue: mapTypeSegmentedControl.selectedSegmentIndex)
+        
+        switch(mapType!) {
+        
+            case .Standard:
+                mapView.mapType = MKMapType.Standard
+            case .Hybrid:
+                mapView.mapType = MKMapType.Hybrid
+            case .Satellite:
+                mapView.mapType = MKMapType.Satellite
+        }
+    }
     
-    @IBOutlet var theMapView: MKMapView!
+    private var entities = [CorkDistrictEntity]()
+    private var btnSelected = [Bool]()
     
-    @IBOutlet var parkButton: UIButton!
-    @IBOutlet var restButton: UIButton!
-    @IBOutlet var wineButton: UIButton!
-    @IBOutlet var hotelButton: UIButton!
+
+    override func viewWillAppear(animated: Bool) {
+        self.navigationController?.navigationBarHidden = false
+        self.navigationController?.navigationBar.clipsToBounds = true
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        prepareButtonLayout()
         
         
-        util.mapView = theMapView
-        util.multiPinsMap()
+        let data = CorkDistrictData.sharedInstance
+        entities = data.getAllEntities()
         
-        //request user location
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
         
-        self.theMapView.showsUserLocation = true
-        
-        //fill pin arrays
-        winePins = util.pinTypeOnMap("winery")
-        
-        restPins = util.pinTypeOnMap("rest")
-        
-        hotelPins = util.pinTypeOnMap("hotel")
-        
-        parkPins = util.pinTypeOnMap("park")
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        
-        super.viewWillAppear(animated)
-        
-        self.navigationController?.navigationBar.hidden = false
-        
-        self.automaticallyAdjustsScrollViewInsets = false
-        
-        let theSpan: MKCoordinateSpan = MKCoordinateSpanMake(0.05, 0.05)
-        
-        let centerLocation: CLLocationCoordinate2D = CLLocationCoordinate2DMake(47.655262, -117.414129)
-        
-        let theRegion: MKCoordinateRegion = MKCoordinateRegionMake(centerLocation, theSpan)
-        
-        self.theMapView.setRegion(theRegion, animated: true)
-    }
-    
-    @IBAction func filterWineries(_: AnyObject) {
-        if(showWineries){
-            addPins(winePins)
-            showWineries = false
-            wineButton.alpha = 1.0
-        }
-        else {
-            removePins(winePins)
-            showWineries = true
-            wineButton.alpha = 0.5
-        }
-    }
-    @IBAction func filterHotels(_: AnyObject) {
-        if(showHotels){
-            addPins(hotelPins)
-            showHotels = false
-            hotelButton.alpha = 1.0
-        }
-        else {
-            removePins(hotelPins)
-            showHotels = true
-            hotelButton.alpha = 0.5
-        }
-    }
-    @IBAction func filterRest(_: AnyObject) {
-        if(showRest){
-            addPins(restPins)
-            showRest = false
-            restButton.alpha = 1.0
-        }
-        else {
-            removePins(restPins)
-            showRest = true
-            restButton.alpha = 0.5
-        }
-    }
-    @IBAction func filterParking(_: AnyObject) {
-        if(showParking){
-            addPins(parkPins)
-            showParking = false
-            parkButton.alpha = 1.0
-        }
-        else {
-            removePins(parkPins)
-            showParking = true
-            parkButton.alpha = 0.5
-        }
-    }
-    func removePins(arraytype: [MKPointAnnotation]) {
-        for var i = 0; i < arraytype.count; i++ {
-            theMapView.removeAnnotation(arraytype[i])
-        }
-    }
-    
-    func addPins(arraytype: [MKPointAnnotation]) {
-        for var i = 0; i < arraytype.count; i++ {
-            theMapView.addAnnotation(arraytype[i])
-        }
-    }
-    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
-        if !(annotation is MKPointAnnotation) {
-            return nil
-        }
-        
-        return util.viewForAnnotation(mapView, viewForAnnotation: annotation)
-    }
-    func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer {
-        
-        //if (overlay is MKPolyline) {
+        if let coordinates = data.getMapCoordinates() {
+            mapView.setCenterCoordinate(coordinates, animated: true)
             
-            return util.renderForOverlay(mapView, rendererForOverlay: overlay)
-        //}
+            let center = MKMapPointForCoordinate(coordinates)
+            let size = MKMapSize(width: 5000, height: 5000)
+            
+            let area = MKMapRect(origin: center, size: size)
+            mapView.setVisibleMapRect(area, animated: true)
+        }
         
-        //return nil
+        addCorkDistrictPinsOfType(EntityType.All)
     }
+    
+    func prepareButtonLayout() {
+        
+        wineButton.layer.shadowOffset = CGSize(width: 0.0, height: 1.0)
+        wineButton.layer.shadowOpacity = 0.7
+        wineButton.layer.shadowRadius = 1
+        
+        restaurantButton.layer.shadowOffset = CGSize(width: 0.0, height: 1.0)
+        restaurantButton.layer.shadowOpacity = 0.7
+        restaurantButton.layer.shadowRadius = 1
+        
+        accommodationButton.layer.shadowOffset = CGSize(width: 0.0, height: 1.0)
+        accommodationButton.layer.shadowOpacity = 0.7
+        accommodationButton.layer.shadowRadius = 1
+        
+        parkingButton.layer.shadowOffset = CGSize(width: 0.0, height: 1.0)
+        parkingButton.layer.shadowOpacity = 0.7
+        parkingButton.layer.shadowRadius = 1
+        
+        btnSelected.append(true)
+        btnSelected.append(true)
+        btnSelected.append(true)
+        btnSelected.append(true)
+    }
+    
+    func removeAnnotations() {
+        let toDelete = mapView.annotations
+        mapView.removeAnnotations(toDelete)
+        mapView.reloadInputViews()
+    }
+    
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+        
+        if let sub = annotation.subtitle {
+            if let subtitle = sub {
+                
+                let view = MKAnnotationView(annotation: annotation, reuseIdentifier: "CorkDistrictAnnotationView")
+                
+                switch (subtitle) {
+                case "Accommodation":
+                    view.image = UIImage(named: "accommodationIcon")
+                case "Parking":
+                    view.image = UIImage(named: "parkingIcon")
+                case "Restaurant":
+                    view.image = UIImage(named: "restaurantIcon")
+                case "Winery":
+                    view.image = UIImage(named: "wineryIcon")
+                default:
+                    break
+                }
+                
+                return view
+            }
+        }
+        
+        return nil
+    }
+    
+    
+    func getEntityByTitle(title: String) -> CorkDistrictEntity? {
+        
+        for entity in entities {
+            
+            if entity.title == title {
+                return entity
+            }
+        }
+        
+        return nil
+    }
+    
+    
     func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
         
-        let temp = util.didSelectAnnotationView(view)
-        view.canShowCallout = false;
-
-        if(temp != nil)
-        {
-        
-            let alertV: UIAlertController = sameAddress(temp!, view: view)
-        
-            if(alertV.actions.count > 1) {
-                self.presentViewController(alertV, animated: true, completion: nil)
-            }
-            else {
-                detailAlertView(temp!, view: view)
-            }
-        }
-        else{
-            view.canShowCallout = false;
-
-        }
-        
-    }
-    func sameAddress( temp: NSManagedObject, view: MKAnnotationView!) -> UIAlertController{
-        
-        var returnType = UIAlertController()
-        
-        var shouldAlert: Bool = false
-        
-        let address:String = temp.valueForKey("address") as! String
-        
-        let alertView = UIAlertController(title: "Warning: Same Address", message: "", preferredStyle: .Alert)
-        
-        //var imageView = UIImageView(frame: CGRectMake(10, 15, 50, 50))
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: {
-            action in
-            
-        })
-        var tempAction = UIAlertAction(title: (temp.valueForKey("name") as! String), style: .Default, handler: {
-            action in
-            self.detailAlertView(temp, view: view)
-        })
-        
-        alertView.addAction(tempAction)
-        alertView.addAction(cancelAction)
-        
-        for location in util.getWineries() {
-            if(location.valueForKey("address") as! String == address && temp != location) {
-                
-                shouldAlert = true
-                
-                tempAction = UIAlertAction(title: location.valueForKey("name") as? String, style: .Default, handler: {
-                    action in
-                    self.detailAlertView(location, view: view)
-                })
-                
-                alertView.addAction(tempAction)
-                
+        if let annotation = view.annotation {
+            if let t = annotation.title, s = annotation.subtitle {
+                if let title = t, subtitle = s {
+                    
+                    let alertView = UIAlertController(title: title, message: subtitle, preferredStyle: .Alert)
+                    
+                    let callAction = UIAlertAction(title: "Call", style: .Default, handler: {
+                        action in
+                        let alertMessage = UIAlertController(title: "Are you sure?", message: "Are you sure you want to call this winery?", preferredStyle: .Alert)
+                        let callFinalAction = UIAlertAction(title: "Call", style: .Default, handler: {
+                            action in
+                            let pNumber = "tel://" + subtitle
+                            let url:NSURL? = NSURL(string: pNumber)
+                            UIApplication.sharedApplication().openURL(url!)
+                        })
+                        
+                        alertMessage.addAction(callFinalAction)
+                        alertMessage.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+                        self.presentViewController(alertMessage, animated: true, completion: nil)
+                    })
+                    let detailAction = UIAlertAction(title: "Details", style: .Default, handler: {
+                        action in
+                        self.performSegueWithIdentifier("mapDetail", sender: self)
+                    })
+                    let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: {
+                        action in
+                        
+                    })
+                    
+                    alertView.addAction(callAction)
+                    if(view.annotation!.subtitle! != "park") {
+                        alertView.addAction(detailAction)
+                    }
+                    alertView.addAction(cancelAction)
+                    
+                    
+                    self.presentViewController(alertView, animated: true, completion: nil)
+                }
             }
         }
-        if(shouldAlert) {
-            returnType = alertView
-        }
-        return returnType
-    }
-    func detailAlertView( temp: NSManagedObject, view: MKAnnotationView!) {
         
-        let alertView = UIAlertController(title: temp.valueForKey("name") as? String, message: temp.valueForKey("address") as? String, preferredStyle: .Alert)
-
-        let callAction = UIAlertAction(title: "Call", style: .Default, handler: {
-            action in
-            let alertMessage = UIAlertController(title: "Are you sure?", message: "Are you sure you want to call this winery?", preferredStyle: .Alert)
-            let callFinalAction = UIAlertAction(title: "Call", style: .Default, handler: {
-                action in
-                var pNumber = "tel://"
-                pNumber += (temp.valueForKey("phone")as? String)!
-                let url:NSURL? = NSURL(string: pNumber)
-                UIApplication.sharedApplication().openURL(url!)
-            })
-            alertMessage.addAction(callFinalAction)
-            alertMessage.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
-            self.presentViewController(alertMessage, animated: true, completion: nil)
-            
-            
-            print(temp.valueForKey("phone") as? String)
-        })
-        
-        let detailAction = UIAlertAction(title: "Details", style: .Default, handler: {
-            action in
-            self.performSegueWithIdentifier("mapDetail", sender: self)
-
-            
-        })
-        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: {
-            action in
-            
-        })
-        
-        alertView.addAction(callAction)
-        if(view.annotation!.subtitle! != "park") {
-            alertView.addAction(detailAction)
-        }
-        alertView.addAction(cancelAction)
-        
-        
-        
-        self.presentViewController(alertView, animated: true, completion: nil)
-    }
-    
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!)
-    {
-        
-        let detailVC: DetailViewController = segue.destinationViewController as! DetailViewController
-        
-        var selectedItem: NSManagedObject = util.wineries[util.currentPin] as NSManagedObject
-        
-        
-        if(util.currentType == "winery")
-        {
-            selectedItem = util.wineries[util.currentPin] as NSManagedObject
-            detailVC.currentSelection = selectedItem
-            
-            
-        }
-        else if(util.currentType == "rest")
-        {
-            selectedItem = util.restaurants[util.currentPin] as NSManagedObject
-            detailVC.currentSelection = selectedItem
-            
-        }
-        else if(util.currentType == "hotel")
-        {
-            selectedItem = util.hotels[util.currentPin] as NSManagedObject
-            detailVC.currentSelection = selectedItem
-            
-        }
-  
         
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    func addCorkDistrictPinsOfType(type: EntityType) {
+        
+        let data = CorkDistrictData.sharedInstance
+        
+        switch (type) {
+            
+            case .Accommodation:
+                addPins(data.getAccommodations())
+            case .Parking:
+                addPins(data.getParking())
+            case .Restaurant:
+                addPins(data.getRestaurants())
+            case .Winery:
+                addPins(data.getWineries())
+            case .All:
+                addPins(entities)
+        }
     }
     
+    
+    
+    func addPins(entities: [CorkDistrictEntity]) {
+        
+        for entity in entities {
+            
+            if let coordinate = entity.coordinate {
+                
+                var annotation: CorkDistrictAnnotation
+                
+                switch (entity.type) {
+                    
+                    case .Accommodation:
+                        annotation = AccommodationAnnotation(title: entity.title, coordinate: coordinate, phone: entity.phone)
+                    case .Parking:
+                        annotation = ParkingAnnotation(title: entity.title, coordinate: coordinate, phone: entity.phone)
+                    case .Restaurant:
+                        annotation = RestaurantAnnotation(title: entity.title, coordinate: coordinate, phone: entity.phone)
+                    default:
+                        annotation = WineryAnnotation(title: entity.title, coordinate: coordinate, phone: entity.phone)
+                    
+                }
+                
+                mapView.addAnnotation(annotation)
+            }
+        }
+    }
     
 }
