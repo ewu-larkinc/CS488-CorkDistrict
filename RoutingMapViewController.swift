@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import MapKit
 
-class RoutingMapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
+class RoutingMapViewController: UIViewController, MKMapViewDelegate {
     @IBOutlet weak var directionView: UIView!
     
     @IBAction func startBtnSelected(sender: AnyObject) {
@@ -45,11 +45,13 @@ class RoutingMapViewController: UIViewController, MKMapViewDelegate, CLLocationM
     @IBOutlet weak var directionStepLabel: UILabel!
     @IBOutlet weak var mapView: MKMapView!
     
-    private var textDirections = [String]()
-    private var stepIndex: Int = 0
     static let DEG_TO_RAD: Double = 0.017453292519943295769236907684886
     static let EARTH_RADIUS_IN_METERS = 6372797.560856
+    
+    private var textDirections = [String]()
+    private var stepIndex: Int = 0
     static var numberOfLocationUpdates = 0
+    
     let locationManager = CLLocationManager()
     var displayDirections = false
     var tripDistance: Double?
@@ -58,6 +60,10 @@ class RoutingMapViewController: UIViewController, MKMapViewDelegate, CLLocationM
     
     override func viewDidLoad() {
         
+        mapView.showsUserLocation = true
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.startUpdatingLocation()
         
         setupLayoutObjects()
         
@@ -69,24 +75,21 @@ class RoutingMapViewController: UIViewController, MKMapViewDelegate, CLLocationM
             directionView.hidden = true
             mapView.showsUserLocation = false
             
-            //var theSpan: MKCoordinateSpan
             var centerLocation: CLLocationCoordinate2D
             let type = data.getCurrentTourType()
-            
+        
+            //choose map center point based on
             if(type == WineTourType.Downtown) {
-                //theSpan = MKCoordinateSpanMake(0.025, 0.025)
                 centerLocation = CLLocationCoordinate2DMake(47.654447, -117.424911)
             } else if(type == WineTourType.MtSpokane) {
-                //theSpan = MKCoordinateSpanMake(0.2, 0.2)
                 centerLocation = CLLocationCoordinate2DMake(47.765638, -117.303686)//47.654461, -117.425019)
             } else {
-                //theSpan = MKCoordinateSpanMake(0.03, 0.03)
                 centerLocation = CLLocationCoordinate2DMake(47.657251, -117.409676)
             }
             
-            let frameDistance = CLLocationDistance(500)
+            let frameLength = CLLocationDistance(500)
             
-            let theRegion: MKCoordinateRegion = MKCoordinateRegionMakeWithDistance(centerLocation, frameDistance, frameDistance)
+            let theRegion: MKCoordinateRegion = MKCoordinateRegionMakeWithDistance(centerLocation, frameLength, frameLength)
             
             mapView.setRegion(theRegion, animated: true)
             
@@ -95,26 +98,25 @@ class RoutingMapViewController: UIViewController, MKMapViewDelegate, CLLocationM
                 mapView.addAnnotation(annotation)
             }
         } else {
-            mapView.showsUserLocation = true
-            setupRouting()
+            initRouting()
         }
         
         
     }
     
     override func viewWillAppear(animated: Bool) {
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.startUpdatingLocation()
-        locationManager.delegate = self
+        
     }
     
-    func setupRouting() {
+    func initRouting() {
         
         let data = CorkDistrictData.sharedInstance
         if let entity = data.getSelectedEntity() {
             if let destPt = entity.coordinate {
                 print("GETTING ROUTE COORDINATES")
+                
+                
+                let destPlacemark = MKPlacemark(coordinate: destPt, addressDictionary: nil)
                 
                 guard let location = locationManager.location else {
                     print("Couldn't obtain user location!")
@@ -122,7 +124,6 @@ class RoutingMapViewController: UIViewController, MKMapViewDelegate, CLLocationM
                 }
                 
                 let curLocPlacemark = MKPlacemark(coordinate: location.coordinate, addressDictionary: nil)
-                let destPlacemark = MKPlacemark(coordinate: destPt, addressDictionary: nil)
                 tripDistance = RoutingMapViewController.getDistanceBetweenCoordinates(location.coordinate, to: destPt)
                 print("Distance between coordinates is \(tripDistance)")
                 
@@ -146,9 +147,11 @@ class RoutingMapViewController: UIViewController, MKMapViewDelegate, CLLocationM
                     }
                     else {
                         self.showRoute(response!)
+                        self.locationManager.startUpdatingLocation()
                     }
                     
                 })
+                
             }
         }
     }
@@ -210,7 +213,7 @@ class RoutingMapViewController: UIViewController, MKMapViewDelegate, CLLocationM
         print("DidUpdateUserLocation executing now...")
         
         if RoutingMapViewController.numberOfLocationUpdates == 0 {
-            setupRouting()
+            initRouting()
             RoutingMapViewController.numberOfLocationUpdates++
         } else {
             mapView.setCenterCoordinate(userLocation.coordinate, animated: true)

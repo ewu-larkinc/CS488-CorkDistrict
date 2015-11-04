@@ -490,23 +490,29 @@ class CorkDistrictData {
     }
     
     func fetchLastChangedValuesFromCoreData() {
+        
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext
         
         let fetchRequest = NSFetchRequest(entityName: entityTypeLastChanged)
+        var fetchedResults: [NSManagedObject]?
         
-        let fetchedResults = try! managedContext.executeFetchRequest(fetchRequest) as! [NSManagedObject]
-        
-        let results = fetchedResults
-        for result in results {
-            
-            accommodations.lastChangedCD = (result.valueForKey("accommodation") as! String)
-            packages.lastChangedCD = (result.valueForKey("package") as! String)
-            parking.lastChangedCD = (result.valueForKey("parking") as! String)
-            wineries.lastChangedCD = (result.valueForKey("winery") as! String)
-            restaurants.lastChangedCD = (result.valueForKey("restaurant") as! String)
+        do {
+            fetchedResults = try managedContext.executeFetchRequest(fetchRequest) as? [NSManagedObject]
+        } catch {
+            print("Error, could not save. \(error)")
         }
         
+        if let results = fetchedResults {
+            for result in results {
+            
+                accommodations.lastChangedCD = (result.valueForKey("accommodation") as! String)
+                packages.lastChangedCD = (result.valueForKey("package") as! String)
+                parking.lastChangedCD = (result.valueForKey("parking") as! String)
+                wineries.lastChangedCD = (result.valueForKey("winery") as! String)
+                restaurants.lastChangedCD = (result.valueForKey("restaurant") as! String)
+            }
+        }
     }
     
     func fetchAllCollectionsFromCoreData() {
