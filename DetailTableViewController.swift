@@ -29,6 +29,11 @@ class DetailTableViewController: UITableViewController {
     
     
     override func viewDidLoad() {
+        if let curEnt = currentEntity {
+            navigationController?.navigationItem.leftBarButtonItem?.title = curEnt.typePlural
+            
+        }
+        
         tableView.backgroundView = UIImageView(image: UIImage(named: "detailBackground"))
     }
     
@@ -39,12 +44,11 @@ class DetailTableViewController: UITableViewController {
         if let entity = data.getSelectedEntity() {
             currentEntity = entity
         }
-        
+        self.title = "Details"
     }
     
     override func viewWillDisappear(animated: Bool) {
-        //let data = CorkDistrictData.sharedInstance
-        //data.resetCurrentURL()
+        
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {

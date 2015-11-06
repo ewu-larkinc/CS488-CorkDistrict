@@ -129,6 +129,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     private var entities = [CorkDistrictEntity]()
     private var btnSelected = [Bool]()
+    private var selectedEntity: CorkDistrictEntity?
     
 
     override func viewWillAppear(animated: Bool) {
@@ -237,7 +238,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                     
                     let alertView = UIAlertController(title: title, message: subtitle, preferredStyle: .Alert)
                     
-                    let callAction = UIAlertAction(title: "Call", style: .Default, handler: {
+                    let callAction = UIAlertAction(title: "Call", style: .Default) {
                         action in
                         let alertMessage = UIAlertController(title: "Are you sure?", message: "Are you sure you want to call this winery?", preferredStyle: .Alert)
                         let callFinalAction = UIAlertAction(title: "Call", style: .Default, handler: {
@@ -250,21 +251,34 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                         alertMessage.addAction(callFinalAction)
                         alertMessage.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
                         self.presentViewController(alertMessage, animated: true, completion: nil)
-                    })
-                    let detailAction = UIAlertAction(title: "Details", style: .Default, handler: {
+                    }
+                    
+                    
+                    let detailAction = UIAlertAction(title: "Details", style: .Default) {
                         action in
                         self.performSegueWithIdentifier("mapDetail", sender: self)
-                    })
-                    let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: {
+                    }
+                    
+                    let routeAction = UIAlertAction(title: "Directions", style: .Default) {
                         action in
                         
-                    })
+                        self.performSegueWithIdentifier("mapToRoutingSegue", sender: self)
+                    }
+                    
+                    let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) {
+                        action in
+                        
+                    }
+                    
                     
                     alertView.addAction(callAction)
                     if(view.annotation!.subtitle! != "park") {
                         alertView.addAction(detailAction)
                     }
                     alertView.addAction(cancelAction)
+                    alertView.addAction(routeAction)
+                    
+                    
                     
                     
                     self.presentViewController(alertView, animated: true, completion: nil)
@@ -303,6 +317,8 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             if let coordinate = entity.coordinate {
                 
                 var annotation: CorkDistrictAnnotation
+                
+                print("Current entity type is \(entity.typePlural)")
                 
                 switch (entity.type) {
                     

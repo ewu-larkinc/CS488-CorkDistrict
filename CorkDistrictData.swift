@@ -182,6 +182,23 @@ class CorkDistrictData {
         return MAP_CENTER_ADDRESS
     }
     
+    func getTextForEntityType(type: LocationType) -> String {
+        
+        switch (type) {
+            
+        case .Accommodation:
+            return "Accommodations"
+        case .Package:
+            return "Packages"
+        case .Restaurant:
+            return "Restaurants"
+        case .Winery:
+            return "Wineries"
+        default:
+            return ""
+        }
+    }
+    
     func getEntityByNodeID(nodeID: String) -> CorkDistrictEntity? {
         
         let entities = accommodations.entities + restaurants.entities + wineries.entities
@@ -270,10 +287,12 @@ class CorkDistrictData {
         fetchLastChangedValuesFromCoreData()
         
         if (!dataReceived) {
-        
+            print("Data has NOT been received before. Receiving now...")
             if isDeviceConnectedToNetwork() {
+                print("Device is connected to network, checking website date values and counts now...")
                 retrieveDatesAndCountsFromWeb()
             } else {
+                print("Device is not connected to network, fetching (if available) from core data now...")
                 fetchAllCollectionsFromCoreData()
             }
         }

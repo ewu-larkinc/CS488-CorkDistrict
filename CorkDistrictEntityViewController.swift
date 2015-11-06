@@ -39,6 +39,7 @@ class CorkDistrictEntityViewController : UIViewController, UITableViewDataSource
         NSNotificationCenter.defaultCenter().removeObserver(self, name: notificationKey, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: reloadSelector, name: notificationKey, object: nil)
         
+        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -50,34 +51,19 @@ class CorkDistrictEntityViewController : UIViewController, UITableViewDataSource
         if let type = data.getSelectedEntityType() {
             currentEntityType = type
             print("TESTING - current entity type being set to \(type) in CDEVC")
-            titleText = getTextForEntityType(type)
+            titleText = data.getTextForEntityType(type)
             
             setDataForEntities()
             
             print("entities count is \(entities.count)")
             print("packages count is \(packages.count)")
-            self.navigationController?.navigationItem.title = titleText
+            self.title = titleText
         }
         
         setBackgroundImage()
     }
     
-    func getTextForEntityType(type: LocationType) -> String {
-        
-        switch (type) {
-            
-        case .Accommodation:
-            return "Accommodations"
-        case .Package:
-            return "Packages"
-        case .Restaurant:
-            return "Restaurants"
-        case .Winery:
-            return "Wineries"
-        default:
-            return ""
-        }
-    }
+    
     
     func getLocationTypeForString(type: String) -> LocationType {
         

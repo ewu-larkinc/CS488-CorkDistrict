@@ -120,7 +120,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="teF-f3-Ul5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2269.5" y="576.75"/>
+            <point key="canvasLocation" x="1333.5" y="-179.25"/>
         </scene>
         <!--Embedded Web View Controller-->
         <scene sceneID="lfn-v2-aXS">
@@ -558,7 +558,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a3Y-sW-KKk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3272" y="1844"/>
+            <point key="canvasLocation" x="1723.5" y="1951.5"/>
         </scene>
         <!--Map View Controller-->
         <scene sceneID="kbW-01-YY0">
@@ -572,7 +572,7 @@
                         <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dhn-o9-YiJ">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Dhn-o9-YiJ">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <animations/>
                                 <connections>
@@ -954,11 +954,12 @@
                         <outlet property="parkingButton" destination="AGY-JI-mLY" id="E64-vw-udl"/>
                         <outlet property="restaurantButton" destination="pY3-h0-LfL" id="l3M-B4-1CJ"/>
                         <outlet property="wineButton" destination="ahg-JV-27B" id="ynb-TD-cXP"/>
+                        <segue destination="Ex4-T1-Gr0" kind="show" identifier="mapToRoutingSegue" id="96X-gX-cOD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fDg-Mv-Zj3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3279" y="-198"/>
+            <point key="canvasLocation" x="2158.5" y="-186"/>
         </scene>
         <!--Wine Tour Table View Controller-->
         <scene sceneID="uu9-rc-so3">
@@ -1127,7 +1128,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kw7-IA-DRb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2107.5" y="1670.25"/>
+            <point key="canvasLocation" x="967.5" y="618"/>
         </scene>
         <!--Cork District Entity View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -1387,7 +1388,6 @@
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" id="1ah-T1-Wfw">
-                        <barButtonItem key="backBarButtonItem" title="Entities" id="FTb-hv-g0j"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="pqW-ev-SgJ">
                             <connections>
                                 <action selector="refreshTableView:" destination="BYZ-38-t0r" id="Wvu-aj-Uyh"/>
@@ -1403,7 +1403,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3272" y="852"/>
+            <point key="canvasLocation" x="2047.5" y="924"/>
         </scene>
         <!--Detail Table View Controller-->
         <scene sceneID="1T8-H0-FAA">
@@ -1508,7 +1508,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R8v-C7-XVC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3982.5" y="852"/>
+            <point key="canvasLocation" x="2758.5" y="918"/>
         </scene>
         <!--Routing Map View Controller-->
         <scene sceneID="pFA-oJ-Hzw">
@@ -1536,14 +1536,16 @@
                                         <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                         <animations/>
                                         <fontDescription key="fontDescription" name="GurmukhiMN" family="Gurmukhi MN" pointSize="18"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tY6-3a-sKI">
                                         <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                         <animations/>
                                         <fontDescription key="fontDescription" name="GurmukhiMN" family="Gurmukhi MN" pointSize="15"/>
-                                        <state key="normal" title="Previous Step"/>
+                                        <state key="normal" title="Previous Step">
+                                            <color key="titleColor" red="0.28661700521328504" green="0.79804316139334519" blue="0.79064409112151346" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
                                         <connections>
                                             <action selector="previousStepSelected:" destination="Ex4-T1-Gr0" eventType="touchUpInside" id="NwI-Rc-AdV"/>
                                         </connections>
@@ -1552,7 +1554,9 @@
                                         <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                         <animations/>
                                         <fontDescription key="fontDescription" name="GurmukhiMN" family="Gurmukhi MN" pointSize="15"/>
-                                        <state key="normal" title="Next Step"/>
+                                        <state key="normal" title="Next Step">
+                                            <color key="titleColor" red="0.2866170052" green="0.79804316139999998" blue="0.7906440911" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
                                         <connections>
                                             <action selector="nextStepSelected:" destination="Ex4-T1-Gr0" eventType="touchUpInside" id="Sy1-nq-yjX"/>
                                         </connections>
@@ -1696,7 +1700,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cur-8G-Qx8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4791" y="693"/>
+            <point key="canvasLocation" x="3471" y="93"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="hd7-MS-m7R">
@@ -1715,7 +1719,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rog-H8-SaM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1423.5" y="180.75"/>
+            <point key="canvasLocation" x="43.5" y="432.75"/>
         </scene>
     </scenes>
     <resources>
@@ -1730,7 +1734,7 @@
         <image name="wineryButton" width="60" height="60"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="eRP-bL-O5v"/>
-        <segue reference="30J-VP-xoX"/>
+        <segue reference="Txu-1L-86y"/>
+        <segue reference="96X-gX-cOD"/>
     </inferredMetricsTieBreakers>
 </document>

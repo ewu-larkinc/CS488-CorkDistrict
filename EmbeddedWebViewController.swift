@@ -37,6 +37,7 @@ class EmbeddedWebViewController: UIViewController {
     override func viewDidLoad() {
         self.navigationController?.navigationBarHidden = false
         self.navigationController?.navigationBar.clipsToBounds = true
+        self.title = "Cork District Web"
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -65,7 +66,21 @@ class EmbeddedWebViewController: UIViewController {
                 self.loadingLabel.alpha = 1.0
             })
             
-            }, completion: nil)
+        }, completion: nil)
+        
+        
+        //Attempting a trailing ellipsis animation...
+        /*var ctr=0
+        while ctr < 4 {
+        
+            var text = loadingLabel.text!
+            loadingLabel.text = text + " ."
+            text = loadingLabel.text!
+            ctr++
+            loadingLabel.setNeedsDisplay()
+            NSThread.sleepForTimeInterval(NSTimeInterval(0.25))
+        }*/
+    
     }
     
     func webViewDidFinishLoad(webView: UIWebView) {

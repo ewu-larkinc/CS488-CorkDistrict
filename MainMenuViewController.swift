@@ -23,25 +23,20 @@ class MainMenuViewController : UIViewController, UITableViewDataSource, UITableV
 
     @IBOutlet weak var tableView: UITableView!
     
+    //let activitySelector = Selector("stopLoadingAnimation:")
     let cellIdentifier = "MenuCell"
     let ListSegueIdentifier = "ListEntitiesSegue"
     let MapSegueIdentifier = "MapViewSegue"
     let TourSegueIdentifier = "wineTourSegue"
     let notificationKey = "updateLoadingScreen"
-    let activitySelector = Selector("stopLoadingAnimation:")
     
     let listSize = 7
     var selectedRow: Int?
     var selectedEntityType: String?
     
     override func viewDidLoad() {
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: notificationKey, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: activitySelector, name: notificationKey, object: nil)
-        
-        //let data = CorkDistrictData.sharedInstance
-        /*if data.hasDownloadFinished() {
-            loadingView.hidden = true
-        }*/
+        //NSNotificationCenter.defaultCenter().removeObserver(self, name: notificationKey, object: nil)
+        //NSNotificationCenter.defaultCenter().addObserver(self, selector: activitySelector, name: notificationKey, object: nil)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -51,11 +46,6 @@ class MainMenuViewController : UIViewController, UITableViewDataSource, UITableV
         data.resetCurrentURL()
         data.resetCurrentTour()
     }
-    
-    func stopLoadingAnimation(notification: NSNotification) {
-        //loadingView.hidden = true
-    }
-    
     
     func getSelectedRow() -> Int? {
         return selectedRow

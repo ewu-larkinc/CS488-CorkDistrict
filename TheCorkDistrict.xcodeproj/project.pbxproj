@@ -68,7 +68,7 @@
 		22DF397B1BE5FD690001E12F /* CorkDistrictAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CorkDistrictAnnotation.swift; sourceTree = "<group>"; };
 		22DF397C1BE5FD690001E12F /* CorkDistrictAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CorkDistrictAnnotationView.swift; sourceTree = "<group>"; };
 		22DF397D1BE5FD690001E12F /* CorkDistrictEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CorkDistrictEntity.swift; sourceTree = "<group>"; };
-		22DF397E1BE5FD690001E12F /* DestinationAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DestinationAnnotation.swift; path = ../DestinationAnnotation.swift; sourceTree = "<group>"; };
+		22DF397E1BE5FD690001E12F /* DestinationAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DestinationAnnotation.swift; sourceTree = "<group>"; };
 		22DF397F1BE5FD690001E12F /* EmbeddedWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EmbeddedWebViewController.swift; path = ../EmbeddedWebViewController.swift; sourceTree = "<group>"; };
 		22DF39801BE5FD690001E12F /* EntityCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntityCollection.swift; sourceTree = "<group>"; };
 		22DF39811BE5FD690001E12F /* PackageCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PackageCollection.swift; sourceTree = "<group>"; };
@@ -127,17 +127,16 @@
 			children = (
 				22DF399D1BE5FDAF0001E12F /* AppDelegate.swift */,
 				22DF39731BE5FD690001E12F /* CorkDistrictData.swift */,
-				22DF397F1BE5FD690001E12F /* EmbeddedWebViewController.swift */,
 				22DF39751BE5FD690001E12F /* DetailTableViewController.swift */,
+				22DF397F1BE5FD690001E12F /* EmbeddedWebViewController.swift */,
+				22DF39A41BE5FF3F0001E12F /* ImageDetailCell.swift */,
+				22DF39761BE5FD690001E12F /* MainMenuViewController.swift */,
+				22DF39781BE5FD690001E12F /* RoutingMapViewController.swift */,
 				22DF39841BE5FD690001E12F /* SwiftyJSON.swift */,
 				22DF39791BE5FD690001E12F /* WineTourTableViewController.swift */,
-				22DF39781BE5FD690001E12F /* RoutingMapViewController.swift */,
 				22DF399A1BE5FDAF0001E12F /* Main.storyboard */,
 				22DF39991BE5FDAF0001E12F /* LaunchScreen.storyboard */,
 				22DF39A81BE6006F0001E12F /* TheCorkDistrict.xcdatamodeld */,
-				22DF39A41BE5FF3F0001E12F /* ImageDetailCell.swift */,
-				22DF397E1BE5FD690001E12F /* DestinationAnnotation.swift */,
-				22DF39761BE5FD690001E12F /* MainMenuViewController.swift */,
 				C141C79D1B03E891007EBFF8 /* App_Icon.png */,
 				22DF396E1BE5F8940001E12F /* Images.xcassets */,
 				22DF39AB1BE8785C0001E12F /* MapView */,
@@ -175,6 +174,7 @@
 		22DF39AB1BE8785C0001E12F /* MapView */ = {
 			isa = PBXGroup;
 			children = (
+				22DF397E1BE5FD690001E12F /* DestinationAnnotation.swift */,
 				22DF397A1BE5FD690001E12F /* AccommodationAnnotation.swift */,
 				22DF397B1BE5FD690001E12F /* CorkDistrictAnnotation.swift */,
 				22DF397C1BE5FD690001E12F /* CorkDistrictAnnotationView.swift */,

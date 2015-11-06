@@ -63,6 +63,7 @@ class RoutingMapViewController: UIViewController, MKMapViewDelegate {
         mapView.showsUserLocation = true
         locationManager.requestWhenInUseAuthorization()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
+
         locationManager.startUpdatingLocation()
         
         setupLayoutObjects()
