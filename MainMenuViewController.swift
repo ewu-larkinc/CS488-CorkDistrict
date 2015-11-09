@@ -35,8 +35,7 @@ class MainMenuViewController : UIViewController, UITableViewDataSource, UITableV
     var selectedEntityType: String?
     
     override func viewDidLoad() {
-        //NSNotificationCenter.defaultCenter().removeObserver(self, name: notificationKey, object: nil)
-        //NSNotificationCenter.defaultCenter().addObserver(self, selector: activitySelector, name: notificationKey, object: nil)
+        UIBarButtonItem.appearance().setTitleTextAttributes([NSFontAttributeName: UIFont(name: "Gurmukhi MN", size: 18.0)!], forState: UIControlState.Normal)
     }
     
     override func viewWillAppear(animated: Bool) {

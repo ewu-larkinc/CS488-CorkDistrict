@@ -109,6 +109,7 @@ class DetailTableViewController: UITableViewController {
                     //let cell = tableView.dequeueReusableCellWithIdentifier(basicCellId) as UITableViewCell!
                     cell.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.2)
                     cell.textLabel!.text = currentEntity?.title
+                    cell.textLabel?.font = UIFont(name: "Gurmukhi MN", size: 28.0)
                 return cell
                 case 1:
                     //let cell = tableView.dequeueReusableCellWithIdentifier(basicCellId) as UITableViewCell!

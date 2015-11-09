@@ -35,6 +35,7 @@
 		22DF39A61BE5FF3F0001E12F /* CorkDistrictPackage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DF39A31BE5FF3F0001E12F /* CorkDistrictPackage.swift */; settings = {ASSET_TAGS = (); }; };
 		22DF39A71BE5FF3F0001E12F /* ImageDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DF39A41BE5FF3F0001E12F /* ImageDetailCell.swift */; settings = {ASSET_TAGS = (); }; };
 		22DF39AA1BE6006F0001E12F /* TheCorkDistrict.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 22DF39A81BE6006F0001E12F /* TheCorkDistrict.xcdatamodeld */; settings = {ASSET_TAGS = (); }; };
+		22DF39AE1BF017830001E12F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DF39AD1BF017830001E12F /* Constants.swift */; settings = {ASSET_TAGS = (); }; };
 		840AEAC11B03DC9400DBB6EF /* (null) in Sources */ = {isa = PBXBuildFile; };
 		840AEAC31B04247E00DBB6EF /* (null) in Sources */ = {isa = PBXBuildFile; };
 		C141C79E1B03E891007EBFF8 /* App_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = C141C79D1B03E891007EBFF8 /* App_Icon.png */; };
@@ -83,6 +84,7 @@
 		22DF39A31BE5FF3F0001E12F /* CorkDistrictPackage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CorkDistrictPackage.swift; sourceTree = "<group>"; };
 		22DF39A41BE5FF3F0001E12F /* ImageDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageDetailCell.swift; path = ../ImageDetailCell.swift; sourceTree = "<group>"; };
 		22DF39A91BE6006F0001E12F /* TheCorkDistrict.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TheCorkDistrict.xcdatamodel; sourceTree = "<group>"; };
+		22DF39AD1BF017830001E12F /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		C141C79D1B03E891007EBFF8 /* App_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = App_Icon.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -107,6 +109,7 @@
 		2298E0701AB00B7B003CEFFA = {
 			isa = PBXGroup;
 			children = (
+				22DF39AD1BF017830001E12F /* Constants.swift */,
 				2298E07B1AB00B7B003CEFFA /* TheCorkDistrict */,
 				2298E0941AB00B7B003CEFFA /* TheCorkDistrictTests */,
 				2298E07A1AB00B7B003CEFFA /* Products */,
@@ -330,6 +333,7 @@
 				22DF398D1BE5FD690001E12F /* AccommodationAnnotation.swift in Sources */,
 				22DF39951BE5FD690001E12F /* ParkingAnnotation.swift in Sources */,
 				22DF39871BE5FD690001E12F /* CorkDistrictEntityViewController.swift in Sources */,
+				22DF39AE1BF017830001E12F /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

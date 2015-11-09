@@ -93,6 +93,26 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         }
     }
     
+    /*func toggleAnnotationViews(button: UIButton, type: EntityType) {
+        
+        if btnSelected[type.rawValue] {
+            btnSelected[type.rawValue] = false
+            button.alpha = 0.4
+            
+            for annot in mapView.annotations {
+                if annot is ParkingAnnotation {
+                    mapView.removeAnnotation(annot)
+                }
+            }
+            
+        } else {
+            btnSelected[EntityType.Parking.rawValue] = true
+            addCorkDistrictPinsOfType(EntityType.Parking)
+            parkingButton.alpha = 1
+            parkingButton.setNeedsDisplay()
+        }
+    }*/
+    
     @IBAction func wineryBtnSelected(sender: AnyObject) {
         if btnSelected[EntityType.Winery.rawValue] {
             btnSelected[EntityType.Winery.rawValue] = false
@@ -256,7 +276,10 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                     
                     let detailAction = UIAlertAction(title: "Details", style: .Default) {
                         action in
-                        self.performSegueWithIdentifier("mapDetail", sender: self)
+                        
+                        let data = CorkDistrictData.sharedInstance
+                        data.setSelectedEntityByTitle(title)
+                        self.performSegueWithIdentifier("mapToDetailSegue", sender: self)
                     }
                     
                     let routeAction = UIAlertAction(title: "Directions", style: .Default) {

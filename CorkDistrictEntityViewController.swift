@@ -39,7 +39,8 @@ class CorkDistrictEntityViewController : UIViewController, UITableViewDataSource
         NSNotificationCenter.defaultCenter().removeObserver(self, name: notificationKey, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: reloadSelector, name: notificationKey, object: nil)
         
-        
+        self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "Gurmukhi MN", size: 18)!]
+        UIBarButtonItem.appearance().setTitleTextAttributes([NSFontAttributeName: UIFont(name: "Gurmukhi MN", size: 18.0)!], forState: UIControlState.Normal)
     }
     
     override func viewWillAppear(animated: Bool) {

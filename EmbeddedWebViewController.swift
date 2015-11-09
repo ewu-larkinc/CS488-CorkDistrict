@@ -37,6 +37,7 @@ class EmbeddedWebViewController: UIViewController {
     override func viewDidLoad() {
         self.navigationController?.navigationBarHidden = false
         self.navigationController?.navigationBar.clipsToBounds = true
+        self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "Gurmukhi MN", size: 18)!]
         self.title = "Cork District Web"
     }
     

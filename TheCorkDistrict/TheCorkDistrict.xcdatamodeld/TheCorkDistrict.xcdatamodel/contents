@@ -34,7 +34,7 @@
         <attribute name="startMonth" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="startYear" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="webAddress" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="website" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
         <element name="CorkDistrictEntity" positionX="-63" positionY="-18" width="128" height="255"/>
