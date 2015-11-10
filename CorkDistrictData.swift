@@ -36,8 +36,8 @@ class CorkDistrictData {
     }
     
     var dataReceived: Bool = false
-    private let URL_NOTIFICATIONS = NSURL(string: Constants.URLStrings.Notifications)
-    private let URL_CHANGELOG = NSURL(string: Constants.URLStrings.Changelog)
+    private let URL_NOTIFICATIONS = NSURL(string: Constants.URL.Notifications)
+    private let URL_CHANGELOG = NSURL(string: Constants.URL.Changelog)
     private let MAP_CENTER_ADDRESS = "714 W Main, WA, 99201"
     
     private let entityTypeCorkDistrict = "CorkDistrictEntity"
@@ -56,11 +56,11 @@ class CorkDistrictData {
     private var currentEntityColor: UIColor?
     
     
-    private var wineries = EntityCollection(type: .Winery, url: NSURL(string: Constants.URLStrings.Winery)!)
-    private var restaurants = EntityCollection(type: .Restaurant, url: NSURL(string: Constants.URLStrings.Restaurant)!)
-    private var accommodations = EntityCollection(type: .Accommodation, url: NSURL(string: Constants.URLStrings.Accommodation)!)
-    private var packages = PackageCollection(url: NSURL(string: Constants.URLStrings.Package)!)
-    private var parking = EntityCollection(type: .Parking, url: NSURL(string: Constants.URLStrings.Parking)!)
+    private var wineries = EntityCollection(type: .Winery, url: NSURL(string: Constants.URL.Winery)!)
+    private var restaurants = EntityCollection(type: .Restaurant, url: NSURL(string: Constants.URL.Restaurant)!)
+    private var accommodations = EntityCollection(type: .Accommodation, url: NSURL(string: Constants.URL.Accommodation)!)
+    private var packages = PackageCollection(url: NSURL(string: Constants.URL.Package)!)
+    private var parking = EntityCollection(type: .Parking, url: NSURL(string: Constants.URL.Parking)!)
     
     
     //#MARK: - Access Methods
@@ -177,13 +177,13 @@ class CorkDistrictData {
         switch (type) {
             
             case .Accommodation:
-                currentEntityColor = Constants.Colors.accommodationColor
+                currentEntityColor = Constants.Color.accommodationColor
             case .Parking:
-                currentEntityColor = Constants.Colors.parkingColor
+                currentEntityColor = Constants.Color.parkingColor
             case .Restaurant:
-                currentEntityColor = Constants.Colors.restaurantColor
+                currentEntityColor = Constants.Color.restaurantColor
             case .Winery:
-                currentEntityColor = Constants.Colors.wineryColor
+                currentEntityColor = Constants.Color.wineryColor
             default:
                 break
         }
@@ -417,11 +417,11 @@ class CorkDistrictData {
         for result in fetchedResults {
             
             let title = result.valueForKey(Constants.CoreData.Title) as! String
-            let address = result.valueForKey(Constants.CoreData.EntityAttributes.Address) as! String
-            let zip = result.valueForKey(Constants.CoreData.EntityAttributes.Zipcode) as! String
-            let phone = result.valueForKey(Constants.CoreData.EntityAttributes.Phone) as! String
-            let city = result.valueForKey(Constants.CoreData.EntityAttributes.City) as! String
-            let nodeID = result.valueForKey(Constants.CoreData.EntityAttributes.NodeID) as! String
+            let address = result.valueForKey(Constants.CoreData.EntityAttributes.Addr) as! String
+            let zip = result.valueForKey(Constants.CoreData.EntityAttributes.Zip) as! String
+            let phone = result.valueForKey(Constants.CoreData.EntityAttributes.Phn) as! String
+            let city = result.valueForKey(Constants.CoreData.EntityAttributes.Cty) as! String
+            let nodeID = result.valueForKey(Constants.CoreData.EntityAttributes.NID) as! String
             
             var coordinate: CLLocationCoordinate2D?
             if let coordString = result.valueForKey(Constants.CoreData.Placemark) as? String {
@@ -443,11 +443,11 @@ class CorkDistrictData {
                 
             } else if collection.type == .Winery {
                 
-                let cluster = result.valueForKey(Constants.CoreData.EntityAttributes.Cluster) as! String
-                let hours = result.valueForKey(Constants.CoreData.EntityAttributes.Hours) as! String
-                let cardAccepted = result.valueForKey(Constants.CoreData.EntityAttributes.CardAccepted) as! String
+                let cluster = result.valueForKey(Constants.CoreData.EntityAttributes.Clstr) as! String
+                let hours = result.valueForKey(Constants.CoreData.EntityAttributes.Hrs) as! String
+                let cardAccepted = result.valueForKey(Constants.CoreData.EntityAttributes.Card) as! String
                 let webAddress = result.valueForKey(Constants.CoreData.Website) as! String
-                let description = result.valueForKey(Constants.CoreData.EntityAttributes.Description) as! String
+                let description = result.valueForKey(Constants.CoreData.EntityAttributes.Dscrpt) as! String
                 let imageData = result.valueForKey(Constants.CoreData.ImageData) as! NSData
                 let image = UIImage(data: imageData)
                 
@@ -456,7 +456,7 @@ class CorkDistrictData {
             } else {
                 
                 let webAddress = result.valueForKey(Constants.CoreData.Website) as! String
-                let description = result.valueForKey(Constants.CoreData.EntityAttributes.Description) as! String
+                let dscrpt = result.valueForKey(Constants.CoreData.EntityAttributes.Dscrpt) as! String
                 var image: UIImage
                 
                 if let imageData = result.valueForKey(Constants.CoreData.ImageData) as? NSData {
@@ -473,7 +473,7 @@ class CorkDistrictData {
                     typePlural = "Accommodations"
                 }
                 
-                newEntity = CorkDistrictEntity(title: title, address: address, zip: zip, phone: phone, city: city, nodeID: nodeID, webAddress: webAddress, description: description, type: collection.type, typePlural: typePlural, image: image)
+                newEntity = CorkDistrictEntity(title: title, address: address, zip: zip, phone: phone, city: city, nodeID: nodeID, webAddress: webAddress, description: dscrpt, type: collection.type, typePlural: typePlural, image: image)
             }
             
             if let coord = coordinate {
@@ -503,14 +503,14 @@ class CorkDistrictData {
         for result in fetchedResults {
             
             let title = result.valueForKey(Constants.CoreData.Title) as! String
-            let startDay = result.valueForKey(Constants.CoreData.PackageAttributes.StartDay) as! String
-            let startMonth = result.valueForKey(Constants.CoreData.PackageAttributes.StartMonth) as! String
-            let startYear = result.valueForKey(Constants.CoreData.PackageAttributes.StartYear) as! String
+            let startDay = result.valueForKey(Constants.CoreData.PackageAttributes.StrtDay) as! String
+            let startMonth = result.valueForKey(Constants.CoreData.PackageAttributes.StrtMnth) as! String
+            let startYear = result.valueForKey(Constants.CoreData.PackageAttributes.StrtYr) as! String
             let endDay = result.valueForKey(Constants.CoreData.PackageAttributes.EndDay) as! String
-            let endMonth = result.valueForKey(Constants.CoreData.PackageAttributes.EndMonth) as! String
-            let endYear = result.valueForKey(Constants.CoreData.PackageAttributes.EndYear) as! String
+            let endMonth = result.valueForKey(Constants.CoreData.PackageAttributes.EndMnth) as! String
+            let endYear = result.valueForKey(Constants.CoreData.PackageAttributes.EndYr) as! String
             let cost = result.valueForKey(Constants.CoreData.PackageAttributes.Cost) as! String
-            let relatedNodeID = result.valueForKey(Constants.CoreData.PackageAttributes.RelatedNodeID) as! String
+            let relatedNodeID = result.valueForKey(Constants.CoreData.PackageAttributes.RelatedNID) as! String
             let webAddress = result.valueForKey(Constants.CoreData.Website) as! String
             let imageData = result.valueForKey(Constants.CoreData.ImageData) as! NSData
             let image = UIImage(data: imageData)
@@ -634,14 +634,14 @@ class CorkDistrictData {
             print("Creating core data entity for \(entity.title)")
             newEntity.setValue(String(collection.type), forKey: Constants.CoreData.EntityAttributes.Type)
             newEntity.setValue(entity.title, forKey: Constants.CoreData.Title)
-            newEntity.setValue(entity.nodeID, forKey: Constants.CoreData.EntityAttributes.NodeID)
-            newEntity.setValue(entity.address, forKey: Constants.CoreData.EntityAttributes.Address)
-            newEntity.setValue(entity.zip, forKey: Constants.CoreData.EntityAttributes.Zipcode)
-            newEntity.setValue(entity.city, forKey: Constants.CoreData.EntityAttributes.City)
-            newEntity.setValue(entity.phone, forKey: Constants.CoreData.EntityAttributes.Phone)
+            newEntity.setValue(entity.nodeID, forKey: Constants.CoreData.EntityAttributes.NID)
+            newEntity.setValue(entity.address, forKey: Constants.CoreData.EntityAttributes.Addr)
+            newEntity.setValue(entity.zip, forKey: Constants.CoreData.EntityAttributes.Zip)
+            newEntity.setValue(entity.city, forKey: Constants.CoreData.EntityAttributes.Cty)
+            newEntity.setValue(entity.phone, forKey: Constants.CoreData.EntityAttributes.Phn)
             
             if let description = entity.description {
-                newEntity.setValue(description, forKey: Constants.CoreData.EntityAttributes.Description)
+                newEntity.setValue(description, forKey: Constants.CoreData.EntityAttributes.Dscrpt)
             }
             
             if let webAddress = entity.webAddress {
@@ -649,15 +649,15 @@ class CorkDistrictData {
             }
             
             if let hours = entity.hours {
-                newEntity.setValue(hours, forKey: Constants.CoreData.EntityAttributes.Hours)
+                newEntity.setValue(hours, forKey: Constants.CoreData.EntityAttributes.Hrs)
             }
             
             if let cluster = entity.cluster {
-                newEntity.setValue(cluster, forKey: Constants.CoreData.EntityAttributes.Cluster)
+                newEntity.setValue(cluster, forKey: Constants.CoreData.EntityAttributes.Clstr)
             }
             
             if let cardAccepted = entity.cardAccepted {
-                newEntity.setValue(cardAccepted, forKey: Constants.CoreData.EntityAttributes.CardAccepted)
+                newEntity.setValue(cardAccepted, forKey: Constants.CoreData.EntityAttributes.Card)
             }
             
             if let image = entity.image {
@@ -692,13 +692,13 @@ class CorkDistrictData {
         
             print("Creating core data package for \(entity.title)")
             newEntity.setValue(entity.title, forKey: Constants.CoreData.Title)
-            newEntity.setValue(entity.relatedNodeID, forKey: Constants.CoreData.PackageAttributes.RelatedNodeID)
-            newEntity.setValue(entity.startDay, forKey: Constants.CoreData.PackageAttributes.StartDay)
-            newEntity.setValue(entity.startMonth, forKey: Constants.CoreData.PackageAttributes.StartMonth)
-            newEntity.setValue(entity.startYear, forKey: Constants.CoreData.PackageAttributes.StartYear)
+            newEntity.setValue(entity.relatedNodeID, forKey: Constants.CoreData.PackageAttributes.RelatedNID)
+            newEntity.setValue(entity.startDay, forKey: Constants.CoreData.PackageAttributes.StrtDay)
+            newEntity.setValue(entity.startMonth, forKey: Constants.CoreData.PackageAttributes.StrtMnth)
+            newEntity.setValue(entity.startYear, forKey: Constants.CoreData.PackageAttributes.StrtYr)
             newEntity.setValue(entity.endDay, forKey: Constants.CoreData.PackageAttributes.EndDay)
-            newEntity.setValue(entity.endMonth, forKey: Constants.CoreData.PackageAttributes.EndMonth)
-            newEntity.setValue(entity.endYear, forKey: Constants.CoreData.PackageAttributes.EndYear)
+            newEntity.setValue(entity.endMonth, forKey: Constants.CoreData.PackageAttributes.EndMnth)
+            newEntity.setValue(entity.endYear, forKey: Constants.CoreData.PackageAttributes.EndYr)
             newEntity.setValue(entity.cost, forKey: Constants.CoreData.PackageAttributes.Cost)
             newEntity.setValue(entity.webAddress, forKey: Constants.CoreData.Website)
             newEntity.setValue(UIImageJPEGRepresentation(entity.image, 1), forKey: Constants.CoreData.ImageData)
@@ -797,7 +797,7 @@ class CorkDistrictData {
             
             print(json[ctr])
                 
-            let entityCityStateZip = json[ctr][Constants.JSON.EntityAttributes.CityStateZip].stringValue
+            let entityCityStateZip = json[ctr][Constants.JSON.EntityAttributes.CtyStZip].stringValue
             let cityStateZipArray = separateCityStateZip(entityCityStateZip)
             var entityCity = ""
             var entityZip = ""
@@ -812,12 +812,12 @@ class CorkDistrictData {
             tempTitle = removeHTML(tempTitle)
             let title = removeAmpersand(tempTitle)
             let nodeID = json[ctr][Constants.JSON.EntityAttributes.NodeID].stringValue
-            let address = json[ctr][Constants.JSON.EntityAttributes.Address].stringValue
-            let phone = json[ctr][Constants.JSON.EntityAttributes.Phone].stringValue
+            let address = json[ctr][Constants.JSON.EntityAttributes.Addr].stringValue
+            let phone = json[ctr][Constants.JSON.EntityAttributes.Phn].stringValue
             let entityImageString = stripHtml(json[ctr][Constants.JSON.Thumbnail].stringValue)
             let entityImageUrl = NSURL(string: entityImageString)
             let imgData = NSData(contentsOfURL: entityImageUrl!)
-            let desc = json[ctr][Constants.JSON.EntityAttributes.Description].stringValue as String
+            let desc = json[ctr][Constants.JSON.EntityAttributes.Dscrpt].stringValue as String
             let description = removeOddCharacters(desc)
             var webAddress = json[ctr][Constants.JSON.Website].stringValue
             webAddress = removeOddCharacters(webAddress)
@@ -837,9 +837,9 @@ class CorkDistrictData {
                 newEntity = CorkDistrictEntity(type: collection.type, title: title, address: address, city: entityCity, zip: entityZip, phone: phone, nodeID: nodeID, typePlural: "Parking")
             } else if collection.type == .Winery {
                     
-                let cluster = json[ctr][Constants.JSON.EntityAttributes.Cluster].stringValue
-                let hours = json[ctr][Constants.JSON.EntityAttributes.Hours].stringValue
-                let cardAccepted = json[ctr][Constants.JSON.EntityAttributes.CorkCardAccepted].stringValue
+                let cluster = json[ctr][Constants.JSON.EntityAttributes.Clstr].stringValue
+                let hours = json[ctr][Constants.JSON.EntityAttributes.Hrs].stringValue
+                let cardAccepted = json[ctr][Constants.JSON.EntityAttributes.CorkCard].stringValue
                     
                 newEntity = CorkDistrictEntity(title: title, address: address, zip: entityZip, phone: phone, city: entityCity, nodeID: nodeID, webAddress: webAddress, description: description, type: collection.type, typePlural: "Wineries", image: entityImage,cluster: cluster, hours: hours, cardAccepted: cardAccepted)
             } else {
@@ -885,12 +885,12 @@ class CorkDistrictData {
             tempTitle = removeAmpersand(tempTitle)
             let title = removeHTML(tempTitle)
             
-            let startDay = json[ctr][Constants.JSON.PackageAttributes.StartDay].stringValue
-            let startMonth = json[ctr][Constants.JSON.PackageAttributes.StartMonth].stringValue
-            let startYear = json[ctr][Constants.JSON.PackageAttributes.StartYear].stringValue
+            let startDay = json[ctr][Constants.JSON.PackageAttributes.StrtDay].stringValue
+            let startMonth = json[ctr][Constants.JSON.PackageAttributes.StrtMnth].stringValue
+            let startYear = json[ctr][Constants.JSON.PackageAttributes.StrtYr].stringValue
             let endDay = json[ctr][Constants.JSON.PackageAttributes.EndDay].stringValue
-            let endMonth = json[ctr][Constants.JSON.PackageAttributes.EndMonth].stringValue
-            let endYear = json[ctr][Constants.JSON.PackageAttributes.EndYear].stringValue
+            let endMonth = json[ctr][Constants.JSON.PackageAttributes.EndMnth].stringValue
+            let endYear = json[ctr][Constants.JSON.PackageAttributes.EndYr].stringValue
             let cost = json[ctr][Constants.JSON.PackageAttributes.Cost].stringValue
             let webAddress = json[ctr][Constants.JSON.Website].stringValue
             let entityImageString = stripHtml(json[ctr][Constants.JSON.Thumbnail].stringValue)
@@ -906,7 +906,7 @@ class CorkDistrictData {
                 entityImage = UIImage()
             }
             
-            let temp = json[ctr][Constants.JSON.PackageAttributes.RelatedItems][0]["target_id"].stringValue
+            let temp = json[ctr][Constants.JSON.PackageAttributes.RelItems][0]["target_id"].stringValue
             var relatedNodeID: String
             print("relatedNodeID is \(temp)")
             

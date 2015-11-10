@@ -258,29 +258,28 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                     
                     let alertView = UIAlertController(title: title, message: subtitle, preferredStyle: .Alert)
                     
-                    let callAction = UIAlertAction(title: "Call", style: .Default) {
+                    let callAction = UIAlertAction(title: Constants.AlertAction.Call, style: .Default, handler: {
                         action in
-                        let alertMessage = UIAlertController(title: "Are you sure?", message: "Are you sure you want to call this winery?", preferredStyle: .Alert)
-                        let callFinalAction = UIAlertAction(title: "Call", style: .Default, handler: {
+                        let alertMessage = UIAlertController(title: "Are you sure?", message: "Are you sure you'd like to call this winery?", preferredStyle: .Alert)
+                        let callFinalAction = UIAlertAction(title: Constants.AlertAction.Call, style: .Default, handler: {
                             action in
-                            let pNumber = "tel://" + subtitle
+                            let pNumber = Constants.URL.PhoneBase + subtitle
                             let url:NSURL? = NSURL(string: pNumber)
                             UIApplication.sharedApplication().openURL(url!)
                         })
                         
                         alertMessage.addAction(callFinalAction)
-                        alertMessage.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+                        alertMessage.addAction(UIAlertAction(title: Constants.AlertAction.Cancel, style: .Cancel, handler: nil))
                         self.presentViewController(alertMessage, animated: true, completion: nil)
-                    }
-                    
-                    
-                    let detailAction = UIAlertAction(title: "Details", style: .Default) {
+                    })
+                    let detailAction = UIAlertAction(title: Constants.AlertAction.Details, style: .Default, handler: {
+                        action in
+                        self.performSegueWithIdentifier("mapDetail", sender: self)
+                    })
+                    let cancelAction = UIAlertAction(title: Constants.AlertAction.Cancel, style: .Cancel, handler: {
                         action in
                         
-                        let data = CorkDistrictData.sharedInstance
-                        data.setSelectedEntityByTitle(title)
-                        self.performSegueWithIdentifier("mapToDetailSegue", sender: self)
-                    }
+                    })
                     
                     let routeAction = UIAlertAction(title: "Directions", style: .Default) {
                         action in
@@ -288,20 +287,12 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                         self.performSegueWithIdentifier("mapToRoutingSegue", sender: self)
                     }
                     
-                    let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) {
-                        action in
-                        
-                    }
-                    
-                    
                     alertView.addAction(callAction)
-                    if(view.annotation!.subtitle! != "park") {
+                    if(view.annotation!.subtitle! != "Parking") {
                         alertView.addAction(detailAction)
                     }
                     alertView.addAction(cancelAction)
                     alertView.addAction(routeAction)
-                    
-                    
                     
                     
                     self.presentViewController(alertView, animated: true, completion: nil)

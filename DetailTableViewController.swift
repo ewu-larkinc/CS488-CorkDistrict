@@ -26,7 +26,7 @@ class DetailTableViewController: UITableViewController {
     var currentEntity: CorkDistrictEntity?
     let basicCellId = "BasicDetailCell"
     let imageCellId = "ImageDetailCell"
-    
+    let titleCellId = "TitleDetailCell"
     
     override func viewDidLoad() {
         if let curEnt = currentEntity {
@@ -57,6 +57,8 @@ class DetailTableViewController: UITableViewController {
         
         switch (indexPath.row) {
             
+        case 0:
+            height = 90.0
         case 1:
             height = 80.0
         case 3:
@@ -106,11 +108,10 @@ class DetailTableViewController: UITableViewController {
         
             switch (indexPath.row) {
                 case 0:
-                    //let cell = tableView.dequeueReusableCellWithIdentifier(basicCellId) as UITableViewCell!
-                    cell.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.2)
-                    cell.textLabel!.text = currentEntity?.title
-                    cell.textLabel?.font = UIFont(name: "Gurmukhi MN", size: 28.0)
-                return cell
+                    let cell2 = tableView.dequeueReusableCellWithIdentifier(titleCellId) as UITableViewCell!
+                    cell2.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.2)
+                    cell2.textLabel!.text = currentEntity?.title
+                return cell2
                 case 1:
                     //let cell = tableView.dequeueReusableCellWithIdentifier(basicCellId) as UITableViewCell!
                     let address = currentEntity!.address

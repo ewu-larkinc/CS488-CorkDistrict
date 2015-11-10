@@ -11,7 +11,7 @@ import UIKit
 import MapKit
 
 class RoutingMapViewController: UIViewController, MKMapViewDelegate {
-    @IBOutlet weak var directionView: UIView!
+    
     
     @IBAction func startBtnSelected(sender: AnyObject) {
         displayDirections = true
@@ -23,7 +23,6 @@ class RoutingMapViewController: UIViewController, MKMapViewDelegate {
                 let theRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, (tripDistance!)/6, (tripDistance!)/6)
                 mapView.setRegion(theRegion, animated: true)
             }
-            
         }
     }
     @IBAction func previousStepSelected(sender: AnyObject) {
@@ -39,21 +38,25 @@ class RoutingMapViewController: UIViewController, MKMapViewDelegate {
         }
     }
     
-    @IBOutlet weak var startBtn: UIButton!
+    @IBOutlet weak var directionStepLabel: UILabel!
+    @IBOutlet weak var directionView: UIView!
+    @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var previousStepBtn: UIButton!
     @IBOutlet weak var nextStepBtn: UIButton!
-    @IBOutlet weak var directionStepLabel: UILabel!
-    @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var startBtn: UIButton!
+    
     
     static let DEG_TO_RAD: Double = 0.017453292519943295769236907684886
     static let EARTH_RADIUS_IN_METERS = 6372797.560856
     
-    private var textDirections = [String]()
+    private static var numLocUpdates = 0
+    
+    private var displayDirections = false
     private var stepIndex: Int = 0
-    static var numberOfLocationUpdates = 0
+    private var textDirections = [String]()
     
     let locationManager = CLLocationManager()
-    var displayDirections = false
+    
     var tripDistance: Double?
     var curLocPlacemark: MKPlacemark?
     
@@ -79,7 +82,6 @@ class RoutingMapViewController: UIViewController, MKMapViewDelegate {
             var centerLocation: CLLocationCoordinate2D
             let type = data.getCurrentTourType()
         
-            //choose map center point based on
             if(type == WineTourType.Downtown) {
                 centerLocation = CLLocationCoordinate2DMake(47.654447, -117.424911)
             } else if(type == WineTourType.MtSpokane) {
@@ -197,25 +199,22 @@ class RoutingMapViewController: UIViewController, MKMapViewDelegate {
             let view = MKAnnotationView(annotation: annotation, reuseIdentifier: "DestinationAnnotation")
             
             if annotation is DestinationAnnotation {
-                view.image = UIImage(named: "finishTag")
+                view.image = UIImage(named: Constants.Resources.ImageString.DestinationIcon)
                 return view
             } else if annotation is WineryAnnotation {
-                view.image = UIImage(named: "wineryIcon")
+                view.image = UIImage(named: Constants.Resources.ImageString.WineIcon)
                 return view
             }
             
-        
         
         return nil
     }
     
     func mapView(mapView: MKMapView, didUpdateUserLocation userLocation: MKUserLocation) {
         
-        print("DidUpdateUserLocation executing now...")
-        
-        if RoutingMapViewController.numberOfLocationUpdates == 0 {
+        if RoutingMapViewController.numLocUpdates == 0 {
             initRouting()
-            RoutingMapViewController.numberOfLocationUpdates++
+            RoutingMapViewController.numLocUpdates++
         } else {
             mapView.setCenterCoordinate(userLocation.coordinate, animated: true)
         }
@@ -272,35 +271,32 @@ class RoutingMapViewController: UIViewController, MKMapViewDelegate {
                     
                     let alertView = UIAlertController(title: title, message: subtitle, preferredStyle: .Alert)
                     
-                    let callAction = UIAlertAction(title: "Call", style: .Default, handler: {
+                    let callAction = UIAlertAction(title: Constants.AlertAction.Call, style: .Default, handler: {
                         action in
-                        let alertMessage = UIAlertController(title: "Are you sure?", message: "Are you sure you want to call this winery?", preferredStyle: .Alert)
-                        let callFinalAction = UIAlertAction(title: "Call", style: .Default, handler: {
+                        let alertMessage = UIAlertController(title: "Are you sure?", message: "Are you sure you'd like to call this winery?", preferredStyle: .Alert)
+                        let callFinalAction = UIAlertAction(title: Constants.AlertAction.Call, style: .Default, handler: {
                             action in
-                            let pNumber = "tel://" + subtitle
+                            let pNumber = Constants.URL.PhoneBase + subtitle
                             let url:NSURL? = NSURL(string: pNumber)
                             UIApplication.sharedApplication().openURL(url!)
                         })
                         
                         alertMessage.addAction(callFinalAction)
-                        alertMessage.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+                        alertMessage.addAction(UIAlertAction(title: Constants.AlertAction.Cancel, style: .Cancel, handler: nil))
                         self.presentViewController(alertMessage, animated: true, completion: nil)
                     })
-                    let detailAction = UIAlertAction(title: "Details", style: .Default, handler: {
+                    let detailAction = UIAlertAction(title: Constants.AlertAction.Details, style: .Default, handler: {
                         action in
                         self.performSegueWithIdentifier("mapDetail", sender: self)
                     })
-                    let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: {
+                    let cancelAction = UIAlertAction(title: Constants.AlertAction.Cancel, style: .Cancel, handler: {
                         action in
                         
                     })
                     
                     alertView.addAction(callAction)
-                    if(view.annotation!.subtitle! != "park") {
-                        alertView.addAction(detailAction)
-                    }
+                    alertView.addAction(detailAction)
                     alertView.addAction(cancelAction)
-                    
                     
                     self.presentViewController(alertView, animated: true, completion: nil)
                 }
