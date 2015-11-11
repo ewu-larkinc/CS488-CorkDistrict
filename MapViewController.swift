@@ -258,6 +258,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                     
                     let alertView = UIAlertController(title: title, message: subtitle, preferredStyle: .Alert)
                     
+                    
                     let callAction = UIAlertAction(title: Constants.AlertAction.Call, style: .Default, handler: {
                         action in
                         let alertMessage = UIAlertController(title: "Are you sure?", message: "Are you sure you'd like to call this winery?", preferredStyle: .Alert)
@@ -281,18 +282,19 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                         
                     })
                     
-                    let routeAction = UIAlertAction(title: "Directions", style: .Default) {
+                    let routeAction = UIAlertAction(title: "Get Directions", style: .Default) {
                         action in
                         
                         self.performSegueWithIdentifier("mapToRoutingSegue", sender: self)
                     }
                     
                     alertView.addAction(callAction)
+                    alertView.addAction(routeAction)
                     if(view.annotation!.subtitle! != "Parking") {
                         alertView.addAction(detailAction)
                     }
                     alertView.addAction(cancelAction)
-                    alertView.addAction(routeAction)
+                    
                     
                     
                     self.presentViewController(alertView, animated: true, completion: nil)

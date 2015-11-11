@@ -23,7 +23,12 @@ class MainMenuViewController : UIViewController, UITableViewDataSource, UITableV
 
     @IBOutlet weak var tableView: UITableView!
     
-    //let activitySelector = Selector("stopLoadingAnimation:")
+    @IBAction func longPressDetected(sender: AnyObject) {
+        
+        let alertView = UIAlertController(title: "Credits", message: "This masterpiece was hand-crafted by an EWU Senior Project team in 2015 (Team members: Chris Larkin, Kyle Bondo, Justin Cargile, Nate Pilgrim, and Zac Bowman).", preferredStyle: .Alert)
+        presentViewController(alertView, animated: true, completion: nil)
+    }
+    
     let cellIdentifier = "MenuCell"
     let ListSegueIdentifier = "ListEntitiesSegue"
     let MapSegueIdentifier = "MapViewSegue"
@@ -74,6 +79,12 @@ class MainMenuViewController : UIViewController, UITableViewDataSource, UITableV
             cell.textLabel!.text = MenuOptions.Alaska.rawValue
         case 6:
             cell.textLabel!.text = MenuOptions.Packages.rawValue
+            let longPressDetector = UILongPressGestureRecognizer(target: cell, action: "longPressDetected")
+            
+            longPressDetector.minimumPressDuration = 5.0
+            longPressDetector.delaysTouchesBegan = true
+            longPressDetector.delegate = cell
+            cell.addGestureRecognizer(longPressDetector)
         default:
             break
         }

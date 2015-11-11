@@ -116,8 +116,6 @@ class RoutingMapViewController: UIViewController, MKMapViewDelegate {
         let data = CorkDistrictData.sharedInstance
         if let entity = data.getSelectedEntity() {
             if let destPt = entity.coordinate {
-                print("GETTING ROUTE COORDINATES")
-                
                 
                 let destPlacemark = MKPlacemark(coordinate: destPt, addressDictionary: nil)
                 
@@ -128,7 +126,6 @@ class RoutingMapViewController: UIViewController, MKMapViewDelegate {
                 
                 let curLocPlacemark = MKPlacemark(coordinate: location.coordinate, addressDictionary: nil)
                 tripDistance = RoutingMapViewController.getDistanceBetweenCoordinates(location.coordinate, to: destPt)
-                print("Distance between coordinates is \(tripDistance)")
                 
                 let request = MKDirectionsRequest()
                 request.source = MKMapItem(placemark: curLocPlacemark)
@@ -270,6 +267,7 @@ class RoutingMapViewController: UIViewController, MKMapViewDelegate {
                 if let title = t, subtitle = s {
                     
                     let alertView = UIAlertController(title: title, message: subtitle, preferredStyle: .Alert)
+                    
                     
                     let callAction = UIAlertAction(title: Constants.AlertAction.Call, style: .Default, handler: {
                         action in

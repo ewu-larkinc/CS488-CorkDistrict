@@ -243,6 +243,19 @@ class CorkDistrictData {
         return nil
     }
     
+    func getEntityByTitle(title: String) -> CorkDistrictEntity? {
+        
+        let entities = accommodations.entities + restaurants.entities + wineries.entities
+        
+        for entity in entities {
+            
+            if entity.title == title {
+                return entity
+            }
+        }
+        return nil
+    }
+    
     func translateMapCoordinates() {
         
         let geocoder = CLGeocoder()
